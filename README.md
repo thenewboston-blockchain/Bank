@@ -15,3 +15,20 @@ Initialize database:
 ```
 python3 manage.py migrate
 ```
+
+## Running Tests
+
+Run all tests:
+```
+python3 manage.py test
+```
+
+Run all tests in parallel:
+```
+python3 manage.py test --parallel
+```
+
+Run tests for individual app:
+```
+python3 manage.py test v1/validators/
+```
