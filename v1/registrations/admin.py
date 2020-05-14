@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models.validator_registration import ValidatorRegistration
+
+admin.site.register(ValidatorRegistration)

@@ -19,6 +19,7 @@ INSTALLED_APPS = [
 
     # API (v1)
     'v1.validators.apps.ValidatorsConfig',
+    'v1.registrations.apps.RegistrationsConfig',
 
 ]
 
