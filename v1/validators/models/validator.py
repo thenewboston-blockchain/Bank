@@ -4,6 +4,7 @@ from django.db import models
 
 class Validator(models.Model):
     ip_address = models.GenericIPAddressField()
+    primary = models.BooleanField(default=False)
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
@@ -18,4 +19,4 @@ class Validator(models.Model):
         default_related_name = 'validators'
 
     def __str__(self):
-        return f'{self.id} | {self.ip_address} | {self.trust}'
+        return f'{self.id} | {self.ip_address} | {self.trust} | {self.primary}'
