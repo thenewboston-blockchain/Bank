@@ -1,10 +1,11 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from v1.general.models.created_modified import CreatedModified
 
-class Validator(models.Model):
-    ip_address = models.GenericIPAddressField(unique=True)
-    primary = models.BooleanField(default=False)
+
+class Member(CreatedModified):
+    identifier = models.CharField(max_length=256, unique=True)
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
@@ -16,7 +17,7 @@ class Validator(models.Model):
     )
 
     class Meta:
-        default_related_name = 'validators'
+        default_related_name = 'members'
 
     def __str__(self):
-        return f'{self.id} | {self.ip_address} | {self.trust} | {self.primary}'
+        return f'{self.id} | {self.trust}'
