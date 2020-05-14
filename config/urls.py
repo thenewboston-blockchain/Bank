@@ -9,6 +9,7 @@ urlpatterns = [
 
     # API (v1)
     path('', include('v1.members.urls')),
+    path('', include('v1.node_configurations.urls')),
     path('', include('v1.registrations.urls')),
     path('', include('v1.validators.urls')),
 

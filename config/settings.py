@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'v1.validators.apps.ValidatorsConfig',
     'v1.registrations.apps.RegistrationsConfig',
     'v1.members.apps.MembersConfig',
+    'v1.node_configurations.apps.NodeConfigurationsConfig',
 
 ]
 
