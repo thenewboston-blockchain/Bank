@@ -20,4 +20,4 @@ class Member(CreatedModified):
         default_related_name = 'members'
 
     def __str__(self):
-        return f'{self.id} | {self.trust}'
+        return f'{self.id} | {self.identifier} | {self.trust}'
