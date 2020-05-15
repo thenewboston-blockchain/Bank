@@ -12,7 +12,7 @@ class NodeConfiguration(models.Model):
     version = models.CharField(max_length=32)
 
     # Fees
-    default_tx_fee = models.DecimalField(
+    default_transaction_fee = models.DecimalField(
         decimal_places=16,
         default=0,
         max_digits=32,
@@ -37,20 +37,17 @@ class NodeConfiguration(models.Model):
     def __str__(self):
         return f'{self.id}'
 
-    def clean(self):
+    def _validate(self, error):
         """
         Ensure only one NodeConfiguration exists
         """
 
         if not self.id and NodeConfiguration.objects.exists():
-            raise ValidationError('Only one NodeConfiguration allowed')
+            raise error('Only one NodeConfiguration allowed')
+
+    def clean(self):
+        self._validate(ValidationError)
 
     def save(self, *args, **kwargs):
-        """
-        Ensure only one NodeConfiguration exists
-        """
-
-        if not self.id and NodeConfiguration.objects.exists():
-            raise RuntimeError('Only one NodeConfiguration allowed')
-
+        self._validate(RuntimeError)
         super().save(*args, **kwargs)
