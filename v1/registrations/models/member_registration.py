@@ -5,7 +5,7 @@ from v1.network.models.network_registration import NetworkRegistration
 
 
 class MemberRegistration(NetworkRegistration):
-    identifier = models.CharField(max_length=256, unique=True)
+    identifier = models.CharField(max_length=256)
     member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
