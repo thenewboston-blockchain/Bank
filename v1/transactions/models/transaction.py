@@ -26,6 +26,7 @@ class Transaction(CreatedModified):
     balance_key = models.CharField(max_length=256)
     recipient = models.CharField(max_length=256)
     sender = models.CharField(max_length=256)
+    signature = models.CharField(max_length=256)
     validated = models.BooleanField(default=False)
 
     class Meta:
