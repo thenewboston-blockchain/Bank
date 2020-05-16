@@ -1,12 +1,10 @@
-from decimal import Decimal
-
 from rest_framework import serializers
 
 from v1.constants.models import PENDING
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.utils.serializers import all_field_names
-from v1.validators.helpers.validator_configuration import get_primary_validator_configuration
+from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.member_registration import MemberRegistration
 
 
@@ -131,27 +129,23 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         if len(txs) > 2:
             raise serializers.ValidationError('Length of Txs should never be greater than 2')
 
-        bank_configuration = get_self_configuration()
-        bank_registration_fee = bank_configuration.registration_fee
+        self_configuration = get_self_configuration()
+        bank_registration_fee = self_configuration.registration_fee
 
         if bank_registration_fee:
             self._validate_tx_exists(
                 amount=bank_registration_fee,
-                recipient=bank_configuration.identifier,
+                recipient=self_configuration.identifier,
                 txs=txs
             )
 
-        # TODO: Consider storing all validator configurations the same as node configuration, in database
-        # TODO: This will allow treating all values the same (rather than strings vs decimals)
-
-        validator_configuration = get_primary_validator_configuration()
-        validator_transaction_fee = validator_configuration['transaction_fee']
-        validator_transaction_fee = Decimal(validator_transaction_fee)
+        primary_validator = get_primary_validator()
+        validator_transaction_fee = primary_validator.default_transaction_fee
 
         if validator_transaction_fee:
             self._validate_tx_exists(
                 amount=validator_transaction_fee,
-                recipient=validator_configuration['identifier'],
+                recipient=primary_validator.identifier,
                 txs=txs
             )
 

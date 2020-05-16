@@ -1,15 +1,17 @@
-def get_primary_validator_configuration():
+from ..models.validator import Validator
+
+
+def get_primary_validator():
     """
-    Return current primary validator configuration details
+    Return primary validator
     """
 
     # TODO: Connect to actual validator
     # TODO: Read validator Tx from cache
 
-    return {
-        'identifier': 'validator123',
-        'node_type': 'VALIDATOR',
-        'registration_fee': '64.0000000000000000',
-        'transaction_fee': '8.0000000000000000',
-        'version': 'v1.0'
-    }
+    primary_validator = Validator.objects.filter(primary=True).first()
+
+    if not primary_validator:
+        raise RuntimeError('No primary validator')
+
+    return primary_validator

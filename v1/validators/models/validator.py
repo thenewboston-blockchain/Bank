@@ -24,6 +24,6 @@ class Validator(Node):
         return (
             f'ID: {self.id} | '
             f'IP Address: {self.ip_address} | '
-            f'Trust: {self.trust} | '
-            f'Primary: {self.primary}'
+            f'Primary: {self.primary} | '
+            f'Trust: {self.trust}'
         )
