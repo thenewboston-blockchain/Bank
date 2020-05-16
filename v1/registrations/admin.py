@@ -1,7 +1,7 @@
 from django.contrib import admin
 
+from .models.bank_registration import BankRegistration
 from .models.member_registration import MemberRegistration
-from .models.validator_registration import ValidatorRegistration
 
+admin.site.register(BankRegistration)
 admin.site.register(MemberRegistration)
-admin.site.register(ValidatorRegistration)

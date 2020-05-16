@@ -1,14 +1,14 @@
 from django.urls import path
 
+from .views.bank_registration import BankRegistrationView
 from .views.member_registration import MemberRegistrationView
-from .views.validator_registration import ValidatorRegistrationView
 
 urlpatterns = [
 
+    # Bank registrations
+    path('bank_registrations', BankRegistrationView.as_view()),
+
     # Member registrations
     path('member_registrations', MemberRegistrationView.as_view()),
-
-    # Validator registrations
-    path('validator_registrations', ValidatorRegistrationView.as_view()),
 
 ]
