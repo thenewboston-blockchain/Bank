@@ -8,4 +8,5 @@ class SelfConfigurationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SelfConfiguration
-        fields = all_field_names(SelfConfiguration)
+        fields = '__all__'
+        read_only_fields = all_field_names(SelfConfiguration)

@@ -2,20 +2,11 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.utils.validators import validate_is_real_number
+from v1.general.models.transaction_fee_tier import TransactionFeeTier
 from .self_configuration import SelfConfiguration
 
 
-class TransactionFeeTier(models.Model):
-    fee = models.DecimalField(
-        decimal_places=16,
-        default=0,
-        max_digits=32,
-        validators=[
-            MinValueValidator(0),
-            validate_is_real_number
-        ]
-    )
+class SelfTransactionFeeTier(TransactionFeeTier):
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
@@ -28,7 +19,7 @@ class TransactionFeeTier(models.Model):
     )
 
     class Meta:
-        default_related_name = 'transaction_fee_tiers'
+        default_related_name = 'self_transaction_fee_tiers'
 
     def __str__(self):
         return f'{self.trust} | {self.fee}'

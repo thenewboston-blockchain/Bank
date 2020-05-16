@@ -8,4 +8,5 @@ class MemberSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Member
-        fields = all_field_names(Member)
+        fields = '__all__'
+        read_only_fields = all_field_names(Member)

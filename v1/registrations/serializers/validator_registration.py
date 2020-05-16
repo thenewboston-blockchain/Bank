@@ -8,4 +8,5 @@ class ValidatorRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ValidatorRegistration
-        fields = all_field_names(ValidatorRegistration)
+        fields = '__all__'
+        read_only_fields = all_field_names(ValidatorRegistration)

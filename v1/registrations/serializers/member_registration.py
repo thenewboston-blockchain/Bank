@@ -14,7 +14,8 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MemberRegistration
-        fields = all_field_names(MemberRegistration)
+        fields = '__all__'
+        read_only_fields = all_field_names(MemberRegistration)
 
 
 class TransactionSerializer(serializers.Serializer):

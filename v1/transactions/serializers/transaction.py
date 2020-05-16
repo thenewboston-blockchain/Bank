@@ -8,4 +8,5 @@ class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Transaction
-        fields = all_field_names(Transaction)
+        fields = '__all__'
+        read_only_fields = all_field_names(Transaction)
