@@ -18,11 +18,11 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # API (v1)
-    'v1.validators.apps.ValidatorsConfig',
-    'v1.registrations.apps.RegistrationsConfig',
-    'v1.members.apps.MembersConfig',
-    'v1.self_configurations.apps.SelfConfigurationsConfig',
     'v1.bank_transactions.apps.BankTransactionsConfig',
+    'v1.members.apps.MembersConfig',
+    'v1.registrations.apps.RegistrationsConfig',
+    'v1.self_configurations.apps.SelfConfigurationsConfig',
+    'v1.validators.apps.ValidatorsConfig',
 
 ]
 
