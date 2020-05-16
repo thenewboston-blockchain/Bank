@@ -1,10 +1,10 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.general.models.node import Node
+from v1.network.models.network_node import NetworkNode
 
 
-class Validator(Node):
+class Validator(NetworkNode):
     ip_address = models.GenericIPAddressField(unique=True)
     primary = models.BooleanField(default=False)
     trust = models.DecimalField(

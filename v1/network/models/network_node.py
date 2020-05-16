@@ -1,10 +1,10 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from v1.utils.validators import validate_is_real_number
+from ..utls.validators import validate_is_real_number
 
 
-class Node(models.Model):
+class NetworkNode(models.Model):
     identifier = models.CharField(max_length=256)
     version = models.CharField(max_length=32)
 

@@ -1,11 +1,11 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.general.models.transaction_fee_tier import TransactionFeeTier
+from v1.network.models.network_transaction_fee_tier import NetworkTransactionFeeTier
 from .validator import Validator
 
 
-class ValidatorTransactionFeeTier(TransactionFeeTier):
+class ValidatorTransactionFeeTier(NetworkTransactionFeeTier):
     validator = models.ForeignKey(Validator, on_delete=models.CASCADE)
     trust = models.DecimalField(
         decimal_places=2,
@@ -23,6 +23,7 @@ class ValidatorTransactionFeeTier(TransactionFeeTier):
 
     def __str__(self):
         return (
+            f'ID: {self.id} | '
             f'Trust: {self.trust} | '
             f'Fee: {self.fee}'
         )

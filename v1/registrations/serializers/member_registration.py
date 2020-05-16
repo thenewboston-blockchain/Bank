@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
-from v1.constants.models import PENDING
 from v1.members.models.member import Member
+from v1.network.constants.models import PENDING
+from v1.network.utls.serializers import all_field_names
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
-from v1.utils.serializers import all_field_names
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.member_registration import MemberRegistration
 
@@ -16,7 +16,7 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
         read_only_fields = all_field_names(MemberRegistration)
 
 
-class TransactionSerializer(serializers.Serializer):
+class _TransactionSerializer(serializers.Serializer):
     amount = serializers.DecimalField(max_digits=32, decimal_places=16)
     balance_key = serializers.CharField(max_length=256)
     recipient = serializers.CharField(max_length=256)
@@ -41,7 +41,7 @@ class TransactionSerializer(serializers.Serializer):
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
     signature = serializers.CharField(max_length=256)
-    txs = TransactionSerializer(many=True, required=True)
+    txs = _TransactionSerializer(many=True, required=True)
     verifying_key_hex = serializers.CharField(max_length=256)
 
     def create(self, validated_data):
@@ -121,7 +121,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         Verify that there are no extra payments
         """
 
-        self_configuration = get_self_configuration()
+        self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
 
         bank_registration_fee = self_configuration.registration_fee

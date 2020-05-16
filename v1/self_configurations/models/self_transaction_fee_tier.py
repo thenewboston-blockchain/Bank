@@ -2,11 +2,11 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.general.models.transaction_fee_tier import TransactionFeeTier
-from .self_configuration import SelfConfiguration
+from v1.network.models.network_transaction_fee_tier import NetworkTransactionFeeTier
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
 
 
-class SelfTransactionFeeTier(TransactionFeeTier):
+class SelfTransactionFeeTier(NetworkTransactionFeeTier):
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
@@ -22,21 +22,21 @@ class SelfTransactionFeeTier(TransactionFeeTier):
         default_related_name = 'self_transaction_fee_tiers'
 
     def __str__(self):
-        return f'{self.trust} | {self.fee}'
+        return (
+            f'Trust: {self.trust} | '
+            f'Fee: {self.fee}'
+        )
 
-    def _validate(self, error):
+    def _validate(self, exception_class):
         """
         Ensure fee is higher than than default transaction fee
         """
 
-        self_configuration = SelfConfiguration.objects.first()
+        self_configuration = get_self_configuration(exception_class=exception_class)
         default_transaction_fee = self_configuration.default_transaction_fee
 
-        if not self_configuration:
-            raise error('SelfConfiguration required')
-
         if self.fee <= default_transaction_fee:
-            raise error(f'Fee must be higher than default transaction fee of {default_transaction_fee}')
+            raise exception_class(f'Fee must be higher than default transaction fee of {default_transaction_fee}')
 
     def clean(self):
         self._validate(ValidationError)

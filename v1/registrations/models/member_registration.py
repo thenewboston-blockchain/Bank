@@ -1,10 +1,10 @@
 from django.db import models
 
 from v1.members.models.member import Member
-from .registration import Registration
+from v1.network.models.network_registration import NetworkRegistration
 
 
-class MemberRegistration(Registration):
+class MemberRegistration(NetworkRegistration):
     identifier = models.CharField(max_length=256, unique=True)
     member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True, null=True)
 
@@ -12,4 +12,8 @@ class MemberRegistration(Registration):
         default_related_name = 'member_registrations'
 
     def __str__(self):
-        return f'{self.id} | {self.identifier} | {self.status}'
+        return (
+            f'ID: {self.id} | '
+            f'Identifier: {self.identifier} | '
+            f'Status: {self.status}'
+        )

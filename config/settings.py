@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'v1.registrations.apps.RegistrationsConfig',
     'v1.members.apps.MembersConfig',
     'v1.self_configurations.apps.SelfConfigurationsConfig',
-    'v1.transactions.apps.TransactionsConfig',
+    'v1.bank_transactions.apps.BankTransactionsConfig',
 
 ]
 

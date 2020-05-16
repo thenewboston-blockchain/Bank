@@ -14,5 +14,5 @@ class SelfConfigurationDetail(APIView):
         description: Get self configuration details
         """
 
-        self_configuration = get_self_configuration()
+        self_configuration = get_self_configuration(exception_class=RuntimeError)
         return Response(SelfConfigurationSerializer(self_configuration).data)

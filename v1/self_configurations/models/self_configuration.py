@@ -2,17 +2,21 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from v1.constants.models import BANK, NODE_TYPE_CHOICES
-from v1.general.models.node import Node
+from v1.network.models.network_node import NetworkNode
 
 
-class SelfConfiguration(Node):
+class SelfConfiguration(NetworkNode):
     node_type = models.CharField(choices=NODE_TYPE_CHOICES, default=BANK, max_length=4)
 
     class Meta:
         default_related_name = 'self_configurations'
 
     def __str__(self):
-        return f'{self.id}'
+        return (
+            f'ID: {self.id} | '
+            f'Node type: {self.node_type} | '
+            f'Version: {self.version}'
+        )
 
     def _validate(self, error):
         """

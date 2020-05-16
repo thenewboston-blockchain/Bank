@@ -1,10 +1,10 @@
 from django.db import models
 
+from v1.network.models.network_registration import NetworkRegistration
 from v1.validators.models.validator import Validator
-from .registration import Registration
 
 
-class BankRegistration(Registration):
+class BankRegistration(NetworkRegistration):
     validator = models.ForeignKey(Validator, on_delete=models.CASCADE)
 
     class Meta:
@@ -14,5 +14,6 @@ class BankRegistration(Registration):
         return (
             f'ID: {self.id} | '
             f'Validator IP: {self.validator.ip_address} | '
+            f'Fee: {self.fee} | '
             f'Status: {self.status}'
         )

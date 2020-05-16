@@ -1,7 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.general.models.created_modified import CreatedModified
+from v1.network.models.created_modified import CreatedModified
 
 
 class Member(CreatedModified):
@@ -20,4 +20,8 @@ class Member(CreatedModified):
         default_related_name = 'members'
 
     def __str__(self):
-        return f'{self.id} | {self.identifier} | {self.trust}'
+        return (
+            f'ID: {self.id} | '
+            f'Identifier: {self.identifier} | '
+            f'Trust: {self.trust}'
+        )

@@ -2,7 +2,7 @@
 
 import django.core.validators
 from django.db import migrations, models
-import v1.utils.validators
+import v1.network.utls.validators
 
 
 class Migration(migrations.Migration):
@@ -19,8 +19,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('identifier', models.CharField(max_length=256)),
                 ('version', models.CharField(max_length=32)),
-                ('default_transaction_fee', models.DecimalField(decimal_places=16, default=0, max_digits=32, validators=[django.core.validators.MinValueValidator(0), v1.utils.validators.validate_is_real_number])),
-                ('registration_fee', models.DecimalField(decimal_places=16, default=0, max_digits=32, validators=[django.core.validators.MinValueValidator(0), v1.utils.validators.validate_is_real_number])),
+                ('default_transaction_fee', models.DecimalField(decimal_places=16, default=0, max_digits=32, validators=[django.core.validators.MinValueValidator(0), v1.network.utls.validators.validate_is_real_number])),
+                ('registration_fee', models.DecimalField(decimal_places=16, default=0, max_digits=32, validators=[django.core.validators.MinValueValidator(0), v1.network.utls.validators.validate_is_real_number])),
                 ('node_type', models.CharField(choices=[('BANK', 'BANK')], default='BANK', max_length=4)),
             ],
             options={
@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             name='TransactionFeeTier',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('fee', models.DecimalField(decimal_places=16, default=0, max_digits=32, validators=[django.core.validators.MinValueValidator(0), v1.utils.validators.validate_is_real_number])),
+                ('fee', models.DecimalField(decimal_places=16, default=0, max_digits=32, validators=[django.core.validators.MinValueValidator(0), v1.network.utls.validators.validate_is_real_number])),
                 ('trust', models.DecimalField(decimal_places=2, default=0, max_digits=5, unique=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
             ],
             options={
