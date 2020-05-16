@@ -9,7 +9,6 @@ from ..models.member_registration import MemberRegistration
 
 
 class MemberRegistrationSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = MemberRegistration
         fields = '__all__'
@@ -58,7 +57,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             fee=tx_details['bank_registration_fee']
         )
 
-        # TODO: Send to validator
+        # TODO: Send to validator (task)
         print({
             'signature': validated_data['signature'],
             'txs': txs,
@@ -116,12 +115,27 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
     def validate_txs(self, txs):
         """
         Check that Txs exist
+        - if both Bank and Validator charge 0 fees, return empty list
         Verify that correct payment exist for both Bank and Validator
         Verify that there are no extra payments
         """
 
-        # TODO: Handle logic for when both bank and validators charge 0 fees
-        # TODO: Further split up validation functions
+        self_configuration = get_self_configuration()
+        primary_validator = get_primary_validator()
+
+        bank_registration_fee = self_configuration.registration_fee
+        validator_transaction_fee = primary_validator.default_transaction_fee
+
+        if bank_registration_fee == 0 and validator_transaction_fee == 0:
+            self._validate_txs_length(
+                bank_registration_fee=bank_registration_fee,
+                txs=txs,
+                validator_transaction_fee=validator_transaction_fee
+            )
+            return {
+                'bank_registration_fee': 0,
+                'txs': txs
+            }
 
         if not txs:
             raise serializers.ValidationError('Invalid Txs')
@@ -129,18 +143,12 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         if len(txs) > 2:
             raise serializers.ValidationError('Length of Txs should never be greater than 2')
 
-        self_configuration = get_self_configuration()
-        bank_registration_fee = self_configuration.registration_fee
-
         if bank_registration_fee:
             self._validate_tx_exists(
                 amount=bank_registration_fee,
                 recipient=self_configuration.identifier,
                 txs=txs
             )
-
-        primary_validator = get_primary_validator()
-        validator_transaction_fee = primary_validator.default_transaction_fee
 
         if validator_transaction_fee:
             self._validate_tx_exists(
