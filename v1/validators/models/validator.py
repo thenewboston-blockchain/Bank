@@ -23,7 +23,7 @@ class Validator(NetworkNode):
     def __str__(self):
         return (
             f'ID: {self.id} | '
-            f'IP Address: {self.ip_address} | '
+            f'IP address: {self.ip_address} | '
             f'Primary: {self.primary} | '
             f'Trust: {self.trust}'
         )
