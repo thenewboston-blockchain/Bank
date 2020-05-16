@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'v1.registrations.apps.RegistrationsConfig',
     'v1.members.apps.MembersConfig',
     'v1.node_configurations.apps.NodeConfigurationsConfig',
+    'v1.transactions.apps.TransactionsConfig',
 
 ]
 
