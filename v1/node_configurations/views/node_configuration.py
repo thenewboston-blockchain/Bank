@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ..models.node_configuration import NodeConfiguration
+from ..helpers.node_configuration import get_node_configuration
 from ..serializers.node_configuration import NodeConfigurationSerializer
 
 
@@ -14,5 +14,5 @@ class NodeConfigurationDetail(APIView):
         description: Get node configuration details
         """
 
-        node_configuration = NodeConfiguration.objects.first()
+        node_configuration = get_node_configuration()
         return Response(NodeConfigurationSerializer(node_configuration).data)
