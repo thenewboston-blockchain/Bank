@@ -60,8 +60,8 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         if not tx:
             raise serializers.ValidationError({
                 'error_message': 'Tx not found',
-                'amount': amount,
-                'recipient': recipient
+                'expected_amount': amount,
+                'expected_recipient': recipient
             })
 
     @staticmethod
