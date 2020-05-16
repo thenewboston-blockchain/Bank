@@ -10,6 +10,7 @@ from ..models.member_registration import MemberRegistration
 
 
 class MemberRegistrationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = MemberRegistration
         fields = '__all__'
@@ -36,6 +37,8 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         )
 
         # TODO: Send to validator (task)
+        # TODO: If it comes back OK, the member is accepted into the bank
+
         print({
             'signature': validated_data['signature'],
             'txs': txs,
