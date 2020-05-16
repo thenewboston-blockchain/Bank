@@ -17,9 +17,9 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
-    signature = serializers.CharField(max_length=256)
+    signature = serializers.CharField(max_length=256, required=True)
     txs = NetworkTransactionSerializer(many=True, required=True)
-    verifying_key_hex = serializers.CharField(max_length=256)
+    verifying_key_hex = serializers.CharField(max_length=256, required=True)
 
     def create(self, validated_data):
         """
