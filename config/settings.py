@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     # API (v1)
+    'v1.banks.apps.BanksConfig',
     'v1.bank_transactions.apps.BankTransactionsConfig',
     'v1.members.apps.MembersConfig',
     'v1.registrations.apps.RegistrationsConfig',
