@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from v1.network.utls.serializers import all_field_names
+from v1.network.utils.serializers import all_field_names
 from ..models.validator_transaction_fee_tier import ValidatorTransactionFeeTier
 
 

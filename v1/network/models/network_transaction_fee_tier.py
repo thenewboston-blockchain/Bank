@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
-from ..utls.validators import validate_is_real_number
+from ..utils.validators import validate_is_real_number
 
 
 class NetworkTransactionFeeTier(models.Model):

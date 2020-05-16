@@ -3,7 +3,7 @@ from django.db import models
 
 from ..constants.models import PENDING, REGISTRATION_STATUS_CHOICES
 from ..models.created_modified import CreatedModified
-from ..utls.validators import validate_is_real_number
+from ..utils.validators import validate_is_real_number
 
 
 class NetworkRegistration(CreatedModified):
