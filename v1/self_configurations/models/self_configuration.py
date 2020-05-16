@@ -13,7 +13,6 @@ class SelfConfiguration(NetworkNode):
 
     def __str__(self):
         return (
-            f'ID: {self.id} | '
             f'Node type: {self.node_type} | '
             f'Version: {self.version}'
         )
