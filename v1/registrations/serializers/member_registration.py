@@ -2,6 +2,8 @@ from decimal import Decimal
 
 from rest_framework import serializers
 
+from v1.constants.models import PENDING
+from v1.members.models.member import Member
 from v1.node_configurations.helpers.node_configuration import get_node_configuration
 from v1.node_configurations.helpers.validator_configuration import get_primary_validator_configuration
 from v1.utils.serializers import all_field_names
@@ -41,14 +43,30 @@ class TransactionSerializer(serializers.Serializer):
 class MemberRegistrationSerializerCreate(serializers.Serializer):
     signature = serializers.CharField(max_length=256)
     txs = TransactionSerializer(many=True, required=True)
-    verifying_key_hex = serializers.CharField(max_length=128)
+    verifying_key_hex = serializers.CharField(max_length=256)
 
     def create(self, validated_data):
         """
-        Sample comment
+        Create member registration
+        Forward block to validator
         """
 
-        return validated_data
+        tx_details = validated_data['txs']
+        txs = tx_details['txs']
+
+        member_registration = MemberRegistration.objects.create(
+            identifier=validated_data['verifying_key_hex'],
+            fee=tx_details['bank_registration_fee']
+        )
+
+        # TODO: Send to validator
+        print({
+            'signature': validated_data['signature'],
+            'txs': txs,
+            'verifying_key_hex': validated_data['verifying_key_hex']
+        })
+
+        return member_registration
 
     def update(self, instance, validated_data):
         raise RuntimeError('Method unavailable')
@@ -66,6 +84,35 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 'amount': amount,
                 'recipient': recipient
             })
+
+    @staticmethod
+    def _validate_txs_length(*, bank_registration_fee, txs, validator_transaction_fee):
+        """
+        Verify that there are not an excessive amount of Txs
+        """
+
+        fees = [fee for fee in [bank_registration_fee, validator_transaction_fee] if fee != 0]
+        if len(txs) > len(fees):
+            raise serializers.ValidationError({
+                'error_message': 'Invalid Txs',
+                'bank_registration_fee': bank_registration_fee,
+                'validator_transaction_fee': validator_transaction_fee
+            })
+
+    @staticmethod
+    def validate_verifying_key_hex(verifying_key_hex):
+        """
+        Check if member already exists
+        Check for existing pending registration
+        """
+
+        if Member.objects.filter(identifier=verifying_key_hex).exists():
+            raise serializers.ValidationError('Member already exists')
+
+        if MemberRegistration.objects.filter(identifier=verifying_key_hex, status=PENDING).exists():
+            raise serializers.ValidationError('Pending registration already exists')
+
+        return verifying_key_hex
 
     def validate_txs(self, txs):
         """
@@ -107,12 +154,13 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 txs=txs
             )
 
-        fees = [fee for fee in [bank_registration_fee, validator_transaction_fee] if fee != 0]
-        if len(txs) > len(fees):
-            raise serializers.ValidationError({
-                'error_message': 'Invalid Txs',
-                'bank_registration_fee': bank_registration_fee,
-                'validator_transaction_fee': validator_transaction_fee
-            })
+        self._validate_txs_length(
+            bank_registration_fee=bank_registration_fee,
+            txs=txs,
+            validator_transaction_fee=validator_transaction_fee
+        )
 
-        return txs
+        return {
+            'bank_registration_fee': bank_registration_fee,
+            'txs': txs
+        }

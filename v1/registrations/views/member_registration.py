@@ -48,6 +48,9 @@ class MemberRegistrationView(APIView):
 
         serializer = MemberRegistrationSerializerCreate(data=request.data, context={'request': request})
         if serializer.is_valid():
-            response = serializer.save()
-            return Response(response, status=status.HTTP_201_CREATED)
+            member_registration = serializer.save()
+            return Response(
+                MemberRegistrationSerializer(member_registration).data,
+                status=status.HTTP_201_CREATED
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
