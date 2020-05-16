@@ -31,7 +31,7 @@ class TransactionFeeTier(models.Model):
         default_related_name = 'node_configurations'
 
     def __str__(self):
-        return f'{self.id}'
+        return f'{self.trust} | {self.fee}'
 
     def _validate(self, error):
         """
