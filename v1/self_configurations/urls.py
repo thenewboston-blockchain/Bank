@@ -1,12 +1,12 @@
 from django.urls import path
 
-from .views.node_configuration import NodeConfigurationDetail
+from .views.self_configuration import SelfConfigurationDetail
 from .views.transaction_fee_tier import TransactionFeeTierView
 
 urlpatterns = [
 
-    # Node configuration
-    path('node_configuration', NodeConfigurationDetail.as_view()),
+    # Self configuration
+    path('self_configuration', SelfConfigurationDetail.as_view()),
 
     # Transaction fee tiers
     path('transaction_fee_tiers', TransactionFeeTierView.as_view()),

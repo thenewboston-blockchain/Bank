@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from v1.utils.validators import validate_is_real_number
-from .node_configuration import NodeConfiguration
+from .self_configuration import SelfConfiguration
 
 
 class TransactionFeeTier(models.Model):
@@ -28,7 +28,7 @@ class TransactionFeeTier(models.Model):
     )
 
     class Meta:
-        default_related_name = 'node_configurations'
+        default_related_name = 'transaction_fee_tiers'
 
     def __str__(self):
         return f'{self.trust} | {self.fee}'
@@ -38,11 +38,11 @@ class TransactionFeeTier(models.Model):
         Ensure fee is higher than than default transaction fee
         """
 
-        node_configuration = NodeConfiguration.objects.first()
-        default_transaction_fee = node_configuration.default_transaction_fee
+        self_configuration = SelfConfiguration.objects.first()
+        default_transaction_fee = self_configuration.default_transaction_fee
 
-        if not node_configuration:
-            raise error('NodeConfiguration required')
+        if not self_configuration:
+            raise error('SelfConfiguration required')
 
         if self.fee <= default_transaction_fee:
             raise error(f'Fee must be higher than default transaction fee of {default_transaction_fee}')

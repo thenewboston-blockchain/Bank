@@ -1,8 +1,10 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
+from v1.general.models.node import Node
 
-class Validator(models.Model):
+
+class Validator(Node):
     ip_address = models.GenericIPAddressField(unique=True)
     primary = models.BooleanField(default=False)
     trust = models.DecimalField(
@@ -19,4 +21,9 @@ class Validator(models.Model):
         default_related_name = 'validators'
 
     def __str__(self):
-        return f'{self.id} | {self.ip_address} | {self.trust} | {self.primary}'
+        return (
+            f'ID: {self.id} | '
+            f'IP Address: {self.ip_address} | '
+            f'Trust: {self.trust} | '
+            f'Primary: {self.primary}'
+        )

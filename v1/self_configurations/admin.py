@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models.node_configuration import NodeConfiguration
+from .models.self_configuration import SelfConfiguration
 from .models.transaction_fee_tier import TransactionFeeTier
 
-admin.site.register(NodeConfiguration)
+admin.site.register(SelfConfiguration)
 admin.site.register(TransactionFeeTier)

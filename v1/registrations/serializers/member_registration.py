@@ -4,9 +4,9 @@ from rest_framework import serializers
 
 from v1.constants.models import PENDING
 from v1.members.models.member import Member
-from v1.node_configurations.helpers.node_configuration import get_node_configuration
-from v1.node_configurations.helpers.validator_configuration import get_primary_validator_configuration
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.utils.serializers import all_field_names
+from v1.validators.helpers.validator_configuration import get_primary_validator_configuration
 from ..models.member_registration import MemberRegistration
 
 
@@ -130,7 +130,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         if len(txs) > 2:
             raise serializers.ValidationError('Length of Txs should never be greater than 2')
 
-        bank_configuration = get_node_configuration()
+        bank_configuration = get_self_configuration()
         bank_registration_fee = bank_configuration.registration_fee
 
         if bank_registration_fee:
