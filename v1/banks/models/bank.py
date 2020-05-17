@@ -5,7 +5,6 @@ from v1.network.models.network_node import NetworkNode
 
 
 class Bank(NetworkNode):
-    ip_address = models.GenericIPAddressField(unique=True)
     trust = models.DecimalField(
         decimal_places=2,
         default=0,

@@ -5,7 +5,6 @@ from v1.network.models.network_node import NetworkNode
 
 
 class Validator(NetworkNode):
-    ip_address = models.GenericIPAddressField(unique=True)
     primary = models.BooleanField(default=False)
     trust = models.DecimalField(
         decimal_places=2,
