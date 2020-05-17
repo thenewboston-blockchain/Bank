@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from ..constants.models import PROTOCOL_CHOICES
 from ..utils.validators import validate_is_real_number
 
 
@@ -8,6 +9,7 @@ class NetworkNode(models.Model):
     identifier = models.CharField(max_length=256)
     ip_address = models.GenericIPAddressField(unique=True)
     port = models.PositiveSmallIntegerField(blank=True, null=True)
+    protocol = models.CharField(choices=PROTOCOL_CHOICES, max_length=5)
     version = models.CharField(max_length=32)
 
     # Fees
