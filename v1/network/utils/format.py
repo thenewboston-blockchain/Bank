@@ -1,4 +1,13 @@
-def format_node_address(node):
+def format_address(*, ip_address, port, protocol):
+    """
+    Format address
+    """
+
+    port = f':{port}' if port else ''
+    return f'{protocol}://{ip_address}{port}/'
+
+
+def format_node_address(*, node):
     """
     Format address for node
     """
