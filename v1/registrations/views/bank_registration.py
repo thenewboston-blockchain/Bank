@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from v1.decorators.nodes import signed_by_primary_validator
 from ..models.bank_registration import BankRegistration
 from ..serializers.bank_registration import BankRegistrationSerializer
 
@@ -16,3 +17,18 @@ class BankRegistrationView(APIView):
 
         bank_registrations = BankRegistration.objects.all()
         return Response(BankRegistrationSerializer(bank_registrations, many=True).data)
+
+
+# bank_registrations/{bank_registration_id}
+class BankRegistrationDetail(APIView):
+
+    @staticmethod
+    @signed_by_primary_validator
+    def patch(request, bank_registration_id):
+        """
+        description: Update bank registration
+        """
+
+        signed_data = request.data.get('signed_data')
+        print(signed_data)
+        return Response(1)
