@@ -1,9 +1,9 @@
 from rest_framework import serializers
 
 from v1.members.models.member import Member
-from v1.network.constants.models import PENDING
-from v1.network.serializers.network_transaction import NetworkTransactionSerializer
-from v1.network.utils.serializers import all_field_names
+from thenewboston.constants.models import PENDING
+from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
+from thenewboston.utils.serializers import all_field_names
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.member_registration import MemberRegistration

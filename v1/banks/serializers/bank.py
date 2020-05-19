@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from v1.network.utils.serializers import all_field_names
+from thenewboston.utils.serializers import all_field_names
 from ..models.bank import Bank
 
 

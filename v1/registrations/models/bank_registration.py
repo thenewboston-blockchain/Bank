@@ -1,6 +1,6 @@
 from django.db import models
 
-from v1.network.models.network_registration import NetworkRegistration
+from thenewboston.models.network_registration import NetworkRegistration
 from v1.validators.models.validator import Validator
 
 

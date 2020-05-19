@@ -1,7 +1,7 @@
 from django.db import models
 
 from v1.members.models.member import Member
-from v1.network.models.network_registration import NetworkRegistration
+from thenewboston.models.network_registration import NetworkRegistration
 
 
 class MemberRegistration(NetworkRegistration):

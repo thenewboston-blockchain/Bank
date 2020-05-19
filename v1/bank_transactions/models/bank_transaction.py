@@ -1,7 +1,7 @@
 from django.db import models
 
-from v1.network.models.created_modified import CreatedModified
-from v1.network.models.network_transaction import NetworkTransaction
+from thenewboston.models.created_modified import CreatedModified
+from thenewboston.models.network_transaction import NetworkTransaction
 
 """
 created_date - Not stored on the network transaction log, stored by bank for member reference only

@@ -2,8 +2,8 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from v1.constants.models import NODE_TYPE_CHOICES
-from v1.network.constants.nodes import BANK
-from v1.network.models.network_node import NetworkNode
+from thenewboston.constants.nodes import BANK
+from thenewboston.models.network_node import NetworkNode
 
 
 class SelfConfiguration(NetworkNode):

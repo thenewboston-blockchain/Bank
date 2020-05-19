@@ -1,7 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.network.models.created_modified import CreatedModified
+from thenewboston.models.created_modified import CreatedModified
 
 
 class Member(CreatedModified):

@@ -1,7 +1,7 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
-from v1.network.models.network_transaction_fee_tier import NetworkTransactionFeeTier
+from thenewboston.models.network_transaction_fee_tier import NetworkTransactionFeeTier
 from .validator import Validator
 
 
