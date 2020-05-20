@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from v1.decorators.nodes import signed_by_primary_validator
+from v1.decorators.nodes import is_primary_validator
 from ..models.bank_registration import BankRegistration
 from ..serializers.bank_registration import BankRegistrationSerializer, BankRegistrationSerializerUpdate
 
@@ -25,7 +25,7 @@ class BankRegistrationView(APIView):
 class BankRegistrationDetail(APIView):
 
     @staticmethod
-    @signed_by_primary_validator
+    @is_primary_validator
     def patch(request, bank_registration_id):
         """
         description: Update bank registration
