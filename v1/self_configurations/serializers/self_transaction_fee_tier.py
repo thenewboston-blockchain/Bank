@@ -1,6 +1,6 @@
 from rest_framework import serializers
-
 from thenewboston.utils.serializers import all_field_names
+
 from ..models.self_transaction_fee_tier import SelfTransactionFeeTier
 
 

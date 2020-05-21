@@ -1,6 +1,6 @@
 from rest_framework import serializers
-
 from thenewboston.utils.serializers import all_field_names
+
 from ..models.member import Member
 
 

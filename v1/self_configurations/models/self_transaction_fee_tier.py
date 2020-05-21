@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
 from thenewboston.models.network_transaction_fee_tier import NetworkTransactionFeeTier
+
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 
 
