@@ -5,7 +5,7 @@ from thenewboston.models.created_modified import CreatedModified
 
 
 class Member(CreatedModified):
-    identifier = models.CharField(max_length=256, unique=True)
+    account_number = models.CharField(max_length=256, unique=True)
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
@@ -22,6 +22,6 @@ class Member(CreatedModified):
     def __str__(self):
         return (
             f'ID: {self.id} | '
-            f'Identifier: {self.identifier} | '
+            f'Account number: {self.account_number} | '
             f'Trust: {self.trust}'
         )

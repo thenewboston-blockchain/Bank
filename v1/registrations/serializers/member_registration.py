@@ -2,6 +2,7 @@ from rest_framework import serializers
 from thenewboston.constants.network import PENDING
 from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
 from thenewboston.utils.serializers import all_field_names
+from thenewboston.wallets.accounts import verify_block
 
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
@@ -18,9 +19,9 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
-    signature = serializers.CharField(max_length=256, required=True)
-    txs = NetworkTransactionSerializer(many=True, required=True)
-    verifying_key_hex = serializers.CharField(max_length=256, required=True)
+    account_number = serializers.CharField(max_length=256)
+    signature = serializers.CharField(max_length=256)
+    txs = NetworkTransactionSerializer(many=True)
 
     def create(self, validated_data):
         """
@@ -32,16 +33,16 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         txs = tx_details['txs']
 
         member_registration = MemberRegistration.objects.create(
-            identifier=validated_data['verifying_key_hex'],
+            account_number=validated_data['account_number'],
             fee=tx_details['bank_registration_fee']
         )
 
         # TODO: Send to validator (task)
         # TODO: If it comes back OK, the member is accepted into the bank
         print({
+            'account_number': validated_data['account_number'],
             'signature': validated_data['signature'],
             'txs': txs,
-            'verifying_key_hex': validated_data['verifying_key_hex']
         })
 
         return member_registration
@@ -77,20 +78,28 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 'validator_transaction_fee': validator_transaction_fee
             })
 
+    def validate(self, data):
+        """
+        Verify Tx block formatting, data, and signature
+        """
+
+        verify_block(block=data, allow_empty_txs=True)
+        return data
+
     @staticmethod
-    def validate_verifying_key_hex(verifying_key_hex):
+    def validate_account_number(account_number):
         """
         Check if member already exists
         Check for existing pending registration
         """
 
-        if Member.objects.filter(identifier=verifying_key_hex).exists():
+        if Member.objects.filter(account_number=account_number).exists():
             raise serializers.ValidationError('Member already exists')
 
-        if MemberRegistration.objects.filter(identifier=verifying_key_hex, status=PENDING).exists():
+        if MemberRegistration.objects.filter(account_number=account_number, status=PENDING).exists():
             raise serializers.ValidationError('Pending registration already exists')
 
-        return verifying_key_hex
+        return account_number
 
     def validate_txs(self, txs):
         """
@@ -126,14 +135,14 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         if bank_registration_fee:
             self._validate_tx_exists(
                 amount=bank_registration_fee,
-                recipient=self_configuration.identifier,
+                recipient=self_configuration.account_number,
                 txs=txs
             )
 
         if validator_transaction_fee:
             self._validate_tx_exists(
                 amount=validator_transaction_fee,
-                recipient=primary_validator.identifier,
+                recipient=primary_validator.account_number,
                 txs=txs
             )
 

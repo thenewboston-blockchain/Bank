@@ -23,6 +23,9 @@ class MemberRegistrationView(APIView):
         """
         description: Register as a bank member
         parameters:
+          - name: account_number
+            required: true
+            type: string
           - name: signature
             required: true
             type: string
@@ -41,9 +44,6 @@ class MemberRegistrationView(APIView):
                 recipient:
                   required: true
                   type: string
-          - name: verifying_key_hex
-            required: true
-            type: string
         """
 
         serializer = MemberRegistrationSerializerCreate(data=request.data, context={'request': request})
