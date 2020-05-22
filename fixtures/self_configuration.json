@@ -3,7 +3,7 @@
     "model": "self_configurations.selfconfiguration",
     "pk": 1,
     "fields": {
-      "identifier": "bank_001",
+      "account_number": "bank_001",
       "ip_address": "192.168.1.232",
       "port": 8000,
       "protocol": "http",
