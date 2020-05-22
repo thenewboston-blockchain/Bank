@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from thenewboston.blocks.validation import validate_block
 from thenewboston.constants.network import PENDING
 from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
 from thenewboston.utils.serializers import all_field_names
@@ -18,31 +19,29 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
-    signature = serializers.CharField(max_length=256, required=True)
-    txs = NetworkTransactionSerializer(many=True, required=True)
-    verifying_key_hex = serializers.CharField(max_length=256, required=True)
+    account_number = serializers.CharField(max_length=256)
+    balance_lock = serializers.CharField(max_length=64)
+    signature = serializers.CharField(max_length=256)
+    txs = NetworkTransactionSerializer(many=True)
 
     def create(self, validated_data):
         """
-        Create member registration
+        Create pending member registration
         Forward block to validator
         """
 
-        tx_details = validated_data['txs']
-        txs = tx_details['txs']
+        bank_registration_fee = validated_data['bank_registration_fee']
+        block = validated_data['block']
 
         member_registration = MemberRegistration.objects.create(
-            identifier=validated_data['verifying_key_hex'],
-            fee=tx_details['bank_registration_fee']
+            account_number=block['account_number'],
+            fee=bank_registration_fee,
+            status=PENDING
         )
 
-        # TODO: Send to validator (task)
+        # TODO: Send to validator
         # TODO: If it comes back OK, the member is accepted into the bank
-        print({
-            'signature': validated_data['signature'],
-            'txs': txs,
-            'verifying_key_hex': validated_data['verifying_key_hex']
-        })
+        print(block)
 
         return member_registration
 
@@ -77,20 +76,49 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 'validator_transaction_fee': validator_transaction_fee
             })
 
+    def validate(self, data):
+        """
+        Validate block:
+        - Tx formatting
+        - Tx chaining
+        - signature
+
+        Note: when building the block, txs are pulled from 'initial_data' since 'data' has already been processed by
+        the NetworkTransactionSerializer converting all amounts to DecimalField (which are not JSON serializable)
+        """
+
+        self_configuration = get_self_configuration(exception_class=RuntimeError)
+        bank_registration_fee = self_configuration.registration_fee
+
+        block = {
+            'account_number': data['account_number'],
+            'signature': data['signature'],
+            'txs': self.initial_data['txs']
+        }
+        validate_block(
+            allow_empty_txs=True,
+            balance_lock=data['balance_lock'],
+            block=block
+        )
+        return {
+            'bank_registration_fee': bank_registration_fee,
+            'block': block
+        }
+
     @staticmethod
-    def validate_verifying_key_hex(verifying_key_hex):
+    def validate_account_number(account_number):
         """
         Check if member already exists
         Check for existing pending registration
         """
 
-        if Member.objects.filter(identifier=verifying_key_hex).exists():
+        if Member.objects.filter(account_number=account_number).exists():
             raise serializers.ValidationError('Member already exists')
 
-        if MemberRegistration.objects.filter(identifier=verifying_key_hex, status=PENDING).exists():
+        if MemberRegistration.objects.filter(account_number=account_number, status=PENDING).exists():
             raise serializers.ValidationError('Pending registration already exists')
 
-        return verifying_key_hex
+        return account_number
 
     def validate_txs(self, txs):
         """
@@ -112,10 +140,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 txs=txs,
                 validator_transaction_fee=validator_transaction_fee
             )
-            return {
-                'bank_registration_fee': 0,
-                'txs': txs
-            }
+            return txs
 
         if not txs:
             raise serializers.ValidationError('Invalid Txs')
@@ -126,14 +151,14 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         if bank_registration_fee:
             self._validate_tx_exists(
                 amount=bank_registration_fee,
-                recipient=self_configuration.identifier,
+                recipient=self_configuration.account_number,
                 txs=txs
             )
 
         if validator_transaction_fee:
             self._validate_tx_exists(
                 amount=validator_transaction_fee,
-                recipient=primary_validator.identifier,
+                recipient=primary_validator.account_number,
                 txs=txs
             )
 
@@ -143,7 +168,4 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             validator_transaction_fee=validator_transaction_fee
         )
 
-        return {
-            'bank_registration_fee': bank_registration_fee,
-            'txs': txs
-        }
+        return txs
