@@ -1,8 +1,8 @@
 from rest_framework import serializers
+from thenewboston.blocks.validation import validate_block
 from thenewboston.constants.network import PENDING
 from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
 from thenewboston.utils.serializers import all_field_names
-from thenewboston.wallets.accounts import verify_block
 
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
@@ -20,12 +20,13 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
     account_number = serializers.CharField(max_length=256)
+    balance_lock = serializers.CharField(max_length=64)
     signature = serializers.CharField(max_length=256)
     txs = NetworkTransactionSerializer(many=True)
 
     def create(self, validated_data):
         """
-        Create member registration
+        Create pending member registration
         Forward block to validator
         """
 
@@ -34,10 +35,11 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
 
         member_registration = MemberRegistration.objects.create(
             account_number=validated_data['account_number'],
-            fee=tx_details['bank_registration_fee']
+            fee=tx_details['bank_registration_fee'],
+            status=PENDING
         )
 
-        # TODO: Send to validator (task)
+        # TODO: Send to validator
         # TODO: If it comes back OK, the member is accepted into the bank
         print({
             'account_number': validated_data['account_number'],
@@ -80,10 +82,14 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
 
     def validate(self, data):
         """
-        Verify Tx block formatting, data, and signature
+        Validate block:
+        - Tx formatting
+        - Tx chaining
+        - signature
         """
 
-        verify_block(block=data, allow_empty_txs=True)
+        balance_lock = data.pop('balance_lock')
+        validate_block(allow_empty_txs=True, balance_lock=balance_lock, block=data)
         return data
 
     @staticmethod
