@@ -82,23 +82,24 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         - Tx formatting
         - Tx chaining
         - signature
+
+        Note: when building the block, txs are pulled from 'initial_data' since 'data' has already been processed by
+        the NetworkTransactionSerializer converting all amounts to DecimalField (which are not JSON serializable)
         """
 
-        tx_details = data['txs']
-        bank_registration_fee = tx_details['bank_registration_fee']
+        self_configuration = get_self_configuration(exception_class=RuntimeError)
+        bank_registration_fee = self_configuration.registration_fee
 
         block = {
             'account_number': data['account_number'],
             'signature': data['signature'],
             'txs': self.initial_data['txs']
         }
-
         validate_block(
             allow_empty_txs=True,
             balance_lock=data['balance_lock'],
             block=block
         )
-
         return {
             'bank_registration_fee': bank_registration_fee,
             'block': block
@@ -139,10 +140,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 txs=txs,
                 validator_transaction_fee=validator_transaction_fee
             )
-            return {
-                'bank_registration_fee': 0,
-                'txs': txs
-            }
+            return txs
 
         if not txs:
             raise serializers.ValidationError('Invalid Txs')
@@ -170,7 +168,4 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             validator_transaction_fee=validator_transaction_fee
         )
 
-        return {
-            'bank_registration_fee': bank_registration_fee,
-            'txs': txs
-        }
+        return txs
