@@ -30,22 +30,18 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         Forward block to validator
         """
 
-        tx_details = validated_data['txs']
-        txs = tx_details['txs']
+        bank_registration_fee = validated_data['bank_registration_fee']
+        block = validated_data['block']
 
         member_registration = MemberRegistration.objects.create(
-            account_number=validated_data['account_number'],
-            fee=tx_details['bank_registration_fee'],
+            account_number=block['account_number'],
+            fee=bank_registration_fee,
             status=PENDING
         )
 
         # TODO: Send to validator
         # TODO: If it comes back OK, the member is accepted into the bank
-        print({
-            'account_number': validated_data['account_number'],
-            'signature': validated_data['signature'],
-            'txs': txs,
-        })
+        print(block)
 
         return member_registration
 
@@ -88,9 +84,25 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         - signature
         """
 
-        balance_lock = data.pop('balance_lock')
-        validate_block(allow_empty_txs=True, balance_lock=balance_lock, block=data)
-        return data
+        tx_details = data['txs']
+        bank_registration_fee = tx_details['bank_registration_fee']
+
+        block = {
+            'account_number': data['account_number'],
+            'signature': data['signature'],
+            'txs': self.initial_data['txs']
+        }
+
+        validate_block(
+            allow_empty_txs=True,
+            balance_lock=data['balance_lock'],
+            block=block
+        )
+
+        return {
+            'bank_registration_fee': bank_registration_fee,
+            'block': block
+        }
 
     @staticmethod
     def validate_account_number(account_number):

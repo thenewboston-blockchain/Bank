@@ -26,6 +26,9 @@ class MemberRegistrationView(APIView):
           - name: account_number
             required: true
             type: string
+          - name: balance_lock
+            required: true
+            type: string
           - name: signature
             required: true
             type: string
