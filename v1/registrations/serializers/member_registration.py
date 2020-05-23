@@ -2,6 +2,7 @@ from rest_framework import serializers
 from thenewboston.blocks.validation import validate_block
 from thenewboston.constants.network import PENDING
 from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
+from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 
 from v1.members.models.member import Member
@@ -47,20 +48,6 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
 
     def update(self, instance, validated_data):
         raise RuntimeError('Method unavailable')
-
-    @staticmethod
-    def _validate_tx_exists(*, amount, recipient, txs):
-        """
-        Check for the existence of a Tx
-        """
-
-        tx = next((tx for tx in txs if tx.get('amount') == amount and tx.get('recipient') == recipient), None)
-        if not tx:
-            raise serializers.ValidationError({
-                'error_message': 'Tx not found',
-                'expected_amount': amount,
-                'expected_recipient': recipient
-            })
 
     @staticmethod
     def _validate_txs_length(*, bank_registration_fee, txs, validator_transaction_fee):
@@ -149,15 +136,17 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             raise serializers.ValidationError('Length of Txs should never be greater than 2')
 
         if bank_registration_fee:
-            self._validate_tx_exists(
+            validate_transaction_exists(
                 amount=bank_registration_fee,
+                error=serializers.ValidationError,
                 recipient=self_configuration.account_number,
                 txs=txs
             )
 
         if validator_transaction_fee:
-            self._validate_tx_exists(
+            validate_transaction_exists(
                 amount=validator_transaction_fee,
+                error=serializers.ValidationError,
                 recipient=primary_validator.account_number,
                 txs=txs
             )
