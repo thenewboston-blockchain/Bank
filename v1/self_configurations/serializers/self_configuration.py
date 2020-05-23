@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from thenewboston.utils.serializers import all_field_names
+from thenewboston.utils.fields import all_field_names
 
 from ..models.self_configuration import SelfConfiguration
 
