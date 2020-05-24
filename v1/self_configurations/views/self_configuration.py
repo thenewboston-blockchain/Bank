@@ -5,7 +5,7 @@ from ..helpers.self_configuration import get_self_configuration
 from ..serializers.self_configuration import SelfConfigurationSerializer
 
 
-# self_configuration
+# config
 class SelfConfigurationDetail(APIView):
 
     @staticmethod

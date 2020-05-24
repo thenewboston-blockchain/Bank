@@ -7,6 +7,6 @@ from ..models.validator import Validator
 class ValidatorSerializer(serializers.ModelSerializer):
 
     class Meta:
+        exclude = ('id',)
         model = Validator
-        fields = '__all__'
         read_only_fields = all_field_names(Validator)
