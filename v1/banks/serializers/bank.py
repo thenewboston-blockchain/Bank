@@ -7,6 +7,6 @@ from ..models.bank import Bank
 class BankSerializer(serializers.ModelSerializer):
 
     class Meta:
+        exclude = ('id',)
         model = Bank
-        fields = '__all__'
         read_only_fields = all_field_names(Bank)
