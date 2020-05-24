@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from thenewboston.blocks.validation import validate_block
-from thenewboston.constants.network import PENDING
+from thenewboston.constants.network import ACCOUNT_NUMBER_LENGTH, BALANCE_LOCK_LENGTH, PENDING, SIGNATURE_LENGTH
 from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
@@ -20,9 +20,9 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
-    account_number = serializers.CharField(max_length=64)
-    balance_lock = serializers.CharField(max_length=64)
-    signature = serializers.CharField(max_length=128)
+    account_number = serializers.CharField(max_length=ACCOUNT_NUMBER_LENGTH)
+    balance_lock = serializers.CharField(max_length=BALANCE_LOCK_LENGTH)
+    signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
     txs = NetworkTransactionSerializer(many=True)
 
     def create(self, validated_data):
