@@ -5,7 +5,6 @@ from thenewboston.models.network_node import NetworkNode
 
 
 class Validator(NetworkNode):
-    primary = models.BooleanField(default=False)
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
@@ -23,6 +22,5 @@ class Validator(NetworkNode):
         return (
             f'ID: {self.id} | '
             f'IP address: {self.ip_address} | '
-            f'Primary: {self.primary} | '
             f'Trust: {self.trust}'
         )

@@ -10,7 +10,6 @@
       "version": "v1.0",
       "default_transaction_fee": "2.0000000000000000",
       "registration_fee": "16.0000000000000000",
-      "primary": true,
       "trust": "100.00"
     }
   }

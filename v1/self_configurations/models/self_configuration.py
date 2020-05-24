@@ -4,9 +4,11 @@ from thenewboston.constants.network import BANK
 from thenewboston.models.network_node import NetworkNode
 
 from v1.constants.models import NODE_TYPE_CHOICES
+from v1.validators.models.validator import Validator
 
 
 class SelfConfiguration(NetworkNode):
+    primary_validator = models.ForeignKey(Validator, on_delete=models.SET_NULL, blank=True, null=True)
     node_type = models.CharField(choices=NODE_TYPE_CHOICES, default=BANK, max_length=4)
 
     class Meta:
