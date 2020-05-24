@@ -1,2 +1,5 @@
 /Users/bucky/Desktop/Projects/thenewboston-python/dist/thenewboston-0.0.1.tar.gz
+celery==4.4.2
+django-redis==4.11.0
+redis==3.5.2
 wheel==0.34.2
