@@ -2,7 +2,9 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from thenewboston.constants.network import BANK
 from thenewboston.models.network_node import NetworkNode
+from thenewboston.utils.fields import common_field_names
 
+from v1.banks.models.bank import Bank
 from v1.constants.models import NODE_TYPE_CHOICES
 from v1.validators.models.validator import Validator
 
@@ -20,6 +22,20 @@ class SelfConfiguration(NetworkNode):
             f'Version: {self.version}'
         )
 
+    def _update_related_bank(self):
+        """
+        Update related row in the bank table
+        """
+
+        bank = Bank.objects.filter(ip_address=self.ip_address)
+        field_names = common_field_names(self, Bank)
+        data = {f: getattr(self, f) for f in field_names}
+
+        if bank:
+            bank.update(**data)
+        else:
+            Bank.objects.create(**data, trust=100)
+
     def _validate(self, error):
         """
         Ensure only one SelfConfiguration exists
@@ -34,3 +50,4 @@ class SelfConfiguration(NetworkNode):
     def save(self, *args, **kwargs):
         self._validate(RuntimeError)
         super().save(*args, **kwargs)
+        self._update_related_bank()

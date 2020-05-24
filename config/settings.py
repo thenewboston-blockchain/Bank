@@ -17,9 +17,11 @@ INSTALLED_APPS = [
     # Requirements
     'rest_framework',
 
-    # API (v1)
-    'v1.validators.apps.ValidatorsConfig',
+    # API (v1) network nodes
     'v1.banks.apps.BanksConfig',
+    'v1.validators.apps.ValidatorsConfig',
+
+    # API (v1)
     'v1.bank_transactions.apps.BankTransactionsConfig',
     'v1.members.apps.MembersConfig',
     'v1.registrations.apps.RegistrationsConfig',
