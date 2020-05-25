@@ -1,4 +1,4 @@
-from ..models.validator import Validator
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
 
 
 def get_primary_validator():
@@ -9,7 +9,8 @@ def get_primary_validator():
     # TODO: Connect to actual validator
     # TODO: Read validator Tx from cache
 
-    primary_validator = Validator.objects.filter(primary=True).first()
+    self_configuration = get_self_configuration(exception_class=RuntimeError)
+    primary_validator = self_configuration.primary_validator
 
     if not primary_validator:
         raise RuntimeError('No primary validator')
