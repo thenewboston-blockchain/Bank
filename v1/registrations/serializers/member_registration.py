@@ -42,8 +42,6 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             fee=bank_registration_fee,
             status=PENDING
         )
-
-        # TODO: Fix url_path (this one is just used for testing)
         sign_and_send_block.delay(
             block=block,
             ip_address=primary_validator.ip_address,
