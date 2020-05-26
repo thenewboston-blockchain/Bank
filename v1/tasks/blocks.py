@@ -19,8 +19,8 @@ def sign_and_send_block(*, block, ip_address, port, protocol, url_path):
     signing_key = SigningKey('e0ba29c1c493d01a5f665db55a4bd77caa140cf9722d0ed367ce4183230d2e02', encoder=HexEncoder)
     confirmation_identifier = get_account_number(signing_key=signing_key)
     confirmation_identifier = encode_account_number(account_number=confirmation_identifier)
-
     message = sort_and_encode(block)
+
     signed_block = {
         'block': block,
         'confirmation_identifier': confirmation_identifier,
