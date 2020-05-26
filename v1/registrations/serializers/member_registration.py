@@ -7,6 +7,7 @@ from thenewboston.utils.fields import all_field_names
 
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
+from v1.tasks.blocks import sign_and_send_block
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.member_registration import MemberRegistration
 
@@ -31,8 +32,10 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         Forward block to validator
         """
 
-        bank_registration_fee = validated_data['bank_registration_fee']
-        block = validated_data['block']
+        block = validated_data
+        self_configuration = get_self_configuration(exception_class=RuntimeError)
+        bank_registration_fee = self_configuration.registration_fee
+        primary_validator = self_configuration.primary_validator
 
         member_registration = MemberRegistration.objects.create(
             account_number=block['account_number'],
@@ -40,9 +43,14 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             status=PENDING
         )
 
-        # TODO: Send to validator
-        # TODO: If it comes back OK, the member is accepted into the bank
-        print(block)
+        # TODO: Fix url_path (this one is just used for testing)
+        sign_and_send_block.delay(
+            block=block,
+            ip_address=primary_validator.ip_address,
+            port=primary_validator.port,
+            protocol=primary_validator.protocol,
+            url_path='/blocks'
+        )
 
         return member_registration
 
@@ -74,9 +82,6 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         the NetworkTransactionSerializer converting all amounts to DecimalField (which are not JSON serializable)
         """
 
-        self_configuration = get_self_configuration(exception_class=RuntimeError)
-        bank_registration_fee = self_configuration.registration_fee
-
         block = {
             'account_number': data['account_number'],
             'signature': data['signature'],
@@ -87,10 +92,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             balance_lock=data['balance_lock'],
             block=block
         )
-        return {
-            'bank_registration_fee': bank_registration_fee,
-            'block': block
-        }
+        return block
 
     @staticmethod
     def validate_account_number(account_number):
