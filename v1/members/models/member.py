@@ -1,11 +1,11 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from thenewboston.constants.network import ACCOUNT_NUMBER_LENGTH
+from thenewboston.constants.network import VERIFY_KEY_LENGTH
 from thenewboston.models.created_modified import CreatedModified
 
 
 class Member(CreatedModified):
-    account_number = models.CharField(max_length=ACCOUNT_NUMBER_LENGTH, unique=True)
+    account_number = models.CharField(max_length=VERIFY_KEY_LENGTH, unique=True)
     trust = models.DecimalField(
         decimal_places=2,
         default=0,

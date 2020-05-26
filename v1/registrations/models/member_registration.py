@@ -1,12 +1,12 @@
 from django.db import models
-from thenewboston.constants.network import ACCOUNT_NUMBER_LENGTH
+from thenewboston.constants.network import VERIFY_KEY_LENGTH
 from thenewboston.models.network_registration import NetworkRegistration
 
 from v1.members.models.member import Member
 
 
 class MemberRegistration(NetworkRegistration):
-    account_number = models.CharField(max_length=ACCOUNT_NUMBER_LENGTH)
+    account_number = models.CharField(max_length=VERIFY_KEY_LENGTH)
     member = models.ForeignKey(Member, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
