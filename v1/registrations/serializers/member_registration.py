@@ -49,7 +49,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             ip_address=primary_validator.ip_address,
             port=primary_validator.port,
             protocol=primary_validator.protocol,
-            url_path='/blocks'
+            url_path='/bank_blocks'
         )
 
         return member_registration
