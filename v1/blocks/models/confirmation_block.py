@@ -1,4 +1,5 @@
 from django.db import models
+from thenewboston.constants.network import BLOCK_IDENTIFIER_LENGTH
 from thenewboston.models.created_modified import CreatedModified
 
 from v1.blocks.models.block import Block
@@ -8,6 +9,7 @@ from v1.validators.models.validator import Validator
 class ConfirmationBlock(CreatedModified):
     block = models.ForeignKey(Block, on_delete=models.CASCADE)
     validator = models.ForeignKey(Validator, on_delete=models.CASCADE)
+    block_identifier = models.CharField(max_length=BLOCK_IDENTIFIER_LENGTH)
 
     class Meta:
         default_related_name = 'confirmation_blocks'
