@@ -2,12 +2,11 @@ from celery import shared_task
 from nacl.encoding import HexEncoder
 from nacl.signing import SigningKey
 from thenewboston.blocks.signatures import generate_signature
+from thenewboston.environment.environment_variables import get_environment_variable
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import post
 from thenewboston.utils.tools import sort_and_encode
 from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_key
-
-from config.helpers.environment_variables import get_environment_variable
 
 
 @shared_task
