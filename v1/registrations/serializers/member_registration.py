@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 from thenewboston.blocks.validation import validate_block
 from thenewboston.constants.network import BALANCE_LOCK_LENGTH, PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
@@ -5,6 +6,8 @@ from thenewboston.serializers.network_transaction import NetworkTransactionSeria
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 
+from v1.bank_transactions.models.bank_transaction import BankTransaction
+from v1.blocks.models.block import Block
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import sign_and_send_block
@@ -26,34 +29,29 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
     txs = NetworkTransactionSerializer(many=True)
 
-    def create(self, validated_data):
+    @staticmethod
+    def _create_block_and_bank_transactions(validated_block):
         """
-        Create pending member registration
-        Forward block to validator
+        Create block and bank transactions
         """
 
-        block = validated_data
-        self_configuration = get_self_configuration(exception_class=RuntimeError)
-        bank_registration_fee = self_configuration.registration_fee
-        primary_validator = self_configuration.primary_validator
-
-        member_registration = MemberRegistration.objects.create(
-            account_number=block['account_number'],
-            fee=bank_registration_fee,
-            status=PENDING
-        )
-        sign_and_send_block.delay(
-            block=block,
-            ip_address=primary_validator.ip_address,
-            port=primary_validator.port,
-            protocol=primary_validator.protocol,
-            url_path='/bank_blocks'
+        block = Block.objects.create(
+            sender=validated_block['account_number'],
+            signature=validated_block['signature']
         )
 
-        return member_registration
+        bank_transactions = []
 
-    def update(self, instance, validated_data):
-        raise RuntimeError('Method unavailable')
+        for tx in validated_block['txs']:
+            bank_transaction = BankTransaction(
+                amount=tx['amount'],
+                balance_key=tx['balance_key'],
+                block=block,
+                recipient=tx['recipient'],
+            )
+            bank_transactions.append(bank_transaction)
+
+        BankTransaction.objects.bulk_create(bank_transactions)
 
     @staticmethod
     def _validate_txs_length(*, bank_registration_fee, txs, validator_transaction_fee):
@@ -68,6 +66,40 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
                 'bank_registration_fee': bank_registration_fee,
                 'validator_transaction_fee': validator_transaction_fee
             })
+
+    def create(self, validated_data):
+        """
+        Create pending member registration
+        Forward block to validator
+        """
+
+        validated_block = validated_data
+        self_configuration = get_self_configuration(exception_class=RuntimeError)
+        bank_registration_fee = self_configuration.registration_fee
+        primary_validator = self_configuration.primary_validator
+
+        try:
+            with transaction.atomic():
+                self._create_block_and_bank_transactions(validated_block)
+                member_registration = MemberRegistration.objects.create(
+                    account_number=validated_block['account_number'],
+                    fee=bank_registration_fee,
+                    status=PENDING
+                )
+                sign_and_send_block.delay(
+                    block=validated_block,
+                    ip_address=primary_validator.ip_address,
+                    port=primary_validator.port,
+                    protocol=primary_validator.protocol,
+                    url_path='/bank_blocks'
+                )
+        except Exception as e:
+            print(e)
+
+        return member_registration
+
+    def update(self, instance, validated_data):
+        raise RuntimeError('Method unavailable')
 
     def validate(self, data):
         """
