@@ -11,7 +11,7 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-from config.settings.environment import SETTINGS_MODULE
+from config.helpers.environment import SETTINGS_MODULE
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', SETTINGS_MODULE)
 

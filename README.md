@@ -16,6 +16,12 @@ Initialize database:
 python3 manage.py migrate
 ```
 
+Set required environment variables:
+```
+# 64 character signing key
+NETWORK_SIGNING_KEY
+```
+
 ## Running Tests
 
 Run all tests:

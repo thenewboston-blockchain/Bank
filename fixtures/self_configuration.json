@@ -5,13 +5,14 @@
     "fields": {
       "account_number": "bank_001",
       "ip_address": "192.168.1.232",
+      "network_identifier": "63fdf55f38271f8376a405bcb35d3a89fb1d193ea68b2ad5609ceb601e1e26c4",
       "port": 8000,
       "protocol": "http",
       "version": "v1.0",
       "default_transaction_fee": "1.0000000000000000",
       "registration_fee": "2.0000000000000000",
-      "node_type": "BANK",
-      "primary_validator": 1
+      "primary_validator": 1,
+      "node_type": "BANK"
     }
   }
 ]

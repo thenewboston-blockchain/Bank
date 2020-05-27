@@ -7,23 +7,24 @@ from thenewboston.utils.network import post
 from thenewboston.utils.tools import sort_and_encode
 from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_key
 
+from config.helpers.environment_variables import get_environment_variable
+
 
 @shared_task
 def sign_and_send_block(*, block, ip_address, port, protocol, url_path):
     """
     Sign block and send to recipient
-    recipient - any NetworkNode
     """
 
-    # TODO: Signing key
-    signing_key = SigningKey('e0ba29c1c493d01a5f665db55a4bd77caa140cf9722d0ed367ce4183230d2e02', encoder=HexEncoder)
-    confirmation_identifier = get_verify_key(signing_key=signing_key)
-    confirmation_identifier = encode_verify_key(verify_key=confirmation_identifier)
+    network_signing_key = get_environment_variable('NETWORK_SIGNING_KEY')
+    signing_key = SigningKey(network_signing_key, encoder=HexEncoder)
+    network_identifier = get_verify_key(signing_key=signing_key)
+    network_identifier = encode_verify_key(verify_key=network_identifier)
     message = sort_and_encode(block)
 
     signed_block = {
         'block': block,
-        'confirmation_identifier': confirmation_identifier,
+        'network_identifier': network_identifier,
         'signature': generate_signature(message=message, signing_key=signing_key)
     }
 

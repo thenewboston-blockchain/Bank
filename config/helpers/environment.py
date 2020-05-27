@@ -8,6 +8,9 @@ if ENVIRONMENT == 'development':
 if ENVIRONMENT == 'local':
     SETTINGS_MODULE = 'config.settings.local'
 
+if ENVIRONMENT == 'postgres_local':
+    SETTINGS_MODULE = 'config.settings.local'
+
 if ENVIRONMENT == 'production':
     SETTINGS_MODULE = 'config.settings.production'
 

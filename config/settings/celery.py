@@ -2,7 +2,7 @@ import os
 
 from celery import Celery
 
-from config.settings.environment import SETTINGS_MODULE
+from config.helpers.environment import SETTINGS_MODULE
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', SETTINGS_MODULE)
 
