@@ -1,11 +1,11 @@
 from celery import shared_task
 from nacl.encoding import HexEncoder
 from nacl.signing import SigningKey
-from thenewboston.accounts.account_numbers import encode_account_number, get_account_number
 from thenewboston.blocks.signatures import generate_signature
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import post
 from thenewboston.utils.tools import sort_and_encode
+from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_key
 
 
 @shared_task
@@ -17,8 +17,8 @@ def sign_and_send_block(*, block, ip_address, port, protocol, url_path):
 
     # TODO: Signing key
     signing_key = SigningKey('e0ba29c1c493d01a5f665db55a4bd77caa140cf9722d0ed367ce4183230d2e02', encoder=HexEncoder)
-    confirmation_identifier = get_account_number(signing_key=signing_key)
-    confirmation_identifier = encode_account_number(account_number=confirmation_identifier)
+    confirmation_identifier = get_verify_key(signing_key=signing_key)
+    confirmation_identifier = encode_verify_key(verify_key=confirmation_identifier)
     message = sort_and_encode(block)
 
     signed_block = {
