@@ -10,6 +10,7 @@ from thenewboston.constants.network import (
 )
 from thenewboston.serializers.block import BlockSerializer
 from thenewboston.utils.fields import all_field_names
+from thenewboston.utils.tools import sort_and_encode
 
 from v1.members.models.member import Member
 from v1.registrations.models.member_registration import MemberRegistration
@@ -85,10 +86,8 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         network_identifier = data['network_identifier']
         signature = data['signature']
 
-        # TODO: May have to encode the block first
-
         verify_signature(
-            message=block,
+            message=sort_and_encode(block),
             signature=signature,
             verify_key=network_identifier
         )
