@@ -2,4 +2,5 @@
 celery==4.4.2
 django-redis==4.11.0
 redis==3.5.2
+tblib==1.6.0
 wheel==0.34.2
