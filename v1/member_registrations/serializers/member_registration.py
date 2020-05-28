@@ -12,7 +12,7 @@ from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import sign_and_send_block
 from v1.validators.helpers.validator_configuration import get_primary_validator
-from ..models.member_registration import MemberRegistration
+from v1.member_registrations.models.member_registration import MemberRegistration
 
 
 class MemberRegistrationSerializer(serializers.ModelSerializer):

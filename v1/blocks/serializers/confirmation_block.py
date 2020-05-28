@@ -13,7 +13,7 @@ from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
 from v1.members.models.member import Member
-from v1.registrations.models.member_registration import MemberRegistration
+from v1.member_registrations.models.member_registration import MemberRegistration
 from v1.validators.models.validator import Validator
 from ..models.block import Block
 from ..models.confirmation_block import ConfirmationBlock
