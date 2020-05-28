@@ -8,7 +8,7 @@ from thenewboston.constants.network import (
     SIGNATURE_LENGTH,
     VERIFY_KEY_LENGTH
 )
-from thenewboston.serializers.block import BlockSerializer
+from thenewboston.serializers.confirmation_block_message import ConfirmationBlockMessageSerializer
 from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
@@ -28,8 +28,8 @@ class ConfirmationBlockSerializer(serializers.ModelSerializer):
 
 
 class ConfirmationBlockSerializerCreate(serializers.Serializer):
-    block = BlockSerializer()
     block_identifier = serializers.CharField(max_length=BLOCK_IDENTIFIER_LENGTH)
+    message = ConfirmationBlockMessageSerializer()
     network_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
 
@@ -42,9 +42,10 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         """
 
         block_identifier = validated_data['block_identifier']
+        message = validated_data['message']
         network_identifier = validated_data['network_identifier']
 
-        inner_block = validated_data['block']
+        inner_block = message['block']
         inner_block_account_number = inner_block['account_number']
         inner_block_signature = inner_block['signature']
 
@@ -82,12 +83,12 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         Validate signature
         """
 
-        block = data['block']
+        message = self.initial_data['message']
         network_identifier = data['network_identifier']
         signature = data['signature']
 
         verify_signature(
-            message=sort_and_encode(block),
+            message=sort_and_encode(message),
             signature=signature,
             verify_key=network_identifier
         )
