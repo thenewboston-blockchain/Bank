@@ -7,6 +7,7 @@ from thenewboston.utils.format import format_address
 from thenewboston.utils.network import post
 from thenewboston.utils.tools import sort_and_encode
 from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_key
+from thenewboston.utils.files import write_json
 
 
 @shared_task
@@ -26,6 +27,8 @@ def sign_and_send_block(*, block, ip_address, port, protocol, url_path):
         'network_identifier': network_identifier,
         'signature': generate_signature(message=message, signing_key=signing_key)
     }
+
+    write_json('sample-block.json', signed_block)
 
     node_address = format_address(ip_address=ip_address, port=port, protocol=protocol)
     url = f'{node_address}{url_path}'
