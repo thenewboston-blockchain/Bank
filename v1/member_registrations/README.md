@@ -3,7 +3,7 @@
 Users are required to register at a bank before they are able to send transactions through that bank. If their 
 registration is accepted they will be referred to as a "member" of that bank.
 
-#### POST /member_registrations
+### POST /member_registrations
 
 - `account_number` - account number of the registering account
 - `balance_lock` - current balance lock for the above `account_number`
