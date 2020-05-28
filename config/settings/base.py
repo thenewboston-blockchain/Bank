@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'v1.bank_registrations.apps.BankRegistrationsConfig',
     'v1.bank_transactions.apps.BankTransactionsConfig',
     'v1.blocks.apps.BlocksConfig',
+    'v1.confirmation_blocks.apps.ConfirmationBlocksConfig',
     'v1.member_registrations.apps.MemberRegistrationsConfig',
     'v1.members.apps.MembersConfig',
     'v1.self_configurations.apps.SelfConfigurationsConfig',
