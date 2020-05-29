@@ -79,7 +79,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         return block
 
     @staticmethod
-    def validated_account_number(account_number):
+    def validate_account_number(account_number):
         """
         Check account number belongs to a registered member
         """

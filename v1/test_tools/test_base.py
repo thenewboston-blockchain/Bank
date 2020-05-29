@@ -1,10 +1,12 @@
 from django.core.cache import cache
+from faker import Faker
 from rest_framework.test import APITestCase
 
 from .data import FIXTURES
 
 
 class TestBase(APITestCase):
+    fake = Faker()
     fixtures = FIXTURES
 
     def tearDown(self):
