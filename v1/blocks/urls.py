@@ -1,3 +1,10 @@
 from django.urls import path
 
-urlpatterns = []
+from .views.block import BlockView
+
+urlpatterns = [
+
+    # Blocks
+    path('blocks', BlockView.as_view()),
+
+]

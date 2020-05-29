@@ -6,13 +6,12 @@ from thenewboston.serializers.network_transaction import NetworkTransactionSeria
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 
-from v1.bank_transactions.models.bank_transaction import BankTransaction
-from v1.blocks.models.block import Block
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import sign_and_send_block
+from v1.utils.blocks import create_block_and_bank_transactions
 from v1.validators.helpers.validator_configuration import get_primary_validator
-from v1.member_registrations.models.member_registration import MemberRegistration
+from ..models.member_registration import MemberRegistration
 
 
 class MemberRegistrationSerializer(serializers.ModelSerializer):
@@ -28,30 +27,6 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
     balance_lock = serializers.CharField(max_length=BALANCE_LOCK_LENGTH)
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
     txs = NetworkTransactionSerializer(many=True)
-
-    @staticmethod
-    def _create_block_and_bank_transactions(validated_block):
-        """
-        Create block and bank transactions
-        """
-
-        block = Block.objects.create(
-            sender=validated_block['account_number'],
-            signature=validated_block['signature']
-        )
-
-        bank_transactions = []
-
-        for tx in validated_block['txs']:
-            bank_transaction = BankTransaction(
-                amount=tx['amount'],
-                balance_key=tx['balance_key'],
-                block=block,
-                recipient=tx['recipient'],
-            )
-            bank_transactions.append(bank_transaction)
-
-        BankTransaction.objects.bulk_create(bank_transactions)
 
     @staticmethod
     def _validate_txs_length(*, bank_registration_fee, txs, validator_transaction_fee):
@@ -80,7 +55,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
 
         try:
             with transaction.atomic():
-                self._create_block_and_bank_transactions(validated_block)
+                create_block_and_bank_transactions(validated_block)
                 member_registration = MemberRegistration.objects.create(
                     account_number=validated_block['account_number'],
                     fee=bank_registration_fee,

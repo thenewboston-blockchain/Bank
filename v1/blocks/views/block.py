@@ -2,34 +2,28 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from v1.member_registrations.models.member_registration import MemberRegistration
-from v1.member_registrations.serializers.member_registration import (
-    MemberRegistrationSerializer,
-    MemberRegistrationSerializerCreate
-)
+from v1.blocks.models.block import Block
+from v1.blocks.serializers.block import BlockSerializer, BlockSerializerCreate
 
 
-# member_registrations
-class MemberRegistrationView(APIView):
+# blocks
+class BlockView(APIView):
 
     @staticmethod
     def get(request):
         """
-        description: List member registrations
+        description: List blocks
         """
 
-        member_registrations = MemberRegistration.objects.all()
-        return Response(MemberRegistrationSerializer(member_registrations, many=True).data)
+        blocks = Block.objects.all()
+        return Response(BlockSerializer(blocks, many=True).data)
 
     @staticmethod
     def post(request):
         """
-        description: Register as a bank member
+        description: Create block
         parameters:
           - name: account_number
-            required: true
-            type: string
-          - name: balance_lock
             required: true
             type: string
           - name: signature
@@ -52,11 +46,11 @@ class MemberRegistrationView(APIView):
                   type: string
         """
 
-        serializer = MemberRegistrationSerializerCreate(data=request.data, context={'request': request})
+        serializer = BlockSerializerCreate(data=request.data, context={'request': request})
         if serializer.is_valid():
-            member_registration = serializer.save()
+            block = serializer.save()
             return Response(
-                MemberRegistrationSerializer(member_registration).data,
+                BlockSerializer(block).data,
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
