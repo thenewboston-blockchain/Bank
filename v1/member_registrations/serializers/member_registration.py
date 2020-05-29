@@ -28,20 +28,6 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
     txs = NetworkTransactionSerializer(many=True)
 
-    @staticmethod
-    def _validate_txs_length(*, bank_registration_fee, txs, validator_transaction_fee):
-        """
-        Verify that there are not an excessive amount of Txs
-        """
-
-        fees = [fee for fee in [bank_registration_fee, validator_transaction_fee] if fee != 0]
-        if len(txs) > len(fees):
-            raise serializers.ValidationError({
-                'error_message': 'Invalid Txs',
-                'bank_registration_fee': bank_registration_fee,
-                'validator_transaction_fee': validator_transaction_fee
-            })
-
     def create(self, validated_data):
         """
         Create pending member registration
@@ -92,11 +78,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             'signature': data['signature'],
             'txs': self.initial_data['txs']
         }
-        validate_block(
-            allow_empty_txs=True,
-            balance_lock=data['balance_lock'],
-            block=block
-        )
+        validate_block(balance_lock=data['balance_lock'], block=block)
         return block
 
     @staticmethod
@@ -114,54 +96,32 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
 
         return account_number
 
-    def validate_txs(self, txs):
+    @staticmethod
+    def validate_txs(txs):
         """
-        Check that Txs exist
-        - if both Bank and Validator charge 0 fees, return empty list
+        Check that the correct number of Txs exist
         Verify that correct payment exist for both Bank and Validator
-        Verify that there are no extra payments
         """
 
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
-
         bank_registration_fee = self_configuration.registration_fee
         validator_transaction_fee = primary_validator.default_transaction_fee
 
-        if bank_registration_fee == 0 and validator_transaction_fee == 0:
-            self._validate_txs_length(
-                bank_registration_fee=bank_registration_fee,
-                txs=txs,
-                validator_transaction_fee=validator_transaction_fee
-            )
-            return txs
+        if len(txs) != 2:
+            raise serializers.ValidationError(f'Expecting 2 transactions, found {len(txs)}')
 
-        if not txs:
-            raise serializers.ValidationError('Invalid Txs')
-
-        if len(txs) > 2:
-            raise serializers.ValidationError('Length of Txs should never be greater than 2')
-
-        if bank_registration_fee:
-            validate_transaction_exists(
-                amount=bank_registration_fee,
-                error=serializers.ValidationError,
-                recipient=self_configuration.account_number,
-                txs=txs
-            )
-
-        if validator_transaction_fee:
-            validate_transaction_exists(
-                amount=validator_transaction_fee,
-                error=serializers.ValidationError,
-                recipient=primary_validator.account_number,
-                txs=txs
-            )
-
-        self._validate_txs_length(
-            bank_registration_fee=bank_registration_fee,
-            txs=txs,
-            validator_transaction_fee=validator_transaction_fee
+        validate_transaction_exists(
+            amount=bank_registration_fee,
+            error=serializers.ValidationError,
+            recipient=self_configuration.account_number,
+            txs=txs
+        )
+        validate_transaction_exists(
+            amount=validator_transaction_fee,
+            error=serializers.ValidationError,
+            recipient=primary_validator.account_number,
+            txs=txs
         )
 
         return txs
