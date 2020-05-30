@@ -1,13 +1,7 @@
 from django.db import transaction
 from rest_framework import serializers
 from thenewboston.blocks.signatures import verify_signature
-from thenewboston.constants.network import (
-    ACCEPTED,
-    BLOCK_IDENTIFIER_LENGTH,
-    PENDING,
-    SIGNATURE_LENGTH,
-    VERIFY_KEY_LENGTH
-)
+from thenewboston.constants.network import ACCEPTED, PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
 from thenewboston.serializers.confirmation_block_message import ConfirmationBlockMessageSerializer
 from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
@@ -28,7 +22,6 @@ class ConfirmationBlockSerializer(serializers.ModelSerializer):
 
 
 class ConfirmationBlockSerializerCreate(serializers.Serializer):
-    block_identifier = serializers.CharField(max_length=BLOCK_IDENTIFIER_LENGTH)
     message = ConfirmationBlockMessageSerializer()
     network_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
@@ -41,8 +34,8 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         - update MemberRegistration to accepted
         """
 
-        block_identifier = validated_data['block_identifier']
         message = validated_data['message']
+        block_identifier = message['block_identifier']
         network_identifier = validated_data['network_identifier']
 
         inner_block = message['block']
