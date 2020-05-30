@@ -1,10 +1,9 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from thenewboston.models.network_validator import NetworkValidator
 
-from thenewboston.models.network_node import NetworkNode
 
-
-class Validator(NetworkNode):
+class Validator(NetworkValidator):
     trust = models.DecimalField(
         decimal_places=2,
         default=0,
