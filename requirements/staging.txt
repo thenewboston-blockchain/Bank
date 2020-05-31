@@ -4,28 +4,33 @@
 #
 #    pip-compile --output-file=requirements/staging.txt requirements/staging.in
 #
+-e git+ssh://git@github.com/thenewboston-developers/thenewboston-python.git#egg=thenewboston  # via -r requirements/base.in
 amqp==2.5.2               # via kombu
 asgiref==3.2.7            # via django
 billiard==3.6.3.0         # via celery
 celery==4.4.2             # via -r requirements/base.in
 certifi==2020.4.5.1       # via requests
+cffi==1.14.0              # via pynacl
 chardet==3.0.4            # via requests
 django-redis==4.11.0      # via -r requirements/base.in
-django==3.0.6             # via django-redis
+django==3.0.6             # via django-redis, djangorestframework, thenewboston
+djangorestframework==3.11.0  # via thenewboston
 faker==4.1.0              # via -r requirements/base.in
 idna==2.9                 # via requests
 importlib-metadata==1.6.0  # via kombu
 kombu==4.6.8              # via celery
 ptable==0.9.2             # via thenewboston
+pycodestyle==2.6.0        # via thenewboston
+pycparser==2.20           # via cffi
+pynacl==1.3.0             # via thenewboston
 python-dateutil==2.8.1    # via faker
 pytz==2020.1              # via celery, django
 redis==3.5.2              # via -r requirements/base.in, django-redis
 requests==2.23.0          # via thenewboston
-six==1.15.0               # via python-dateutil
+six==1.15.0               # via pynacl, python-dateutil
 sqlparse==0.3.1           # via django
 tblib==1.6.0              # via -r requirements/base.in
 text-unidecode==1.3       # via faker
-file:///Users/bucky/Desktop/Projects/thenewboston-python/dist/thenewboston-0.0.1.tar.gz  # via -r requirements/base.in
 urllib3==1.25.9           # via requests
 vine==1.3.0               # via amqp, celery
 wheel==0.34.2             # via -r requirements/base.in
