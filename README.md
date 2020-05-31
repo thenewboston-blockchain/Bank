@@ -31,6 +31,8 @@ brew install redis
 redis-server
 ```
 
+Create a virtual environment with Python 3.6 or higher.
+
 Install required packages:
 ```
 pip3 install -r requirements/local.txt
