@@ -33,7 +33,7 @@ redis-server
 
 Install required packages:
 ```
-sudo pip3 install -r requirements/local.txt
+pip3 install -r requirements/local.txt
 ```
 
 Run Celery:
