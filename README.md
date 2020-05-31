@@ -7,7 +7,7 @@ an SSH key to your GitHub account.
 # Check if you already have an SSH key
 cat ~/.ssh/id_rsa.pub
 
-# Create a SSH key you do not already have one
+# Create an SSH key if you do not already have one
 ssh-keygen -t rsa
 
 # Copy to clipboard (Mac)
