@@ -6,7 +6,6 @@ sudo pip3 install -r requirements/local.txt
 ```
 
 When adding a package, add to `requirements/base.in` and then :
-
 ```
 bash scripts/compile_requirements.sh
 ```
@@ -18,6 +17,17 @@ DJANGO_APPLICATION_ENVIRONMENT
 
 # 64 character signing key used to authenticate network requests
 NETWORK_SIGNING_KEY
+```
+
+Install and run Redis:
+```
+brew install redis
+redis-server
+```
+
+Run Celery:
+```
+celery -A config.settings worker -l debug
 ```
 
 ## Running Tests
