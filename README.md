@@ -60,6 +60,11 @@ Run tests for individual app:
 python3 manage.py test v1/validators/
 ```
 
+To monitor celery tasks:
+```
+celery flower -A config.settings --address=127.0.0.1 --port=5555
+```
+
 ## Developers
 
 When adding a package, add to `requirements/base.in` and then :
