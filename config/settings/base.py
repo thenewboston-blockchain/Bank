@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Requirements
+    'channels',
     'rest_framework',
 
     # API (v1) network nodes
@@ -43,6 +44,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
+ASGI_APPLICATION = 'config.routing.application'
 
 TEMPLATES = [
     {
