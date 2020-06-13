@@ -1,8 +1,8 @@
 from django.db import transaction
 from rest_framework import serializers
 from thenewboston.blocks.validation import validate_block
-from thenewboston.constants.network import BALANCE_LOCK_LENGTH, PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
-from thenewboston.serializers.network_transaction import NetworkTransactionSerializer
+from thenewboston.constants.network import PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
+from thenewboston.serializers.message import MessageSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 
@@ -24,9 +24,8 @@ class MemberRegistrationSerializer(serializers.ModelSerializer):
 
 class MemberRegistrationSerializerCreate(serializers.Serializer):
     account_number = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
-    balance_lock = serializers.CharField(max_length=BALANCE_LOCK_LENGTH)
+    message = MessageSerializer()
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
-    txs = NetworkTransactionSerializer(many=True)
 
     def create(self, validated_data):
         """
@@ -69,14 +68,14 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         - Tx chaining
         - signature
 
-        Note: when building the block, txs are pulled from 'initial_data' since 'data' has already been processed by
-        the NetworkTransactionSerializer converting all amounts to DecimalField (which are not JSON serializable)
+        Note: when building the block, message is pulled from 'initial_data' since 'data' has already been processed by
+        the MessageSerializer converting all amounts to DecimalField (which are not JSON serializable)
         """
 
         block = {
             'account_number': data['account_number'],
-            'signature': data['signature'],
-            'txs': self.initial_data['txs']
+            'message': self.initial_data['message'],
+            'signature': data['signature']
         }
         validate_block(balance_lock=data['balance_lock'], block=block)
         return block
@@ -97,12 +96,13 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         return account_number
 
     @staticmethod
-    def validate_txs(txs):
+    def validate_message(message):
         """
         Check that the correct number of Txs exist
         Verify that correct payment exist for both Bank and Validator
         """
 
+        txs = message['txs']
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
         bank_registration_fee = self_configuration.registration_fee
@@ -124,4 +124,4 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             txs=txs
         )
 
-        return txs
+        return message

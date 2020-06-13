@@ -37,7 +37,7 @@ class BlockView(APIView):
               properties:
                 amount:
                   required: true
-                  type: integer
+                  type: number
                 balance_key:
                   required: true
                   type: string
