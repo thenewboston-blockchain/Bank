@@ -45,7 +45,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
                     url_path='/bank_blocks'
                 )
         except Exception as e:
-            print(e)
+            raise serializers.ValidationError(e)
 
         return block
 
