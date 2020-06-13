@@ -14,6 +14,5 @@ class BankTransaction(NetworkTransaction):
         return (
             f'ID: {self.id} | '
             f'Amount: {self.amount} | '
-            f'Balance key: {self.balance_key} | '
             f'Recipient: {self.recipient}'
         )

@@ -29,7 +29,8 @@ class TestMemberRegistration(TestBase):
         block = generate_block(
             account_number=account_number,
             balance_lock=encoded_account_number,
-            payments=[
+            signing_key=signing_key,
+            transactions=[
                 {
                     'amount': float(self_configuration.registration_fee),
                     'recipient': self_configuration.account_number
@@ -38,12 +39,7 @@ class TestMemberRegistration(TestBase):
                     'amount': float(primary_validator.default_transaction_fee),
                     'recipient': primary_validator.account_number
                 }
-            ],
-            signing_key=signing_key,
+            ]
         )
 
-        payload = {
-            **block,
-            'balance_lock': encoded_account_number
-        }
-        self.validate_post('/member_registrations', payload, status.HTTP_201_CREATED)
+        self.validate_post('/member_registrations', block, status.HTTP_201_CREATED)

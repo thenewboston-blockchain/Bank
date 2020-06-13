@@ -7,19 +7,22 @@ def create_block_and_bank_transactions(block_data):
     Create block and bank transactions
     """
 
+    message = block_data['message']
+
     block = Block.objects.create(
+        balance_key=message['balance_key'],
         sender=block_data['account_number'],
         signature=block_data['signature']
     )
 
     bank_transactions = []
+    message = block_data['message']
 
-    for tx in block_data['txs']:
+    for tx in message['txs']:
         bank_transaction = BankTransaction(
             amount=tx['amount'],
-            balance_key=tx['balance_key'],
             block=block,
-            recipient=tx['recipient'],
+            recipient=tx['recipient']
         )
         bank_transactions.append(bank_transaction)
 

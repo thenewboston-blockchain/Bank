@@ -1,10 +1,11 @@
 from django.db import transaction
 from rest_framework import serializers
-from thenewboston.blocks.validation import validate_block
+from thenewboston.blocks.signatures import verify_signature
 from thenewboston.constants.network import PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
 from thenewboston.serializers.message import MessageSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
+from thenewboston.utils.tools import sort_and_encode
 
 from v1.members.models.member import Member
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
@@ -63,10 +64,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
 
     def validate(self, data):
         """
-        Validate block:
-        - Tx formatting
-        - Tx chaining
-        - signature
+        Validate block signature
 
         Note: when building the block, message is pulled from 'initial_data' since 'data' has already been processed by
         the MessageSerializer converting all amounts to DecimalField (which are not JSON serializable)
@@ -77,7 +75,11 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
             'message': self.initial_data['message'],
             'signature': data['signature']
         }
-        validate_block(balance_lock=data['balance_lock'], block=block)
+        verify_signature(
+            message=sort_and_encode(block['message']),
+            signature=block['signature'],
+            verify_key=block['account_number']
+        )
         return block
 
     @staticmethod

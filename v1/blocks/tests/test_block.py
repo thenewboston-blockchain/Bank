@@ -33,7 +33,8 @@ class TestBlock(TestBase):
         block = generate_block(
             account_number=account_number,
             balance_lock=encoded_account_number,
-            payments=[
+            signing_key=signing_key,
+            transactions=[
                 {
                     'amount': float(self_configuration.registration_fee),
                     'recipient': self_configuration.account_number
@@ -46,8 +47,7 @@ class TestBlock(TestBase):
                     'amount': self.fake.pyfloat(min_value=1, max_value=100, positive=True, right_digits=4),
                     'recipient': random_account_number()
                 }
-            ],
-            signing_key=signing_key,
+            ]
         )
 
         self.validate_post('/blocks', block, status.HTTP_201_CREATED)
