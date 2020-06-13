@@ -36,7 +36,7 @@ class TestBlock(TestBase):
             signing_key=signing_key,
             transactions=[
                 {
-                    'amount': float(self_configuration.registration_fee),
+                    'amount': float(self_configuration.default_transaction_fee),
                     'recipient': self_configuration.account_number
                 },
                 {

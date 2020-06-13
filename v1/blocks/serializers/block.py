@@ -93,7 +93,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
 
-        bank_registration_fee = self_configuration.registration_fee
+        bank_default_transaction_fee = self_configuration.default_transaction_fee
         validator_transaction_fee = primary_validator.default_transaction_fee
 
         txs = message['txs']
@@ -102,7 +102,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
             raise serializers.ValidationError('Invalid Txs')
 
         validate_transaction_exists(
-            amount=bank_registration_fee,
+            amount=bank_default_transaction_fee,
             error=serializers.ValidationError,
             recipient=self_configuration.account_number,
             txs=txs
