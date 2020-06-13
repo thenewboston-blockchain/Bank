@@ -26,24 +26,28 @@ class BlockView(APIView):
           - name: account_number
             required: true
             type: string
+          - name: message
+            required: true
+            type: object
+            properties:
+              balance_key:
+                required: true
+                type: string
+              txs:
+                required: true
+                type: array
+                items:
+                  type: object
+                  properties:
+                    amount:
+                      required: true
+                      type: number
+                    recipient:
+                      required: true
+                      type: string
           - name: signature
             required: true
             type: string
-          - name: txs
-            required: true
-            type: array
-            items:
-              type: object
-              properties:
-                amount:
-                  required: true
-                  type: integer
-                balance_key:
-                  required: true
-                  type: string
-                recipient:
-                  required: true
-                  type: string
         """
 
         serializer = BlockSerializerCreate(data=request.data, context={'request': request})

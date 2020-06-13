@@ -45,7 +45,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
                     url_path='/bank_blocks'
                 )
         except Exception as e:
-            print(e)
+            raise serializers.ValidationError(e)
 
         return block
 
@@ -54,28 +54,22 @@ class BlockSerializerCreate(NetworkBlockSerializer):
 
     def validate(self, data):
         """
-        Validate signature
+        Validate block signature
 
-        Note: when building the block, txs are pulled from 'initial_data' since 'data' has already been processed by
-        the NetworkTransactionSerializer converting all amounts to DecimalField (which are not JSON serializable)
+        Note: when building the block, message is pulled from 'initial_data' since 'data' has already been processed by
+        the MessageSerializer converting all amounts to DecimalField (which are not JSON serializable)
         """
-
-        account_number = data['account_number']
-        signature = data['signature']
-        txs = self.initial_data['txs']
-
-        verify_signature(
-            message=sort_and_encode(txs),
-            signature=signature,
-            verify_key=account_number
-        )
 
         block = {
             'account_number': data['account_number'],
-            'signature': data['signature'],
-            'txs': self.initial_data['txs']
+            'message': self.initial_data['message'],
+            'signature': data['signature']
         }
-
+        verify_signature(
+            message=sort_and_encode(block['message']),
+            signature=block['signature'],
+            verify_key=block['account_number']
+        )
         return block
 
     @staticmethod
@@ -90,7 +84,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         return account_number
 
     @staticmethod
-    def validate_txs(txs):
+    def validate_message(message):
         """
         Check that Txs exist
         Verify that correct payment exist for both Bank and Validator
@@ -99,19 +93,20 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
 
-        bank_registration_fee = self_configuration.registration_fee
+        bank_default_transaction_fee = self_configuration.default_transaction_fee
         validator_transaction_fee = primary_validator.default_transaction_fee
+
+        txs = message['txs']
 
         if not txs:
             raise serializers.ValidationError('Invalid Txs')
 
         validate_transaction_exists(
-            amount=bank_registration_fee,
+            amount=bank_default_transaction_fee,
             error=serializers.ValidationError,
             recipient=self_configuration.account_number,
             txs=txs
         )
-
         validate_transaction_exists(
             amount=validator_transaction_fee,
             error=serializers.ValidationError,
