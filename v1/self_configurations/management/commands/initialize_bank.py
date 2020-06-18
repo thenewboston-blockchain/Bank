@@ -19,7 +19,6 @@ class Command(InitializeNode):
     def __init__(self):
         super().__init__()
 
-        self.primary_validator = None
         self.required_input = {
             'account_number': None,
             'default_transaction_fee': None,
@@ -74,8 +73,7 @@ class Command(InitializeNode):
         # Create SelfConfiguration and related Bank objects
         SelfConfiguration.objects.create(
             **self.required_input,
-            node_type=BANK,
-            primary_validator=self.primary_validator
+            node_type=BANK
         )
 
-        self.stdout.write(self.style.SUCCESS('Primary validator initialization complete'))
+        self.stdout.write(self.style.SUCCESS('Bank initialization complete'))
