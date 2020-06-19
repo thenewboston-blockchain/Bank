@@ -3,9 +3,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from v1.decorators.nodes import is_primary_validator
+from v1.decorators.nodes import is_primary_validator, is_self
 from ..models.bank_registration import BankRegistration
-from ..serializers.bank_registration import BankRegistrationSerializer, BankRegistrationSerializerUpdate
+from ..serializers.bank_registration import (
+    BankRegistrationSerializer,
+    BankRegistrationSerializerCreate,
+    BankRegistrationSerializerUpdate
+)
 
 
 # bank_registrations
@@ -19,6 +23,24 @@ class BankRegistrationView(APIView):
 
         bank_registrations = BankRegistration.objects.all()
         return Response(BankRegistrationSerializer(bank_registrations, many=True).data)
+
+    @staticmethod
+    @is_self
+    def post(request):
+        """
+        description: Create bank registration
+        """
+
+        message = request.data.get('message')
+        serializer = BankRegistrationSerializerCreate(data=message, context={'request': request})
+
+        if serializer.is_valid():
+            bank_registration = serializer.save()
+            return Response(
+                BankRegistrationSerializer(bank_registration).data,
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 # bank_registrations/{bank_registration_id}
