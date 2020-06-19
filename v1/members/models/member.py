@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from thenewboston.constants.network import VERIFY_KEY_LENGTH
@@ -5,6 +7,7 @@ from thenewboston.models.created_modified import CreatedModified
 
 
 class Member(CreatedModified):
+    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)
     account_number = models.CharField(max_length=VERIFY_KEY_LENGTH, unique=True)
     trust = models.DecimalField(
         decimal_places=2,

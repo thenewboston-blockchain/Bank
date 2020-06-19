@@ -1,7 +1,7 @@
 [
   {
     "model": "self_configurations.selfconfiguration",
-    "pk": 1,
+    "pk": "e16f4028-3175-49ee-8317-05b5d8a4dc03",
     "fields": {
       "account_number": "5e12967707909e62b2bb2036c209085a784fabbc3deccefee70052b6181c8ed8",
       "ip_address": "192.168.1.232",
@@ -11,7 +11,7 @@
       "version": "v1.0",
       "default_transaction_fee": "1.0000000000000000",
       "registration_fee": "2.0000000000000000",
-      "primary_validator": 1,
+      "primary_validator": "a8101b03-15ad-42fc-8e64-2de24b850e0e",
       "node_type": "BANK"
     }
   }

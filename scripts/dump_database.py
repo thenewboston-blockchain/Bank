@@ -1,5 +1,13 @@
 import os
 
+"""
+python3 scripts/dump_database.py
+
+Running this script will:
+- delete all migration files
+- delete db.sqlite3
+"""
+
 
 def main():
     for root, dirs, files in os.walk('v1'):
@@ -24,6 +32,6 @@ def remove_database():
         print('No database to remove')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
     remove_database()
