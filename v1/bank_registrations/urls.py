@@ -6,6 +6,6 @@ urlpatterns = [
 
     # Bank registrations
     path('bank_registrations', BankRegistrationView.as_view()),
-    path('bank_registrations/<int:bank_registration_id>', BankRegistrationDetail.as_view()),
+    path('bank_registrations/<uuid:bank_registration_id>', BankRegistrationDetail.as_view()),
 
 ]

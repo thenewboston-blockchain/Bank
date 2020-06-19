@@ -34,12 +34,12 @@ class BankRegistrationDetail(APIView):
             type: string
         """
 
-        signed_data = request.data.get('signed_data')
+        message = request.data.get('message')
         bank_registration = get_object_or_404(BankRegistration, pk=bank_registration_id)
 
         serializer = BankRegistrationSerializerUpdate(
             bank_registration,
-            data=signed_data,
+            data=message,
             partial=True
         )
 

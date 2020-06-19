@@ -1,7 +1,10 @@
 from functools import wraps
 
+from nacl.exceptions import BadSignatureError
 from rest_framework import status
 from rest_framework.response import Response
+from thenewboston.blocks.signatures import verify_signature
+from thenewboston.utils.tools import sort_and_encode
 
 from v1.validators.helpers.validator_configuration import get_primary_validator
 
@@ -14,17 +17,36 @@ def is_primary_validator(func):
     @wraps(func)
     def inner(request, *args, **kwargs):
 
-        if not request.user.is_authenticated:
-            ip_address = request.META.get('REMOTE_ADDR')
+        print(request.data)
+        message = request.data.get('message')
+        network_identifier = request.data.get('network_identifier')
+        signature = request.data.get('signature')
 
-            if not ip_address:
-                return Response(status=status.HTTP_401_UNAUTHORIZED)
+        # TODO: This should be hitting the cache
+        primary_validator = get_primary_validator()
 
-            # TODO: This should be hitting the cache
-            primary_validator = get_primary_validator()
+        if network_identifier != primary_validator.network_identifier:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-            if ip_address != primary_validator.ip_address:
-                return Response(status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            verify_signature(
+                message=sort_and_encode(message),
+                signature=signature,
+                verify_key=network_identifier
+            )
+        except BadSignatureError:
+            # TODO: Standardize error messages
+            return Response(
+                {'Error': 'Bad signature'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+        except Exception as e:
+            # TODO: Standardize error messages
+            print(e)
+            return Response(
+                {'Error': 'Unknown error'},
+                status=status.HTTP_401_UNAUTHORIZED
+            )
 
         return func(request, *args, **kwargs)
 
