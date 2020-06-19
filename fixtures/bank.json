@@ -1,7 +1,6 @@
 [
   {
     "model": "banks.bank",
-    "pk": "0fe52080-1a77-4a41-be99-01983379503e",
     "fields": {
       "account_number": "5e12967707909e62b2bb2036c209085a784fabbc3deccefee70052b6181c8ed8",
       "ip_address": "192.168.1.232",

@@ -1,7 +1,6 @@
 [
   {
     "model": "self_configurations.selfconfiguration",
-    "pk": "e16f4028-3175-49ee-8317-05b5d8a4dc03",
     "fields": {
       "account_number": "5e12967707909e62b2bb2036c209085a784fabbc3deccefee70052b6181c8ed8",
       "ip_address": "192.168.1.232",
