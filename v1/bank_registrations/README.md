@@ -10,11 +10,12 @@ This verification prevents end users from acting as banks by sending transaction
 
 ### POST /bank_registrations
 
-- `message` - `validator` to register with and `block` payment for registration fee
-- `network_identifier` - network identifier of the primary validator
+- `message` - `validator_network_identifier` to register with and `block` payment for registration fee
+- `network_identifier` - network identifier of the bank
 - `signature` - hex value of the signed `message`
 
-```
+Request:
+```json
 {
   "message": {
     "block": {
@@ -23,17 +24,29 @@ This verification prevents end users from acting as banks by sending transaction
         "balance_key": "5e12967707909e62b2bb2036c209085a784fabbc3deccefee70052b6181c8ed8",
         "txs": [
           {
-            "amount": 1,
+            "amount": 8,
             "recipient": "ad1f8845c6a1abb6011a2a434a079a087c460657aad54329a84b406dce8bf314"
           }
         ]
       },
-      "signature": "8216cb5d8ca2ff76a8b522f5c2e0e2090668e8a80224900e3c378b453e822666d58d314efa72f13bfdb6538d284edbde2b24f402aed00a89883af90a809c1d04"
+      "signature": "a341eb2d678df410fb110760fd2c77c5969975d4fcba9a3846d9f11dfb43151bc23a157c26dd29163f061697806bc2b75d74a300ed6ba1a504ae2de6013d8c0f"
     },
-    "validator": "a8101b03-15ad-42fc-8e64-2de24b850e0e"
+    "validator_network_identifier": "3afdf37573f1a511def0bd85553404b7091a76bcd79cdcebba1310527b167521"
   },
   "network_identifier": "d5356888dc9303e44ce52b1e06c3165a7759b9df1e6a6dfbd33ee1c3df1ab4d1",
-  "signature": "f12452a689bd86ce36abda70d46df3cb97975315ccdfb39b4989b86191bf6e9cbe545174a14927dd0c2a96ded7e393d672e3eff95c36d53906a0afd85dcd000a"
+  "signature": "890d200626e4403702f15bb00906d5d8f4abba2cab68cec37007d6436f9256e202d2e26a049ad0e68d5c07cea7db7c20cb346b15ac973f909bac0df8f605f60c"
+}
+```
+
+Response:
+```json
+{
+  "id":"36f84a29-cdd5-442a-88bc-fbc4107e5207",
+  "created_date":"2020-06-20T17:31:38.578363Z",
+  "modified_date":"2020-06-20T17:31:38.578392Z",
+  "fee":"8.0000000000000000",
+  "status":"PENDING",
+  "validator":"a8101b03-15ad-42fc-8e64-2de24b850e0e"
 }
 ```
 
@@ -57,10 +70,10 @@ Request:
 Response:
 ```json
 {
-  "id": "afce31d3-5c55-479c-8e42-eff28358b113",
-  "created_date": "2020-06-19T21:51:41.136479Z",
-  "modified_date": "2020-06-19T22:17:56.705678Z",
-  "fee": "0.0000000000000001",
+  "id":"36f84a29-cdd5-442a-88bc-fbc4107e5207",
+  "created_date":"2020-06-20T17:31:38.578363Z",
+  "modified_date": "2020-06-21T22:17:56.705678Z",
+  "fee":"8.0000000000000000",
   "status": "ACCEPTED",
   "validator": "a8101b03-15ad-42fc-8e64-2de24b850e0e"
 }
