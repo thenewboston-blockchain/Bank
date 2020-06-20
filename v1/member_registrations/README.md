@@ -9,7 +9,7 @@ registration is accepted they will be referred to as a "member" of that bank.
 - `message` - current balance lock for the above `account_number` and Txs for bank registration fee and validator Tx fee
 - `signature` - hex value of the signed `message`
 
-Request:
+Request (client > Bank):
 ```json
 {
   "account_number": "0cdd4ba04456ca169baca3d66eace869520c62fe84421329086e03d91a68acdb",
@@ -30,7 +30,7 @@ Request:
 }
 ```
 
-Response:
+Response (Bank > client):
 ```json
 {
   "id": "09e2b3ff-8680-4dab-b848-f2c1df9de0bb",
@@ -47,7 +47,7 @@ Upon successful member registration, the bank will create a bank block with the 
 for validation. After successful validation, the validator will send a confirmation block back to the bank and the bank
 will create the member and update the member registration status to accepted.
 
-Bank block:
+Request (Bank > Validator):
 ```json
 {
   "block": {
