@@ -48,7 +48,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
                         'ip_address': self_configuration.ip_address,
                         'port': self_configuration.port,
                         'protocol': self_configuration.protocol,
-                        'source_bank_registration_pk': bank_registration.pk,
+                        'source_bank_registration_pk': str(bank_registration.pk),
                         'validator_network_identifier': validator.network_identifier,
                         'version': self_configuration.version
                     },
