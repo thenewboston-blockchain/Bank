@@ -73,6 +73,7 @@ Request (Bank > Validator):
     "ip_address": "192.168.1.232",
     "port": 8000,
     "protocol": "http",
+    "source_bank_registration_pk": "3db3598d-e80e-41c5-a692-e381eb0ca75b",
     "validator_network_identifier": "3afdf37573f1a511def0bd85553404b7091a76bcd79cdcebba1310527b167521",
     "version": "v1.0"
   },
@@ -81,7 +82,7 @@ Request (Bank > Validator):
 }
 ```
 
-### PATCH /bank_registrations
+### PATCH /bank_registrations/3db3598d-e80e-41c5-a692-e381eb0ca75b
 
 - `message` - status to indicate the result of the bank registration
 - `network_identifier` - network identifier of the primary validator
