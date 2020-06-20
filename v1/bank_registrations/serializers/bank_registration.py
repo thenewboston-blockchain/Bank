@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 from thenewboston.blocks.signatures import verify_signature
 from thenewboston.constants.network import PENDING, VERIFY_KEY_LENGTH
@@ -6,6 +7,8 @@ from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
+from v1.tasks.signed_requests import sign_and_send_post_request
 from v1.validators.models.validator import Validator
 from ..models.bank_registration import BankRegistration
 
@@ -30,13 +33,31 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
 
         block = validated_data['block']
         validator = validated_data['validator']
-        print(block)
 
-        bank_registration = BankRegistration.objects.create(
-            fee=validator.registration_fee,
-            status=PENDING,
-            validator=validator
-        )
+        try:
+            with transaction.atomic():
+                bank_registration = BankRegistration.objects.create(
+                    fee=validator.registration_fee,
+                    status=PENDING,
+                    validator=validator
+                )
+                self_configuration = get_self_configuration(exception_class=RuntimeError)
+                sign_and_send_post_request.delay(
+                    data={
+                        'block': block,
+                        'ip_address': self_configuration.ip_address,
+                        'port': self_configuration.port,
+                        'protocol': self_configuration.protocol,
+                        'validator_network_identifier': validator.network_identifier,
+                        'version': self_configuration.version
+                    },
+                    ip_address=validator.ip_address,
+                    port=validator.port,
+                    protocol=validator.protocol,
+                    url_path='/bank_registrations'
+                )
+        except Exception as e:
+            print(e)
 
         return bank_registration
 
