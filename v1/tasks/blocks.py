@@ -10,7 +10,7 @@ from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_ke
 
 
 @shared_task
-def sign_and_send_block(*, block, ip_address, port, protocol, url_path):
+def send_signed_block(*, block, ip_address, port, protocol, url_path):
     """
     Sign block and send to recipient
     """

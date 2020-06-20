@@ -8,7 +8,7 @@ from thenewboston.utils.signed_requests import generate_signed_request
 
 
 @shared_task
-def sign_and_send_post_request(*, data, ip_address, port, protocol, url_path):
+def send_signed_post_request(*, data, ip_address, port, protocol, url_path):
     """
     Sign data and send to recipient
     """

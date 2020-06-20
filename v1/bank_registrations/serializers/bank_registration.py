@@ -8,7 +8,7 @@ from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
-from v1.tasks.signed_requests import sign_and_send_post_request
+from v1.tasks.signed_requests import send_signed_post_request
 from v1.validators.models.validator import Validator
 from ..models.bank_registration import BankRegistration
 
@@ -42,7 +42,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
                     validator=validator
                 )
                 self_configuration = get_self_configuration(exception_class=RuntimeError)
-                sign_and_send_post_request.delay(
+                send_signed_post_request.delay(
                     data={
                         'block': block,
                         'ip_address': self_configuration.ip_address,
