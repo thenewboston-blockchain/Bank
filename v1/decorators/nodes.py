@@ -4,9 +4,9 @@ from nacl.exceptions import BadSignatureError
 from rest_framework import status
 from rest_framework.response import Response
 from thenewboston.blocks.signatures import verify_signature
-from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from thenewboston.utils.tools import sort_and_encode
 
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.validators.helpers.validator_configuration import get_primary_validator
 
 
