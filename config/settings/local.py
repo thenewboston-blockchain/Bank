@@ -22,3 +22,38 @@ CACHES = {
         }
     }
 }
+
+LOGGING = {
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'error.log.file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'error.log'),
+            'formatter': 'verbose',
+            'level': 'ERROR',
+        },
+        'warning.log.file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'warning.log'),
+            'formatter': 'verbose',
+            'level': 'WARNING',
+        },
+    },
+    'loggers': {
+        'thenewboston': {
+            'handlers': ['console', 'error.log.file', 'warning.log.file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+    'version': 1,
+}
