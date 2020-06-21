@@ -1,3 +1,4 @@
+import logging
 from functools import wraps
 
 from nacl.exceptions import BadSignatureError
@@ -8,6 +9,8 @@ from thenewboston.utils.tools import sort_and_encode
 
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.validators.helpers.validator_configuration import get_primary_validator
+
+logger = logging.getLogger('thenewboston')
 
 
 def is_primary_validator(func):
@@ -33,15 +36,16 @@ def is_primary_validator(func):
                 signature=signature,
                 verify_key=network_identifier
             )
-        except BadSignatureError:
+        except BadSignatureError as e:
+            logger.exception(e)
             # TODO: Standardize error messages
             return Response(
                 {'Error': 'Bad signature'},
                 status=status.HTTP_401_UNAUTHORIZED
             )
         except Exception as e:
+            logger.exception(e)
             # TODO: Standardize error messages
-            print(e)
             return Response(
                 {'Error': 'Unknown error'},
                 status=status.HTTP_401_UNAUTHORIZED
@@ -74,15 +78,16 @@ def is_self(func):
                 signature=signature,
                 verify_key=network_identifier
             )
-        except BadSignatureError:
+        except BadSignatureError as e:
+            logger.exception(e)
             # TODO: Standardize error messages
             return Response(
                 {'Error': 'Bad signature'},
                 status=status.HTTP_401_UNAUTHORIZED
             )
         except Exception as e:
+            logger.exception(e)
             # TODO: Standardize error messages
-            print(e)
             return Response(
                 {'Error': 'Unknown error'},
                 status=status.HTTP_401_UNAUTHORIZED

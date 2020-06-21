@@ -1,3 +1,5 @@
+import logging
+
 from celery import shared_task
 from nacl.encoding import HexEncoder
 from nacl.signing import SigningKey
@@ -5,6 +7,8 @@ from thenewboston.environment.environment_variables import get_environment_varia
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import post
 from thenewboston.utils.signed_requests import generate_signed_request
+
+logger = logging.getLogger('thenewboston')
 
 
 @shared_task
@@ -23,4 +27,8 @@ def send_signed_post_request(*, data, ip_address, port, protocol, url_path):
 
     node_address = format_address(ip_address=ip_address, port=port, protocol=protocol)
     url = f'{node_address}{url_path}'
-    post(url=url, body=signed_request)
+
+    try:
+        post(url=url, body=signed_request)
+    except Exception as e:
+        logger.exception(e)
