@@ -11,7 +11,7 @@ class SelfConfigurationDetail(APIView):
     @staticmethod
     def get(request):
         """
-        description: Get self configuration details
+        description: Get self configuration detail
         """
 
         self_configuration = get_self_configuration(exception_class=RuntimeError)
