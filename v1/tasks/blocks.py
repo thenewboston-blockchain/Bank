@@ -1,3 +1,5 @@
+import logging
+
 from celery import shared_task
 from nacl.encoding import HexEncoder
 from nacl.signing import SigningKey
@@ -7,6 +9,8 @@ from thenewboston.utils.format import format_address
 from thenewboston.utils.network import post
 from thenewboston.utils.tools import sort_and_encode
 from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_key
+
+logger = logging.getLogger('thenewboston')
 
 
 @shared_task
@@ -29,4 +33,8 @@ def send_signed_block(*, block, ip_address, port, protocol, url_path):
 
     node_address = format_address(ip_address=ip_address, port=port, protocol=protocol)
     url = f'{node_address}{url_path}'
-    post(url=url, body=signed_block)
+
+    try:
+        post(url=url, body=signed_block)
+    except Exception as e:
+        logger.exception(e)
