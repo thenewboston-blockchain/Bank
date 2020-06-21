@@ -1,3 +1,5 @@
+import logging
+
 from django.db import transaction
 from rest_framework import serializers
 from thenewboston.blocks.signatures import verify_signature
@@ -11,6 +13,8 @@ from v1.member_registrations.models.member_registration import MemberRegistratio
 from v1.members.models.member import Member
 from v1.validators.models.validator import Validator
 from ..models.confirmation_block import ConfirmationBlock
+
+logger = logging.getLogger('thenewboston')
 
 
 class ConfirmationBlockSerializer(serializers.ModelSerializer):
@@ -64,7 +68,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
                     )
                     member_registration.update(member=member, status=ACCEPTED)
         except Exception as e:
-            print(e)
+            logger.exception(e)
 
         return confirmation_block
 

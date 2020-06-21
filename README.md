@@ -63,6 +63,11 @@ celery flower -A config.settings --address=127.0.0.1 --port=5555
 
 ## Developers
 
+To watch log files:
+```commandline
+tail -f logs/error.log -n 10
+```
+
 When adding a package, add to `requirements/base.in` and then :
 ```
 bash scripts/compile_requirements.sh

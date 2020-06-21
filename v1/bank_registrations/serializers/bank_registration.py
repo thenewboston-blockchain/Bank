@@ -1,3 +1,5 @@
+import logging
+
 from django.db import transaction
 from rest_framework import serializers
 from thenewboston.blocks.signatures import verify_signature
@@ -11,6 +13,8 @@ from v1.self_configurations.helpers.self_configuration import get_self_configura
 from v1.tasks.signed_requests import send_signed_post_request
 from v1.validators.models.validator import Validator
 from ..models.bank_registration import BankRegistration
+
+logger = logging.getLogger('thenewboston')
 
 
 class BankRegistrationSerializer(serializers.ModelSerializer):
@@ -58,7 +62,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
                     url_path='/bank_registrations'
                 )
         except Exception as e:
-            print(e)
+            logger.exception(e)
 
         return bank_registration
 

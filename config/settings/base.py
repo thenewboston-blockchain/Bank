@@ -1,6 +1,8 @@
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+
 SECRET_KEY = 'g#$0(*8%8af27k7-e!ll^!-4yxomcx8ljv_o&_z*zhvi)f8&e6'
 DEBUG = True
 
@@ -99,3 +101,38 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_WORKER_CONCURRENCY = 1
+
+LOGGING = {
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'error.handler': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'error.log'),
+            'formatter': 'verbose',
+            'level': 'ERROR',
+        },
+        'warning.handler': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'warning.log'),
+            'formatter': 'verbose',
+            'level': 'WARNING',
+        },
+    },
+    'loggers': {
+        'thenewboston': {
+            'handlers': ['error.handler', 'warning.handler'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+    'version': 1,
+}

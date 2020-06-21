@@ -1,3 +1,5 @@
+import logging
+
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 from thenewboston.base_classes.initialize_node import InitializeNode
@@ -18,6 +20,8 @@ Running this script will:
 - create a Validator object using config data
 - set that Validator as the primary validator
 """
+
+logger = logging.getLogger('thenewboston')
 
 
 class Command(InitializeNode):
@@ -111,7 +115,7 @@ class Command(InitializeNode):
                 self.set_primary_validator(config)
             except Exception as e:
                 self._error('Unable to connect')
-                print(e)
+                logger.exception(e)
                 continue
 
             connected = True
