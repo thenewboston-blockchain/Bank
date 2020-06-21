@@ -101,3 +101,38 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_WORKER_CONCURRENCY = 1
+
+LOGGING = {
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'error.handler': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'error.log'),
+            'formatter': 'verbose',
+            'level': 'ERROR',
+        },
+        'warning.handler': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'warning.log'),
+            'formatter': 'verbose',
+            'level': 'WARNING',
+        },
+    },
+    'loggers': {
+        'thenewboston': {
+            'handlers': ['error.handler', 'warning.handler'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+    'version': 1,
+}
