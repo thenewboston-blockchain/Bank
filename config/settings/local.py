@@ -35,22 +35,22 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
         },
-        'error.log.file': {
+        'error.handler': {
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'error.log'),
+            'filename': os.path.join(LOGS_DIR, 'error.log'),
             'formatter': 'verbose',
             'level': 'ERROR',
         },
-        'warning.log.file': {
+        'warning.handler': {
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'warning.log'),
+            'filename': os.path.join(LOGS_DIR, 'warning.log'),
             'formatter': 'verbose',
             'level': 'WARNING',
         },
     },
     'loggers': {
         'thenewboston': {
-            'handlers': ['console', 'error.log.file', 'warning.log.file'],
+            'handlers': ['error.handler', 'warning.handler'],
             'level': 'WARNING',
             'propagate': True,
         },

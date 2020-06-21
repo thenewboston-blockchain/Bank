@@ -5,3 +5,7 @@
 db.sqlite3
 dump.rdb
 venv
+
+# Log files
+logs/*
+!logs/.gitkeep
