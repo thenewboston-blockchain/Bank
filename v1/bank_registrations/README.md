@@ -88,8 +88,8 @@ Request (Bank > Validator):
 
 After receiving the registration request, the validator will create a bank registration which will be initially set to 
 "pending". The validator then responds to the bank as confirmation that the request had been received. Note that the ID
-in the response does not match the `source_bank_registration_pk`. This is because each node maintains it's own separate
-copy of the bank registrations. 
+in the response does not match the `source_bank_registration_pk`. This is because each node maintains their own separate
+copy of the bank registration. 
 
 Response (Validator > Bank):
 ```json
