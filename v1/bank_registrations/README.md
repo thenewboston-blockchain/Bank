@@ -113,7 +113,7 @@ bank node. This is done through the ability to act as a server by responding pro
 validator to the bank's IP address. This verification prevents end users from acting as banks by sending transactions 
 directly to the validator.
 
-### PATCH /bank_registrations/3db3598d-e80e-41c5-a692-e381eb0ca75b
+### PATCH /bank_registrations/{source_bank_registration_pk}
 
 - `message` - status to indicate the result of the bank registration
 - `network_identifier` - network identifier of the primary validator
