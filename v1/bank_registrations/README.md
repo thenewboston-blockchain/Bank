@@ -10,6 +10,8 @@ existing banks. Banks must also prove that they are configured properly to act a
 ability to act as a server by responding properly to network requests made from the validator to the bank's IP address. 
 This verification prevents end users from acting as banks by sending transactions directly to the validator.
 
+![](https://github.com/thenewboston-developers/Bank/raw/master/v1/bank_registrations/diagrams/Bank-Registration.png)
+
 ### POST /bank_registrations
 
 - `message` - `validator_network_identifier` to register with and `block` payment for registration fee
