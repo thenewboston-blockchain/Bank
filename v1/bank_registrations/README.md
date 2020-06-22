@@ -2,13 +2,7 @@
 
 Banks must also register with validators before they are accepted onto the network by that validator. This is done in a 
 similar fashion to the registration process between user accounts and banks. To register, banks will pay a registration 
-fee to the validator. The validator will then place the registration in a "pending" state as it performs a network 
-background check of the applying bank. 
-
-During this process, validators will check the bank's trust level with other existing banks. Banks must also prove that 
-they are configured properly to act as a bank node. This is done through the ability to act as a server by responding 
-properly to network requests made from the validator to the bank's IP address. This verification prevents end users from 
-acting as banks by sending transactions directly to the validator.
+fee to the validator.
 
 ![](https://github.com/thenewboston-developers/Bank/raw/master/v1/bank_registrations/diagrams/Bank-Registration.png)
 
@@ -88,6 +82,11 @@ Request (Bank > Validator):
 }
 ```
 
+After receiving the registration request, the validator will create a bank registration which will be initially set to 
+"pending". The validator then responds to the bank as confirmation that the request had been received. Note that the ID
+in the response does not match the `source_bank_registration_pk`. This is because each node maintains it's own separate
+copy of the bank registrations. 
+
 Response (Validator > Bank):
 ```json
 {
@@ -103,6 +102,12 @@ Response (Validator > Bank):
   "bank": null
 }
 ```
+
+The validator then performs a network background check of the applying bank. During this process, validators will check 
+the bank's trust level with other existing banks. Banks must also prove that they are configured properly to act as a 
+bank node. This is done through the ability to act as a server by responding properly to network requests made from the 
+validator to the bank's IP address. This verification prevents end users from acting as banks by sending transactions 
+directly to the validator.
 
 ### PATCH /bank_registrations/3db3598d-e80e-41c5-a692-e381eb0ca75b
 
