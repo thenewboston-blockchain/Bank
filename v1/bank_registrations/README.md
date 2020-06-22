@@ -1,8 +1,12 @@
 ## Bank Registrations
 
-Banks must also register with validators before they are accepted onto the network by that validator. This is done in a 
+Banks must register with validators before they are accepted onto the network by that validator. This is done in a 
 similar fashion to the registration process between user accounts and banks. To register, banks will pay a registration 
 fee to the validator.
+
+Rather than sending the registration request directly from client to the validator, the request will be sent through the 
+bank. The bank will then forward it along to the validator. The purpose of routing the request through the bank is so 
+that the bank can first create a record of the registration.
 
 ![](https://github.com/thenewboston-developers/Bank/raw/master/v1/bank_registrations/diagrams/Bank-Registration.png)
 
