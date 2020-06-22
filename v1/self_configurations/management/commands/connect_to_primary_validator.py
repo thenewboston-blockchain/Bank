@@ -154,7 +154,7 @@ class Command(InitializeNode):
 
         Validator.objects.filter(
             Q(ip_address=validator_data.get('ip_address')) |
-            Q(network_identifier=validator_data.get('network_identifier'))
+            Q(node_identifier=validator_data.get('node_identifier'))
         ).delete()
 
         validator = Validator.objects.create(

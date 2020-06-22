@@ -21,20 +21,20 @@ def is_primary_validator(func):
     @wraps(func)
     def inner(request, *args, **kwargs):
         message = request.data.get('message')
-        network_identifier = request.data.get('network_identifier')
+        node_identifier = request.data.get('node_identifier')
         signature = request.data.get('signature')
 
         # TODO: This should be hitting the cache
         primary_validator = get_primary_validator()
 
-        if network_identifier != primary_validator.network_identifier:
+        if node_identifier != primary_validator.node_identifier:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         try:
             verify_signature(
                 message=sort_and_encode(message),
                 signature=signature,
-                verify_key=network_identifier
+                verify_key=node_identifier
             )
         except BadSignatureError as e:
             logger.exception(e)
@@ -64,19 +64,19 @@ def is_self(func):
     @wraps(func)
     def inner(request, *args, **kwargs):
         message = request.data.get('message')
-        network_identifier = request.data.get('network_identifier')
+        node_identifier = request.data.get('node_identifier')
         signature = request.data.get('signature')
 
         self_configuration = get_self_configuration(exception_class=RuntimeError)
 
-        if network_identifier != self_configuration.network_identifier:
+        if node_identifier != self_configuration.node_identifier:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         try:
             verify_signature(
                 message=sort_and_encode(message),
                 signature=signature,
-                verify_key=network_identifier
+                verify_key=node_identifier
             )
         except BadSignatureError as e:
             logger.exception(e)

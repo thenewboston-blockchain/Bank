@@ -27,7 +27,7 @@ class BankRegistrationSerializer(serializers.ModelSerializer):
 
 class BankRegistrationSerializerCreate(serializers.Serializer):
     block = NetworkBlockSerializer()
-    validator_network_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
+    validator_node_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
 
     def create(self, validated_data):
         """
@@ -53,7 +53,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
                         'port': self_configuration.port,
                         'protocol': self_configuration.protocol,
                         'source_bank_registration_pk': str(bank_registration.pk),
-                        'validator_network_identifier': validator.network_identifier,
+                        'validator_node_identifier': validator.node_identifier,
                         'version': self_configuration.version
                     },
                     ip_address=validator.ip_address,
@@ -79,7 +79,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
         """
 
         block = self.initial_data['block']
-        validator = data['validator_network_identifier']
+        validator = data['validator_node_identifier']
 
         verify_signature(
             message=sort_and_encode(block['message']),
@@ -100,17 +100,17 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
         }
 
     @staticmethod
-    def validate_validator_network_identifier(validator_network_identifier):
+    def validate_validator_node_identifier(validator_node_identifier):
         """
-        Ensure validator_network_identifier matches known validator NID
+        Ensure validator_node_identifier matches known validator NID
         Check for existing pending registration
         """
 
-        validator = Validator.objects.filter(network_identifier=validator_network_identifier).first()
+        validator = Validator.objects.filter(node_identifier=validator_node_identifier).first()
 
         if not validator:
             raise serializers.ValidationError(
-                f'Could not find validator with validator_network_identifier {validator_network_identifier}'
+                f'Could not find validator with validator_node_identifier {validator_node_identifier}'
             )
 
         if BankRegistration.objects.filter(status=PENDING, validator=validator).exists():

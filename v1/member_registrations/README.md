@@ -66,7 +66,7 @@ Request (Bank > Validator):
       }
     ]
   },
-  "network_identifier": "d5356888dc9303e44ce52b1e06c3165a7759b9df1e6a6dfbd33ee1c3df1ab4d1",
+  "node_identifier": "d5356888dc9303e44ce52b1e06c3165a7759b9df1e6a6dfbd33ee1c3df1ab4d1",
   "signature": "e2fd7a34b27efde10548edcc693266339eec6e8346cc97b3d5c25d1c7167c48dda260081b622bc02e4f982cdd0c4f1cb7fd8e079dfa76c5625a1e85cfefeb203"
 }
 ```

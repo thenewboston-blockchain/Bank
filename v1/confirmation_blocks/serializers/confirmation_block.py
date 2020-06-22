@@ -27,7 +27,7 @@ class ConfirmationBlockSerializer(serializers.ModelSerializer):
 
 class ConfirmationBlockSerializerCreate(serializers.Serializer):
     message = ConfirmationBlockMessageSerializer()
-    network_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
+    node_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
 
     def create(self, validated_data):
@@ -40,14 +40,14 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
 
         message = validated_data['message']
         block_identifier = message['block_identifier']
-        network_identifier = validated_data['network_identifier']
+        node_identifier = validated_data['node_identifier']
 
         inner_block = message['block']
         inner_block_account_number = inner_block['account_number']
         inner_block_signature = inner_block['signature']
 
         block = Block.objects.get(signature=inner_block_signature)
-        validator = Validator.objects.get(network_identifier=network_identifier)
+        validator = Validator.objects.get(node_identifier=node_identifier)
 
         try:
             with transaction.atomic():
@@ -81,24 +81,24 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         """
 
         message = self.initial_data['message']
-        network_identifier = data['network_identifier']
+        node_identifier = data['node_identifier']
         signature = data['signature']
 
         verify_signature(
             message=sort_and_encode(message),
             signature=signature,
-            verify_key=network_identifier
+            verify_key=node_identifier
         )
 
         return data
 
     @staticmethod
-    def validate_network_identifier(network_identifier):
+    def validate_node_identifier(node_identifier):
         """
-        Validate that network_identifier belongs to validator
+        Validate that node_identifier belongs to validator
         """
 
-        if not Validator.objects.filter(network_identifier=network_identifier).exists():
-            raise serializers.ValidationError('Validator with that network_identifier does not exist')
+        if not Validator.objects.filter(node_identifier=node_identifier).exists():
+            raise serializers.ValidationError('Validator with that node_identifier does not exist')
 
-        return network_identifier
+        return node_identifier
