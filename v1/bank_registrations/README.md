@@ -13,7 +13,7 @@ that the bank can first create a record of the registration.
 ### POST /bank_registrations
 
 - `message` - `validator_node_identifier` to register with and `block` payment for registration fee
-- `node_identifier` - network identifier of the bank
+- `node_identifier` - node identifier of the bank
 - `signature` - hex value of the signed `message`
 
 Request (client > Bank):
@@ -116,7 +116,7 @@ directly to the validator.
 ### PATCH /bank_registrations/{source_bank_registration_pk}
 
 - `message` - status to indicate the result of the bank registration
-- `node_identifier` - network identifier of the primary validator
+- `node_identifier` - node identifier of the primary validator
 - `signature` - hex value of the signed `message`
 
 Request (Validator > Bank):

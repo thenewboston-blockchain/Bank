@@ -27,7 +27,7 @@ Response:
 
 - `block_identifier` - hashed head block of the validators blockchain
 - `message` - original bank block and a list of updated account balances of all accounts involved
-- `node_identifier` - validators network identifier
+- `node_identifier` - validators node identifier
 - `signature` - hex value of the signed `message`
 
 Request:

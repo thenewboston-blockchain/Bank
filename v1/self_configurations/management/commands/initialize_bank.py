@@ -38,7 +38,7 @@ class Command(InitializeNode):
         # Input values
         self.get_verify_key(
             attribute_name='node_identifier',
-            human_readable_name='network identifier'
+            human_readable_name='node identifier'
         )
         self.get_verify_key(
             attribute_name='account_number',
