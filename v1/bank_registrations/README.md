@@ -5,10 +5,10 @@ similar fashion to the registration process between user accounts and banks. To 
 fee to the validator. The validator will then place the registration in a "pending" state as it performs a network 
 background check of the applying bank. 
 
-During this process, validators will check the bank's trust level with other 
-existing banks. Banks must also prove that they are configured properly to act as a bank node. This is done through the 
-ability to act as a server by responding properly to network requests made from the validator to the bank's IP address. 
-This verification prevents end users from acting as banks by sending transactions directly to the validator.
+During this process, validators will check the bank's trust level with other existing banks. Banks must also prove that 
+they are configured properly to act as a bank node. This is done through the ability to act as a server by responding 
+properly to network requests made from the validator to the bank's IP address. This verification prevents end users from 
+acting as banks by sending transactions directly to the validator.
 
 ![](https://github.com/thenewboston-developers/Bank/raw/master/v1/bank_registrations/diagrams/Bank-Registration.png)
 
@@ -54,6 +54,8 @@ Response (Bank > client):
 }
 ```
 
+### POST /bank_registrations
+
 Upon successful validation, the bank will send a signed request to the validator containing information the validator
 will need in order to connect to the bank to verify the registration information.
 
@@ -83,6 +85,22 @@ Request (Bank > Validator):
   },
   "network_identifier": "d5356888dc9303e44ce52b1e06c3165a7759b9df1e6a6dfbd33ee1c3df1ab4d1",
   "signature": "890d200626e4403702f15bb00906d5d8f4abba2cab68cec37007d6436f9256e202d2e26a049ad0e68d5c07cea7db7c20cb346b15ac973f909bac0df8f605f60c"
+}
+```
+
+Response (Validator > Bank):
+```json
+{
+  "id": "7af67e0c-b2a2-4d00-a49e-ca455b25de20",
+  "created_date": "2020-06-22T21:40:03.854198Z",
+  "modified_date": "2020-06-22T21:40:03.854221Z",
+  "fee": "8.0000000000000000",
+  "status": "PENDING",
+  "ip_address": "192.168.1.232",
+  "network_identifier": "d5356888dc9303e44ce52b1e06c3165a7759b9df1e6a6dfbd33ee1c3df1ab4d1",
+  "port": 8000,
+  "protocol": "http",
+  "bank": null
 }
 ```
 
