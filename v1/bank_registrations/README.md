@@ -74,8 +74,8 @@ Request (Bank > Validator):
       },
       "signature": "a341eb2d678df410fb110760fd2c77c5969975d4fcba9a3846d9f11dfb43151bc23a157c26dd29163f061697806bc2b75d74a300ed6ba1a504ae2de6013d8c0f"
     },
-    "id": "3db3598d-e80e-41c5-a692-e381eb0ca75b",
     "ip_address": "192.168.1.232",
+    "pk": "3db3598d-e80e-41c5-a692-e381eb0ca75b",
     "port": 8000,
     "protocol": "http",
     "validator_node_identifier": "3afdf37573f1a511def0bd85553404b7091a76bcd79cdcebba1310527b167521",
