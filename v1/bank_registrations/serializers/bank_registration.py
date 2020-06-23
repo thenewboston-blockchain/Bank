@@ -49,10 +49,10 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
                 send_signed_post_request.delay(
                     data={
                         'block': block,
+                        'id': str(bank_registration.id),
                         'ip_address': self_configuration.ip_address,
                         'port': self_configuration.port,
                         'protocol': self_configuration.protocol,
-                        'source_bank_registration_pk': str(bank_registration.pk),
                         'validator_node_identifier': validator.node_identifier,
                         'version': self_configuration.version
                     },

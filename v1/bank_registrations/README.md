@@ -74,10 +74,10 @@ Request (Bank > Validator):
       },
       "signature": "a341eb2d678df410fb110760fd2c77c5969975d4fcba9a3846d9f11dfb43151bc23a157c26dd29163f061697806bc2b75d74a300ed6ba1a504ae2de6013d8c0f"
     },
+    "id": "3db3598d-e80e-41c5-a692-e381eb0ca75b",
     "ip_address": "192.168.1.232",
     "port": 8000,
     "protocol": "http",
-    "source_bank_registration_pk": "3db3598d-e80e-41c5-a692-e381eb0ca75b",
     "validator_node_identifier": "3afdf37573f1a511def0bd85553404b7091a76bcd79cdcebba1310527b167521",
     "version": "v1.0"
   },
@@ -87,9 +87,7 @@ Request (Bank > Validator):
 ```
 
 After receiving the registration request, the validator will create a bank registration which will be initially set to 
-"pending". The validator then responds to the bank as confirmation that the request had been received. Note that the ID
-in the response does not match the `source_bank_registration_pk`. This is because each node maintains their own separate
-copy of the bank registration. 
+"pending". The validator then responds to the bank as confirmation that the request had been received.
 
 Response (Validator > Bank):
 ```json
@@ -113,7 +111,7 @@ bank node. This is done through the ability to act as a server by responding pro
 validator to the bank's IP address. This verification prevents end users from acting as banks by sending transactions 
 directly to the validator.
 
-### PATCH /bank_registrations/{source_bank_registration_pk}
+### PATCH /bank_registrations/{id}
 
 - `message` - status to indicate the result of the bank registration
 - `node_identifier` - node identifier of the primary validator
