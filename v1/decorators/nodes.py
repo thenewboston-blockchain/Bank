@@ -5,6 +5,7 @@ from nacl.exceptions import BadSignatureError
 from rest_framework import status
 from rest_framework.response import Response
 from thenewboston.blocks.signatures import verify_signature
+from thenewboston.constants.errors import BAD_SIGNATURE, ERROR, UNKNOWN
 from thenewboston.utils.tools import sort_and_encode
 
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
@@ -24,7 +25,6 @@ def is_primary_validator(func):
         node_identifier = request.data.get('node_identifier')
         signature = request.data.get('signature')
 
-        # TODO: This should be hitting the cache
         primary_validator = get_primary_validator()
 
         if node_identifier != primary_validator.node_identifier:
@@ -38,16 +38,14 @@ def is_primary_validator(func):
             )
         except BadSignatureError as e:
             logger.exception(e)
-            # TODO: Standardize error messages
             return Response(
-                {'Error': 'Bad signature'},
+                {ERROR: BAD_SIGNATURE},
                 status=status.HTTP_401_UNAUTHORIZED
             )
         except Exception as e:
             logger.exception(e)
-            # TODO: Standardize error messages
             return Response(
-                {'Error': 'Unknown error'},
+                {ERROR: UNKNOWN},
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
@@ -80,16 +78,14 @@ def is_self(func):
             )
         except BadSignatureError as e:
             logger.exception(e)
-            # TODO: Standardize error messages
             return Response(
-                {'Error': 'Bad signature'},
+                {ERROR: BAD_SIGNATURE},
                 status=status.HTTP_401_UNAUTHORIZED
             )
         except Exception as e:
             logger.exception(e)
-            # TODO: Standardize error messages
             return Response(
-                {'Error': 'Unknown error'},
+                {ERROR: UNKNOWN},
                 status=status.HTTP_401_UNAUTHORIZED
             )
 

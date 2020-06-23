@@ -6,8 +6,7 @@ def get_primary_validator():
     Return primary validator
     """
 
-    # TODO: Connect to actual validator
-    # TODO: Read validator Tx from cache
+    # TODO: This should be hitting the cache
 
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
