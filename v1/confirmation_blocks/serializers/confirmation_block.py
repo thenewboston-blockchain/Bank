@@ -8,9 +8,9 @@ from thenewboston.serializers.confirmation_block_message import ConfirmationBloc
 from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
+from v1.account_registrations.models.account_registration import AccountRegistration
+from v1.accounts.models.account import Account
 from v1.blocks.models.block import Block
-from v1.member_registrations.models.member_registration import MemberRegistration
-from v1.members.models.member import Member
 from v1.validators.models.validator import Validator
 from ..models.confirmation_block import ConfirmationBlock
 
@@ -33,9 +33,9 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
     def create(self, validated_data):
         """
         Create confirmation block
-        If the inner blocks account number relates to a pending MemberRegistration:
-        - create Member
-        - update MemberRegistration to accepted
+        If the inner blocks account number relates to a pending AccountRegistration:
+        - create Account
+        - update AccountRegistration to accepted
         """
 
         message = validated_data['message']
@@ -56,17 +56,17 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
                     block_identifier=block_identifier,
                     validator=validator
                 )
-                member_registration = MemberRegistration.objects.filter(
+                account_registration = AccountRegistration.objects.filter(
                     account_number=inner_block_account_number,
                     status=PENDING
                 )
 
-                if member_registration:
-                    member = Member.objects.create(
+                if account_registration:
+                    account = Account.objects.create(
                         account_number=inner_block_account_number,
                         trust=50
                     )
-                    member_registration.update(member=member, status=ACCEPTED)
+                    account_registration.update(account=account, status=ACCEPTED)
         except Exception as e:
             logger.exception(e)
 

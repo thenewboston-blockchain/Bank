@@ -7,18 +7,18 @@ from v1.self_configurations.helpers.self_configuration import get_self_configura
 from v1.test_tools.test_base import TestBase
 
 
-class TestMemberRegistration(TestBase):
+class TestAccountRegistration(TestBase):
 
     def test_list(self):
         """
-        List member registrations
+        List account registrations
         """
 
-        self.validate_get('/member_registrations', status.HTTP_200_OK)
+        self.validate_get('/account_registrations', status.HTTP_200_OK)
 
     def test_post(self):
         """
-        Register as a bank member
+        Register as a bank account
         """
 
         signing_key, account_number = create_account()
@@ -42,4 +42,4 @@ class TestMemberRegistration(TestBase):
             ]
         )
 
-        self.validate_post('/member_registrations', block, status.HTTP_201_CREATED)
+        self.validate_post('/account_registrations', block, status.HTTP_201_CREATED)

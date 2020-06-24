@@ -3,7 +3,7 @@ from thenewboston.accounts.manage import create_account
 from thenewboston.blocks.block import generate_block
 from thenewboston.verify_keys.verify_key import encode_verify_key
 
-from v1.members.models.member import Member
+from v1.accounts.models.account import Account
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.test_tools.helpers import random_account_number
 from v1.test_tools.test_base import TestBase
@@ -25,7 +25,7 @@ class TestBlock(TestBase):
 
         signing_key, account_number = create_account()
         encoded_account_number = encode_verify_key(verify_key=account_number)
-        Member.objects.create(account_number=encoded_account_number, trust=50)
+        Account.objects.create(account_number=encoded_account_number, trust=50)
 
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = self_configuration.primary_validator

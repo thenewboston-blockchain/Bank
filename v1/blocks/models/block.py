@@ -5,8 +5,8 @@ from thenewboston.constants.network import BALANCE_LOCK_LENGTH, SIGNATURE_LENGTH
 from thenewboston.models.created_modified import CreatedModified
 
 """
-created_date - Not stored on the network, stored by bank for member reference only
-modified_date - Not stored on the network, stored by bank for member reference only
+created_date - Not stored on the network, stored by bank for reference only
+modified_date - Not stored on the network, stored by bank for reference only
 """
 
 

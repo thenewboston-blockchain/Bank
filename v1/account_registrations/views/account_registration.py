@@ -2,29 +2,29 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from v1.member_registrations.models.member_registration import MemberRegistration
-from v1.member_registrations.serializers.member_registration import (
-    MemberRegistrationSerializer,
-    MemberRegistrationSerializerCreate
+from v1.account_registrations.models.account_registration import AccountRegistration
+from v1.account_registrations.serializers.account_registration import (
+    AccountRegistrationSerializer,
+    AccountRegistrationSerializerCreate
 )
 
 
-# member_registrations
-class MemberRegistrationView(APIView):
+# account_registrations
+class AccountRegistrationView(APIView):
 
     @staticmethod
     def get(request):
         """
-        description: List member registrations
+        description: List account registrations
         """
 
-        member_registrations = MemberRegistration.objects.all()
-        return Response(MemberRegistrationSerializer(member_registrations, many=True).data)
+        account_registrations = AccountRegistration.objects.all()
+        return Response(AccountRegistrationSerializer(account_registrations, many=True).data)
 
     @staticmethod
     def post(request):
         """
-        description: Register as a bank member
+        description: Register as a bank account
         parameters:
           - name: account_number
             required: true
@@ -53,11 +53,11 @@ class MemberRegistrationView(APIView):
             type: string
         """
 
-        serializer = MemberRegistrationSerializerCreate(data=request.data, context={'request': request})
+        serializer = AccountRegistrationSerializerCreate(data=request.data, context={'request': request})
         if serializer.is_valid():
-            member_registration = serializer.save()
+            account_registration = serializer.save()
             return Response(
-                MemberRegistrationSerializer(member_registration).data,
+                AccountRegistrationSerializer(account_registration).data,
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
