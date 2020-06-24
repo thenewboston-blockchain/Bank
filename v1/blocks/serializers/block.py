@@ -8,7 +8,7 @@ from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
-from v1.members.models.member import Member
+from v1.accounts.models.account import Account
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import send_signed_block
 from v1.utils.blocks import create_block_and_bank_transactions
@@ -80,11 +80,11 @@ class BlockSerializerCreate(NetworkBlockSerializer):
     @staticmethod
     def validate_account_number(account_number):
         """
-        Check account number belongs to a registered member
+        Check account number belongs to a registered account
         """
 
-        if not Member.objects.filter(account_number=account_number).exists():
-            raise serializers.ValidationError('Member with that account number does not exist')
+        if not Account.objects.filter(account_number=account_number).exists():
+            raise serializers.ValidationError('Account with that account number does not exist')
 
         return account_number
 

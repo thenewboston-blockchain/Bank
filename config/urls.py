@@ -18,8 +18,8 @@ urlpatterns = [
     path('', include('v1.banks.urls')),
     path('', include('v1.blocks.urls')),
     path('', include('v1.confirmation_blocks.urls')),
-    path('', include('v1.member_registrations.urls')),
-    path('', include('v1.members.urls')),
+    path('', include('v1.account_registrations.urls')),
+    path('', include('v1.accounts.urls')),
     path('', include('v1.self_configurations.urls')),
     path('', include('v1.validators.urls')),
 

@@ -9,32 +9,32 @@ from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 from thenewboston.utils.tools import sort_and_encode
 
-from v1.members.models.member import Member
+from v1.accounts.models.account import Account
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import send_signed_block
 from v1.utils.blocks import create_block_and_bank_transactions
 from v1.validators.helpers.validator_configuration import get_primary_validator
-from ..models.member_registration import MemberRegistration
+from ..models.account_registration import AccountRegistration
 
 logger = logging.getLogger('thenewboston')
 
 
-class MemberRegistrationSerializer(serializers.ModelSerializer):
+class AccountRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = MemberRegistration
+        model = AccountRegistration
         fields = '__all__'
-        read_only_fields = all_field_names(MemberRegistration)
+        read_only_fields = all_field_names(AccountRegistration)
 
 
-class MemberRegistrationSerializerCreate(serializers.Serializer):
+class AccountRegistrationSerializerCreate(serializers.Serializer):
     account_number = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
     message = MessageSerializer()
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
 
     def create(self, validated_data):
         """
-        Create pending member registration
+        Create pending account registration
         Forward block to validator
         """
 
@@ -46,7 +46,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         try:
             with transaction.atomic():
                 create_block_and_bank_transactions(validated_block)
-                member_registration = MemberRegistration.objects.create(
+                account_registration = AccountRegistration.objects.create(
                     account_number=validated_block['account_number'],
                     fee=bank_registration_fee,
                     status=PENDING
@@ -61,7 +61,7 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
         except Exception as e:
             logger.exception(e)
 
-        return member_registration
+        return account_registration
 
     def update(self, instance, validated_data):
         raise RuntimeError('Method unavailable')
@@ -89,14 +89,14 @@ class MemberRegistrationSerializerCreate(serializers.Serializer):
     @staticmethod
     def validate_account_number(account_number):
         """
-        Check if member already exists
+        Check if account already exists
         Check for existing pending registration
         """
 
-        if Member.objects.filter(account_number=account_number).exists():
-            raise serializers.ValidationError('Member already exists')
+        if Account.objects.filter(account_number=account_number).exists():
+            raise serializers.ValidationError('Account already exists')
 
-        if MemberRegistration.objects.filter(account_number=account_number, status=PENDING).exists():
+        if AccountRegistration.objects.filter(account_number=account_number, status=PENDING).exists():
             raise serializers.ValidationError('Pending registration already exists')
 
         return account_number

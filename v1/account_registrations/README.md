@@ -1,12 +1,12 @@
-## Member Registrations
+## Account Registrations
 
-Users are required to register at a bank before they are able to send transactions through that bank. If their 
-registration is accepted they will be referred to as a "member" of that bank.
+Users are required to register their account(s) with a bank before they are able to send transactions through that 
+bank.
 
-### POST /member_registrations
+### POST /account_registrations
 
 - `account_number` - account number of the registering account
-- `message` - current balance lock for the above `account_number` and Txs for bank registration fee and validator Tx fee
+- `message` - balance key for the `account_number` and Txs for bank registration fee and validator Tx fee
 - `signature` - hex value of the signed `message`
 
 Request (client > Bank):
@@ -39,13 +39,13 @@ Response (Bank > client):
   "fee": "2.0000000000000000",
   "status": "PENDING",
   "account_number": "484b3176c63d5f37d808404af1a12c4b9649cd6f6769f35bdf5a816133623fbc",
-  "member": null
+  "account": null
 }
 ```
 
-Upon successful member registration, the bank will create a bank block with the given data and send it to the validator
+Upon successful account registration, the bank will create a bank block with the given data and send it to the validator
 for validation. After successful validation, the validator will send a confirmation block back to the bank and the bank
-will create the member and update the member registration status to accepted.
+will create the account and update the account registration status to accepted.
 
 Request (Bank > Validator):
 ```json
