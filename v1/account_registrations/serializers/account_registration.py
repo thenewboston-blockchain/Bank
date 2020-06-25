@@ -49,6 +49,7 @@ class AccountRegistrationSerializerCreate(serializers.Serializer):
                 account_registration = AccountRegistration.objects.create(
                     account_number=validated_block['account_number'],
                     fee=bank_registration_fee,
+                    registration_block_signature=validated_block['signature'],
                     status=PENDING
                 )
                 send_signed_block.delay(
