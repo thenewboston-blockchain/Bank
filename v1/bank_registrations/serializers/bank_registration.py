@@ -42,6 +42,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
             with transaction.atomic():
                 bank_registration = BankRegistration.objects.create(
                     fee=validator.registration_fee,
+                    registration_block_signature=block['signature'],
                     status=PENDING,
                     validator=validator
                 )
