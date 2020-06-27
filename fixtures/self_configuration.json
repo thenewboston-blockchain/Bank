@@ -10,7 +10,7 @@
       "version": "v1.0",
       "default_transaction_fee": "1.0000000000000000",
       "registration_fee": "2.0000000000000000",
-      "primary_validator": "a8101b03-15ad-42fc-8e64-2de24b850e0e",
+      "primary_validator": "98c85ca7-6e67-4764-9fc0-995ff8d7303b",
       "node_type": "BANK"
     }
   }
