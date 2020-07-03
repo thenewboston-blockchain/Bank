@@ -92,3 +92,52 @@ def is_self(func):
         return func(request, *args, **kwargs)
 
     return inner
+
+
+def is_signed_message(func):
+    """
+    Decorator to verify the request signature
+    """
+
+    @wraps(func)
+    def inner(request, *args, **kwargs):
+        request, error = verify_request_signature(request=request, signed_data_key='message')
+
+        if error:
+            return Response(error, status=status.HTTP_401_UNAUTHORIZED)
+
+        return func(request, *args, **kwargs)
+
+    return inner
+
+
+def verify_request_signature(*, request, signed_data_key):
+    """
+    Verify the request signature
+    signed_data - block or message
+    """
+
+    node_identifier = request.data.get('node_identifier')
+    signature = request.data.get('signature')
+    signed_data = request.data.get(signed_data_key)
+
+    for field in ['node_identifier', 'signature', signed_data_key]:
+        if not request.data.get(field):
+            return request, {ERROR: f'{field} required'}
+
+    error = None
+
+    try:
+        verify_signature(
+            message=sort_and_encode(signed_data),
+            signature=signature,
+            verify_key=node_identifier
+        )
+    except BadSignatureError as e:
+        logger.exception(e)
+        error = {ERROR: BAD_SIGNATURE}
+    except Exception as e:
+        logger.exception(e)
+        error = {ERROR: UNKNOWN}
+
+    return request, error

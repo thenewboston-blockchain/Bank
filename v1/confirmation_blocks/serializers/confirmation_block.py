@@ -2,11 +2,9 @@ import logging
 
 from django.db import transaction
 from rest_framework import serializers
-from thenewboston.blocks.signatures import verify_signature
 from thenewboston.constants.network import ACCEPTED, PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
 from thenewboston.serializers.confirmation_block_message import ConfirmationBlockMessageSerializer
 from thenewboston.utils.fields import all_field_names
-from thenewboston.utils.tools import sort_and_encode
 
 from v1.account_registrations.models.account_registration import AccountRegistration
 from v1.accounts.models.account import Account
@@ -64,7 +62,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
                 if account_registration:
                     account = Account.objects.create(
                         account_number=inner_block_account_number,
-                        trust=50
+                        trust=0
                     )
                     account_registration.update(account=account, status=ACCEPTED)
         except Exception as e:
@@ -74,23 +72,6 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
 
     def update(self, instance, validated_data):
         raise RuntimeError('Method unavailable')
-
-    def validate(self, data):
-        """
-        Validate signature
-        """
-
-        message = self.initial_data['message']
-        node_identifier = data['node_identifier']
-        signature = data['signature']
-
-        verify_signature(
-            message=sort_and_encode(message),
-            signature=signature,
-            verify_key=node_identifier
-        )
-
-        return data
 
     @staticmethod
     def validate_node_identifier(node_identifier):

@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from v1.decorators.nodes import is_signed_message
 from ..models.confirmation_block import ConfirmationBlock
 from ..serializers.confirmation_block import ConfirmationBlockSerializer, ConfirmationBlockSerializerCreate
 
@@ -19,6 +20,7 @@ class ConfirmationBlockView(APIView):
         return Response(ConfirmationBlockSerializer(confirmation_blocks, many=True).data)
 
     @staticmethod
+    @is_signed_message
     def post(request):
         """
         description: Create confirmation block
