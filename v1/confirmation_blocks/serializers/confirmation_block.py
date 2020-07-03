@@ -38,14 +38,13 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
 
         message = validated_data['message']
         block_identifier = message['block_identifier']
-        node_identifier = validated_data['node_identifier']
+        validator = validated_data['node_identifier']
 
         inner_block = message['block']
         inner_block_account_number = inner_block['account_number']
         inner_block_signature = inner_block['signature']
 
         block = Block.objects.get(signature=inner_block_signature)
-        validator = Validator.objects.get(node_identifier=node_identifier)
 
         try:
             with transaction.atomic():
@@ -67,6 +66,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
                     account_registration.update(account=account, status=ACCEPTED)
         except Exception as e:
             logger.exception(e)
+            raise serializers.ValidationError(e)
 
         return confirmation_block
 
@@ -79,7 +79,9 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         Validate that node_identifier belongs to validator
         """
 
-        if not Validator.objects.filter(node_identifier=node_identifier).exists():
+        validator = Validator.objects.filter(node_identifier=node_identifier).first()
+
+        if not validator:
             raise serializers.ValidationError('Validator with that node_identifier does not exist')
 
-        return node_identifier
+        return validator
