@@ -64,6 +64,7 @@ class BankRegistrationSerializerCreate(serializers.Serializer):
                 )
         except Exception as e:
             logger.exception(e)
+            raise serializers.ValidationError(e)
 
         return bank_registration
 
