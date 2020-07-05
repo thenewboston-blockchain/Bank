@@ -13,9 +13,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     # API (v1)
-    path('', include('v1.account_registrations.urls')),
     path('', include('v1.accounts.urls')),
-    path('', include('v1.bank_registrations.urls')),
     path('', include('v1.bank_transactions.urls')),
     path('', include('v1.banks.urls')),
     path('', include('v1.blocks.urls')),

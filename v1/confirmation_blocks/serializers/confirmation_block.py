@@ -2,12 +2,10 @@ import logging
 
 from django.db import transaction
 from rest_framework import serializers
-from thenewboston.constants.network import ACCEPTED, PENDING, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
+from thenewboston.constants.network import SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
 from thenewboston.serializers.confirmation_block_message import ConfirmationBlockMessageSerializer
 from thenewboston.utils.fields import all_field_names
 
-from v1.account_registrations.models.account_registration import AccountRegistration
-from v1.accounts.models.account import Account
 from v1.blocks.models.block import Block
 from v1.validators.models.validator import Validator
 from ..models.confirmation_block import ConfirmationBlock
@@ -31,9 +29,6 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
     def create(self, validated_data):
         """
         Create confirmation block
-        If the inner blocks account number relates to a pending AccountRegistration:
-        - create Account
-        - update AccountRegistration to accepted
         """
 
         message = validated_data['message']
@@ -41,7 +36,6 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         validator = validated_data['node_identifier']
 
         inner_block = message['block']
-        inner_block_account_number = inner_block['account_number']
         inner_block_signature = inner_block['signature']
 
         block = Block.objects.get(signature=inner_block_signature)
@@ -53,17 +47,6 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
                     block_identifier=block_identifier,
                     validator=validator
                 )
-                account_registration = AccountRegistration.objects.filter(
-                    account_number=inner_block_account_number,
-                    status=PENDING
-                )
-
-                if account_registration:
-                    account = Account.objects.create(
-                        account_number=inner_block_account_number,
-                        trust=0
-                    )
-                    account_registration.update(account=account, status=ACCEPTED)
         except Exception as e:
             logger.exception(e)
             raise serializers.ValidationError(e)
