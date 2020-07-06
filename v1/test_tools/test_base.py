@@ -2,12 +2,18 @@ from django.core.cache import cache
 from faker import Faker
 from rest_framework.test import APITestCase
 
-from .data import FIXTURES
+from v1.self_configurations.management.commands.initialize_test_bank import Command
 
 
 class TestBase(APITestCase):
     fake = Faker()
-    fixtures = FIXTURES
+
+    def setUp(self):
+        """
+        Initialize test bank
+        """
+
+        Command().handle(ip='127.0.0.1')
 
     def tearDown(self):
         """
