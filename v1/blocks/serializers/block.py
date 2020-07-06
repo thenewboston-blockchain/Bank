@@ -10,6 +10,7 @@ from thenewboston.utils.tools import sort_and_encode
 
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import send_signed_block
+from v1.accounts.models.account import Account
 from v1.utils.blocks import create_block_and_bank_transactions
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.block import Block
@@ -40,6 +41,10 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         try:
             with transaction.atomic():
                 block = create_block_and_bank_transactions(validated_block)
+                Account.objects.get_or_create(
+                    account_number=validated_block['account_number'],
+                    defaults={'trust': 0},
+                )
                 send_signed_block.delay(
                     block=validated_block,
                     ip_address=primary_validator.ip_address,
