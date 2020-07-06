@@ -25,12 +25,11 @@ INSTALLED_APPS = [
     'v1.validators.apps.ValidatorsConfig',
 
     # API (v1)
-    'v1.bank_registrations.apps.BankRegistrationsConfig',
+    'v1.accounts.apps.AccountsConfig',
     'v1.bank_transactions.apps.BankTransactionsConfig',
     'v1.blocks.apps.BlocksConfig',
     'v1.confirmation_blocks.apps.ConfirmationBlocksConfig',
-    'v1.account_registrations.apps.AccountRegistrationsConfig',
-    'v1.accounts.apps.AccountsConfig',
+    'v1.connection_requests.apps.ConnectionRequestsConfig',
     'v1.self_configurations.apps.SelfConfigurationsConfig',
 
 ]

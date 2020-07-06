@@ -37,7 +37,6 @@ Install required packages:
 pip3 install -r requirements/local.txt
 ```
 
-
 ## Local Development
 
 Run Redis:
@@ -59,7 +58,6 @@ To monitor Celery tasks:
 ```
 celery flower -A config.settings --address=127.0.0.1 --port=5555
 ```
-
 
 ## Developers
 

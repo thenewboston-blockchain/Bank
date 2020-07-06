@@ -26,7 +26,6 @@ class Command(InitializeNode):
             'node_identifier': None,
             'port': None,
             'protocol': None,
-            'registration_fee': None,
             'version': None
         }
 
@@ -47,10 +46,6 @@ class Command(InitializeNode):
         self.get_fee(
             attribute_name='default_transaction_fee',
             human_readable_name='default transaction fee'
-        )
-        self.get_fee(
-            attribute_name='registration_fee',
-            human_readable_name='registration fee'
         )
         self.get_protocol()
         self.get_ip_address()
