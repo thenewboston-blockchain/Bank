@@ -1,21 +1,5 @@
 ## Project Setup
 
-The development environment uses a private repository. To be able to install this as a dependency you will need to add
-an SSH key to your GitHub account. 
-
-```
-# Check if you already have an SSH key
-cat ~/.ssh/id_rsa.pub
-
-# Create an SSH key if you do not already have one
-ssh-keygen -t rsa
-
-# Copy to clipboard (Mac)
-pbcopy < ~/.ssh/id_rsa.pub
-```
-
-Add your SSH key to GitHub: https://github.com/settings/keys
-
 Set required environment variables:
 ```
 # Valid values are development, local, postgres_local, production, or staging
