@@ -1,0 +1,139 @@
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+LOGS_DIR = os.path.join(BASE_DIR, 'logs')
+
+SECRET_KEY = 'g#$0(*8%8af27k7-e!ll^!-4yxomcx8ljv_o&_z*zhvi)f8&e6'
+DEBUG = True
+
+ALLOWED_HOSTS = ['*']
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+
+    # Requirements
+    'channels',
+    'rest_framework',
+
+    # API (v1) network nodes
+    'v1.banks.apps.BanksConfig',
+    'v1.validators.apps.ValidatorsConfig',
+
+    # API (v1)
+    'v1.accounts.apps.AccountsConfig',
+    'v1.bank_transactions.apps.BankTransactionsConfig',
+    'v1.blocks.apps.BlocksConfig',
+    'v1.confirmation_blocks.apps.ConfirmationBlocksConfig',
+    'v1.connection_requests.apps.ConnectionRequestsConfig',
+    'v1.invalid_blocks.apps.InvalidBlocksConfig',
+    'v1.self_configurations.apps.SelfConfigurationsConfig',
+    'v1.validator_confirmation_services.apps.ValidatorConfirmationServicesConfig',
+
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'config.urls'
+ASGI_APPLICATION = 'config.routing.application'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'config.wsgi.application'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+LANGUAGE_CODE = 'en-us'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_WORKER_CONCURRENCY = 1
+
+LOGGING = {
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'error.handler': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'error.log'),
+            'formatter': 'verbose',
+            'level': 'ERROR',
+        },
+        'warning.handler': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_DIR, 'warning.log'),
+            'formatter': 'verbose',
+            'level': 'WARNING',
+        },
+    },
+    'loggers': {
+        'thenewboston': {
+            'handlers': ['error.handler', 'warning.handler'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+    'version': 1,
+}
