@@ -1,12 +1,20 @@
 ## Project Setup
 
+Clone this repository:
+```
+git clone https://github.com/thenewboston-developers/Bank.git
+```
+
+cd into it ```cd Bank```
+
+
 Set required environment variables:
 ```
 # Valid values are development, local, postgres_local, production, or staging
-DJANGO_APPLICATION_ENVIRONMENT='local'
+export DJANGO_APPLICATION_ENVIRONMENT='local'
 
 # 64 character signing key used to authenticate network requests
-NETWORK_SIGNING_KEY='e5e5fec0dcbbd8b0a76c67204823678d3f243de7a0a1042bb3ecf66285cd9fd4'
+export NETWORK_SIGNING_KEY='e5e5fec0dcbbd8b0a76c67204823678d3f243de7a0a1042bb3ecf66285cd9fd4'
 ```
 
 Install Redis:
