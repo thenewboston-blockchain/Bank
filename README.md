@@ -1,12 +1,10 @@
 ## Project Setup
 
-Clone this repository:
+Clone this repository and cd into it:
 ```
 git clone https://github.com/thenewboston-developers/Bank.git
+cd Bank
 ```
-
-cd into it ```cd Bank```
-
 
 Set required environment variables:
 ```
