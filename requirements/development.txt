@@ -8,11 +8,11 @@
 amqp==2.6.0               # via kombu
 asgiref==3.2.10           # via channels, daphne, django
 attrs==19.3.0             # via automat, service-identity, twisted
-autobahn==20.6.1          # via daphne
+autobahn==20.6.2          # via daphne
 automat==20.2.0           # via twisted
 billiard==3.6.3.0         # via celery
 celery==4.4.2             # via -r requirements/base.in, flower
-certifi==2020.4.5.2       # via requests
+certifi==2020.6.20        # via requests
 cffi==1.14.0              # via cryptography, pynacl
 channels==2.4.0           # via -r requirements/base.in
 chardet==3.0.4            # via requests
@@ -21,16 +21,16 @@ cryptography==2.9.2       # via autobahn, pyopenssl, service-identity
 daphne==2.5.0             # via channels
 django-debug-toolbar==2.2  # via -r requirements/base.in
 django-redis==4.11.0      # via -r requirements/base.in
-django==3.0.6             # via channels, django-debug-toolbar, django-redis, djangorestframework, thenewboston
+django==3.0.7             # via channels, django-debug-toolbar, django-redis, djangorestframework, thenewboston
 djangorestframework==3.11.0  # via thenewboston
 faker==4.1.0              # via -r requirements/base.in
 flower==0.9.4             # via -r requirements/base.in
 humanize==0.5.1           # via flower
 hyperlink==19.0.0         # via twisted
-idna==2.9                 # via hyperlink, requests, twisted
-importlib-metadata==1.6.1  # via kombu
+idna==2.10                # via hyperlink, requests, twisted
+importlib-metadata==1.7.0  # via kombu
 incremental==17.5.0       # via twisted
-kombu==4.6.10             # via celery
+kombu==4.6.11             # via celery
 ptable==0.9.2             # via thenewboston
 pyasn1-modules==0.2.8     # via service-identity
 pyasn1==0.4.8             # via pyasn1-modules, service-identity
