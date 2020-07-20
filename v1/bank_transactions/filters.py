@@ -4,20 +4,6 @@ from django.db.models import Q
 from .models.bank_transaction import BankTransaction
 
 
-class AccountNumberFilter(filters.CharFilter):
-
-    def filter(self, qs, value):
-        queryset = None
-        if value in EMPTY_VALUES:
-            return qs
-
-        kwargs = {
-        }
-        queryset = qs.filter(**kwargs)
-
-        return queryset
-
-
 class BankTransactionFilter(filters.FilterSet):
 
     account_number = filters.CharFilter(
