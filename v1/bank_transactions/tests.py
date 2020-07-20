@@ -83,7 +83,7 @@ class FilterTests(APITestCase):
         self.assertEqual(res.status_code, HTTPStatus.OK)
         self.assertEqual(len(res.data), 5)
 
-    def test_filter_acount_number(self):
+    def test_filter_account_number(self):
         """
         Test filtering both `recipient` and `block__sender` with
         `account_number` query param.
