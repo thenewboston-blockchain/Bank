@@ -44,7 +44,7 @@ class FilterTests(APITestCase):
                 recipient=self.bank3
             )
         for _ in range(7):
-            # Create 7 `BankTransaction` instances for `bank4 recipient.
+            # Create 7 `BankTransaction` instances for `bank4` recipient.
             BankTransaction.objects.create(
                 block=bank2_block,
                 amount=Decimal(100),
@@ -80,14 +80,34 @@ class FilterTests(APITestCase):
             'block__sender': self.bank1,
         }
         res = self.client.get(self.URL, params)
+        self.assertEqual(res.status_code, HTTPStatus.OK)
         self.assertEqual(len(res.data), 5)
 
     def test_filter_acount_number(self):
         """
-        Test that there are 5 instances where `bank1` is the `Block` sender.
+        Test filtering both `recipient` and `block__sender` with
+        `account_number` query param.
         """
-        account_number = ''
         params = {
-            'account_number': account_number,
+            'account_number': self.bank4,
         }
         res = self.client.get(self.URL, params)
+        self.assertEqual(res.status_code, HTTPStatus.OK)
+        # Assert  data for `bank4` as recipient
+        self.assertEqual(len(res.data), 7)
+
+        # Create data for `bank4` as sender
+        bank4_block = Block.objects.create(
+            balance_key=secrets.token_urlsafe(BALANCE_LOCK_LENGTH),
+            sender=self.bank4,
+            signature=secrets.token_urlsafe(SIGNATURE_LENGTH),
+        )
+        for _ in range(3):
+            BankTransaction.objects.create(
+                block=bank4_block,
+                amount=Decimal(100),
+                recipient=self.bank1
+            )
+        res = self.client.get(self.URL, params)
+        self.assertEqual(res.status_code, HTTPStatus.OK)
+        self.assertEqual(len(res.data), 10)
