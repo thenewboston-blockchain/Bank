@@ -3,6 +3,7 @@ import secrets
 from decimal import Decimal
 from http import HTTPStatus
 
+from django.test.utils import override_settings
 from django.urls import reverse
 
 from rest_framework.test import APITestCase
@@ -15,7 +16,7 @@ from v1.blocks.models.block import (
 )
 
 
-class FilterTests(APITestCase):
+class PaginationFilterTests(APITestCase):
     """
     Tests for `BankTransactionView` filtering.
     """
@@ -111,3 +112,29 @@ class FilterTests(APITestCase):
         res = self.client.get(self.URL, params)
         self.assertEqual(res.status_code, HTTPStatus.OK)
         self.assertEqual(len(res.data), 10)
+
+    def test_paginated_list(self):
+        total_data_count = BankTransaction.objects.count()
+        params = {
+            'limit': 1,
+            'offset': 0,
+        }
+        res = self.client.get(self.URL, params)
+        self.assertEqual(res.status_code, HTTPStatus.OK)
+        data = res.data
+        # Assert pagination fields
+        self.assertIn('next', data)
+        self.assertIn('previous', data)
+        # Assert `limit`
+        self.assertEqual(len(data['results']), 1)
+        self.assertEqual(data['count'], total_data_count)
+
+        offset = 5
+        params = {
+            'offset': offset,
+        }
+        res = self.client.get(self.URL, params)
+        self.assertEqual(res.status_code, HTTPStatus.OK)
+        data = res.data
+        # Assert `offset`
+        self.assertEqual(len(data['results']), (total_data_count - offset))

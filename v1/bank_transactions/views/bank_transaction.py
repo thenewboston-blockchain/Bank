@@ -6,6 +6,8 @@ from rest_framework import (
 
 from django_filters.rest_framework import DjangoFilterBackend
 
+from v1.utils.pagination import APIPagination
+
 from ..filters import BankTransactionFilter
 from ..helpers.optimizations import optimize_bank_transaction_list
 from ..models.bank_transaction import BankTransaction
@@ -21,6 +23,7 @@ class BankTransactionView(
     filter_backends = [DjangoFilterBackend]
     filter_class = BankTransactionFilter
     serializer_class = BankTransactionSerializer
+    pagination_class = APIPagination
 
     def get_queryset(self):
         """

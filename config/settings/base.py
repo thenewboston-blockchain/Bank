@@ -141,3 +141,6 @@ LOGGING = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+PAGINATION_DEFAULT_LIMIT = 50  # Default number of results per request
+PAGINATION_MAX_LIMIT = 100  # Maximum number of results per request
