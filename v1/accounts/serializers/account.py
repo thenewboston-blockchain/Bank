@@ -10,3 +10,10 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
         model = Account
         read_only_fields = all_field_names(Account)
+
+
+class AccountSerializerUpdate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        fields = ('trust',)
