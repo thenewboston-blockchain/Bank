@@ -10,3 +10,10 @@ class ValidatorSerializer(serializers.ModelSerializer):
         exclude = ('id',)
         model = Validator
         read_only_fields = all_field_names(Validator)
+
+
+class ValidatorSerializerUpdate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Validator
+        fields = ('trust',)
