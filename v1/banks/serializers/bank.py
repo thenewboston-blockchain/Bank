@@ -10,3 +10,10 @@ class BankSerializer(serializers.ModelSerializer):
         exclude = ('id',)
         model = Bank
         read_only_fields = all_field_names(Bank)
+
+
+class BankSerializerUpdate(serializers.ModelSerializer):
+
+    class Meta:
+        model = Bank
+        fields = ('trust',)
