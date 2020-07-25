@@ -1,1 +1,5 @@
 -r base.in
+
+pytest==5.4.3
+pytest-django==3.9.0
+factory-boy==2.12.0
