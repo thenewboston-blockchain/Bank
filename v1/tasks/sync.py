@@ -26,6 +26,42 @@ def get_primary_validator_candidates(*, current_primary_validator):
 
 
 @shared_task
+def send_primary_validator_updated_notices():
+    """
+    Send a notice to all validators that the banks primary validator has been updated
+    - 200 response > validator is syncing to new primary validator
+    - 400 response > validator is not syncing to new primary validator (can be deleted)
+    """
+
+    self_configuration = get_self_configuration(exception_class=RuntimeError)
+    primary_validator = self_configuration.primary_validator
+    confirmation_validators = Validator.objects.all().exclude(node_identifier=primary_validator.node_identifier)
+
+    data = {
+        'ip_address': primary_validator.ip_address,
+        'port': primary_validator.port,
+        'protocol': primary_validator.protocol
+    }
+
+    for confirmation_validator in confirmation_validators:
+        signed_request = generate_signed_request(
+            data=data,
+            nid_signing_key=get_signing_key()
+        )
+        node_address = format_address(
+            ip_address=confirmation_validator.ip_address,
+            port=confirmation_validator.port,
+            protocol=confirmation_validator.protocol,
+        )
+        url = f'{node_address}/primary_validator_updated'
+
+        try:
+            post(url=url, body=signed_request)
+        except Exception as e:
+            logger.exception(e)
+
+
+@shared_task
 def set_primary_validator():
     """
     Set the primary validator to the validator that is the:
@@ -60,6 +96,8 @@ def set_primary_validator():
 
             self_configuration.primary_validator = validator
             self_configuration.save()
+
+            send_primary_validator_updated_notices.delay()
             return
         except Exception as e:
             logger.exception(e)
