@@ -1,10 +1,11 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from v1.bank_transactions.views.bank_transaction import BankTransactionView
+from v1.bank_transactions.views.bank_transaction import BankTransactionViewSet
 
-urlpatterns = [
 
-    # Bank transactions
-    path('bank_transactions', BankTransactionView.as_view()),
+app_name = 'bank_transactions'
 
-]
+router = DefaultRouter()
+router.register('bank_transactions', BankTransactionViewSet)
+
+urlpatterns = router.urls

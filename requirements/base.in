@@ -9,3 +9,4 @@ tblib==1.6.0
 thenewboston>=0.0.4
 uWSGI==2.0.18
 wheel==0.34.2
+django-filter==2.3.0

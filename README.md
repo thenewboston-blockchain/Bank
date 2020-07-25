@@ -39,9 +39,9 @@ Run Celery:
 celery -A config.settings worker -l debug
 ```
 
-To run all tests in parallel:
+To run all tests:
 ```
-python3 manage.py test --parallel
+pytest
 ```
 
 To monitor Celery tasks:
