@@ -6,8 +6,8 @@ from thenewboston.serializers.network_block import NetworkBlockSerializer
 from thenewboston.utils.fields import all_field_names
 
 from v1.blocks.models.block import Block
+from v1.tasks.sync import set_primary_validator
 from v1.utils.trust import calculate_weighted_trust, decrease_trust
-from v1.validators.helpers.appoint import appoint_primary_validator
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from v1.validators.models.validator import Validator
 from ..models.invalid_block import InvalidBlock
@@ -82,7 +82,6 @@ class InvalidBlockSerializerCreate(serializers.Serializer):
 
             invalid_block.save()
 
-            # TODO: Stick this on a delay
             weighted_trust = calculate_weighted_trust(
                 node=confirmation_validator,
                 node_list=Validator.objects.all().exclude(pk=primary_validator.id)
@@ -91,7 +90,7 @@ class InvalidBlockSerializerCreate(serializers.Serializer):
                 amount=weighted_trust,
                 node=primary_validator
             )
-            appoint_primary_validator()
+            set_primary_validator.delay()
         except Exception as e:
             logger.exception(e)
             raise serializers.ValidationError(e)
