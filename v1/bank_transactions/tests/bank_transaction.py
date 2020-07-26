@@ -4,8 +4,8 @@ import pytest
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
 
-from v1.bank_transactions.factories.bank_transaction import BankTransactionFactory
 from v1.utils.functools import rgetattr
+from ..factories.bank_transaction import BankTransactionFactory
 
 
 @pytest.fixture
