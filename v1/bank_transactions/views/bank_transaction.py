@@ -15,10 +15,10 @@ class BankTransactionViewSet(
     """
     List bank transactions
     """
-    serializer_class = BankTransactionSerializer
-    filterset_class = BankTransactionFilter
 
+    filterset_class = BankTransactionFilter
+    pagination_class = LimitOffsetPagination
     queryset = optimize_bank_transaction_list(
         BankTransaction.objects.all(),
     )
-    pagination_class = LimitOffsetPagination
+    serializer_class = BankTransactionSerializer

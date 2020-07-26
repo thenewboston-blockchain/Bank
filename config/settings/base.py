@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     # Requirements
     'channels',
     'corsheaders',
+    'django_filters',
     'rest_framework',
 
     # API (v1) network nodes
