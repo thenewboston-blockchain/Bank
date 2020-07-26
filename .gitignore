@@ -60,6 +60,9 @@ coverage.xml
 htmlcov/
 nosetests.xml
 
+# pytest
+.pytest_cache
+
 # pyenv
 .python-version
 

@@ -1,20 +1,24 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.mixins import ListModelMixin
+from rest_framework.viewsets import GenericViewSet
 
+from v1.third_party.rest_framework.pagination import LimitOffsetPagination
+from ..filters.bank_transaction import BankTransactionFilter
 from ..helpers.optimizations import optimize_bank_transaction_list
 from ..models.bank_transaction import BankTransaction
 from ..serializers.bank_transaction import BankTransactionSerializer
 
 
-# bank_transactions
-class BankTransactionView(APIView):
+class BankTransactionViewSet(
+    ListModelMixin,
+    GenericViewSet,
+):
+    """
+    List bank transactions
+    """
 
-    @staticmethod
-    def get(request):
-        """
-        description: List bank transactions
-        """
-
-        bank_transactions = BankTransaction.objects.all()
-        bank_transactions = optimize_bank_transaction_list(bank_transactions)
-        return Response(BankTransactionSerializer(bank_transactions, many=True).data)
+    filterset_class = BankTransactionFilter
+    pagination_class = LimitOffsetPagination
+    queryset = optimize_bank_transaction_list(
+        BankTransaction.objects.all(),
+    )
+    serializer_class = BankTransactionSerializer
