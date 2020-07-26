@@ -7,9 +7,24 @@ from thenewboston.utils.network import post
 from thenewboston.utils.tools import sort_and_encode
 from thenewboston.verify_keys.verify_key import encode_verify_key, get_verify_key
 
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.self_configurations.helpers.signing_key import get_signing_key
+from v1.tasks.sync import set_primary_validator
 
 logger = logging.getLogger('thenewboston')
+
+
+def request_new_primary_validator():
+    """
+    Request a new primary validator
+    Called if/when the existing primary validator goes offline
+    """
+
+    self_configuration = get_self_configuration(exception_class=RuntimeError)
+    primary_validator = self_configuration.primary_validator
+    primary_validator.trust = 0
+    primary_validator.save()
+    set_primary_validator.delay()
 
 
 @shared_task
@@ -28,11 +43,11 @@ def send_signed_block(*, block, ip_address, port, protocol, url_path):
         'node_identifier': node_identifier,
         'signature': generate_signature(message=message, signing_key=signing_key)
     }
-
     node_address = format_address(ip_address=ip_address, port=port, protocol=protocol)
     url = f'{node_address}{url_path}'
 
     try:
         post(url=url, body=signed_block)
     except Exception as e:
+        request_new_primary_validator()
         logger.exception(e)

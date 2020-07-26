@@ -58,6 +58,7 @@ def send_primary_validator_updated_notices():
         try:
             post(url=url, body=signed_request)
         except Exception as e:
+            confirmation_validator.delete()
             logger.exception(e)
 
 
