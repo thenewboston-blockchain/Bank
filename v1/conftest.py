@@ -1,6 +1,6 @@
 import pytest
 
-from v1.thirdparty.pytest.client import UserWrapper
+from v1.third_party.pytest.client import UserWrapper
 
 
 @pytest.fixture

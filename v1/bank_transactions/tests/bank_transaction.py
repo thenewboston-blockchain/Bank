@@ -14,7 +14,7 @@ def bank_transactions():
 
 
 @pytest.mark.parametrize(
-    'filter, attribute',
+    'field, attribute',
     [
         ('account_number', 'block.sender'),
         ('account_number', 'recipient'),
@@ -22,7 +22,7 @@ def bank_transactions():
         ('recipient', 'recipient'),
     ],
 )
-def test_bank_transaction_filter(anonymous_client, bank_transactions, filter, attribute, django_assert_max_num_queries):
+def test_bank_transaction_filter(anonymous_client, bank_transactions, field, attribute, django_assert_max_num_queries):
     target_transaction = random.choice(bank_transactions)
 
     with django_assert_max_num_queries(2):
@@ -30,7 +30,7 @@ def test_bank_transaction_filter(anonymous_client, bank_transactions, filter, at
             reverse('bank_transactions:banktransaction-list'),
             {
                 'limit': 0,
-                filter: rgetattr(target_transaction, attribute),
+                field: rgetattr(target_transaction, attribute),
             },
             expected=HTTP_200_OK,
         )
