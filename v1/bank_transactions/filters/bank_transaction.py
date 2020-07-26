@@ -1,25 +1,27 @@
-from django_filters.rest_framework import FilterSet, CharFilter
 from django.db.models import Q
+from django_filters.rest_framework import CharFilter, FilterSet
 
 from ..models.bank_transaction import BankTransaction
 
 
 class BankTransactionFilter(FilterSet):
-
-    account_number = CharFilter(
-        method='filter_account_number'
-    )
+    account_number = CharFilter(method='filter_account_number')
 
     class Meta:
         model = BankTransaction
         fields = [
-            'recipient',
-            'block__sender',
             'account_number',
+            'block__sender',
+            'recipient',
         ]
 
-    def filter_account_number(self, queryset, name, value):
+    @staticmethod
+    def filter_account_number(queryset, _, value):
+        """
+        Filter queryset by account number
+        """
 
         return queryset.filter(
-            Q(block__sender=value) | Q(recipient=value)
+            Q(block__sender=value) |
+            Q(recipient=value)
         )

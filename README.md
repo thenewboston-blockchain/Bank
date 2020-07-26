@@ -44,6 +44,11 @@ To run all tests in parallel:
 python3 manage.py test --parallel
 ```
 
+To run pytests:
+```
+pytest
+```
+
 To monitor Celery tasks:
 ```
 celery flower -A config.settings --address=127.0.0.1 --port=5555

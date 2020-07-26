@@ -1,10 +1,11 @@
 import random
+
 import pytest
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
 
-from v1.utils.functools import rgetattr
 from v1.bank_transactions.factories.bank_transaction import BankTransactionFactory
+from v1.utils.functools import rgetattr
 
 
 @pytest.fixture
@@ -15,16 +16,13 @@ def bank_transactions():
 @pytest.mark.parametrize(
     'filter, attribute',
     [
-        ('recipient', 'recipient'),
-        ('block__sender', 'block.sender'),
-        ('account_number', 'recipient'),
         ('account_number', 'block.sender'),
+        ('account_number', 'recipient'),
+        ('block__sender', 'block.sender'),
+        ('recipient', 'recipient'),
     ],
 )
-def test_bank_transaction_filter(
-    anonymous_client, bank_transactions, filter, attribute,
-    django_assert_max_num_queries,
-):
+def test_bank_transaction_filter(anonymous_client, bank_transactions, filter, attribute, django_assert_max_num_queries):
     target_transaction = random.choice(bank_transactions)
 
     with django_assert_max_num_queries(2):

@@ -6,8 +6,7 @@ from ..models.bank_transaction import BankTransaction
 
 
 class BankTransactionFactory(NetworkTransactionFactory):
+    block = SubFactory(BlockFactory)
 
     class Meta:
         model = BankTransaction
-
-    block = SubFactory(BlockFactory)

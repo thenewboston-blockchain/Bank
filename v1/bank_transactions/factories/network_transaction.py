@@ -4,10 +4,6 @@ from thenewboston.models.network_transaction import NetworkTransaction
 
 
 class NetworkTransactionFactory(DjangoModelFactory):
-
-    class Meta:
-        model = NetworkTransaction
-
     amount = Faker(
         'pydecimal',
         left_digits=16,
@@ -17,3 +13,6 @@ class NetworkTransactionFactory(DjangoModelFactory):
         'text',
         max_nb_chars=VERIFY_KEY_LENGTH,
     )
+
+    class Meta:
+        model = NetworkTransaction
