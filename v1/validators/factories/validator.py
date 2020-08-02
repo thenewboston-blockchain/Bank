@@ -1,7 +1,7 @@
 from factory import Faker
 
-from ..models.validator import Validator
 from .network_validator import NetworkValidatorFactory
+from ..models.validator import Validator
 
 
 class ValidatorFactory(NetworkValidatorFactory):

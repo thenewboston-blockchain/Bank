@@ -49,7 +49,7 @@ class BlockViewSet(
           type: string
     """
 
-    filterset_fields = ('sender', )
+    filterset_fields = ('sender',)
     pagination_class = LimitOffsetPagination
     queryset = Block.objects.all()
 
@@ -57,7 +57,6 @@ class BlockViewSet(
     serializer_create_class = BlockSerializerCreate
 
     def create(self, request, *args, **kwargs):
-
         serializer = self.serializer_create_class(
             data=request.data,
             context={'request': request},

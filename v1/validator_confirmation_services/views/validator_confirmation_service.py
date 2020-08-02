@@ -27,7 +27,7 @@ class ValidatorConfirmationServiceViewSet(
       description: Create validator confirmation service
     """
 
-    filterset_fields = ('validator__node_identifier', )
+    filterset_fields = ('validator__node_identifier',)
     pagination_class = LimitOffsetPagination
     queryset = ValidatorConfirmationService.objects.all()
 
@@ -36,7 +36,6 @@ class ValidatorConfirmationServiceViewSet(
 
     @is_signed_message
     def create(self, request, *args, **kwargs):
-
         serializer = self.serializer_create_class(
             data={
                 **request.data['message'],
