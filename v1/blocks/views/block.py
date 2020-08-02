@@ -1,60 +1,71 @@
-from rest_framework import status
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.status import HTTP_201_CREATED
+from rest_framework.viewsets import GenericViewSet
 
-from v1.blocks.models.block import Block
-from v1.blocks.serializers.block import BlockSerializer, BlockSerializerCreate
+from v1.third_party.rest_framework.pagination import LimitOffsetPagination
+from ..models.block import Block
+from ..serializers.block import BlockSerializer, BlockSerializerCreate
 
 
 # blocks
-class BlockView(APIView):
+class BlockViewSet(
+    CreateModelMixin,
+    ListModelMixin,
+    GenericViewSet,
+):
+    """
+    Blocks
+    ---
+    list:
+      description: List blocks
+    create:
+      description: Create block
+      parameters:
+        - name: account_number
+          required: true
+          type: string
+        - name: message
+          required: true
+          type: object
+          properties:
+            balance_key:
+              required: true
+              type: string
+            txs:
+              required: true
+              type: array
+              items:
+                type: object
+                properties:
+                  amount:
+                    required: true
+                    type: number
+                  recipient:
+                    required: true
+                    type: string
+        - name: signature
+          required: true
+          type: string
+    """
 
-    @staticmethod
-    def get(request):
-        """
-        description: List blocks
-        """
+    filterset_fields = ('sender', )
+    pagination_class = LimitOffsetPagination
+    queryset = Block.objects.all()
 
-        blocks = Block.objects.all()
-        return Response(BlockSerializer(blocks, many=True).data)
+    serializer_class = BlockSerializer
+    serializer_create_class = BlockSerializerCreate
 
-    @staticmethod
-    def post(request):
-        """
-        description: Create block
-        parameters:
-          - name: account_number
-            required: true
-            type: string
-          - name: message
-            required: true
-            type: object
-            properties:
-              balance_key:
-                required: true
-                type: string
-              txs:
-                required: true
-                type: array
-                items:
-                  type: object
-                  properties:
-                    amount:
-                      required: true
-                      type: number
-                    recipient:
-                      required: true
-                      type: string
-          - name: signature
-            required: true
-            type: string
-        """
+    def create(self, request, *args, **kwargs):
 
-        serializer = BlockSerializerCreate(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            block = serializer.save()
-            return Response(
-                BlockSerializer(block).data,
-                status=status.HTTP_201_CREATED
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.serializer_create_class(
+            data=request.data,
+            context={'request': request},
+        )
+        serializer.is_valid(raise_exception=True)
+
+        block = serializer.save()
+        return Response(
+            self.get_serializer(block).data,
+            status=HTTP_201_CREATED,
+        )

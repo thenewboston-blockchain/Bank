@@ -1,5 +1,4 @@
 from factory import DjangoModelFactory, Faker
-
 from thenewboston.models.created_modified import CreatedModified
 
 
