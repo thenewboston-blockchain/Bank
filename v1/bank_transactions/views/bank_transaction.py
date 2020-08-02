@@ -8,12 +8,16 @@ from ..models.bank_transaction import BankTransaction
 from ..serializers.bank_transaction import BankTransactionSerializer
 
 
+# bank_transactions
 class BankTransactionViewSet(
     ListModelMixin,
     GenericViewSet,
 ):
     """
-    List bank transactions
+    Bank transactions
+    ---
+    list:
+      description: List bank transactions
     """
 
     filterset_class = BankTransactionFilter

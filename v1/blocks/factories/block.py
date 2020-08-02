@@ -1,8 +1,8 @@
 from factory import Faker
 from thenewboston.constants.network import BALANCE_LOCK_LENGTH, SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
 
-from v1.blocks.models.block import Block
 from .created_modified import CreatedModifiedFactory
+from ..models.block import Block
 
 
 class BlockFactory(CreatedModifiedFactory):
