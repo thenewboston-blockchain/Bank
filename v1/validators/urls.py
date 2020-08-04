@@ -1,11 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views.validator import ValidatorDetail, ValidatorView
+from .views.validator import ValidatorViewSet
 
-urlpatterns = [
+app_name = 'validators'
 
-    # Validators
-    path('validators', ValidatorView.as_view()),
-    path('validators/<str:node_identifier>', ValidatorDetail.as_view()),
+router = DefaultRouter(trailing_slash=False)
+router.register('validators', ValidatorViewSet)
 
-]
+urlpatterns = router.urls

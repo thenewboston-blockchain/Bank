@@ -1,5 +1,3 @@
-import os
-
 from django.contrib.auth import get_user_model
 from django.core import management
 from django.core.cache import cache
@@ -26,9 +24,6 @@ Default superuser is:
 username: bucky
 password: pass1234
 """
-
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-FIXTURES_DIR = os.path.join(CURRENT_DIR, 'test_fixtures')
 
 User = get_user_model()
 
@@ -71,8 +66,6 @@ class Command(BaseCommand):
         Load in fixture data (same models as above)
         """
 
-        global FIXTURES_DIR
-
         self.stdout.write(self.style.SUCCESS('Installing fixture data...'))
 
         Account.objects.all().delete()
@@ -81,14 +74,12 @@ class Command(BaseCommand):
         User.objects.all().delete()
         Validator.objects.all().delete()
 
-        fixture_files = [
-            'validator.json',
-            'self_configuration.json',
-            'user.json'
+        fixtures = [
+            'validator',
+            'self_configuration',
+            'user'
         ]
 
-        for fixture_file in fixture_files:
-            fixtures = os.path.join(FIXTURES_DIR, fixture_file)
-            management.call_command(loaddata.Command(), fixtures, verbosity=1)
+        management.call_command(loaddata.Command(), *fixtures, verbosity=1)
 
         self.stdout.write(self.style.SUCCESS('Fixture data installed successfully'))

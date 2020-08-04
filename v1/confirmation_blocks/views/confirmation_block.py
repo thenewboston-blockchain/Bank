@@ -1,36 +1,41 @@
-from rest_framework import status
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.status import HTTP_201_CREATED
+from rest_framework.viewsets import GenericViewSet
 
 from v1.decorators.nodes import is_signed_message
 from ..models.confirmation_block import ConfirmationBlock
 from ..serializers.confirmation_block import ConfirmationBlockSerializer, ConfirmationBlockSerializerCreate
 
 
-# confirmation_blocks
-class ConfirmationBlockView(APIView):
+class ConfirmationBlockViewSet(
+    CreateModelMixin,
+    ListModelMixin,
+    GenericViewSet,
+):
+    """
+    Confirmation blocks
+    ---
+    list:
+      description: List confirmation blocks
+    create:
+      description: Create confirmation block
+    """
 
-    @staticmethod
-    def get(request):
-        """
-        description: List confirmation blocks
-        """
+    queryset = ConfirmationBlock.objects.all()
+    serializer_class = ConfirmationBlockSerializer
+    serializer_create_class = ConfirmationBlockSerializerCreate
 
-        confirmation_blocks = ConfirmationBlock.objects.all()
-        return Response(ConfirmationBlockSerializer(confirmation_blocks, many=True).data)
-
-    @staticmethod
     @is_signed_message
-    def post(request):
-        """
-        description: Create confirmation block
-        """
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_create_class(
+            data=request.data,
+            context={'request': request},
+        )
+        serializer.is_valid(raise_exception=True)
 
-        serializer = ConfirmationBlockSerializerCreate(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            confirmation_block = serializer.save()
-            return Response(
-                ConfirmationBlockSerializer(confirmation_block).data,
-                status=status.HTTP_201_CREATED
-            )
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        block = serializer.save()
+        return Response(
+            self.get_serializer(block).data,
+            status=HTTP_201_CREATED,
+        )

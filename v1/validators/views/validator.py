@@ -1,46 +1,44 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import status
+from rest_framework.mixins import ListModelMixin, UpdateModelMixin
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 
 from v1.decorators.nodes import is_self_signed_message
 from ..models.validator import Validator
 from ..serializers.validator import ValidatorSerializer, ValidatorSerializerUpdate
 
 
-# validators
-class ValidatorView(APIView):
+class ValidatorViewSet(
+    ListModelMixin,
+    UpdateModelMixin,
+    GenericViewSet,
+):
+    """
+    Validators
+    ---
+    list:
+      description: List validators
+    update:
+      description: Update validator
+      parameters:
+        - name: trust
+          type: number
+    """
 
-    @staticmethod
-    def get(request):
-        """
-        description: List validators
-        """
+    queryset = Validator.objects.all()
+    lookup_field = 'node_identifier'
+    serializer_class = ValidatorSerializer
+    update_serializer_class = ValidatorSerializerUpdate
 
-        validators = Validator.objects.all()
-        return Response(ValidatorSerializer(validators, many=True).data)
-
-
-# validators/{node_identifier}
-class ValidatorDetail(APIView):
-
-    @staticmethod
     @is_self_signed_message
-    def patch(request, node_identifier):
-        """
-        description: Update validator
-        parameters:
-          - name: trust
-            type: number
-        """
+    def update(self, request, *args, **kwargs):
 
-        validator = get_object_or_404(Validator, node_identifier=node_identifier)
-        serializer = ValidatorSerializerUpdate(
-            validator,
+        serializer = self.update_serializer_class(
+            self.get_object(),
             data=request.data['message'],
             partial=True
         )
-        if serializer.is_valid():
-            serializer.save()
-            return Response(ValidatorSerializer(serializer.instance).data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.is_valid(raise_exception=True)
+
+        return Response(
+            self.get_serializer(serializer.save()).data
+        )

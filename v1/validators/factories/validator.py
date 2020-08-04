@@ -5,7 +5,7 @@ from ..models.validator import Validator
 
 
 class ValidatorFactory(NetworkValidatorFactory):
-    trust = Faker('pydecimal', left_digits=3, right_digits=2)
+    trust = Faker('pyfloat', left_digits=3, right_digits=2, min_value=0, max_value=100)
 
     class Meta:
         model = Validator

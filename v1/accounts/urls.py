@@ -1,11 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views.account import AccountDetail, AccountView
+from .views.account import AccountViewSet
 
-urlpatterns = [
+app_name = 'accounts'
 
-    # Accounts
-    path('accounts', AccountView.as_view()),
-    path('accounts/<str:account_number>', AccountDetail.as_view()),
+router = DefaultRouter(trailing_slash=False)
+router.register('accounts', AccountViewSet)
 
-]
+urlpatterns = router.urls

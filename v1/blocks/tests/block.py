@@ -1,22 +1,28 @@
 import random
 
-import pytest
 from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
 
-from ..factories.block import BlockFactory
-
-
-@pytest.fixture
-def blocks():
-    yield BlockFactory.create_batch(100)
+from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 
 
-def test_bank_transaction_filter(anonymous_client, blocks, django_assert_max_num_queries):
+def test_blocks_list(client, blocks, django_assert_max_num_queries):
+    with django_assert_max_num_queries(2):
+        response = client.get_json(
+            reverse('blocks:block-list'),
+            {'limit': 0},
+            expected=HTTP_200_OK,
+        )
+
+    assert_objects_vs_dicts(blocks, response)
+    assert response
+
+
+def test_blocks_list_filter(client, blocks, django_assert_max_num_queries):
     block = random.choice(blocks)
 
     with django_assert_max_num_queries(2):
-        response = anonymous_client.get_json(
+        response = client.get_json(
             reverse('blocks:block-list'),
             {
                 'limit': 0,
@@ -25,3 +31,14 @@ def test_bank_transaction_filter(anonymous_client, blocks, django_assert_max_num
             expected=HTTP_200_OK,
         )
     assert response[0]['id'] == str(block.id)
+
+
+def test_blocks_post(client, block_data):
+
+    response = client.post_json(
+        reverse('blocks:block-list'),
+        block_data,
+        expected=HTTP_201_CREATED,
+    )
+    assert block_data['signature'] == response['signature']
+    assert block_data['message']['balance_key'] == response['balance_key']

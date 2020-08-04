@@ -3,12 +3,10 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.viewsets import GenericViewSet
 
-from v1.third_party.rest_framework.pagination import LimitOffsetPagination
 from ..models.block import Block
 from ..serializers.block import BlockSerializer, BlockSerializerCreate
 
 
-# blocks
 class BlockViewSet(
     CreateModelMixin,
     ListModelMixin,
@@ -50,9 +48,7 @@ class BlockViewSet(
     """
 
     filterset_fields = ('sender',)
-    pagination_class = LimitOffsetPagination
     queryset = Block.objects.all()
-
     serializer_class = BlockSerializer
     serializer_create_class = BlockSerializerCreate
 

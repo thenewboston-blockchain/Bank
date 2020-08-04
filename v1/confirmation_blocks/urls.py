@@ -1,10 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views.confirmation_block import ConfirmationBlockView
+from .views.confirmation_block import ConfirmationBlockViewSet
 
-urlpatterns = [
+app_name = 'confirmation_blocks'
 
-    # Confirmation blocks
-    path('confirmation_blocks', ConfirmationBlockView.as_view()),
+router = DefaultRouter(trailing_slash=False)
+router.register('confirmation_blocks', ConfirmationBlockViewSet)
 
-]
+urlpatterns = router.urls
