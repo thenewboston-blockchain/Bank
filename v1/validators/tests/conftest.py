@@ -5,7 +5,7 @@ from ..factories.validator import ValidatorFactory
 
 
 @pytest.fixture
-def validator_json_data():
+def validator_fake_data():
     yield build_json(ValidatorFactory)
 
 

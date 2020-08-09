@@ -10,7 +10,7 @@ def bank(encoded_account_number):
 
 
 @pytest.fixture
-def bank_json_data():
+def bank_fake_data():
     yield build_json(BankFactory)
 
 

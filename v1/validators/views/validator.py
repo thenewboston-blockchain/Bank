@@ -24,8 +24,8 @@ class ValidatorViewSet(
           type: number
     """
 
-    queryset = Validator.objects.all()
     lookup_field = 'node_identifier'
+    queryset = Validator.objects.all()
     serializer_class = ValidatorSerializer
     update_serializer_class = ValidatorSerializerUpdate
 

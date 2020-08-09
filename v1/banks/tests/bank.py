@@ -17,7 +17,7 @@ def test_banks_list(client, banks, django_assert_max_num_queries):
     assert response
 
 
-def test_banks_patch(client, bank, bank_json_data, self_configuration):
+def test_banks_patch(client, bank, bank_fake_data, self_configuration):
 
     response = client.patch_json(
         reverse(
@@ -25,9 +25,9 @@ def test_banks_patch(client, bank, bank_json_data, self_configuration):
             args=[bank.node_identifier]
         ),
         generate_signed_request(
-            data=bank_json_data,
+            data=bank_fake_data,
             nid_signing_key=get_signing_key(),
         ),
         expected=HTTP_200_OK,
     )
-    assert float(response['trust']) == bank_json_data['trust']
+    assert float(response['trust']) == bank_fake_data['trust']

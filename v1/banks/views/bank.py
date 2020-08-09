@@ -24,8 +24,8 @@ class BankViewSet(
           type: number
     """
 
-    queryset = Bank.objects.all()
     lookup_field = 'node_identifier'
+    queryset = Bank.objects.all()
     serializer_class = BankSerializer
     update_serializer_class = BankSerializerUpdate
 
