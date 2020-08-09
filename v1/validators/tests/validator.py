@@ -17,16 +17,16 @@ def test_validator_list(client, validators, django_assert_max_num_queries):
     assert response
 
 
-def test_validator_patch(client, validator, validator_json_data, self_configuration):
+def test_validator_patch(client, validator, validator_fake_data, self_configuration):
     response = client.patch_json(
         reverse(
             'validators:validator-detail',
             args=[validator.node_identifier]
         ),
         generate_signed_request(
-            data=validator_json_data,
+            data=validator_fake_data,
             nid_signing_key=get_signing_key(),
         ),
         expected=HTTP_200_OK,
     )
-    assert float(response['trust']) == validator_json_data['trust']
+    assert float(response['trust']) == validator_fake_data['trust']

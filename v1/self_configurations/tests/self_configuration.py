@@ -1,7 +1,6 @@
-from thenewboston.constants.network import BANK
-
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
+from thenewboston.constants.network import BANK
 
 
 def test_self_configuration_get(client, self_configuration):

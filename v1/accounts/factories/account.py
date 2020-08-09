@@ -1,7 +1,7 @@
 from factory import Faker
 from thenewboston.constants.network import VERIFY_KEY_LENGTH
 
-from v1.blocks.factories.created_modified import CreatedModifiedFactory
+from v1.third_party.thenewboston.factories.created_modified import CreatedModifiedFactory
 from ..models.account import Account
 
 

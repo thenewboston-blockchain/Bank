@@ -21,8 +21,8 @@ class SelfConfigurationViewSet(
     serializer_class = SelfConfigurationSerializer
 
     @classonlymethod
-    def as_view(cls, actions=None, **initkwargs):
-        return super().as_view(actions={'get': 'retrieve_first'}, **initkwargs)
+    def as_view(cls, actions=None, **kwargs):
+        return super().as_view(actions={'get': 'retrieve_first'}, **kwargs)
 
     def retrieve_first(self, request, *args, **kwargs):
         return Response(
