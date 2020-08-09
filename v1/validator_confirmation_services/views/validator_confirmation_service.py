@@ -4,7 +4,6 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.viewsets import GenericViewSet
 
 from v1.decorators.nodes import is_signed_message
-from v1.third_party.rest_framework.pagination import LimitOffsetPagination
 from ..models.validator_confirmation_service import ValidatorConfirmationService
 from ..serializers.validator_confirmation_service import (
     ValidatorConfirmationServiceSerializer,
@@ -12,7 +11,6 @@ from ..serializers.validator_confirmation_service import (
 )
 
 
-# validator_confirmation_services
 class ValidatorConfirmationServiceViewSet(
     CreateModelMixin,
     ListModelMixin,
@@ -28,7 +26,6 @@ class ValidatorConfirmationServiceViewSet(
     """
 
     filterset_fields = ('validator__node_identifier',)
-    pagination_class = LimitOffsetPagination
     queryset = ValidatorConfirmationService.objects.all()
 
     serializer_class = ValidatorConfirmationServiceSerializer

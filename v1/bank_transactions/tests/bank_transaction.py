@@ -4,13 +4,20 @@ import pytest
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
 
+from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 from v1.utils.functools import rgetattr
-from ..factories.bank_transaction import BankTransactionFactory
 
 
-@pytest.fixture
-def bank_transactions():
-    yield BankTransactionFactory.create_batch(100)
+def test_bank_transactions_list(client, bank_transactions, django_assert_max_num_queries):
+    with django_assert_max_num_queries(2):
+        response = client.get_json(
+            reverse('bank_transactions:banktransaction-list'),
+            {'limit': 0},
+            expected=HTTP_200_OK,
+        )
+
+    assert_objects_vs_dicts(bank_transactions, response)
+    assert response
 
 
 @pytest.mark.parametrize(
@@ -22,11 +29,11 @@ def bank_transactions():
         ('recipient', 'recipient'),
     ],
 )
-def test_bank_transaction_filter(anonymous_client, bank_transactions, field, attribute, django_assert_max_num_queries):
+def test_bank_transactions_filter(client, bank_transactions, field, attribute, django_assert_max_num_queries):
     target_transaction = random.choice(bank_transactions)
 
     with django_assert_max_num_queries(2):
-        response = anonymous_client.get_json(
+        response = client.get_json(
             reverse('bank_transactions:banktransaction-list'),
             {
                 'limit': 0,

@@ -1,10 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views.self_configuration import SelfConfigurationDetail
+from .views.self_configuration import SelfConfigurationViewSet
 
-urlpatterns = [
+app_name = 'self_configurations'
 
-    # Self configuration
-    path('config', SelfConfigurationDetail.as_view()),
+router = DefaultRouter(trailing_slash=False)
+router.register('config', SelfConfigurationViewSet, basename='config')
 
-]
+urlpatterns = router.urls

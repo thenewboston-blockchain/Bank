@@ -2,7 +2,7 @@ import pytz
 from factory import Faker
 from thenewboston.models.confirmation_service import ConfirmationService
 
-from v1.blocks.factories.created_modified import CreatedModifiedFactory
+from v1.third_party.thenewboston.factories.created_modified import CreatedModifiedFactory
 
 
 class ConfirmationServiceFactory(CreatedModifiedFactory):

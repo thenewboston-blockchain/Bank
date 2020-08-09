@@ -1,11 +1,10 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views.bank import BankDetail, BankView
+from .views.bank import BankViewSet
 
-urlpatterns = [
+app_name = 'banks'
 
-    # Banks
-    path('banks', BankView.as_view()),
-    path('banks/<str:node_identifier>', BankDetail.as_view()),
+router = DefaultRouter(trailing_slash=False)
+router.register('banks', BankViewSet)
 
-]
+urlpatterns = router.urls
