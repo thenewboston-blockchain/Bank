@@ -9,7 +9,7 @@ from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 def test_accounts_list(client, accounts, django_assert_max_num_queries):
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('accounts:account-list'),
+            reverse('account-list'),
             {'limit': 0},
             expected=HTTP_200_OK,
         )
@@ -20,7 +20,7 @@ def test_accounts_list(client, accounts, django_assert_max_num_queries):
 def test_accounts_patch(client, account, account_fake_data, self_configuration):
     response = client.patch_json(
         reverse(
-            'accounts:account-detail',
+            'account-detail',
             args=[account.account_number]
         ),
         generate_signed_request(

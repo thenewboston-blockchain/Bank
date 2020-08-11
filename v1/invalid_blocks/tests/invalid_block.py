@@ -7,7 +7,7 @@ from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 def test_invalid_block_list(client, invalid_blocks, django_assert_max_num_queries):
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('invalid_blocks:invalidblock-list'),
+            reverse('invalidblock-list'),
             {'limit': 0},
             expected=HTTP_200_OK,
         )
@@ -19,7 +19,7 @@ def test_invalid_block_list(client, invalid_blocks, django_assert_max_num_querie
 def test_invalid_block_post(client, validator, block_data, block, invalid_block_data):
 
     response = client.post_json(
-        reverse('invalid_blocks:invalidblock-list'),
+        reverse('invalidblock-list'),
         invalid_block_data,
         expected=HTTP_201_CREATED,
     )

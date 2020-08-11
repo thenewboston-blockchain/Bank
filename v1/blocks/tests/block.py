@@ -9,7 +9,7 @@ from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 def test_blocks_list(client, blocks, django_assert_max_num_queries):
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('blocks:block-list'),
+            reverse('block-list'),
             {'limit': 0},
             expected=HTTP_200_OK,
         )
@@ -23,7 +23,7 @@ def test_blocks_list_filter(client, blocks, django_assert_max_num_queries):
 
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('blocks:block-list'),
+            reverse('block-list'),
             {
                 'limit': 0,
                 'sender': block.sender,
@@ -36,7 +36,7 @@ def test_blocks_list_filter(client, blocks, django_assert_max_num_queries):
 def test_blocks_post(client, block_data):
 
     response = client.post_json(
-        reverse('blocks:block-list'),
+        reverse('block-list'),
         block_data,
         expected=HTTP_201_CREATED,
     )
