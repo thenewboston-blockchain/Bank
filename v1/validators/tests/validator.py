@@ -9,7 +9,7 @@ from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 def test_validator_list(client, validators, django_assert_max_num_queries):
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('validators:validator-list'),
+            reverse('validator-list'),
             {'limit': 0},
             expected=HTTP_200_OK,
         )
@@ -20,7 +20,7 @@ def test_validator_list(client, validators, django_assert_max_num_queries):
 def test_validator_patch(client, validator, validator_fake_data, self_configuration):
     response = client.patch_json(
         reverse(
-            'validators:validator-detail',
+            'validator-detail',
             args=[validator.node_identifier]
         ),
         generate_signed_request(

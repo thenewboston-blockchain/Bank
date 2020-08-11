@@ -11,7 +11,7 @@ from v1.utils.functools import rgetattr
 def test_bank_transactions_list(client, bank_transactions, django_assert_max_num_queries):
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('bank_transactions:banktransaction-list'),
+            reverse('banktransaction-list'),
             {'limit': 0},
             expected=HTTP_200_OK,
         )
@@ -34,7 +34,7 @@ def test_bank_transactions_filter(client, bank_transactions, field, attribute, d
 
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('bank_transactions:banktransaction-list'),
+            reverse('banktransaction-list'),
             {
                 'limit': 0,
                 field: rgetattr(target_transaction, attribute),

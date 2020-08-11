@@ -11,7 +11,7 @@ def test_validator_confirmation_service_filter(
 
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('validator_confirmation_services:validatorconfirmationservice-list'),
+            reverse('validatorconfirmationservice-list'),
             {
                 'limit': 0,
                 'validator__node_identifier': validator_confirmation_service.validator.node_identifier,

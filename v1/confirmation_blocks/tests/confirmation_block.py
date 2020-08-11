@@ -7,7 +7,7 @@ from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 def test_confirmation_block_list(client, confirmation_blocks, django_assert_max_num_queries):
     with django_assert_max_num_queries(2):
         response = client.get_json(
-            reverse('confirmation_blocks:confirmationblock-list'),
+            reverse('confirmationblock-list'),
             {'limit': 0},
             expected=HTTP_200_OK,
         )
@@ -19,7 +19,7 @@ def test_confirmation_block_list(client, confirmation_blocks, django_assert_max_
 def test_confirmation_block_post(client, validator, block, confirmation_block_data):
 
     response = client.post_json(
-        reverse('confirmation_blocks:confirmationblock-list'),
+        reverse('confirmationblock-list'),
         confirmation_block_data,
         expected=HTTP_201_CREATED,
     )

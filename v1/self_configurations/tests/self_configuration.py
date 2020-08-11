@@ -6,7 +6,7 @@ from thenewboston.constants.network import BANK
 def test_self_configuration_get(client, self_configuration):
 
     response = client.get_json(
-        reverse('self_configurations:config-list'),
+        reverse('config-list'),
         expected=HTTP_200_OK,
     )
 
