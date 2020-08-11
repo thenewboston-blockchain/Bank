@@ -1,4 +1,3 @@
-from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 from .views.validator_confirmation_service import ValidatorConfirmationServiceViewSet
