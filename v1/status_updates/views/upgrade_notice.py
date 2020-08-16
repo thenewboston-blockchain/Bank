@@ -9,9 +9,8 @@ from ..serializers.upgrade_notice import UpgradeNoticeSerializer
 # upgrade_notice
 class UpgradeNoticeView(APIView):
 
-    @staticmethod
     @is_signed_message
-    def post(request):
+    def post(self, request):
         """
         description: Notice from a previous confirmation validator that they are now a primary validator
         """
