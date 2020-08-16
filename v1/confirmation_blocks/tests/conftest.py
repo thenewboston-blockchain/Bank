@@ -1,7 +1,7 @@
 import pytest
+from thenewboston.third_party.factory.utils import build_json
 from thenewboston.utils.signed_requests import generate_signed_request
 
-from v1.third_party.factory.utils import build_json
 from ..factories.confirmation_block import ConfirmationBlockFactory
 
 

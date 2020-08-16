@@ -3,11 +3,11 @@ from django.core.management import call_command
 from factory import Faker
 from thenewboston.accounts.manage import create_account
 from thenewboston.blocks.block import generate_block
+from thenewboston.third_party.pytest.client import UserWrapper
 from thenewboston.verify_keys.verify_key import encode_verify_key
 
 from v1.accounts.factories.account import AccountFactory
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
-from v1.third_party.pytest.client import UserWrapper
 from v1.utils.blocks import create_block_and_bank_transactions
 from v1.validators.factories.validator import ValidatorFactory
 

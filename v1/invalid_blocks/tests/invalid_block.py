@@ -1,7 +1,6 @@
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
-
-from v1.third_party.pytest.asserts import assert_objects_vs_dicts
+from thenewboston.third_party.pytest.asserts import assert_objects_vs_dicts
 
 
 def test_invalid_block_list(client, invalid_blocks, django_assert_max_num_queries):
