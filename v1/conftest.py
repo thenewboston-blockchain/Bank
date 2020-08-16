@@ -87,8 +87,9 @@ def signing_key(account_data):
 
 
 @pytest.fixture
-def self_configuration():
+def self_configuration(monkeypatch):
     call_command('loaddata', 'validator', 'self_configuration', 'user')
+    monkeypatch.setenv('NETWORK_SIGNING_KEY', 'e5e5fec0dcbbd8b0a76c67204823678d3f243de7a0a1042bb3ecf66285cd9fd4')
     yield get_self_configuration(exception_class=RuntimeError)
 
 
