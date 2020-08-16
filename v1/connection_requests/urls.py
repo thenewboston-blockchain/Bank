@@ -1,10 +1,6 @@
-from django.urls import path
+from rest_framework.routers import SimpleRouter
 
-from .views.connection_request import ConnectionRequestView
+from .views.connection_request import ConnectionRequestViewSet
 
-urlpatterns = [
-
-    # Connection requests
-    path('connection_requests', ConnectionRequestView.as_view()),
-
-]
+router = SimpleRouter(trailing_slash=False)
+router.register('connection_requests', ConnectionRequestViewSet, basename='connection_requests')
