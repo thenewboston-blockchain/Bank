@@ -3,8 +3,8 @@ import random
 import pytest
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
+from thenewboston.third_party.pytest.asserts import assert_objects_vs_dicts
 
-from v1.third_party.pytest.asserts import assert_objects_vs_dicts
 from v1.utils.functools import rgetattr
 
 

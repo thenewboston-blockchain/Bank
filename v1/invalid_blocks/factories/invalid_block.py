@@ -1,8 +1,8 @@
 from factory import Faker, SubFactory
 from thenewboston.constants.network import BLOCK_IDENTIFIER_LENGTH
+from thenewboston.factories.created_modified import CreatedModifiedFactory
 
 from v1.blocks.factories.block import BlockFactory
-from v1.third_party.thenewboston.factories.created_modified import CreatedModifiedFactory
 from v1.validators.factories.validator import ValidatorFactory
 from ..models.invalid_block import InvalidBlock
 

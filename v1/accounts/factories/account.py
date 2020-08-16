@@ -1,12 +1,12 @@
 from factory import Faker
 from thenewboston.constants.network import VERIFY_KEY_LENGTH
+from thenewboston.factories.created_modified import CreatedModifiedFactory
 
-from v1.third_party.thenewboston.factories.created_modified import CreatedModifiedFactory
 from ..models.account import Account
 
 
 class AccountFactory(CreatedModifiedFactory):
-    account_number = Faker('text', max_nb_chars=VERIFY_KEY_LENGTH)
+    account_number = Faker('pystr', max_chars=VERIFY_KEY_LENGTH)
 
     trust = Faker(
         'pyfloat',
