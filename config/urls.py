@@ -24,6 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 
+    # API (v1)
+    path('', include('v1.status_updates.urls')),
+
 ]
 
 router = DefaultRouter(trailing_slash=False)
