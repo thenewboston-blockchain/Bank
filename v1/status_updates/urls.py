@@ -1,10 +1,6 @@
-from django.urls import path
+from rest_framework.routers import SimpleRouter
 
-from .views.upgrade_notice import UpgradeNoticeView
+from .views.upgrade_notice import UpgradeNoticeViewSet
 
-urlpatterns = [
-
-    # Upgrade notice (from validator)
-    path('upgrade_notice', UpgradeNoticeView.as_view())
-
-]
+router = SimpleRouter(trailing_slash=False)
+router.register('upgrade_notice', UpgradeNoticeViewSet, basename='upgrade_notice')
