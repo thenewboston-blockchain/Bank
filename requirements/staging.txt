@@ -7,7 +7,7 @@
 amqp==2.6.1               # via kombu
 asgiref==3.2.10           # via channels, daphne, django
 atomicwrites==1.4.0       # via pytest
-attrs==19.3.0             # via automat, pytest, service-identity, twisted
+attrs==20.1.0             # via automat, pytest, service-identity, twisted
 autobahn==20.7.1          # via daphne
 automat==20.2.0           # via twisted
 billiard==3.6.3.0         # via celery
@@ -24,10 +24,10 @@ django-cors-headers==3.4.0  # via thenewboston
 django-debug-toolbar==2.2  # via -r requirements/base.in
 django-filter==2.3.0      # via -r requirements/base.in
 django-redis==4.11.0      # via -r requirements/base.in
-django==3.0.8             # via channels, django-cors-headers, django-debug-toolbar, django-filter, django-redis, djangorestframework, thenewboston
-djangorestframework==3.11.0  # via thenewboston
+django==3.1               # via channels, django-cors-headers, django-debug-toolbar, django-filter, django-redis, djangorestframework, thenewboston
+djangorestframework==3.11.1  # via thenewboston
 factory-boy==3.0.1        # via thenewboston
-faker==4.1.0              # via -r requirements/base.in, factory-boy
+faker==4.1.2              # via factory-boy
 flower==0.9.4             # via -r requirements/base.in
 humanize==0.5.1           # via flower
 hyperlink==20.0.1         # via twisted
@@ -60,7 +60,7 @@ six==1.15.0               # via automat, cryptography, packaging, pynacl, pyopen
 sqlparse==0.3.1           # via django, django-debug-toolbar
 tblib==1.6.0              # via -r requirements/base.in
 text-unidecode==1.3       # via faker
-thenewboston==0.0.8       # via -r requirements/base.in
+thenewboston==0.0.11      # via -r requirements/base.in
 toml==0.10.1              # via pytest
 tornado==6.0.4            # via flower
 twisted[tls]==20.3.0      # via daphne

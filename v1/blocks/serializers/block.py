@@ -66,7 +66,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         Validate block signature
 
         Note: when building the block, message is pulled from 'initial_data' since 'data' has already been processed by
-        the MessageSerializer converting all amounts to DecimalField (which are not JSON serializable)
+        the MessageSerializer converting all amounts to IntegerField
         """
 
         block = {

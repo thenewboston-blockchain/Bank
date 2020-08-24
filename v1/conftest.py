@@ -44,15 +44,15 @@ def block_data(account_data, account, encoded_account_number, random_encoded_acc
         signing_key=signing_key,
         transactions=[
             {
-                'amount': float(self_configuration.default_transaction_fee),
+                'amount': self_configuration.default_transaction_fee,
                 'recipient': self_configuration.account_number
             },
             {
-                'amount': float(primary_validator.default_transaction_fee),
+                'amount': primary_validator.default_transaction_fee,
                 'recipient': primary_validator.account_number
             },
             {
-                'amount': Faker('pyfloat', min_value=1, max_value=100, right_digits=4).generate(),
+                'amount': Faker('pyint').generate(),
                 'recipient': random_encoded_account_number
             }
         ]
