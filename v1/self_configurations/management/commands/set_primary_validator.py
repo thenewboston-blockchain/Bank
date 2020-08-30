@@ -1,12 +1,12 @@
 from django.db.models import Q
-from thenewboston.base_classes.connect_to_primary_validator import ConnectToPrimaryValidator
+from thenewboston.base_classes.fetch_primary_validator_config import FetchPrimaryValidatorConfig
 from thenewboston.utils.fields import standard_field_names
 
 from v1.self_configurations.models.self_configuration import SelfConfiguration
 from v1.validators.models.validator import Validator
 
 """
-python3 manage.py connect_to_primary_validator
+python3 manage.py set_primary_validator
 
 Running this script will:
 - connect to Validator and download config
@@ -15,16 +15,16 @@ Running this script will:
 """
 
 
-class Command(ConnectToPrimaryValidator):
-    help = 'Connect to primary validator'
+class Command(FetchPrimaryValidatorConfig):
+    help = 'Set primary validator'
 
-    def set_primary_validator(self, validator_config):
+    def handle_primary_validator_config(self, primary_validator_config):
         """
         Set primary validator
         """
 
         validator_field_names = standard_field_names(Validator)
-        validator_data = {k: v for k, v in validator_config.items() if k in validator_field_names}
+        validator_data = {k: v for k, v in primary_validator_config.items() if k in validator_field_names}
 
         Validator.objects.filter(
             Q(ip_address=validator_data.get('ip_address')) |

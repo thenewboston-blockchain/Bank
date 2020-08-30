@@ -7,6 +7,11 @@ from v1.self_configurations.models.self_configuration import SelfConfiguration
 """
 python3 manage.py initialize_bank
 
+Prerequisites:
+- python3 manage.py makemigrations
+- python3 manage.py migrate
+- python3 manage.py createsuperuser (optional)
+
 Running this script will:
 - delete existing SelfConfiguration and related Bank objects
 - create SelfConfiguration and related Bank objects
