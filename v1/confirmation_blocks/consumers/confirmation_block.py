@@ -41,4 +41,4 @@ class ConfirmationBlockConsumer(JsonWebsocketConsumer):
         Send confirmation block notification to group
         """
 
-        self.send_json(event['payload'])
+        self.send_json(event['message'])

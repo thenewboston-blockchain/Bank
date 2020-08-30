@@ -48,7 +48,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         )
 
         send_confirmation_block_notifications(
-            payload=self.data,
+            payload=self.initial_data,
             sender_account_number=inner_block_account_number,
             recipient_account_numbers=inner_block_recipients
         )
