@@ -60,5 +60,3 @@ When adding a package, add to `requirements/base.in` and then :
 ```
 bash scripts/compile_requirements.sh
 ```
-
-Test account keys: https://docs.google.com/spreadsheets/d/1XzkE-KOOarIRkBZ_AoYIf7KpRkLEO7HOxOvLcWGxSNU/edit?usp=sharing
