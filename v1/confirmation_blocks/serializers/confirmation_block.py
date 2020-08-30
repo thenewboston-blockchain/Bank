@@ -1,5 +1,7 @@
 import logging
 
+import channels.layers
+from asgiref.sync import async_to_sync
 from django.db import transaction
 from rest_framework import serializers
 from thenewboston.constants.network import SIGNATURE_LENGTH, VERIFY_KEY_LENGTH
@@ -8,6 +10,7 @@ from thenewboston.utils.fields import all_field_names
 
 from v1.blocks.models.block import Block
 from v1.validators.models.validator import Validator
+from ..consumers.confirmation_block import ConfirmationBlockConsumer
 from ..models.confirmation_block import ConfirmationBlock
 
 logger = logging.getLogger('thenewboston')
@@ -37,6 +40,8 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
 
         inner_block = message['block']
         inner_block_signature = inner_block['signature']
+        inner_block_account_number = inner_block['account_number']
+        inner_block_recipients = (tx['recipient'] for tx in inner_block['message']['txs'])
 
         block = Block.objects.get(signature=inner_block_signature)
 
@@ -50,6 +55,16 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         except Exception as e:
             logger.exception(e)
             raise serializers.ValidationError(e)
+
+        for account_number in (*tuple(inner_block_recipients), inner_block_account_number):
+            channel_layer = channels.layers.get_channel_layer()
+            async_to_sync(channel_layer.group_send)(
+                ConfirmationBlockConsumer.group_name(account_number),
+                {
+                    'type': 'send.confirmation.block',
+                    'message': self.data,
+                }
+            )
 
         return confirmation_block
 

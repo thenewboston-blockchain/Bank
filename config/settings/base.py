@@ -153,3 +153,12 @@ REST_FRAMEWORK = {
 
 PAGINATION_DEFAULT_LIMIT = 50
 PAGINATION_MAX_LIMIT = 100
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
+}
