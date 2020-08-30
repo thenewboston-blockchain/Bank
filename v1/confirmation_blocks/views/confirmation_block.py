@@ -1,6 +1,6 @@
 from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
 from rest_framework.viewsets import GenericViewSet
 
 from v1.decorators.nodes import is_signed_message
@@ -33,9 +33,12 @@ class ConfirmationBlockViewSet(
             context={'request': request},
         )
         serializer.is_valid(raise_exception=True)
+        confirmation_block = serializer.save()
 
-        block = serializer.save()
-        return Response(
-            self.get_serializer(block).data,
-            status=HTTP_201_CREATED,
-        )
+        if confirmation_block:
+            return Response(
+                self.get_serializer(confirmation_block).data,
+                status=HTTP_201_CREATED,
+            )
+
+        return Response({}, status=HTTP_200_OK)
