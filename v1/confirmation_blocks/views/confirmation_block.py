@@ -33,9 +33,9 @@ class ConfirmationBlockViewSet(
             context={'request': request},
         )
         serializer.is_valid(raise_exception=True)
+        confirmation_block = serializer.save()
 
-        block = serializer.save()
         return Response(
-            self.get_serializer(block).data,
+            self.get_serializer(confirmation_block).data,
             status=HTTP_201_CREATED,
         )

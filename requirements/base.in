@@ -1,5 +1,6 @@
 celery==4.4.2
 channels==2.4.0
+channels-redis==2.4.2
 django-debug-toolbar==2.2
 django-filter==2.3.0
 django-redis==4.11.0
