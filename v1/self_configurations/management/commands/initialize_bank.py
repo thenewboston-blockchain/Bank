@@ -12,7 +12,6 @@ Prerequisites:
 - python3 manage.py migrate
 - python3 manage.py createsuperuser (optional)
 
-
 Running this script will:
 - delete existing SelfConfiguration and related Bank objects
 - create SelfConfiguration and related Bank objects
