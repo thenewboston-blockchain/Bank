@@ -27,12 +27,12 @@ class AccountViewSet(
     lookup_field = 'account_number'
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
-    update_serializer_class = AccountSerializerUpdate
+    serializer_update_class = AccountSerializerUpdate
 
     @is_self_signed_message
     def update(self, request, *args, **kwargs):
 
-        serializer = self.update_serializer_class(
+        serializer = self.serializer_update_class(
             self.get_object(),
             data=request.data['message'],
             partial=True
