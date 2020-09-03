@@ -1,4 +1,4 @@
-from rest_framework.mixins import ListModelMixin, UpdateModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
@@ -9,6 +9,7 @@ from ..serializers.bank import BankSerializer, BankSerializerUpdate
 
 class BankViewSet(
     ListModelMixin,
+    RetrieveModelMixin,
     UpdateModelMixin,
     GenericViewSet,
 ):
@@ -31,7 +32,6 @@ class BankViewSet(
 
     @is_self_signed_message
     def update(self, request, *args, **kwargs):
-
         serializer = self.update_serializer_class(
             self.get_object(),
             data=request.data['message'],
