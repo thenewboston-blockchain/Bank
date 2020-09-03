@@ -4,25 +4,10 @@ from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch, post
 from thenewboston.utils.signed_requests import generate_signed_request
 
-from v1.banks.models.bank import Bank
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.self_configurations.helpers.signing_key import get_signing_key
-from v1.validators.models.validator import Validator
 
 logger = logging.getLogger('thenewboston')
-
-
-def get_node_url_resource_name(*, node):
-    """
-    Return the default related name for the given node
-    - used in URL formatting
-    """
-
-    if isinstance(node, Bank):
-        return 'banks'
-
-    if isinstance(node, Validator):
-        return 'validators'
 
 
 def is_node_connected(*, node, self_configuration):
@@ -36,8 +21,7 @@ def is_node_connected(*, node, self_configuration):
         protocol=node.protocol,
     )
 
-    url_resource_name = get_node_url_resource_name(node=node)
-    url = f'{node_address}/{url_resource_name}/{self_configuration.node_identifier}'
+    url = f'{node_address}/banks/{self_configuration.node_identifier}'
 
     try:
         fetch(url=url, headers={})
