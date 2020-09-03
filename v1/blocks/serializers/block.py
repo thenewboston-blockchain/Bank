@@ -64,7 +64,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         Verify that correct payment exist for both Bank and Validator
         """
 
-        super(BlockSerializerCreate, self).validate(data)
+        data = super(BlockSerializerCreate, self).validate(data)
 
         account_number = data['account_number']
         message = data['message']
