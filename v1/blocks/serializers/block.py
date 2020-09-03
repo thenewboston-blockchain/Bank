@@ -38,11 +38,14 @@ class BlockSerializerCreate(NetworkBlockSerializer):
 
         try:
             with transaction.atomic():
-                block = create_block_and_bank_transactions(validated_block)
-                Account.objects.get_or_create(
-                    account_number=validated_block['account_number'],
-                    defaults={'trust': 0},
-                )
+                block, created = create_block_and_bank_transactions(validated_block)
+
+                if created:
+                    Account.objects.get_or_create(
+                        account_number=validated_block['account_number'],
+                        defaults={'trust': 0},
+                    )
+
                 send_signed_block.delay(
                     block=validated_block,
                     ip_address=primary_validator.ip_address,
