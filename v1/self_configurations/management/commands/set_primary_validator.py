@@ -2,16 +2,17 @@ from django.db.models import Q
 from thenewboston.base_classes.fetch_primary_validator_config import FetchPrimaryValidatorConfig
 from thenewboston.utils.fields import standard_field_names
 
-from v1.self_configurations.models.self_configuration import SelfConfiguration
+from v1.connection_requests.helpers.connect import set_primary_validator
 from v1.validators.models.validator import Validator
 
 """
 python3 manage.py set_primary_validator
 
 Running this script will:
-- connect to Validator and download config
-- create a Validator object using config data
-- set that Validator as the primary validator
+- fetch config data from primary validator
+- create a Validator instance using config data
+- set that Validator as this nodes primary validator
+- connect to the primary validator
 """
 
 
@@ -35,6 +36,5 @@ class Command(FetchPrimaryValidatorConfig):
             **validator_data,
             trust=self.required_input['trust']
         )
-        self_configuration = SelfConfiguration.objects.first()
-        self_configuration.primary_validator = validator
-        self_configuration.save()
+
+        set_primary_validator(validator=validator)

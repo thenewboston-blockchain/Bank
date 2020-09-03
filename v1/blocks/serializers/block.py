@@ -64,52 +64,56 @@ class BlockSerializerCreate(NetworkBlockSerializer):
     def validate(self, data):
         """
         Validate block signature
+        Check that Txs exist
+        Verify that correct payment exist for both Bank and Validator
 
         Note: when building the block, message is pulled from 'initial_data' since 'data' has already been processed by
         the MessageSerializer converting all amounts to IntegerField
         """
 
-        block = {
-            'account_number': data['account_number'],
-            'message': self.initial_data['message'],
-            'signature': data['signature']
-        }
-        verify_signature(
-            message=sort_and_encode(block['message']),
-            signature=block['signature'],
-            verify_key=block['account_number']
-        )
-        return block
+        account_number = data['account_number']
+        message = self.initial_data['message']
+        signature = data['signature']
 
-    @staticmethod
-    def validate_message(message):
-        """
-        Check that Txs exist
-        Verify that correct payment exist for both Bank and Validator
-        """
+        block = {
+            'account_number': account_number,
+            'message': message,
+            'signature': signature
+        }
+
+        verify_signature(
+            message=sort_and_encode(message),
+            signature=signature,
+            verify_key=account_number
+        )
 
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
-
-        bank_default_transaction_fee = self_configuration.default_transaction_fee
-        validator_transaction_fee = primary_validator.default_transaction_fee
 
         txs = message['txs']
 
         if not txs:
             raise serializers.ValidationError('Invalid Txs')
 
-        validate_transaction_exists(
-            amount=bank_default_transaction_fee,
-            error=serializers.ValidationError,
-            recipient=self_configuration.account_number,
-            txs=txs
-        )
-        validate_transaction_exists(
-            amount=validator_transaction_fee,
-            error=serializers.ValidationError,
-            recipient=primary_validator.account_number,
-            txs=txs
-        )
+        recipients = {tx['recipient'] for tx in txs}
 
-        return txs
+        if account_number in recipients:
+            raise serializers.ValidationError('Sending account_number not allowed as a recipient')
+
+        if account_number != self_configuration.account_number:
+            validate_transaction_exists(
+                amount=self_configuration.default_transaction_fee,
+                error=serializers.ValidationError,
+                recipient=self_configuration.account_number,
+                txs=txs
+            )
+
+        if account_number != primary_validator.account_number:
+            validate_transaction_exists(
+                amount=primary_validator.default_transaction_fee,
+                error=serializers.ValidationError,
+                recipient=primary_validator.account_number,
+                txs=txs
+            )
+
+        return block
