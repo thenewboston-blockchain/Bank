@@ -25,6 +25,7 @@ class AccountViewSet(
     """
 
     lookup_field = 'account_number'
+    ordering_fields = '__all__'
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     serializer_update_class = AccountSerializerUpdate

@@ -27,6 +27,7 @@ class BankViewSet(
     """
 
     lookup_field = 'node_identifier'
+    ordering_fields = '__all__'
     queryset = Bank.objects.all()
     serializer_class = BankSerializer
     serializer_create_class = BankSerializerCreate
@@ -39,9 +40,10 @@ class BankViewSet(
             context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
+        bank = serializer.save()
 
         return Response(
-            self.get_serializer(serializer.save()).data
+            self.get_serializer(bank).data
         )
 
     @is_self_signed_message
@@ -52,7 +54,8 @@ class BankViewSet(
             partial=True
         )
         serializer.is_valid(raise_exception=True)
+        bank = serializer.save()
 
         return Response(
-            self.get_serializer(serializer.save()).data
+            self.get_serializer(bank).data
         )

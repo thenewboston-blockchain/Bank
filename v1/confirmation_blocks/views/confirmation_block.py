@@ -22,6 +22,7 @@ class ConfirmationBlockViewSet(
       description: Create confirmation block
     """
 
+    ordering_fields = '__all__'
     queryset = ConfirmationBlock.objects.all()
     serializer_class = ConfirmationBlockSerializer
     serializer_create_class = ConfirmationBlockSerializerCreate

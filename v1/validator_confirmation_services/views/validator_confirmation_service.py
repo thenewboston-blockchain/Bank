@@ -26,8 +26,8 @@ class ValidatorConfirmationServiceViewSet(
     """
 
     filterset_fields = ('validator__node_identifier',)
+    ordering_fields = '__all__'
     queryset = ValidatorConfirmationService.objects.all()
-
     serializer_class = ValidatorConfirmationServiceSerializer
     serializer_create_class = ValidatorConfirmationServiceSerializerCreate
 
@@ -41,9 +41,9 @@ class ValidatorConfirmationServiceViewSet(
             context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
-
         validator_confirmation_service = serializer.save()
+
         return Response(
             self.get_serializer(validator_confirmation_service).data,
-            status=HTTP_201_CREATED,
+            status=HTTP_201_CREATED
         )
