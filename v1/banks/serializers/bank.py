@@ -12,8 +12,15 @@ class BankSerializer(serializers.ModelSerializer):
         read_only_fields = all_field_names(Bank)
 
 
+class BankSerializerCreate(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
+        model = Bank
+
+
 class BankSerializerUpdate(serializers.ModelSerializer):
 
     class Meta:
-        model = Bank
         fields = ('trust',)
+        model = Bank
