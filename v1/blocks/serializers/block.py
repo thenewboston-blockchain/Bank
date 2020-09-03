@@ -2,11 +2,9 @@ import logging
 
 from django.db import transaction
 from rest_framework import serializers
-from thenewboston.blocks.signatures import verify_signature
 from thenewboston.serializers.network_block import NetworkBlockSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
-from thenewboston.utils.tools import sort_and_encode
 
 from v1.accounts.models.account import Account
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
@@ -63,42 +61,17 @@ class BlockSerializerCreate(NetworkBlockSerializer):
 
     def validate(self, data):
         """
-        Validate block signature
-        Check that Txs exist
         Verify that correct payment exist for both Bank and Validator
-
-        Note: when building the block, message is pulled from 'initial_data' since 'data' has already been processed by
-        the MessageSerializer converting all amounts to IntegerField
         """
 
+        data = super(BlockSerializerCreate, self).validate(data)
+
         account_number = data['account_number']
-        message = self.initial_data['message']
-        signature = data['signature']
-
-        block = {
-            'account_number': account_number,
-            'message': message,
-            'signature': signature
-        }
-
-        verify_signature(
-            message=sort_and_encode(message),
-            signature=signature,
-            verify_key=account_number
-        )
+        message = data['message']
+        txs = message['txs']
 
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = get_primary_validator()
-
-        txs = message['txs']
-
-        if not txs:
-            raise serializers.ValidationError('Invalid Txs')
-
-        recipients = {tx['recipient'] for tx in txs}
-
-        if account_number in recipients:
-            raise serializers.ValidationError('Sending account_number not allowed as a recipient')
 
         if account_number != self_configuration.account_number:
             validate_transaction_exists(
@@ -116,4 +89,4 @@ class BlockSerializerCreate(NetworkBlockSerializer):
                 txs=txs
             )
 
-        return block
+        return data

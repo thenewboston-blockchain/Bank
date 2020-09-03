@@ -7,6 +7,6 @@ django-redis==4.11.0
 flower==0.9.4
 redis==3.5.2
 tblib==1.6.0
-thenewboston==0.0.15
+thenewboston==0.0.18
 uWSGI==2.0.18
 wheel==0.34.2
