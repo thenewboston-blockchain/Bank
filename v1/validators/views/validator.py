@@ -27,6 +27,7 @@ class ValidatorViewSet(
     """
 
     lookup_field = 'node_identifier'
+    ordering_fields = '__all__'
     queryset = Validator.objects.all()
     serializer_class = ValidatorSerializer
     serializer_create_class = ValidatorSerializerCreate
@@ -39,9 +40,10 @@ class ValidatorViewSet(
             context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
+        validator = serializer.save()
 
         return Response(
-            self.get_serializer(serializer.save()).data
+            self.get_serializer(validator).data
         )
 
     @is_self_signed_message
@@ -52,7 +54,8 @@ class ValidatorViewSet(
             partial=True
         )
         serializer.is_valid(raise_exception=True)
+        validator = serializer.save()
 
         return Response(
-            self.get_serializer(serializer.save()).data
+            self.get_serializer(validator).data
         )

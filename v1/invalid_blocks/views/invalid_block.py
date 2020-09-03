@@ -22,6 +22,7 @@ class InvalidBlockViewSet(
       description: Create invalid block
     """
 
+    ordering_fields = '__all__'
     queryset = InvalidBlock.objects.all()
     serializer_class = InvalidBlockSerializer
     serializer_create_class = InvalidBlockSerializerCreate
@@ -30,12 +31,12 @@ class InvalidBlockViewSet(
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_create_class(
             data=request.data,
-            context={'request': request},
+            context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
+        invalid_block = serializer.save()
 
-        block = serializer.save()
         return Response(
-            self.get_serializer(block).data,
-            status=HTTP_201_CREATED,
+            self.get_serializer(invalid_block).data,
+            status=HTTP_201_CREATED
         )

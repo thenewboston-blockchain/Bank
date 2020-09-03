@@ -20,7 +20,7 @@ class BankTransactionViewSet(
 
     filterset_class = BankTransactionFilter
     ordering = ['-block__created_date']
-    ordering_fields = ['amount', 'block__created_date', 'id', 'recipient']
+    ordering_fields = ['amount', 'block__created_date', 'block__id', 'block__sender', 'id', 'recipient']
     queryset = optimize_bank_transaction_list(
         BankTransaction.objects.all(),
     )

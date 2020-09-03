@@ -48,6 +48,7 @@ class BlockViewSet(
     """
 
     filterset_fields = ('sender',)
+    ordering_fields = '__all__'
     queryset = Block.objects.all()
     serializer_class = BlockSerializer
     serializer_create_class = BlockSerializerCreate
@@ -58,8 +59,8 @@ class BlockViewSet(
             context={'request': request},
         )
         serializer.is_valid(raise_exception=True)
-
         block = serializer.save()
+
         return Response(
             self.get_serializer(block).data,
             status=HTTP_201_CREATED,
