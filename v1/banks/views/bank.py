@@ -28,11 +28,11 @@ class BankViewSet(
     lookup_field = 'node_identifier'
     queryset = Bank.objects.all()
     serializer_class = BankSerializer
-    update_serializer_class = BankSerializerUpdate
+    serializer_update_class = BankSerializerUpdate
 
     @is_self_signed_message
     def update(self, request, *args, **kwargs):
-        serializer = self.update_serializer_class(
+        serializer = self.serializer_update_class(
             self.get_object(),
             data=request.data['message'],
             partial=True
