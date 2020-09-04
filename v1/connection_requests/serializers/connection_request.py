@@ -24,7 +24,7 @@ logger = logging.getLogger('thenewboston')
 class ConnectionRequestSerializerCreate(serializers.Serializer):
     ip_address = serializers.IPAddressField(protocol='both')
     node_identifier = serializers.CharField(max_length=VERIFY_KEY_LENGTH)
-    port = serializers.IntegerField(max_value=65535, min_value=0, required=False)
+    port = serializers.IntegerField(allow_null=True, max_value=65535, min_value=0, required=False)
     protocol = serializers.ChoiceField(choices=PROTOCOL_CHOICES)
 
     def create(self, validated_data):
