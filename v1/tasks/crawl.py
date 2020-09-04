@@ -5,15 +5,70 @@ from django.core.cache import cache
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch
 
+from v1.banks.models.bank import Bank
 from v1.cache_tools.cache_keys import CRAWL_STATUS
 from v1.connection_requests.helpers.connect import is_self_known_to_node, send_connection_request
+from v1.connection_requests.serializers.bank_configuration import BankConfigurationSerializer
 from v1.connection_requests.serializers.validator_configuration import ValidatorConfigurationSerializer
 from v1.crawl.constants import CRAWL_STATUS_NOT_CRAWLING, CRAWL_STATUS_STOP_REQUESTED
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
-from v1.validators.helpers.validator_configuration import create_validator_from_config_data
+from v1.validators.helpers.validator_configuration import (
+    create_bank_from_config_data,
+    create_validator_from_config_data
+)
 from v1.validators.models.validator import Validator
 
 logger = logging.getLogger('thenewboston')
+
+
+def create_banks(*, known_nodes, results):
+    """
+    For each unknown bank, attempt to:
+    - fetch config data
+    - create new Bank object
+    """
+
+    for bank in get_unknown_nodes(known_nodes=known_nodes, results=results):
+
+        try:
+            address = format_address(
+                ip_address=bank.get('ip_address'),
+                port=bank.get('port'),
+                protocol=bank.get('protocol')
+            )
+            config_address = f'{address}/config'
+            config_data = fetch(url=config_address, headers={})
+            serializer = BankConfigurationSerializer(data=config_data)
+
+            if serializer.is_valid():
+                create_bank_from_config_data(config_data=config_data)
+                continue
+
+            logger.exception(serializer.errors)
+        except Exception as e:
+            logger.exception(e)
+
+
+def crawl_banks(*, primary_validator_address):
+    """
+    Crawl all banks from primary validator and create any new banks
+    """
+
+    known_nodes = get_known_nodes(node_class=Bank)
+    next_url = f'{primary_validator_address}/banks'
+
+    while next_url:
+
+        if cache.get(CRAWL_STATUS) == CRAWL_STATUS_STOP_REQUESTED:
+            break
+
+        try:
+            response = fetch(url=next_url, headers={})
+            next_url = response.get('next')
+            results = response.get('results')
+            create_banks(known_nodes=known_nodes, results=results)
+        except Exception as e:
+            logger.exception(e)
 
 
 def create_validators(*, known_nodes, results):
@@ -44,18 +99,12 @@ def create_validators(*, known_nodes, results):
             logger.exception(e)
 
 
-def crawl_validators(*, primary_validator):
+def crawl_validators(*, primary_validator_address):
     """
     Crawl all validators from primary validator and create any new validators
     """
 
-    known_validators = get_known_nodes(node_class=Validator)
-
-    primary_validator_address = format_address(
-        ip_address=primary_validator.ip_address,
-        port=primary_validator.port,
-        protocol=primary_validator.protocol
-    )
+    known_nodes = get_known_nodes(node_class=Validator)
     next_url = f'{primary_validator_address}/validators'
 
     while next_url:
@@ -67,7 +116,7 @@ def crawl_validators(*, primary_validator):
             response = fetch(url=next_url, headers={})
             next_url = response.get('next')
             results = response.get('results')
-            create_validators(known_nodes=known_validators, results=results)
+            create_validators(known_nodes=known_nodes, results=results)
         except Exception as e:
             logger.exception(e)
 
@@ -123,7 +172,16 @@ def start_crawl():
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
 
-    crawl_validators(primary_validator=primary_validator)
+    primary_validator_address = format_address(
+        ip_address=primary_validator.ip_address,
+        port=primary_validator.port,
+        protocol=primary_validator.protocol
+    )
+
+    crawl_banks(primary_validator_address=primary_validator_address)
+    crawl_validators(primary_validator_address=primary_validator_address)
+
+    send_connection_requests(node_class=Bank, self_configuration=self_configuration)
     send_connection_requests(node_class=Validator, self_configuration=self_configuration)
 
     # TODO: Set crawl_last_completed date in cache

@@ -8,13 +8,15 @@ from thenewboston.constants.network import (
     PROTOCOL_CHOICES,
     VERIFY_KEY_LENGTH
 )
-from thenewboston.utils.fields import standard_field_names
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch
 
 from v1.banks.models.bank import Bank
 from v1.self_configurations.models.self_configuration import SelfConfiguration
-from v1.validators.helpers.validator_configuration import create_validator_from_config_data
+from v1.validators.helpers.validator_configuration import (
+    create_bank_from_config_data,
+    create_validator_from_config_data
+)
 from v1.validators.models.validator import Validator
 from .bank_configuration import BankConfigurationSerializer
 from .validator_configuration import ValidatorConfigurationSerializer
@@ -36,9 +38,7 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
         config_data = validated_data
 
         if config_data['node_type'] == BANK:
-            fields = standard_field_names(Bank)
-            data = {field: validated_data[field] for field in fields if field != 'trust'}
-            Bank.objects.create(**data, trust=0)
+            create_bank_from_config_data(config_data=validated_data)
 
         if config_data['node_type'] == CONFIRMATION_VALIDATOR:
             create_validator_from_config_data(config_data=validated_data)
