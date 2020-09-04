@@ -16,12 +16,14 @@ from v1.validators.models.validator import Validator
 logger = logging.getLogger('thenewboston')
 
 
-def create_validators(*, unknown_validators):
+def create_validators(*, known_nodes, results):
     """
-    For each unknown validator in the list attempt to fetch config data and create new Validator object
+    For each unknown validator, attempt to:
+    - fetch config data
+    - create new Validator object
     """
 
-    for validator in unknown_validators:
+    for validator in get_unknown_nodes(known_nodes=known_nodes, results=results):
 
         try:
             address = format_address(
@@ -44,9 +46,7 @@ def create_validators(*, unknown_validators):
 
 def crawl_validators(*, primary_validator):
     """
-    Crawl all validators from primary validator
-    - create any new validators
-    - send a connection request to any validators where self is unknown
+    Crawl all validators from primary validator and create any new validators
     """
 
     known_validators = get_known_nodes(node_class=Validator)
@@ -67,11 +67,7 @@ def crawl_validators(*, primary_validator):
             response = fetch(url=next_url, headers={})
             next_url = response.get('next')
             results = response.get('results')
-            unknown_validators = get_unknown_nodes(
-                known_nodes=known_validators,
-                results=results
-            )
-            create_validators(unknown_validators=unknown_validators)
+            create_validators(known_nodes=known_validators, results=results)
         except Exception as e:
             logger.exception(e)
 
@@ -130,4 +126,6 @@ def start_crawl():
     crawl_validators(primary_validator=primary_validator)
     send_connection_requests(node_class=Validator, self_configuration=self_configuration)
 
+    # TODO: Set crawl_last_completed date in cache
+    # TODO: Send back notification with that information as well
     cache.set(CRAWL_STATUS, CRAWL_STATUS_NOT_CRAWLING, None)

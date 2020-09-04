@@ -11,8 +11,7 @@ def create_validator_from_config_data(*, config_data):
 
     fields = standard_field_names(Validator)
     data = {field: config_data[field] for field in fields if field != 'trust'}
-    validator = Validator.objects.create(**data, trust=0)
-    return validator
+    Validator.objects.create(**data, trust=0)
 
 
 def get_primary_validator():
