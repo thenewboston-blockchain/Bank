@@ -28,12 +28,9 @@ class PrimaryValidatorConfigurationSerializer(PrimaryValidatorSerializer):
             primary_validator = self_configuration.primary_validator
             self_primary_validator_configuration = ValidatorSerializer(primary_validator).data
 
-        for key, self_primary_validator_value in self_primary_validator_configuration.items():
-
-            if key in ['node_type', 'primary_validator', 'trust']:
-                continue
-
+        for key in ['account_number', 'ip_address', 'node_identifier', 'protocol']:
             requesting_node_value = requesting_node_primary_validator_configuration.get(key)
+            self_primary_validator_value = self_primary_validator_configuration.get(key)
 
             if requesting_node_value is None:
                 raise serializers.ValidationError(f'{key} not found on requesting nodes primary validator')
