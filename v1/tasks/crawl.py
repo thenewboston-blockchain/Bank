@@ -47,6 +47,8 @@ def create_new_validators(*, unknown_validators):
 def crawl_validators(*, primary_validator, self_configuration):
     """
     Crawl all validators from primary validator
+    - create any new validators
+    - send a connection request to any validators where self is unknown
     """
 
     known_validators = get_known_validators()
