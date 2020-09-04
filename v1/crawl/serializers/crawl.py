@@ -21,18 +21,15 @@ class CrawlSerializer(serializers.Serializer):
         """
 
         crawl = validated_data['crawl']
-        crawl_status = None
 
         if crawl == CRAWL_COMMAND_START:
             cache.set(CRAWL_STATUS, CRAWL_STATUS_CRAWLING, None)
-            start_crawl()
-            crawl_status = CRAWL_STATUS_CRAWLING
+            start_crawl.delay()
 
         if crawl == CRAWL_COMMAND_STOP:
             cache.set(CRAWL_STATUS, CRAWL_STATUS_STOP_REQUESTED, None)
-            crawl_status = CRAWL_STATUS_NOT_CRAWLING
 
-        return crawl_status
+        return validated_data
 
     def update(self, instance, validated_data):
         raise RuntimeError('Method unavailable')

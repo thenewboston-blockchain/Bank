@@ -1,11 +1,10 @@
-from django.core.cache import cache
 from django.utils.decorators import classonlymethod
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.viewsets import ViewSet
 
-from v1.cache_tools.cache_keys import CRAWL_LAST_COMPLETED, CRAWL_STATUS
 from v1.decorators.nodes import is_self_signed_message
+from ..helpers import get_crawl_info
 from ..serializers.crawl import CrawlSerializer
 
 
@@ -25,10 +24,7 @@ class CrawlViewSet(ViewSet):
     @staticmethod
     def crawl_status(request):
         return Response(
-            {
-                'crawl_last_completed': cache.get(CRAWL_LAST_COMPLETED),
-                'crawl_status': cache.get(CRAWL_STATUS)
-            },
+            get_crawl_info(),
             status=HTTP_200_OK
         )
 
@@ -41,9 +37,9 @@ class CrawlViewSet(ViewSet):
             context={'request': request}
         )
         serializer.is_valid(raise_exception=True)
-        crawl_status = serializer.save()
+        serializer.save()
 
         return Response(
-            {'crawl_status': crawl_status},
+            get_crawl_info(),
             status=HTTP_200_OK
         )

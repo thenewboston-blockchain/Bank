@@ -26,7 +26,7 @@ def is_self_known_to_node(*, node, self_configuration):
         fetch(url=url, headers={})
         return True
     except Exception as e:
-        logger.exception(e)
+        logger.debug(e)
 
     return False
 

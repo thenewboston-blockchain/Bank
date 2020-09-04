@@ -2,11 +2,12 @@ import logging
 
 from celery import shared_task
 from django.core.cache import cache
+from django.utils import timezone
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch
 
 from v1.banks.models.bank import Bank
-from v1.cache_tools.cache_keys import CRAWL_STATUS
+from v1.cache_tools.cache_keys import CRAWL_LAST_COMPLETED, CRAWL_STATUS
 from v1.connection_requests.helpers.connect import is_self_known_to_node, send_connection_request
 from v1.connection_requests.serializers.bank_configuration import BankConfigurationSerializer
 from v1.connection_requests.serializers.validator_configuration import ValidatorConfigurationSerializer
@@ -186,6 +187,6 @@ def start_crawl():
     send_connection_requests(node_class=Bank, self_configuration=self_configuration)
     send_connection_requests(node_class=Validator, self_configuration=self_configuration)
 
-    # TODO: Set crawl_last_completed date in cache
-    # TODO: Send back notification with that information as well
+    cache.set(CRAWL_LAST_COMPLETED, str(timezone.now()), None)
     cache.set(CRAWL_STATUS, CRAWL_STATUS_NOT_CRAWLING, None)
+    # TODO: Send back notification with that information as well
