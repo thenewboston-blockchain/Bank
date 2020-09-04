@@ -6,7 +6,7 @@ from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch
 
 from v1.cache_tools.cache_keys import CRAWL_STATUS
-from v1.connection_requests.helpers.connect import send_connection_request
+from v1.connection_requests.helpers.connect import is_self_known_to_node, send_connection_request
 from v1.connection_requests.serializers.validator_configuration import ValidatorConfigurationSerializer
 from v1.crawl.constants import CRAWL_STATUS_NOT_CRAWLING
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
@@ -16,10 +16,10 @@ from v1.validators.models.validator import Validator
 logger = logging.getLogger('thenewboston')
 
 
-def connect_to_unknown_validators(*, self_configuration, unknown_validators):
+def create_new_validators(*, unknown_validators):
     """
-    For each validator in the list:
-    - for any unknown validators, attempt to fetch config data and create new Validator object
+    For each unknown validator in the list:
+    - attempt to fetch config data and create new Validator object
     - if successful, send validator a connection request (if needed)
     """
 
@@ -36,24 +36,26 @@ def connect_to_unknown_validators(*, self_configuration, unknown_validators):
             serializer = ValidatorConfigurationSerializer(data=config_data)
 
             if serializer.is_valid():
-                validator = create_validator_from_config_data(config_data=config_data)
-            else:
-                logger.exception(serializer.errors)
+                create_validator_from_config_data(config_data=config_data)
                 continue
 
-            if not is_known_to_node(node_address=address, self_configuration=self_configuration):
-                send_connection_request(node=validator, self_configuration=self_configuration)
-
+            logger.exception(serializer.errors)
         except Exception as e:
             logger.exception(e)
 
 
-def crawl_validators(*, primary_validator_address, self_configuration):
+def crawl_validators(*, primary_validator, self_configuration):
     """
     Crawl all validators from primary validator
     """
 
     known_validators = get_known_validators()
+
+    primary_validator_address = format_address(
+        ip_address=primary_validator.ip_address,
+        port=primary_validator.port,
+        protocol=primary_validator.protocol
+    )
     next_url = f'{primary_validator_address}/validators'
 
     while next_url:
@@ -66,10 +68,15 @@ def crawl_validators(*, primary_validator_address, self_configuration):
                 known_validators=known_validators,
                 validator_list=results
             )
-            connect_to_unknown_validators(
-                self_configuration=self_configuration,
-                unknown_validators=unknown_validators
-            )
+            create_new_validators(unknown_validators=unknown_validators)
+        except Exception as e:
+            logger.exception(e)
+
+    for validator in Validator.objects.all():
+
+        try:
+            if not is_self_known_to_node(node=validator, self_configuration=self_configuration):
+                send_connection_request(node=validator, self_configuration=self_configuration)
         except Exception as e:
             logger.exception(e)
 
@@ -100,22 +107,6 @@ def get_unknown_validators(*, known_validators, validator_list):
     ]
 
 
-def is_known_to_node(*, node_address, self_configuration):
-    """
-    Return boolean to indicate if self is connected to primary validator
-    """
-
-    url = f'{node_address}/banks/{self_configuration.node_identifier}'
-
-    try:
-        fetch(url=url, headers={})
-        return True
-    except Exception as e:
-        logger.exception(e)
-
-    return False
-
-
 @shared_task
 def start_crawl():
     """
@@ -125,12 +116,5 @@ def start_crawl():
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
 
-    primary_validator_address = format_address(
-        ip_address=primary_validator.ip_address,
-        port=primary_validator.port,
-        protocol=primary_validator.protocol
-    )
-
-    crawl_validators(primary_validator_address=primary_validator_address, self_configuration=self_configuration)
-
+    crawl_validators(primary_validator=primary_validator, self_configuration=self_configuration)
     cache.set(CRAWL_STATUS, CRAWL_STATUS_NOT_CRAWLING, None)
