@@ -49,7 +49,7 @@ def create_banks(*, known_nodes, results):
             logger.exception(e)
 
 
-def crawl_banks(*, primary_validator_address):
+def crawl_banks(*, primary_validator_address, self_node_identifier):
     """
     Crawl all banks from primary validator and create any new banks
     """
@@ -66,6 +66,7 @@ def crawl_banks(*, primary_validator_address):
             response = fetch(url=next_url, headers={})
             next_url = response.get('next')
             results = response.get('results')
+            results = [i for i in results if i['node_identifier'] != self_node_identifier]
             create_banks(known_nodes=known_nodes, results=results)
         except Exception as e:
             logger.exception(e)
@@ -170,6 +171,7 @@ def start_crawl():
     """
 
     self_configuration = get_self_configuration(exception_class=RuntimeError)
+    self_node_identifier = self_configuration.node_identifier
     primary_validator = self_configuration.primary_validator
 
     primary_validator_address = format_address(
@@ -178,7 +180,7 @@ def start_crawl():
         protocol=primary_validator.protocol
     )
 
-    crawl_banks(primary_validator_address=primary_validator_address)
+    crawl_banks(primary_validator_address=primary_validator_address, self_node_identifier=self_node_identifier)
     crawl_validators(primary_validator_address=primary_validator_address)
 
     send_connection_requests(node_class=Bank, self_configuration=self_configuration)
