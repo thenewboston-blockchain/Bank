@@ -18,18 +18,16 @@ logger = logging.getLogger('thenewboston')
 
 def create_new_validators(*, unknown_validators):
     """
-    For each unknown validator in the list:
-    - attempt to fetch config data and create new Validator object
-    - if successful, send validator a connection request (if needed)
+    For each unknown validator in the list attempt to fetch config data and create new Validator object
     """
 
-    for unknown_validator in unknown_validators:
+    for validator in unknown_validators:
 
         try:
             address = format_address(
-                ip_address=unknown_validator.get('ip_address'),
-                port=unknown_validator.get('port'),
-                protocol=unknown_validator.get('protocol')
+                ip_address=validator.get('ip_address'),
+                port=validator.get('port'),
+                protocol=validator.get('protocol')
             )
             config_address = f'{address}/config'
             config_data = fetch(url=config_address, headers={})
@@ -51,7 +49,7 @@ def crawl_validators(*, primary_validator, self_configuration):
     - send a connection request to any validators where self is unknown
     """
 
-    known_validators = get_known_validators()
+    known_validators = get_known_nodes(node_class=Validator)
 
     primary_validator_address = format_address(
         ip_address=primary_validator.ip_address,
@@ -66,9 +64,9 @@ def crawl_validators(*, primary_validator, self_configuration):
             response = fetch(url=next_url, headers={})
             next_url = response.get('next')
             results = response.get('results')
-            unknown_validators = get_unknown_validators(
-                known_validators=known_validators,
-                validator_list=results
+            unknown_validators = get_unknown_nodes(
+                known_nodes=known_validators,
+                results=results
             )
             create_new_validators(unknown_validators=unknown_validators)
         except Exception as e:
@@ -83,28 +81,27 @@ def crawl_validators(*, primary_validator, self_configuration):
             logger.exception(e)
 
 
-def get_known_validators():
+def get_known_nodes(*, node_class):
     """
     Return IP address and NID for known validations
-    - used in determining which new validators to connect to
     """
 
-    validators = Validator.objects.all().values('ip_address', 'node_identifier')
+    nodes = node_class.objects.all().values('ip_address', 'node_identifier')
     return {
-        'ip_addresses': {i['ip_address'] for i in validators},
-        'node_identifiers': {i['node_identifier'] for i in validators},
+        'ip_addresses': {i['ip_address'] for i in nodes},
+        'node_identifiers': {i['node_identifier'] for i in nodes},
     }
 
 
-def get_unknown_validators(*, known_validators, validator_list):
+def get_unknown_nodes(*, known_nodes, results):
     """
-    Filter a list of validators for unknown validators
+    Filter a results list for unknown nodes
     """
 
     return [
-        validator for validator in validator_list if (
-            validator['ip_address'] not in known_validators['ip_addresses'] and
-            validator['node_identifier'] not in known_validators['node_identifiers']
+        node for node in results if (
+            node['ip_address'] not in known_nodes['ip_addresses'] and
+            node['node_identifier'] not in known_nodes['node_identifiers']
         )
     ]
 
