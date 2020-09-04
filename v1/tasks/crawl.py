@@ -189,4 +189,6 @@ def start_crawl():
 
     cache.set(CRAWL_LAST_COMPLETED, str(timezone.now()), None)
     cache.set(CRAWL_STATUS, CRAWL_STATUS_NOT_CRAWLING, None)
+
     # TODO: Send back notification with that information as well
+    # TODO: Payload will be v1.crawl.helpers.get_crawl_info()
