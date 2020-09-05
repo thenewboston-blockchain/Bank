@@ -1,3 +1,5 @@
+CRAWL_CACHE_LOCK_KEY = 'crawl'
+
 CRAWL_COMMAND_START = 'start'
 CRAWL_COMMAND_STOP = 'stop'
 

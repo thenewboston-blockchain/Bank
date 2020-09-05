@@ -71,6 +71,7 @@ def crawl_banks(*, primary_validator_address, self_node_identifier):
             create_banks(known_nodes=known_nodes, results=results)
         except Exception as e:
             logger.exception(e)
+            break
 
 
 def create_validators(*, known_nodes, results):
@@ -121,6 +122,7 @@ def crawl_validators(*, primary_validator_address):
             create_validators(known_nodes=known_nodes, results=results)
         except Exception as e:
             logger.exception(e)
+            break
 
 
 def get_known_nodes(*, node_class):
