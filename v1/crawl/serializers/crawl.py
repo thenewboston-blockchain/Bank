@@ -57,7 +57,7 @@ class CrawlSerializer(serializers.Serializer):
         if crawl == CRAWL_COMMAND_START and crawl_status in (CRAWL_STATUS_CRAWLING, CRAWL_STATUS_STOP_REQUESTED):
             raise serializers.ValidationError(self.error_messages['cant_start_crawl'])
 
-        if crawl == CRAWL_COMMAND_STOP and crawl_status != CRAWL_STATUS_CRAWLING:
+        if crawl == CRAWL_COMMAND_STOP and crawl_status in (CRAWL_STATUS_NOT_CRAWLING, CRAWL_STATUS_STOP_REQUESTED):
             raise serializers.ValidationError(self.error_messages['cant_stop_crawl'])
 
         return crawl

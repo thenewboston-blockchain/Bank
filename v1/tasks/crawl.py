@@ -12,6 +12,7 @@ from v1.connection_requests.helpers.connect import is_self_known_to_node, send_c
 from v1.connection_requests.serializers.bank_configuration import BankConfigurationSerializer
 from v1.connection_requests.serializers.validator_configuration import ValidatorConfigurationSerializer
 from v1.crawl.constants import CRAWL_STATUS_NOT_CRAWLING, CRAWL_STATUS_STOP_REQUESTED
+from v1.notifications.crawl_status import send_crawl_status_notification
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.validators.helpers.validator_configuration import (
     create_bank_from_config_data,
@@ -192,5 +193,4 @@ def start_crawl():
     cache.set(CRAWL_LAST_COMPLETED, str(timezone.now()), None)
     cache.set(CRAWL_STATUS, CRAWL_STATUS_NOT_CRAWLING, None)
 
-    # TODO: Send back notification with that information as well
-    # TODO: Payload will be v1.crawl.helpers.get_crawl_info()
+    send_crawl_status_notification()

@@ -1,5 +1,3 @@
-import json
-
 import pytest
 from asgiref.sync import sync_to_async
 from channels.testing import WebsocketCommunicator
@@ -39,13 +37,13 @@ async def test_confirmation_block_async(client, validator, block, confirmation_b
         expected=HTTP_201_CREATED,
     )
 
-    sender_response = json.loads(await communicators[0].receive_from())
+    sender_response = await communicators[0].receive_json_from()
     sender_notification_type = sender_response['notification_type']
     sender_payload = sender_response['payload']
     assert sender_notification_type == CONFIRMATION_BLOCK_NOTIFICATION
     assert sender_payload['message']['block_identifier'] == response['block_identifier']
 
-    recipient_response = json.loads(await communicators[1].receive_from())
+    recipient_response = await communicators[1].receive_json_from()
     recipient_notification_type = recipient_response['notification_type']
     recipient_payload = recipient_response['payload']
     assert recipient_notification_type == CONFIRMATION_BLOCK_NOTIFICATION
