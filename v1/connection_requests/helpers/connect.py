@@ -10,9 +10,9 @@ from v1.self_configurations.helpers.signing_key import get_signing_key
 logger = logging.getLogger('thenewboston')
 
 
-def is_node_connected(*, node, self_configuration):
+def is_self_known_to_node(*, node, self_configuration):
     """
-    Return boolean to indicate if node is connected to self
+    Return boolean to indicate if self is known to node
     """
 
     node_address = format_address(
@@ -20,14 +20,13 @@ def is_node_connected(*, node, self_configuration):
         port=node.port,
         protocol=node.protocol,
     )
-
     url = f'{node_address}/banks/{self_configuration.node_identifier}'
 
     try:
         fetch(url=url, headers={})
         return True
     except Exception as e:
-        logger.exception(e)
+        logger.debug(e)
 
     return False
 
@@ -69,7 +68,7 @@ def set_primary_validator(*, validator):
     self_configuration.primary_validator = validator
     self_configuration.save()
 
-    if is_node_connected(
+    if is_self_known_to_node(
         node=validator,
         self_configuration=self_configuration
     ):

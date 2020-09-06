@@ -1,0 +1,8 @@
+CRAWL_CACHE_LOCK_KEY = 'crawl'
+
+CRAWL_COMMAND_START = 'start'
+CRAWL_COMMAND_STOP = 'stop'
+
+CRAWL_STATUS_CRAWLING = 'crawling'
+CRAWL_STATUS_NOT_CRAWLING = 'not_crawling'
+CRAWL_STATUS_STOP_REQUESTED = 'stop_requested'

@@ -21,6 +21,6 @@ def send_confirmation_block_notifications(*, payload, sender_account_number, rec
                 'message': standardize_notification(
                     notification_type=CONFIRMATION_BLOCK_NOTIFICATION,
                     payload=payload
-                ),
+                )
             }
         )
