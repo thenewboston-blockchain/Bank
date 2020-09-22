@@ -12,7 +12,7 @@ services:
       - REDIS_HOST=redis
       - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=e5e5fec0dcbbd8b0a76c67204823678d3f243de7a0a1042bb3ecf66285cd9fd4
-    command: python3 -u /opt/project/manage.py
+    command: python3 -u /opt/project/manage.py runserver
     volumes:
       - .:/opt/project
     ports:
