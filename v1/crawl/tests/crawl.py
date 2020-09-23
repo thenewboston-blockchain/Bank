@@ -46,7 +46,7 @@ def test_crawl_start_200(client, self_configuration, celery_worker):
     assert response['crawl_status'] == CRAWL_STATUS_CRAWLING
 
     assert cache.get(CRAWL_STATUS) == CRAWL_STATUS_CRAWLING
-    time.sleep(1)
+    time.sleep(2)
     assert cache.get(CRAWL_STATUS) == CRAWL_STATUS_NOT_CRAWLING
     assert crawl_status(client)['crawl_status'] == CRAWL_STATUS_NOT_CRAWLING
 

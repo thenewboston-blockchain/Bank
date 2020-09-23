@@ -8,20 +8,18 @@ aioredis==1.3.1           # via channels-redis
 amqp==2.6.1               # via kombu
 asgiref==3.2.10           # via channels, channels-redis, daphne, django
 async-timeout==3.0.1      # via aioredis
-atomicwrites==1.4.0       # via pytest
 attrs==20.2.0             # via automat, pytest, service-identity, twisted
 autobahn==20.7.1          # via daphne
 automat==20.2.0           # via twisted
 billiard==3.6.3.0         # via celery
 celery==4.4.2             # via -r requirements/base.in, flower
 certifi==2020.6.20        # via requests
-cffi==1.14.2              # via cryptography, pynacl
+cffi==1.14.3              # via cryptography, pynacl
 channels-redis==2.4.2     # via thenewboston
 channels==2.4.0           # via channels-redis, thenewboston
 chardet==3.0.4            # via requests
-colorama==0.4.3           # via pytest
 constantly==15.1.0        # via twisted
-cryptography==3.1         # via autobahn, pyopenssl, service-identity
+cryptography==3.1.1       # via autobahn, pyopenssl, service-identity
 daphne==2.5.0             # via channels
 django-cors-headers==3.4.0  # via thenewboston
 django-debug-toolbar==2.2  # via -r requirements/base.in
@@ -36,9 +34,10 @@ hiredis==1.1.0            # via aioredis
 humanize==0.5.1           # via flower
 hyperlink==20.0.1         # via twisted
 idna==2.10                # via hyperlink, requests, twisted
-importlib-metadata==1.7.0  # via kombu, pluggy, pytest
+importlib-metadata==2.0.0  # via kombu, pluggy, pytest
 incremental==17.5.0       # via twisted
 iniconfig==1.0.1          # via pytest
+iptools==0.7.0            # via -r requirements/local.in
 kombu==4.6.11             # via celery
 more-itertools==8.5.0     # via pytest
 msgpack==0.6.2            # via channels-redis
@@ -74,7 +73,7 @@ txaio==20.4.1             # via autobahn
 urllib3==1.25.10          # via requests
 vine==1.3.0               # via amqp, celery
 wheel==0.34.2             # via -r requirements/base.in
-zipp==3.1.0               # via importlib-metadata
+zipp==3.2.0               # via importlib-metadata
 zope.interface==5.1.0     # via twisted
 
 # The following packages are considered to be unsafe in a requirements file:

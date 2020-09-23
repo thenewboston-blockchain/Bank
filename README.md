@@ -49,6 +49,25 @@ To monitor Celery tasks:
 celery flower -A config.settings --address=127.0.0.1 --port=5555
 ```
 
+## Local Development (Docker edition)
+
+Run:
+```
+docker-compose up # add -d to detach from donsole
+```
+
+To run all tests:
+```
+docker-compose run app pytest
+# or
+docker-compose exec app pytest # if docker-compose run is running
+```
+
+To monitor Celery tasks:
+```
+docker-compose exec celery celery flower -A config.settings --address=127.0.0.1 --port=5555
+```
+
 ## Developers
 
 To watch log files:
