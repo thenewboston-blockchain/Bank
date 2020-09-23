@@ -51,12 +51,12 @@ celery flower -A config.settings --address=127.0.0.1 --port=5555
 
 ## Local Development (Docker edition)
 
-Run
+Run:
 ```
 docker-compose up # add -d to detach from donsole
 ```
 
-To run all tests
+To run all tests:
 ```
 docker-compose run app pytest
 # or
