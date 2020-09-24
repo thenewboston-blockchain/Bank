@@ -1,13 +1,14 @@
 from datetime import datetime, timedelta
 
+import pytest
 from asgiref.sync import sync_to_async
 from channels.testing import WebsocketCommunicator
-import pytest
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_201_CREATED
 from thenewboston.utils.signed_requests import generate_signed_request
 
-from v1.validator_confirmation_services.consumers.validation_confirmation_created import ValidationConfirmationConsumer
+from v1.notifications.constants import VALIDATOR_CONFIRMATION_SERVICE_NOTIFICATION
+from ..consumers.validator_confirmation_service import ValidatorConfirmationServiceConsumer
 
 
 @pytest.mark.asyncio
@@ -16,7 +17,7 @@ async def test_validator_confirmation_service_post_async(
     client, validator, signing_key
 ):
     communicator = WebsocketCommunicator(
-        ValidationConfirmationConsumer,
+        ValidatorConfirmationServiceConsumer,
         'ws/validator_confirmation_services'
     )
     connected, subprotocol = await communicator.connect()
@@ -47,7 +48,7 @@ async def test_validator_confirmation_service_post_async(
     assert response['validator'] == str(validator.pk)
 
     assert communicator_response == {
-        'notification_type': 'VALIDATOR_CONFIRMATION_SERVICES_NOTIFICATION',
+        'notification_type': VALIDATOR_CONFIRMATION_SERVICE_NOTIFICATION,
         'payload': {
             'bank_node_identifier': validator.node_identifier,
             'validator_confirmation_service': response

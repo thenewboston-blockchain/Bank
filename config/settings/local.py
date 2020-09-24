@@ -27,17 +27,3 @@ CACHES = {
         }
     }
 }
-
-
-# class DisableMigrations(object):
-#     def __contains__(self, item):
-#         """DisableMigrations.__contains__ magic method"""
-#         return True
-#
-#     def __getitem__(self, item):
-#         """DisableMigrations.__getitem__ magic method"""
-#         return None
-#
-#
-# MIGRATION_MODULES = DisableMigrations()
-# # TODO: Commit it uncommented permanently only when a separate migration test implemented

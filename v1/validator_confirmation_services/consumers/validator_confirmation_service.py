@@ -2,7 +2,7 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import JsonWebsocketConsumer
 
 
-class ValidationConfirmationConsumer(JsonWebsocketConsumer):
+class ValidatorConfirmationServiceConsumer(JsonWebsocketConsumer):
 
     def connect(self):
         """
@@ -21,11 +21,11 @@ class ValidationConfirmationConsumer(JsonWebsocketConsumer):
         Name of group where messages will be broadcast
         """
 
-        return 'validation_confirmation_created'
+        return 'validator_confirmation_service'
 
-    def send_validation_confirmation_created(self, event):
+    def send_validator_confirmation_service(self, event):
         """
-        Send validation_confirmation_created notification to group
+        Send validator confirmation service notification to group
         """
 
         self.send_json(event['message'])

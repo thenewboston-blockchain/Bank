@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta
 import random
+from datetime import datetime, timedelta
 
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
