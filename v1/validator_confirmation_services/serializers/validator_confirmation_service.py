@@ -24,12 +24,10 @@ class ValidatorConfirmationServiceSerializerCreate(serializers.Serializer):
         Create validator confirmation service
         """
 
-        validator = validated_data['node_identifier']
-
         validator_confirmation_service = ValidatorConfirmationService.objects.create(
             end=validated_data['end'],
             start=validated_data['start'],
-            validator=validator,
+            validator=validated_data['node_identifier'],
         )
 
         return validator_confirmation_service

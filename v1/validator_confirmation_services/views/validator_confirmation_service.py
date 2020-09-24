@@ -9,6 +9,7 @@ from ..serializers.validator_confirmation_service import (
     ValidatorConfirmationServiceSerializer,
     ValidatorConfirmationServiceSerializerCreate
 )
+from ...notifications.validation_confirmation import send_validator_confirmation_service_notification
 
 
 class ValidatorConfirmationServiceViewSet(
@@ -43,7 +44,18 @@ class ValidatorConfirmationServiceViewSet(
         serializer.is_valid(raise_exception=True)
         validator_confirmation_service = serializer.save()
 
+        serialized_data = self.get_serializer(validator_confirmation_service).data
+        serialized_data_fixed = serialized_data.copy()
+
+        # DRF doesn't serialize UUIDs, JSONRenderer in Response does that
+        serialized_data_fixed['validator'] = str(serialized_data_fixed['validator'])
+
+        send_validator_confirmation_service_notification(payload={
+            'bank_node_identifier': request.data['node_identifier'],
+            'validator_confirmation_service': serialized_data_fixed
+        })
+
         return Response(
-            self.get_serializer(validator_confirmation_service).data,
+            serialized_data,
             status=HTTP_201_CREATED
         )

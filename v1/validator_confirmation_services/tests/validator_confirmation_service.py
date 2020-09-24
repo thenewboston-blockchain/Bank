@@ -1,7 +1,9 @@
 import random
+from datetime import datetime, timedelta
 
 from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
+from thenewboston.utils.signed_requests import generate_signed_request
 
 
 def test_validator_confirmation_service_filter(
@@ -19,3 +21,28 @@ def test_validator_confirmation_service_filter(
             expected=HTTP_200_OK,
         )
     assert response[0]['id'] == str(validator_confirmation_service.id)
+
+
+async def test_validator_confirmation_service_post_async(
+    client, django_assert_max_num_queries, validator, signing_key
+):
+    start = datetime.now().isoformat()
+    end = (datetime.now() + timedelta(days=2)).isoformat()
+
+    payload = generate_signed_request(
+        data={
+            'start': start,
+            'end': end
+        },
+        nid_signing_key=signing_key
+    )
+    with django_assert_max_num_queries(2):
+        response = client.post_json(
+            reverse('validatorconfirmationservice-list'),
+            payload,
+            expected=HTTP_201_CREATED
+        )
+
+    assert response['end'][:-1] == end
+    assert response['start'][:-1] == start
+    assert response['validator'] == str(validator.pk)
