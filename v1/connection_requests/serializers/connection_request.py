@@ -74,7 +74,7 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
                 raise serializers.ValidationError('Invalid node_type')
         except Exception as e:
             logger.exception(e)
-            raise serializers.ValidationError(e)
+            raise e
 
         if config_serializer.is_valid():
             return config_data

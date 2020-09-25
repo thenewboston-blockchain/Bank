@@ -1,7 +1,10 @@
 import pytest
+from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_400_BAD_REQUEST
+from thenewboston.constants.network import PRIMARY_VALIDATOR
 from thenewboston.third_party.factory.utils import build_json
+from thenewboston.utils.format import format_address
 from thenewboston.utils.signed_requests import generate_signed_request
 
 from ..factories.connection_request import ConnectionRequestFactory
@@ -28,3 +31,26 @@ def test_banks_post_400_connect_to_self(client, connection_request_data, signing
         expected=HTTP_400_BAD_REQUEST,
     )
     assert response.get('non_field_errors')[0] == 'Unable to connect to self'
+
+
+def test_banks_post_400_primary_validator(
+        client, connection_request_data, signing_key, self_configuration, requests_mock
+):
+    connection_request_data['node_type'] = PRIMARY_VALIDATOR
+    address = format_address(
+        ip_address=connection_request_data['ip_address'],
+        port=connection_request_data.get('port'),
+        protocol=connection_request_data['protocol']
+    )
+    requests_mock.get(f'{address}/config', json=connection_request_data)
+
+    response = client.post_json(
+        reverse('connection_requests-list'),
+        generate_signed_request(
+            data=connection_request_data,
+            nid_signing_key=signing_key,
+        ),
+        expected=status.HTTP_400_BAD_REQUEST
+    )
+
+    assert response == {'non_field_errors': ['Unable to accept connection requests from primary validators']}

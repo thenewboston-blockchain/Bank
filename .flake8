@@ -1,0 +1,16 @@
+[flake8]
+ignore = D203,D101,D400,D401,D106,W503,F403,F405,E501,D403,D104
+exclude =
+    .git,
+    __pycache__,
+    migrations
+filename =
+    *.py
+max-complexity = 12
+import-order-style = google
+; application-import-names =
+max-line-length = 120
+max-linenumber = 500
+accept-encodings = utf-8,utf-16
+inline-quotes = single
+multiline-quotes = double

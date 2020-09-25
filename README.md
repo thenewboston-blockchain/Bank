@@ -78,6 +78,13 @@ docker-compose run app pytest
 docker-compose exec app pytest # if docker-compose run is running
 ```
 
+To run tests with coverage report:
+```
+docker-compose run app pytest --cov=v1
+# or
+docker-compose exec app pytest --cov=v1 # if docker-compose run is running
+```
+
 To monitor Celery tasks:
 ```
 docker-compose exec celery celery flower -A config.settings --address=127.0.0.1 --port=5555
