@@ -35,12 +35,10 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
         Process validated connection request
         """
 
-        config_data = validated_data
-
-        if config_data['node_type'] == BANK:
+        if validated_data['node_type'] == BANK:
             create_bank_from_config_data(config_data=validated_data)
 
-        if config_data['node_type'] == CONFIRMATION_VALIDATOR:
+        if validated_data['node_type'] == CONFIRMATION_VALIDATOR:
             create_validator_from_config_data(config_data=validated_data)
 
         return True

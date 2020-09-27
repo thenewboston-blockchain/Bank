@@ -1,7 +1,11 @@
-from factory.fuzzy import FuzzyChoice
-from thenewboston.constants.network import BANK, CONFIRMATION_VALIDATOR, PRIMARY_VALIDATOR
+from thenewboston.constants.network import BANK, CONFIRMATION_VALIDATOR
 from thenewboston.factories.network_node import NetworkNodeFactory
+from thenewboston.factories.network_validator import NetworkValidatorFactory
 
 
-class ConnectionRequestFactory(NetworkNodeFactory):
-    node_type = FuzzyChoice([BANK, CONFIRMATION_VALIDATOR, PRIMARY_VALIDATOR])
+class BankConnectionRequestFactory(NetworkNodeFactory):
+    node_type = BANK
+
+
+class ValidatorConnectionRequestFactory(NetworkValidatorFactory):
+    node_type = CONFIRMATION_VALIDATOR
