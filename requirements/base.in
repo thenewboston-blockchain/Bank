@@ -5,6 +5,6 @@ django-redis==4.11.0
 flower==0.9.4
 redis==3.5.2
 tblib==1.6.0
-thenewboston==0.0.19
+thenewboston==0.0.20
 wheel==0.35.1
 requests-mock==1.8.0
