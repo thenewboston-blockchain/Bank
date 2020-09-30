@@ -2,7 +2,7 @@ import pytest
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_400_BAD_REQUEST
-from thenewboston.constants.network import BANK, CONFIRMATION_VALIDATOR, PRIMARY_VALIDATOR
+from thenewboston.constants.network import BANK, PRIMARY_VALIDATOR
 from thenewboston.third_party.factory.utils import build_json
 from thenewboston.utils.format import format_address
 from thenewboston.utils.signed_requests import generate_signed_request
@@ -30,7 +30,6 @@ def validator_connection_request_data():
 
 
 def test_banks_post_400_connect_to_self(client, bank_connection_request_data, signing_key, self_configuration):
-
     bank_connection_request_data['ip_address'] = self_configuration.ip_address
     bank_connection_request_data['protocol'] = self_configuration.protocol
 
@@ -97,7 +96,7 @@ def test_banks_post_400_node_id_bank_exists(client, bank_connection_request_data
 
 
 def test_banks_post_400_node_id_validator_exists(
-        client, validator_connection_request_data, signing_key, self_configuration
+    client, validator_connection_request_data, signing_key, self_configuration
 ):
     payload = generate_signed_request(
         data=validator_connection_request_data,
@@ -114,7 +113,7 @@ def test_banks_post_400_node_id_validator_exists(
 
 
 def test_banks_post_400_primary_validator(
-        client, validator_connection_request_data, signing_key, self_configuration, requests_mock
+    client, validator_connection_request_data, signing_key, self_configuration, requests_mock
 ):
     validator_connection_request_data['node_type'] = PRIMARY_VALIDATOR
     address = format_address(
@@ -137,7 +136,7 @@ def test_banks_post_400_primary_validator(
 
 
 def test_banks_post_400_invalid_node_type(
-        client, bank_connection_request_data, signing_key, self_configuration, requests_mock
+    client, bank_connection_request_data, signing_key, self_configuration, requests_mock
 ):
     bank_connection_request_data['node_type'] = 'BLAH_BLAH'
     address = format_address(

@@ -31,7 +31,6 @@ def test_banks_post(client, bank_fake_data, self_configuration):
 
 
 def test_banks_patch(client, bank, bank_fake_data, self_configuration):
-
     response = client.patch_json(
         reverse(
             'bank-detail',
