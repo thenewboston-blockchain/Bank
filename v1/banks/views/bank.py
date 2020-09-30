@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
@@ -24,6 +25,8 @@ class BankViewSet(
       parameters:
         - name: trust
           type: number
+    create:
+      description: Create bank
     """
 
     lookup_field = 'node_identifier'
@@ -43,7 +46,8 @@ class BankViewSet(
         bank = serializer.save()
 
         return Response(
-            self.get_serializer(bank).data
+            self.get_serializer(bank).data,
+            status=status.HTTP_201_CREATED
         )
 
     @is_self_signed_message

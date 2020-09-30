@@ -45,6 +45,7 @@ sdist/
 share/python-wheels/
 var/
 wheels/
+thenewboston.tar.gz
 
 # Unit test / coverage reports
 *.cover
