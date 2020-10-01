@@ -1,7 +1,7 @@
 FROM python:3.8
 
 WORKDIR /opt/project
-
+MOVE . .
 COPY . .
 
 RUN set -x; \
