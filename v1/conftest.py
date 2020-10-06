@@ -1,6 +1,8 @@
+from django.conf import settings
 import pytest
 from django.core.management import call_command
 from factory import Faker
+from pytest_django.migrations import DisableMigrations
 from thenewboston.accounts.manage import create_account
 from thenewboston.blocks.block import generate_block
 from thenewboston.third_party.pytest.client import UserWrapper
@@ -96,3 +98,9 @@ def self_configuration(monkeypatch):
 @pytest.fixture
 def validator(encoded_account_number):
     yield ValidatorFactory(node_identifier=encoded_account_number)
+
+
+@pytest.fixture(scope='session', autouse=True)
+def migrations_disabled():
+    settings.MIGRATION_MODULES = DisableMigrations()
+    yield None
