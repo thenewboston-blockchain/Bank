@@ -7,6 +7,7 @@ from thenewboston.constants.network import BANK, CONFIRMATION_VALIDATOR
 
 from v1.cache_tools.cache_keys import CLEAN_LAST_COMPLETED, CLEAN_STATUS
 from v1.clean.constants import CLEAN_STATUS_NOT_CLEANING
+from v1.notifications.clean_status import send_clean_status_notification
 
 logger = logging.getLogger('thenewboston')
 
@@ -30,5 +31,4 @@ def start_clean():
     cache.set(CLEAN_LAST_COMPLETED, str(timezone.now()), None)
     cache.set(CLEAN_STATUS, CLEAN_STATUS_NOT_CLEANING, None)
 
-    # TODO: implement
-    # send_clean_status_notification()
+    send_clean_status_notification()
