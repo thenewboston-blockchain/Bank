@@ -53,6 +53,9 @@ class BlockSerializerCreate(NetworkBlockSerializer):
                     protocol=primary_validator.protocol,
                     url_path='/bank_blocks'
                 )
+        except serializers.ValidationError as e:
+            logger.exception(e)
+            raise e
         except Exception as e:
             logger.exception(e)
             raise serializers.ValidationError(e)

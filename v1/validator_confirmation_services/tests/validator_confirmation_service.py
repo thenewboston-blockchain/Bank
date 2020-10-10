@@ -23,7 +23,7 @@ def test_validator_confirmation_service_filter(
     assert response[0]['id'] == str(validator_confirmation_service.id)
 
 
-async def test_validator_confirmation_service_post_async(
+def test_validator_confirmation_service_post_async(
     client, django_assert_max_num_queries, validator, signing_key
 ):
     start = datetime.now().isoformat()

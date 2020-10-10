@@ -6,7 +6,9 @@ from ..factories.block import BlockFactory
 
 
 @pytest.fixture
-def block_data_unique_recipients(account_data, account, encoded_account_number, random_encoded_account_number, self_configuration):
+def block_data_unique_recipients(
+    account_data, account, encoded_account_number, random_encoded_account_number, self_configuration
+):
     signing_key, account_number = account_data
     primary_validator = self_configuration.primary_validator
 
