@@ -3,11 +3,11 @@ from asgiref.sync import sync_to_async
 from channels.testing import WebsocketCommunicator
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
+from thenewboston.constants.crawl import CRAWL_COMMAND_START, CRAWL_STATUS_NOT_CRAWLING
 from thenewboston.utils.signed_requests import generate_signed_request
 
 from v1.notifications.constants import CRAWL_STATUS_NOTIFICATION
 from v1.self_configurations.helpers.signing_key import get_signing_key
-from ..constants import CRAWL_COMMAND_START, CRAWL_STATUS_NOT_CRAWLING
 from ..consumers.crawl_status import CrawlStatusConsumer
 
 

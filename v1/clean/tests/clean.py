@@ -4,6 +4,13 @@ import pytest
 from django.core.cache import cache
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from thenewboston.constants.clean import (
+    CLEAN_COMMAND_START,
+    CLEAN_COMMAND_STOP,
+    CLEAN_STATUS_CLEANING,
+    CLEAN_STATUS_NOT_CLEANING,
+    CLEAN_STATUS_STOP_REQUESTED
+)
 from thenewboston.utils.format import format_address
 from thenewboston.utils.signed_requests import generate_signed_request
 
@@ -11,13 +18,6 @@ from v1.validators.models.validator import Validator
 from v1.validators.serializers.validator import ValidatorSerializer
 from v1.cache_tools.cache_keys import CLEAN_STATUS
 from v1.self_configurations.helpers.signing_key import get_signing_key
-from ..constants import (
-    CLEAN_COMMAND_START,
-    CLEAN_COMMAND_STOP,
-    CLEAN_STATUS_CLEANING,
-    CLEAN_STATUS_NOT_CLEANING,
-    CLEAN_STATUS_STOP_REQUESTED
-)
 from ..serializers.clean import CleanSerializer
 
 

@@ -3,13 +3,13 @@ import logging
 from celery import shared_task
 from django.core.cache import cache
 from django.utils import timezone
+from thenewboston.constants.clean import CLEAN_STATUS_NOT_CLEANING, CLEAN_STATUS_STOP_REQUESTED
 from thenewboston.constants.network import BANK, CONFIRMATION_VALIDATOR
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch
 
 from v1.banks.models.bank import Bank
 from v1.cache_tools.cache_keys import CLEAN_LAST_COMPLETED, CLEAN_STATUS
-from v1.clean.constants import CLEAN_STATUS_NOT_CLEANING, CLEAN_STATUS_STOP_REQUESTED
 from v1.connection_requests.serializers.bank_configuration import BankConfigurationSerializer
 from v1.connection_requests.serializers.validator_configuration import ValidatorConfigurationSerializer
 from v1.notifications.clean_status import send_clean_status_notification

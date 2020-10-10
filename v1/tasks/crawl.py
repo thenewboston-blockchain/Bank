@@ -3,6 +3,7 @@ import logging
 from celery import shared_task
 from django.core.cache import cache
 from django.utils import timezone
+from thenewboston.constants.crawl import CRAWL_STATUS_NOT_CRAWLING, CRAWL_STATUS_STOP_REQUESTED
 from thenewboston.utils.format import format_address
 from thenewboston.utils.network import fetch
 
@@ -11,7 +12,6 @@ from v1.cache_tools.cache_keys import CRAWL_LAST_COMPLETED, CRAWL_STATUS
 from v1.connection_requests.helpers.connect import is_self_known_to_node, send_connection_request
 from v1.connection_requests.serializers.bank_configuration import BankConfigurationSerializer
 from v1.connection_requests.serializers.validator_configuration import ValidatorConfigurationSerializer
-from v1.crawl.constants import CRAWL_STATUS_NOT_CRAWLING, CRAWL_STATUS_STOP_REQUESTED
 from v1.notifications.crawl_status import send_crawl_status_notification
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.validators.helpers.validator_configuration import (

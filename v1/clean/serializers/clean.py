@@ -1,15 +1,15 @@
 from django.core.cache import cache
 from rest_framework import serializers
-
-from v1.cache_tools.cache_keys import CLEAN_CACHE_LOCK_KEY, CLEAN_STATUS
-from v1.tasks.clean import start_clean
-from ..constants import (
+from thenewboston.constants.clean import (
     CLEAN_COMMAND_START,
     CLEAN_COMMAND_STOP,
     CLEAN_STATUS_CLEANING,
     CLEAN_STATUS_NOT_CLEANING,
     CLEAN_STATUS_STOP_REQUESTED
 )
+
+from v1.cache_tools.cache_keys import CLEAN_CACHE_LOCK_KEY, CLEAN_STATUS
+from v1.tasks.clean import start_clean
 
 
 class CleanSerializer(serializers.Serializer):
