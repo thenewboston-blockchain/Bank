@@ -4,8 +4,11 @@ import pytest
 from django.core.cache import cache
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from thenewboston.utils.format import format_address
 from thenewboston.utils.signed_requests import generate_signed_request
 
+from v1.validators.models.validator import Validator
+from v1.validators.serializers.validator import ValidatorSerializer
 from v1.cache_tools.cache_keys import CLEAN_STATUS
 from v1.self_configurations.helpers.signing_key import get_signing_key
 from ..constants import (
@@ -49,6 +52,23 @@ def test_clean_start_200(client, no_requests, celery_worker):
     time.sleep(2)
     assert cache.get(CLEAN_STATUS) == CLEAN_STATUS_NOT_CLEANING
     assert clean_status(client)['clean_status'] == CLEAN_STATUS_NOT_CLEANING
+
+
+def test_clean_start_200_validator_removed(client, settings, requests_mock):
+    settings.CELERY_TASK_ALWAYS_EAGER = True
+
+    validator = Validator.objects.first()
+    validator_address = format_address(
+        ip_address=validator.ip_address,
+        port=validator.port,
+        protocol=validator.protocol
+    )
+    requests_mock.get(
+        f'{validator_address}/config',
+        json=ValidatorSerializer(validator).data,
+    )
+    clean_request(client, CLEAN_COMMAND_START, HTTP_200_OK)
+    validator.refresh_from_db()
 
 
 def test_clean_start_400_already_cleaning(client):
