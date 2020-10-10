@@ -6,5 +6,5 @@ flower==0.9.4
 redis==3.5.2
 requests-mock==1.8.0
 tblib==1.6.0
-thenewboston==0.0.21
+thenewboston==0.0.23
 wheel==0.35.1

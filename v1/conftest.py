@@ -1,6 +1,8 @@
 import pytest
+from django.conf import settings
 from django.core.management import call_command
 from factory import Faker
+from pytest_django.migrations import DisableMigrations
 from thenewboston.accounts.manage import create_account
 from thenewboston.blocks.block import generate_block
 from thenewboston.third_party.pytest.client import UserWrapper
@@ -72,6 +74,12 @@ def enable_db_access_for_all_tests(db):
 @pytest.fixture
 def encoded_account_number(account_number):
     yield encode_verify_key(verify_key=account_number)
+
+
+@pytest.fixture(scope='session', autouse=True)
+def migrations_disabled():
+    settings.MIGRATION_MODULES = DisableMigrations()
+    yield None
 
 
 @pytest.fixture
