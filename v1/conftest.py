@@ -1,5 +1,5 @@
-from django.conf import settings
 import pytest
+from django.conf import settings
 from django.core.management import call_command
 from factory import Faker
 from pytest_django.migrations import DisableMigrations
@@ -76,6 +76,12 @@ def encoded_account_number(account_number):
     yield encode_verify_key(verify_key=account_number)
 
 
+@pytest.fixture(scope='session', autouse=True)
+def migrations_disabled():
+    settings.MIGRATION_MODULES = DisableMigrations()
+    yield None
+
+
 @pytest.fixture
 def random_encoded_account_number():
     _, account_number = create_account()
@@ -98,9 +104,3 @@ def self_configuration(monkeypatch):
 @pytest.fixture
 def validator(encoded_account_number):
     yield ValidatorFactory(node_identifier=encoded_account_number)
-
-
-@pytest.fixture(scope='session', autouse=True)
-def migrations_disabled():
-    settings.MIGRATION_MODULES = DisableMigrations()
-    yield None

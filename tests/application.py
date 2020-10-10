@@ -2,6 +2,15 @@ import pycodestyle
 import pytest
 
 
+@pytest.mark.django_db
+def test_migration():
+    """
+    Will run migration
+    """
+
+    assert True
+
+
 def test_style():
     """
     Test PEP 8 style conventions
@@ -13,9 +22,3 @@ def test_style():
     style = pycodestyle.StyleGuide(ignore=['E501', 'W504'])
     result = style.check_files(['config/', 'v1/'])
     assert not result.total_errors
-
-
-@pytest.mark.django_db
-def test_migration():
-    """Will run migration"""
-    assert True
