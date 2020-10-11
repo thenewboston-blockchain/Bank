@@ -6,6 +6,7 @@ from thenewboston.utils.format import format_address
 from thenewboston.utils.network import post
 from thenewboston.utils.signed_requests import generate_signed_request
 
+from v1.notifications.status_updates import send_primary_validator_updated_notification
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.self_configurations.helpers.signing_key import get_signing_key
 from v1.validators.models.validator import Validator
@@ -99,6 +100,7 @@ def set_primary_validator():
             self_configuration.save()
 
             send_primary_validator_updated_notices.delay()
+            send_primary_validator_updated_notification()
             return
         except Exception as e:
             logger.exception(e)

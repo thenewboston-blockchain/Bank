@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from thenewboston.utils.fields import all_field_names
 
-from v1.tasks.sync import set_primary_validator
 from ..models.validator import Validator
 
 
@@ -32,5 +31,8 @@ class ValidatorSerializerUpdate(serializers.ModelSerializer):
         """
 
         instance = super().update(instance, validated_data)
+
+        from v1.tasks.sync import set_primary_validator
         set_primary_validator.delay()
+
         return instance
