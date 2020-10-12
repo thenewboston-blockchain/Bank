@@ -3,8 +3,8 @@ from asgiref.sync import sync_to_async
 from channels.testing import WebsocketCommunicator
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
-from thenewboston.utils.signed_requests import generate_signed_request
 from thenewboston.constants.clean import CLEAN_COMMAND_START, CLEAN_STATUS_NOT_CLEANING
+from thenewboston.utils.signed_requests import generate_signed_request
 
 from v1.notifications.constants import CLEAN_STATUS_NOTIFICATION
 from v1.self_configurations.helpers.signing_key import get_signing_key
@@ -14,7 +14,6 @@ from ..consumers.clean_status import CleanStatusConsumer
 @pytest.mark.asyncio
 @pytest.mark.django_db(transaction=True)
 async def test_clean_status_async(client, no_requests, celery_worker):
-
     communicator = WebsocketCommunicator(
         CleanStatusConsumer,
         'ws/clean_status'

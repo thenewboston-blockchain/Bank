@@ -3,6 +3,7 @@ import logging
 from celery import shared_task
 from django.core.cache import cache
 from django.utils import timezone
+from sentry_sdk import capture_exception
 from thenewboston.constants.clean import CLEAN_STATUS_NOT_CLEANING, CLEAN_STATUS_STOP_REQUESTED
 from thenewboston.constants.network import BANK, CONFIRMATION_VALIDATOR
 from thenewboston.utils.format import format_address
@@ -32,15 +33,19 @@ def clean_nodes(*, nodes_type):
     primary_validator = self_configuration.primary_validator
 
     excluded_node_identifiers = [self_configuration.node_identifier, primary_validator.node_identifier]
+
     if nodes_type == BANK:
         model = Bank
     elif nodes_type == CONFIRMATION_VALIDATOR:
         model = Validator
+    else:
+        raise RuntimeError(f'Invalid nodes_type of {nodes_type}')
 
     nodes = model.objects.all().exclude(node_identifier__in=excluded_node_identifiers)
-
     nodes_to_delete = []
+
     for node in nodes:
+
         if cache.get(CLEAN_STATUS) == CLEAN_STATUS_STOP_REQUESTED:
             break
 
@@ -52,21 +57,23 @@ def clean_nodes(*, nodes_type):
             )
             config_address = f'{address}/config'
             config_data = fetch(url=config_address, headers={})
-
         except Exception as e:
+            capture_exception(e)
             logger.exception(e)
             nodes_to_delete.append(node.id)
             continue
 
         for field in ['ip_address', 'port', 'protocol', 'node_identifier']:
+
             if config_data.get(field) != getattr(node, field):
                 nodes_to_delete.append(node.id)
                 continue
 
         if nodes_type == BANK:
             serializer = BankConfigurationSerializer(data=config_data)
+
             if serializer.is_valid():
-                update_bank_from_config_data(config_data=config_data)
+                update_bank_from_config_data(bank=node, config_data=config_data)
             else:
                 logger.exception(serializer.errors)
                 nodes_to_delete.append(node.id)
@@ -74,8 +81,9 @@ def clean_nodes(*, nodes_type):
 
         if nodes_type == CONFIRMATION_VALIDATOR:
             serializer = ValidatorConfigurationSerializer(data=config_data)
+
             if serializer.is_valid():
-                update_validator_from_config_data(config_data=config_data)
+                update_validator_from_config_data(validator=node, config_data=config_data)
             else:
                 logger.exception(serializer.errors)
                 nodes_to_delete.append(node.id)

@@ -14,10 +14,10 @@ from thenewboston.constants.clean import (
 from thenewboston.utils.format import format_address
 from thenewboston.utils.signed_requests import generate_signed_request
 
-from v1.validators.models.validator import Validator
-from v1.validators.serializers.validator import ValidatorSerializer
 from v1.cache_tools.cache_keys import CLEAN_STATUS
 from v1.self_configurations.helpers.signing_key import get_signing_key
+from v1.validators.models.validator import Validator
+from v1.validators.serializers.validator import ValidatorSerializer
 from ..serializers.clean import CleanSerializer
 
 
