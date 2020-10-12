@@ -39,3 +39,23 @@ def get_primary_validator():
         raise RuntimeError('No primary validator')
 
     return primary_validator
+
+
+def update_bank_from_config_data(*, bank, config_data):
+    """
+    Update bank from config data
+    """
+
+    fields = standard_field_names(Bank)
+    data = {field: config_data[field] for field in fields if field != 'trust'}
+    Bank.objects.filter(pk=bank.pk).update(**data)
+
+
+def update_validator_from_config_data(*, validator, config_data):
+    """
+    Update validator from config data
+    """
+
+    fields = standard_field_names(Validator)
+    data = {field: config_data[field] for field in fields if field != 'trust'}
+    Validator.objects.filter(pk=validator.pk).update(**data)

@@ -3,21 +3,20 @@ from asgiref.sync import sync_to_async
 from channels.testing import WebsocketCommunicator
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
-from thenewboston.constants.crawl import CRAWL_COMMAND_START, CRAWL_STATUS_NOT_CRAWLING
+from thenewboston.constants.clean import CLEAN_COMMAND_START, CLEAN_STATUS_NOT_CLEANING
 from thenewboston.utils.signed_requests import generate_signed_request
 
-from v1.notifications.constants import CRAWL_STATUS_NOTIFICATION
+from v1.notifications.constants import CLEAN_STATUS_NOTIFICATION
 from v1.self_configurations.helpers.signing_key import get_signing_key
-from ..consumers.crawl_status import CrawlStatusConsumer
+from ..consumers.clean_status import CleanStatusConsumer
 
 
 @pytest.mark.asyncio
 @pytest.mark.django_db(transaction=True)
-async def test_crawl_status_async(client, self_configuration, celery_worker):
-
+async def test_clean_status_async(client, no_requests, celery_worker):
     communicator = WebsocketCommunicator(
-        CrawlStatusConsumer,
-        'ws/crawl_status'
+        CleanStatusConsumer,
+        'ws/clean_status'
     )
     connected, subprotocol = await communicator.connect()
     assert connected
@@ -25,10 +24,10 @@ async def test_crawl_status_async(client, self_configuration, celery_worker):
     await sync_to_async(
         client.post_json
     )(
-        reverse('crawl-list'),
+        reverse('clean-list'),
         generate_signed_request(
             data={
-                'crawl': CRAWL_COMMAND_START
+                'clean': CLEAN_COMMAND_START
             },
             nid_signing_key=get_signing_key()
         ),
@@ -36,8 +35,8 @@ async def test_crawl_status_async(client, self_configuration, celery_worker):
     )
     async_response = await communicator.receive_json_from(timeout=3)
     await communicator.disconnect()
-    crawl_status = async_response['payload']
+    clean_status = async_response['payload']
 
-    assert async_response['notification_type'] == CRAWL_STATUS_NOTIFICATION
-    assert crawl_status['crawl_last_completed']
-    assert crawl_status['crawl_status'] == CRAWL_STATUS_NOT_CRAWLING
+    assert async_response['notification_type'] == CLEAN_STATUS_NOTIFICATION
+    assert clean_status['clean_last_completed']
+    assert clean_status['clean_status'] == CLEAN_STATUS_NOT_CLEANING
