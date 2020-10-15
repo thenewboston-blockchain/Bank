@@ -10,7 +10,6 @@ from ..consumers.primary_validator_updated import PrimaryValidatorUpdatedConsume
 @pytest.mark.asyncio
 @pytest.mark.django_db(transaction=True)
 async def test_primary_validator_updated_async(client, self_configuration):
-
     communicator = WebsocketCommunicator(
         PrimaryValidatorUpdatedConsumer,
         'ws/primary_validator_updated'
