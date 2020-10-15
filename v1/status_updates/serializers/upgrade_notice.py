@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from thenewboston.constants.network import VERIFY_KEY_LENGTH
 
+from v1.notifications.status_updates import send_primary_validator_updated_notification
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.sync import send_primary_validator_updated_notices
 from v1.validators.models.validator import Validator
@@ -30,6 +31,7 @@ class UpgradeNoticeSerializer(serializers.Serializer):
             self_configuration.primary_validator = validator
             self_configuration.save()
             send_primary_validator_updated_notices.delay()
+            send_primary_validator_updated_notification()
             return True
 
         validator.delete()
