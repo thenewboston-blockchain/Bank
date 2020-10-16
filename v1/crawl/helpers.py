@@ -10,6 +10,7 @@ def get_crawl_info():
     - HTTP responses
     - WS messages
     """
+
     self_configuration = get_self_configuration(exception_class=RuntimeError)
 
     return {
