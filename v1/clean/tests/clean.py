@@ -18,6 +18,7 @@ from v1.cache_tools.cache_keys import CLEAN_STATUS
 from v1.self_configurations.helpers.signing_key import get_signing_key
 from v1.validators.models.validator import Validator
 from v1.validators.serializers.validator import ValidatorSerializer
+from ..helpers import get_clean_info
 from ..serializers.clean import CleanSerializer
 
 
@@ -117,4 +118,7 @@ def test_clean_stop_400_not_cleaning(client):
 )
 def test_clean_status_200(client, status):
     cache.set(CLEAN_STATUS, status, None)
-    assert clean_status(client)['clean_status'] == status
+    result = clean_status(client)
+
+    assert result['clean_status'] == status
+    assert result == get_clean_info()
