@@ -15,6 +15,7 @@ from thenewboston.utils.signed_requests import generate_signed_request
 
 from v1.cache_tools.cache_keys import CRAWL_STATUS
 from v1.self_configurations.helpers.signing_key import get_signing_key
+from ..helpers import get_crawl_info
 from ..serializers.crawl import CrawlSerializer
 
 
@@ -97,4 +98,7 @@ def test_crawl_stop_400_not_crawling(client, self_configuration):
 )
 def test_crawl_status_200(client, status, self_configuration):
     cache.set(CRAWL_STATUS, status, None)
-    assert crawl_status(client)['crawl_status'] == status
+    result = crawl_status(client)
+
+    assert result['crawl_status'] == status
+    assert result == get_crawl_info()

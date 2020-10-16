@@ -1,6 +1,7 @@
 from django.core.cache import cache
 
 from v1.cache_tools.cache_keys import CRAWL_LAST_COMPLETED, CRAWL_STATUS
+from v1.self_configurations.helpers.self_configuration import get_self_configuration
 
 
 def get_crawl_info():
@@ -10,7 +11,12 @@ def get_crawl_info():
     - WS messages
     """
 
+    self_configuration = get_self_configuration(exception_class=RuntimeError)
+
     return {
         'crawl_last_completed': cache.get(CRAWL_LAST_COMPLETED),
-        'crawl_status': cache.get(CRAWL_STATUS)
+        'crawl_status': cache.get(CRAWL_STATUS),
+        'ip_address': self_configuration.ip_address,
+        'port': self_configuration.port,
+        'protocol': self_configuration.protocol
     }
