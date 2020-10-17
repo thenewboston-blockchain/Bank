@@ -1,10 +1,9 @@
 celery==4.4.2
 django-debug-toolbar==3.1.1
 django-filter==2.3.0
-django-redis==4.11.0
 flower==0.9.4
 redis==3.5.2
 requests-mock==1.8.0
 tblib==1.6.0
-thenewboston==0.0.23
+thenewboston==0.0.24
 wheel==0.35.1
