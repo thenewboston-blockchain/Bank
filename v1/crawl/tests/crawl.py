@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from django.core.cache import cache
 from rest_framework.reverse import reverse
@@ -13,7 +11,7 @@ from thenewboston.constants.crawl import (
 )
 from thenewboston.utils.signed_requests import generate_signed_request
 
-from v1.cache_tools.cache_keys import CRAWL_STATUS
+from v1.cache_tools.cache_keys import CRAWL_LAST_COMPLETED, CRAWL_STATUS
 from v1.self_configurations.helpers.signing_key import get_signing_key
 from ..helpers import get_crawl_info
 from ..serializers.crawl import CrawlSerializer
@@ -40,16 +38,16 @@ def crawl_status(client):
 
 
 @pytest.mark.django_db(transaction=True)
-def test_crawl_start_200(client, self_configuration, celery_worker):
-    response = crawl_request(client, CRAWL_COMMAND_START, HTTP_200_OK)
+def test_crawl_start_200(client, self_configuration, settings):
+    settings.CELERY_TASK_ALWAYS_EAGER = True
+    crawl_request(client, CRAWL_COMMAND_START, HTTP_200_OK)
 
-    assert response['crawl_last_completed'] is None
-    assert response['crawl_status'] == CRAWL_STATUS_CRAWLING
-
-    assert cache.get(CRAWL_STATUS) == CRAWL_STATUS_CRAWLING
-    time.sleep(2)
+    assert cache.get(CRAWL_LAST_COMPLETED) is not None
     assert cache.get(CRAWL_STATUS) == CRAWL_STATUS_NOT_CRAWLING
-    assert crawl_status(client)['crawl_status'] == CRAWL_STATUS_NOT_CRAWLING
+
+    status = crawl_status(client)
+    assert status['crawl_last_completed'] is not None
+    assert status['crawl_status'] == CRAWL_STATUS_NOT_CRAWLING
 
 
 def test_crawl_start_400_already_crawling(client, self_configuration):
@@ -69,15 +67,14 @@ def test_crawl_start_400_stop_requested(client, self_configuration):
 
 
 @pytest.mark.django_db(transaction=True)
-def test_crawl_stop_200(client, self_configuration, celery_worker):
-    crawl_request(client, CRAWL_COMMAND_START, HTTP_200_OK)
+def test_crawl_stop_200(client, self_configuration, settings):
+    settings.CELERY_TASK_ALWAYS_EAGER = True
+
+    cache.set(CRAWL_STATUS, CRAWL_STATUS_CRAWLING, None)
     response = crawl_request(client, CRAWL_COMMAND_STOP, HTTP_200_OK)
 
-    assert response['crawl_last_completed'] is None
     assert response['crawl_status'] == CRAWL_STATUS_STOP_REQUESTED
-    time.sleep(2)
-    assert cache.get(CRAWL_STATUS) == CRAWL_STATUS_NOT_CRAWLING
-    assert crawl_status(client)['crawl_status'] == CRAWL_STATUS_NOT_CRAWLING
+    assert cache.get(CRAWL_STATUS) == CRAWL_STATUS_STOP_REQUESTED
 
 
 def test_crawl_stop_400_not_crawling(client, self_configuration):
