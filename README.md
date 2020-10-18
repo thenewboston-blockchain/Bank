@@ -54,9 +54,9 @@ Run Celery:
 celery -A config.settings worker -l debug
 ```
 
-To run all tests:
+To run all tests in parallel:
 ```
-pytest
+pytest -n auto
 ```
 
 To monitor Celery tasks:
@@ -71,9 +71,9 @@ Run:
 docker-compose up # add -d to detach from donsole
 ```
 
-To run all tests:
+To run all tests in parallel:
 ```
-docker-compose run app pytest
+docker-compose run app pytest -n auto
 # or
 docker-compose exec app pytest # if docker-compose run is running
 ```

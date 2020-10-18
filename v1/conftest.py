@@ -106,6 +106,16 @@ def self_configuration(monkeypatch):
     yield get_self_configuration(exception_class=RuntimeError)
 
 
+@pytest.fixture(autouse=True)
+def use_fake_redis(settings):
+    """
+    Using fake Redis for running tests in parallel.
+    """
+
+    settings.DJANGO_REDIS_CONNECTION_FACTORY = 'thenewboston.third_party.django_redis.pool.FakeConnectionFactory'
+    settings.CACHES['default']['OPTIONS']['REDIS_CLIENT_CLASS'] = 'fakeredis.FakeStrictRedis'
+
+
 @pytest.fixture
 def validator(encoded_account_number):
     yield ValidatorFactory(node_identifier=encoded_account_number)
