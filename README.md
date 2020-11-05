@@ -56,7 +56,7 @@ celery flower -A config.settings --address=127.0.0.1 --port=5555
 
 Run:
 ```
-docker-compose up # add -d to detach from donsole
+docker-compose up # add -d to detach from console
 ```
 
 To run all tests in parallel:
