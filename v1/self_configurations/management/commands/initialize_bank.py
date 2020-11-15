@@ -21,8 +21,8 @@ Running this script will:
 class Command(InitializeNode):
     help = 'Initialize bank'
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         self.required_input = {
             'account_number': None,
@@ -42,20 +42,23 @@ class Command(InitializeNode):
         # Input values
         self.get_verify_key(
             attribute_name='node_identifier',
-            human_readable_name='node identifier'
+            human_readable_name='node identifier',
+            value=options.get('node_identifier')
         )
         self.get_verify_key(
             attribute_name='account_number',
-            human_readable_name='account number'
+            human_readable_name='account number',
+            value=options.get('account_number')
         )
         self.get_fee(
             attribute_name='default_transaction_fee',
-            human_readable_name='default transaction fee'
+            human_readable_name='default transaction fee',
+            value=options.get('default_transaction_fee')
         )
-        self.get_protocol()
-        self.get_ip_address()
-        self.get_port()
-        self.get_version_number()
+        self.get_protocol(value=options.get('protocol'))
+        self.get_ip_address(value=options.get('ip_address'))
+        self.get_port(value=options.get('port'))
+        self.get_version_number(value=options.get('version_number'))
 
         self.initialize_bank()
 
