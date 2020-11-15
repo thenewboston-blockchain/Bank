@@ -1,7 +1,7 @@
+from faker import Faker
 import pytest
 from django.conf import settings
 from django.core.management import call_command
-from factory import Faker
 from pytest_django.migrations import DisableMigrations
 from thenewboston.accounts.manage import create_account
 from thenewboston.blocks.block import generate_block
@@ -54,7 +54,7 @@ def block_data(account_data, account, encoded_account_number, random_encoded_acc
                 'recipient': primary_validator.account_number
             },
             {
-                'amount': Faker('pyint').generate(),
+                'amount': Faker().pyint(),
                 'recipient': random_encoded_account_number
             }
         ]

@@ -1,9 +1,5 @@
 celery==4.4.2
-django-debug-toolbar==3.1.1
-django-filter==2.3.0
-flower==0.9.4
-redis==3.5.2
-requests-mock==1.8.0
-tblib==1.6.0
-thenewboston==0.0.24
-wheel==0.35.1
+flower==0.9.5
+redis==3.5.3
+tblib==1.7.0
+thenewboston==0.0.28
