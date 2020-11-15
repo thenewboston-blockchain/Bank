@@ -9,7 +9,6 @@ from ..consumers.confirmation_block import ConfirmationBlockConsumer
 
 
 @pytest.mark.asyncio
-@pytest.mark.django_db(transaction=True)
 async def test_confirmation_block_async(client, validator, block, confirmation_block_data):
     inner_block = confirmation_block_data['message']['block']
     sender_account_number = inner_block['account_number']

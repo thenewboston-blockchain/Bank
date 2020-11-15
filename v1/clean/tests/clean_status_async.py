@@ -12,7 +12,6 @@ from ..consumers.clean_status import CleanStatusConsumer
 
 
 @pytest.mark.asyncio
-@pytest.mark.django_db(transaction=True)
 async def test_clean_status_async(client, no_requests, celery_worker):
     communicator = WebsocketCommunicator(
         CleanStatusConsumer,

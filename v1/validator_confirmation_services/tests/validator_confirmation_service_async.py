@@ -12,7 +12,6 @@ from ..consumers.validator_confirmation_service import ValidatorConfirmationServ
 
 
 @pytest.mark.asyncio
-@pytest.mark.django_db(transaction=True)
 async def test_validator_confirmation_service_post_async(
     client, validator, signing_key
 ):

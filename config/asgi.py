@@ -11,6 +11,7 @@ import os
 
 import django
 from channels.routing import get_default_application
+from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 
 from config.helpers.environment import SETTINGS_MODULE
 
@@ -18,3 +19,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', SETTINGS_MODULE)
 django.setup()
 
 application = get_default_application()
+application = SentryAsgiMiddleware(application)
