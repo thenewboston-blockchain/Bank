@@ -16,6 +16,9 @@ export DJANGO_APPLICATION_ENVIRONMENT='local'
 
 # 64 character signing key used to authenticate network requests
 export NETWORK_SIGNING_KEY='e5e5fec0dcbbd8b0a76c67204823678d3f243de7a0a1042bb3ecf66285cd9fd4'
+
+# A string with random chars
+export SECRET_KEY='some random string'
 ```
 
 Install Redis:
