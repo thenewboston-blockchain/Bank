@@ -27,6 +27,7 @@ services:
       - POSTGRES_DB=thenewboston
       - POSTGRES_USER=thenewboston
       - POSTGRES_PASSWORD=thenewboston
+      - SECRET_KEY=somesecret
     command: python3 -u /opt/project/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/opt/project
@@ -51,6 +52,7 @@ services:
       - POSTGRES_DB=thenewboston
       - POSTGRES_USER=thenewboston
       - POSTGRES_PASSWORD=thenewboston
+      - SECRET_KEY=somesecret
     command: celery -A config.settings worker -l debug
     volumes:
       - .:/opt/project

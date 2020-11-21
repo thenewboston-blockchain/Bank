@@ -54,3 +54,4 @@ jobs:
           POSTGRES_DB: thenewboston
           POSTGRES_USER: thenewboston
           POSTGRES_PASSWORD: thenewboston
+          SECRET_KEY: somesecret
