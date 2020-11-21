@@ -16,3 +16,6 @@ if ENVIRONMENT == 'production':
 
 if ENVIRONMENT == 'staging':
     SETTINGS_MODULE = 'config.settings.staging'
+
+if ENVIRONMENT == 'test':
+    SETTINGS_MODULE = 'config.settings.test'

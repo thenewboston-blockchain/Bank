@@ -67,8 +67,10 @@ def client():
 
 
 @pytest.fixture(autouse=True)
-def enable_db_access_for_all_tests(db):
-    pass
+def enable_db_access_for_all_tests(request, django_db_setup, django_db_blocker):
+    from pytest_django.fixtures import _django_db_fixture_helper
+    django_db_blocker.unblock()
+    _django_db_fixture_helper(request, django_db_blocker, transactional=True)
 
 
 @pytest.fixture
