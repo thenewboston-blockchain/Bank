@@ -1,5 +1,5 @@
-from faker import Faker
 import pytest
+from faker import Faker
 from thenewboston.blocks.block import generate_block
 
 from ..factories.block import BlockFactory
