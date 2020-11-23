@@ -1,0 +1,21 @@
+v1.status\_updates.views package
+================================
+
+Submodules
+----------
+
+v1.status\_updates.views.upgrade\_notice module
+-----------------------------------------------
+
+.. automodule:: v1.status_updates.views.upgrade_notice
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.status_updates.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.connection\_requests.tests package
+=====================================
+
+Submodules
+----------
+
+v1.connection\_requests.tests.connection\_request module
+--------------------------------------------------------
+
+.. automodule:: v1.connection_requests.tests.connection_request
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.connection_requests.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:

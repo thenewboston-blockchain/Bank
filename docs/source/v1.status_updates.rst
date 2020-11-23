@@ -1,0 +1,40 @@
+v1.status\_updates package
+==========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.status_updates.consumers
+   v1.status_updates.serializers
+   v1.status_updates.tests
+   v1.status_updates.views
+
+Submodules
+----------
+
+v1.status\_updates.routing module
+---------------------------------
+
+.. automodule:: v1.status_updates.routing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.status\_updates.urls module
+------------------------------
+
+.. automodule:: v1.status_updates.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.status_updates
+   :members:
+   :undoc-members:
+   :show-inheritance:

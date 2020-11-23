@@ -1,0 +1,21 @@
+v1.decorators package
+=====================
+
+Submodules
+----------
+
+v1.decorators.nodes module
+--------------------------
+
+.. automodule:: v1.decorators.nodes
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.decorators
+   :members:
+   :undoc-members:
+   :show-inheritance:

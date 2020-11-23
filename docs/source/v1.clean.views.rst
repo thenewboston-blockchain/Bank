@@ -1,0 +1,21 @@
+v1.clean.views package
+======================
+
+Submodules
+----------
+
+v1.clean.views.clean module
+---------------------------
+
+.. automodule:: v1.clean.views.clean
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.clean.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

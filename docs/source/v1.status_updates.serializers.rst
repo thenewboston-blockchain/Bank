@@ -1,0 +1,21 @@
+v1.status\_updates.serializers package
+======================================
+
+Submodules
+----------
+
+v1.status\_updates.serializers.upgrade\_notice module
+-----------------------------------------------------
+
+.. automodule:: v1.status_updates.serializers.upgrade_notice
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.status_updates.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

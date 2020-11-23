@@ -1,0 +1,50 @@
+v1.invalid\_blocks package
+==========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.invalid_blocks.factories
+   v1.invalid_blocks.migrations
+   v1.invalid_blocks.models
+   v1.invalid_blocks.serializers
+   v1.invalid_blocks.tests
+   v1.invalid_blocks.views
+
+Submodules
+----------
+
+v1.invalid\_blocks.admin module
+-------------------------------
+
+.. automodule:: v1.invalid_blocks.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.invalid\_blocks.apps module
+------------------------------
+
+.. automodule:: v1.invalid_blocks.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.invalid\_blocks.urls module
+------------------------------
+
+.. automodule:: v1.invalid_blocks.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.invalid_blocks
+   :members:
+   :undoc-members:
+   :show-inheritance:

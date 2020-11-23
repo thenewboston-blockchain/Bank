@@ -1,0 +1,45 @@
+v1.tasks package
+================
+
+Submodules
+----------
+
+v1.tasks.blocks module
+----------------------
+
+.. automodule:: v1.tasks.blocks
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.tasks.clean module
+---------------------
+
+.. automodule:: v1.tasks.clean
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.tasks.crawl module
+---------------------
+
+.. automodule:: v1.tasks.crawl
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.tasks.sync module
+--------------------
+
+.. automodule:: v1.tasks.sync
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.tasks
+   :members:
+   :undoc-members:
+   :show-inheritance:

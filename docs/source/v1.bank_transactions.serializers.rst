@@ -1,0 +1,21 @@
+v1.bank\_transactions.serializers package
+=========================================
+
+Submodules
+----------
+
+v1.bank\_transactions.serializers.bank\_transaction module
+----------------------------------------------------------
+
+.. automodule:: v1.bank_transactions.serializers.bank_transaction
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.bank_transactions.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:
