@@ -1,11 +1,22 @@
-FROM python:3.8
+FROM python:3.8-alpine
 
 WORKDIR /opt/project
 
-COPY . .
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-RUN set -x; \
-    python3 -m pip install pip-tools; \
-    python3 -m pip install --no-cache-dir -r requirements/local.txt; \
-    test -e thenewboston.tar.gz && python3 -m pip install thenewboston.tar.gz; \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.cache
+COPY ./requirements/local.txt /requirements.txt
+COPY ./thenewboston.tar.* .
+
+RUN set -xe \
+    && apk update \
+    && apk add --virtual build-deps gcc python3-dev musl-dev libressl-dev libffi-dev make \
+    && apk add postgresql-dev \
+    && apk add postgresql-client \
+    && pip install --upgrade pip pip-tools \
+    && pip install --no-cache-dir -r /requirements.txt \
+    && if [ -f thenewboston.tar.gz ]; then pip install thenewboston.tar.gz; fi \
+    && apk del build-deps \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /root/.cache
+
+COPY . .
