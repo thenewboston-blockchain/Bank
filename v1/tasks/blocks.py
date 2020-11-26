@@ -17,9 +17,9 @@ logger = logging.getLogger('thenewboston')
 def request_new_primary_validator():
     """
     Request a new primary validator
+
     Called if/when the existing primary validator goes offline
     """
-
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
     primary_validator.trust = 0
@@ -29,10 +29,7 @@ def request_new_primary_validator():
 
 @shared_task
 def send_signed_block(*, block, ip_address, port, protocol, url_path):
-    """
-    Sign block and send to recipient
-    """
-
+    """Sign block and send to recipient"""
     signing_key = get_signing_key()
     node_identifier = get_verify_key(signing_key=signing_key)
     node_identifier = encode_verify_key(verify_key=node_identifier)

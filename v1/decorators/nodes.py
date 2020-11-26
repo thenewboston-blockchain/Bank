@@ -14,12 +14,9 @@ logger = logging.getLogger('thenewboston')
 
 
 def is_self_signed_message(func):
-    """
-    Verify that the client making the request is self
-    """
-
+    """Verify that the client making the request is self"""
     @wraps(func)
-    def inner(object, request, *args, **kwargs):
+    def inner(obj, request, *args, **kwargs):
         request, error = verify_request_signature(request=request, signed_data_key='message')
 
         if error:
@@ -31,24 +28,21 @@ def is_self_signed_message(func):
         if node_identifier != self_configuration.node_identifier:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
-        return func(object, request, *args, **kwargs)
+        return func(obj, request, *args, **kwargs)
 
     return inner
 
 
 def is_signed_message(func):
-    """
-    Verify that the request has been signed
-    """
-
+    """Verify that the request has been signed"""
     @wraps(func)
-    def inner(object, request, *args, **kwargs):
+    def inner(obj, request, *args, **kwargs):
         request, error = verify_request_signature(request=request, signed_data_key='message')
 
         if error:
             return Response(error, status=status.HTTP_401_UNAUTHORIZED)
 
-        return func(object, request, *args, **kwargs)
+        return func(obj, request, *args, **kwargs)
 
     return inner
 
@@ -56,9 +50,9 @@ def is_signed_message(func):
 def verify_request_signature(*, request, signed_data_key):
     """
     Verify the request signature
+
     signed_data - block or message
     """
-
     node_identifier = request.data.get('node_identifier')
     signature = request.data.get('signature')
     signed_data = request.data.get(signed_data_key)

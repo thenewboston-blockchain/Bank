@@ -22,10 +22,7 @@ class CrawlSerializer(serializers.Serializer):
     }
 
     def create(self, validated_data):
-        """
-        Start a network crawl
-        """
-
+        """Start a network crawl"""
         crawl = validated_data['crawl']
 
         if crawl == CRAWL_COMMAND_START:
@@ -47,10 +44,10 @@ class CrawlSerializer(serializers.Serializer):
     def validate_crawl(self, crawl):
         """
         Validate the correct crawl command is given
+
         - can not start new crawl when already crawling
         - can not stop crawl if not crawling
         """
-
         crawl_status = cache.get(CRAWL_STATUS)
 
         if crawl == CRAWL_COMMAND_START and crawl_status in (CRAWL_STATUS_CRAWLING, CRAWL_STATUS_STOP_REQUESTED):

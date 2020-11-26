@@ -19,6 +19,7 @@ class ValidatorConfirmationServiceViewSet(
 ):
     """
     Validator confirmation services
+
     ---
     list:
       description: List validator confirmation services

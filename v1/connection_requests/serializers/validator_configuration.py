@@ -15,10 +15,7 @@ class ValidatorConfigurationSerializer(ConfigurationSerializer):
 
     @staticmethod
     def validate_node_type(node_type):
-        """
-        Validate node type
-        """
-
+        """Validate node type"""
         if node_type != CONFIRMATION_VALIDATOR:
             raise serializers.ValidationError('Incorrect node_type')
 

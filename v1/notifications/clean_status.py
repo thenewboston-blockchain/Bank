@@ -8,10 +8,7 @@ from .helpers import standardize_notification
 
 
 def send_clean_status_notification():
-    """
-    Send clean status notification to all recipients
-    """
-
+    """Send clean status notification to all recipients"""
     channel_layer = channels.layers.get_channel_layer()
 
     async_to_sync(channel_layer.group_send)(

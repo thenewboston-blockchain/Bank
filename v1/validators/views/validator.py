@@ -16,6 +16,7 @@ class ValidatorViewSet(
 ):
     """
     Validators
+
     ---
     list:
       description: List validators

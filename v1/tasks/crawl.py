@@ -26,10 +26,10 @@ logger = logging.getLogger('thenewboston')
 def create_banks(*, known_nodes, results):
     """
     For each unknown bank, attempt to:
+
     - fetch config data
     - create new Bank object
     """
-
     for bank in get_unknown_nodes(known_nodes=known_nodes, results=results):
 
         try:
@@ -52,10 +52,7 @@ def create_banks(*, known_nodes, results):
 
 
 def crawl_banks(*, primary_validator_address, self_node_identifier):
-    """
-    Crawl all banks from primary validator and create any new banks
-    """
-
+    """Crawl all banks from primary validator and create any new banks"""
     known_nodes = get_known_nodes(node_class=Bank)
     next_url = f'{primary_validator_address}/banks'
 
@@ -78,10 +75,10 @@ def crawl_banks(*, primary_validator_address, self_node_identifier):
 def create_validators(*, known_nodes, results):
     """
     For each unknown validator, attempt to:
+
     - fetch config data
     - create new Validator object
     """
-
     for validator in get_unknown_nodes(known_nodes=known_nodes, results=results):
 
         try:
@@ -104,10 +101,7 @@ def create_validators(*, known_nodes, results):
 
 
 def crawl_validators(*, primary_validator_address):
-    """
-    Crawl all validators from primary validator and create any new validators
-    """
-
+    """Crawl all validators from primary validator and create any new validators"""
     known_nodes = get_known_nodes(node_class=Validator)
     next_url = f'{primary_validator_address}/validators'
 
@@ -127,10 +121,7 @@ def crawl_validators(*, primary_validator_address):
 
 
 def get_known_nodes(*, node_class):
-    """
-    Return IP address and NID for known validations
-    """
-
+    """Return IP address and NID for known validations"""
     nodes = node_class.objects.all().values('ip_address', 'node_identifier')
     return {
         'ip_addresses': {i['ip_address'] for i in nodes},
@@ -139,23 +130,17 @@ def get_known_nodes(*, node_class):
 
 
 def get_unknown_nodes(*, known_nodes, results):
-    """
-    Filter a results list for unknown nodes
-    """
-
+    """Filter a results list for unknown nodes"""
     return [
         node for node in results if (
-            node['ip_address'] not in known_nodes['ip_addresses'] and
-            node['node_identifier'] not in known_nodes['node_identifiers']
+            node['ip_address'] not in known_nodes['ip_addresses']
+            and node['node_identifier'] not in known_nodes['node_identifiers']
         )
     ]
 
 
 def send_connection_requests(*, node_class, self_configuration):
-    """
-    Send a connection request to any nodes where self is unknown
-    """
-
+    """Send a connection request to any nodes where self is unknown"""
     for node in node_class.objects.all():
 
         if cache.get(CRAWL_STATUS) == CRAWL_STATUS_STOP_REQUESTED:
@@ -170,10 +155,7 @@ def send_connection_requests(*, node_class, self_configuration):
 
 @shared_task
 def start_crawl():
-    """
-    Start a network crawl
-    """
-
+    """Start a network crawl"""
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     self_node_identifier = self_configuration.node_identifier
     primary_validator = self_configuration.primary_validator

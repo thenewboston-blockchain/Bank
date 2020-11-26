@@ -9,10 +9,7 @@ from .helpers import standardize_notification
 
 
 def send_validator_confirmation_service_notification(*, payload):
-    """
-    Send validation confirmation created notification to all recipients
-    """
-
+    """Send validation confirmation created notification to all recipients"""
     channel_layer = channels.layers.get_channel_layer()
 
     async_to_sync(channel_layer.group_send)(

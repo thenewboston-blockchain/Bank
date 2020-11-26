@@ -36,10 +36,7 @@ class InvalidBlockMessageSerializer(serializers.Serializer):
 
     @staticmethod
     def validate_primary_validator_node_identifier(primary_validator_node_identifier):
-        """
-        Validate that primary_validator_node_identifier belongs to primary validator
-        """
-
+        """Validate that primary_validator_node_identifier belongs to primary validator"""
         primary_validator = get_primary_validator()
 
         if primary_validator_node_identifier != primary_validator.node_identifier:
@@ -56,10 +53,7 @@ class InvalidBlockSerializerCreate(serializers.Serializer):
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
 
     def create(self, validated_data):
-        """
-        Create invalid block
-        """
-
+        """Create invalid block"""
         message = validated_data['message']
         confirmation_validator = validated_data['node_identifier']
 
@@ -102,10 +96,7 @@ class InvalidBlockSerializerCreate(serializers.Serializer):
 
     @staticmethod
     def validate_node_identifier(node_identifier):
-        """
-        Validate that node_identifier belongs to a connected validator
-        """
-
+        """Validate that node_identifier belongs to a connected validator"""
         validator = Validator.objects.filter(node_identifier=node_identifier).first()
 
         if not validator:

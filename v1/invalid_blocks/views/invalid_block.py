@@ -15,6 +15,7 @@ class InvalidBlockViewSet(
 ):
     """
     Invalid blocks
+
     ---
     list:
       description: List invalid blocks

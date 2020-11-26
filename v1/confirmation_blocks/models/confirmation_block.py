@@ -9,7 +9,7 @@ from v1.validators.models.validator import Validator
 
 
 class ConfirmationBlock(CreatedModified):
-    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)
+    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)  # noqa: A003
     block = models.ForeignKey(Block, on_delete=models.CASCADE)
     validator = models.ForeignKey(Validator, on_delete=models.CASCADE)
     block_identifier = models.CharField(max_length=BLOCK_IDENTIFIER_LENGTH)

@@ -31,10 +31,7 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
     protocol = serializers.ChoiceField(choices=PROTOCOL_CHOICES)
 
     def create(self, validated_data):
-        """
-        Process validated connection request
-        """
-
+        """Process validated connection request"""
         if validated_data['node_type'] == BANK:
             create_bank_from_config_data(config_data=validated_data)
 
@@ -47,9 +44,9 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
     def get_node_config(data):
         """
         Attempt to connect to node
+
         Return nodes config data after validation
         """
-
         ip_address = data['ip_address']
         protocol = data['protocol']
 
@@ -84,10 +81,7 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
         raise RuntimeError('Method unavailable')
 
     def validate(self, data):
-        """
-        Attempt to connect to node
-        """
-
+        """Attempt to connect to node"""
         ip_address = data['ip_address']
         protocol = data['protocol']
 
@@ -104,10 +98,7 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
 
     @staticmethod
     def validate_node_identifier(node_identifier):
-        """
-        Validate node_identifier length
-        """
-
+        """Validate node_identifier length"""
         if len(node_identifier) != VERIFY_KEY_LENGTH:
             raise serializers.ValidationError(f'node_identifier must be {VERIFY_KEY_LENGTH} characters long')
 

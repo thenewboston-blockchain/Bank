@@ -13,6 +13,7 @@ class BankTransactionViewSet(
 ):
     """
     Bank transactions
+
     ---
     list:
       description: List bank transactions

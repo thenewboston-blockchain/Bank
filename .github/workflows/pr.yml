@@ -42,8 +42,8 @@ jobs:
       - name: Install self
         run: pip install -r requirements/production.txt
 
-#      - name: Lint with flake8
-#        run: flake8 .
+      - name: Lint with flake8
+        run: flake8 .
 
       - name: Test with pytest
         run: pytest -n auto

@@ -23,10 +23,7 @@ class SelfConfiguration(NetworkNode):
         )
 
     def _update_related_bank(self):
-        """
-        Update related row in the bank table
-        """
-
+        """Update related row in the bank table"""
         bank = Bank.objects.filter(ip_address=self.ip_address)
         field_names = common_field_names(self, Bank)
         data = {f: getattr(self, f) for f in field_names}
@@ -37,10 +34,7 @@ class SelfConfiguration(NetworkNode):
             Bank.objects.create(**data, trust=100)
 
     def _validate(self, error):
-        """
-        Ensure only one SelfConfiguration exists
-        """
-
+        """Ensure only one SelfConfiguration exists"""
         if not self.id and SelfConfiguration.objects.exists():
             raise error('Only one SelfConfiguration allowed')
 
