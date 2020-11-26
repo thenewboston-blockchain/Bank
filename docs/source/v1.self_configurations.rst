@@ -1,0 +1,51 @@
+v1.self\_configurations package
+===============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.self_configurations.helpers
+   v1.self_configurations.management
+   v1.self_configurations.migrations
+   v1.self_configurations.models
+   v1.self_configurations.serializers
+   v1.self_configurations.tests
+   v1.self_configurations.views
+
+Submodules
+----------
+
+v1.self\_configurations.admin module
+------------------------------------
+
+.. automodule:: v1.self_configurations.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.self\_configurations.apps module
+-----------------------------------
+
+.. automodule:: v1.self_configurations.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.self\_configurations.urls module
+-----------------------------------
+
+.. automodule:: v1.self_configurations.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.self_configurations
+   :members:
+   :undoc-members:
+   :show-inheritance:

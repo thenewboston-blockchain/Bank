@@ -1,0 +1,50 @@
+v1.blocks package
+=================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.blocks.factories
+   v1.blocks.migrations
+   v1.blocks.models
+   v1.blocks.serializers
+   v1.blocks.tests
+   v1.blocks.views
+
+Submodules
+----------
+
+v1.blocks.admin module
+----------------------
+
+.. automodule:: v1.blocks.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.blocks.apps module
+---------------------
+
+.. automodule:: v1.blocks.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.blocks.urls module
+---------------------
+
+.. automodule:: v1.blocks.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.blocks
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.confirmation\_blocks.consumers package
+=========================================
+
+Submodules
+----------
+
+v1.confirmation\_blocks.consumers.confirmation\_block module
+------------------------------------------------------------
+
+.. automodule:: v1.confirmation_blocks.consumers.confirmation_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.confirmation_blocks.consumers
+   :members:
+   :undoc-members:
+   :show-inheritance:

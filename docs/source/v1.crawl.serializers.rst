@@ -1,0 +1,21 @@
+v1.crawl.serializers package
+============================
+
+Submodules
+----------
+
+v1.crawl.serializers.crawl module
+---------------------------------
+
+.. automodule:: v1.crawl.serializers.crawl
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.crawl.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

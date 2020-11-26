@@ -1,0 +1,48 @@
+v1.crawl package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.crawl.consumers
+   v1.crawl.serializers
+   v1.crawl.tests
+   v1.crawl.views
+
+Submodules
+----------
+
+v1.crawl.helpers module
+-----------------------
+
+.. automodule:: v1.crawl.helpers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.crawl.routing module
+-----------------------
+
+.. automodule:: v1.crawl.routing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.crawl.urls module
+--------------------
+
+.. automodule:: v1.crawl.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.crawl
+   :members:
+   :undoc-members:
+   :show-inheritance:

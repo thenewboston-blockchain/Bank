@@ -1,0 +1,21 @@
+v1.banks.factories package
+==========================
+
+Submodules
+----------
+
+v1.banks.factories.bank module
+------------------------------
+
+.. automodule:: v1.banks.factories.bank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.banks.factories
+   :members:
+   :undoc-members:
+   :show-inheritance:

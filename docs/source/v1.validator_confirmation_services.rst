@@ -1,0 +1,59 @@
+v1.validator\_confirmation\_services package
+============================================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.validator_confirmation_services.consumers
+   v1.validator_confirmation_services.factories
+   v1.validator_confirmation_services.migrations
+   v1.validator_confirmation_services.models
+   v1.validator_confirmation_services.serializers
+   v1.validator_confirmation_services.tests
+   v1.validator_confirmation_services.views
+
+Submodules
+----------
+
+v1.validator\_confirmation\_services.admin module
+-------------------------------------------------
+
+.. automodule:: v1.validator_confirmation_services.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.validator\_confirmation\_services.apps module
+------------------------------------------------
+
+.. automodule:: v1.validator_confirmation_services.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.validator\_confirmation\_services.routing module
+---------------------------------------------------
+
+.. automodule:: v1.validator_confirmation_services.routing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.validator\_confirmation\_services.urls module
+------------------------------------------------
+
+.. automodule:: v1.validator_confirmation_services.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.validator_confirmation_services
+   :members:
+   :undoc-members:
+   :show-inheritance:

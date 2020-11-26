@@ -1,0 +1,21 @@
+v1.invalid\_blocks.views package
+================================
+
+Submodules
+----------
+
+v1.invalid\_blocks.views.invalid\_block module
+----------------------------------------------
+
+.. automodule:: v1.invalid_blocks.views.invalid_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.invalid_blocks.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

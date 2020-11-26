@@ -1,0 +1,21 @@
+v1.confirmation\_blocks.serializers package
+===========================================
+
+Submodules
+----------
+
+v1.confirmation\_blocks.serializers.confirmation\_block module
+--------------------------------------------------------------
+
+.. automodule:: v1.confirmation_blocks.serializers.confirmation_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.confirmation_blocks.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

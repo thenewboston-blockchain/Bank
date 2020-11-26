@@ -1,0 +1,21 @@
+v1.self\_configurations.tests package
+=====================================
+
+Submodules
+----------
+
+v1.self\_configurations.tests.self\_configuration module
+--------------------------------------------------------
+
+.. automodule:: v1.self_configurations.tests.self_configuration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.self_configurations.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:

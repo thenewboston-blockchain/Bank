@@ -1,0 +1,21 @@
+v1.invalid\_blocks.models package
+=================================
+
+Submodules
+----------
+
+v1.invalid\_blocks.models.invalid\_block module
+-----------------------------------------------
+
+.. automodule:: v1.invalid_blocks.models.invalid_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.invalid_blocks.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
