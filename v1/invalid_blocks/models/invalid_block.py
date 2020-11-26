@@ -13,7 +13,7 @@ The block FK will be set if the bank has a record of the block (meaning it was o
 
 
 class InvalidBlock(CreatedModified):
-    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)
+    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)  # noqa: A003
     block = models.ForeignKey(Block, on_delete=models.CASCADE, blank=True, null=True)
     confirmation_validator = models.ForeignKey(
         Validator,

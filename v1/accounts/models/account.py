@@ -7,7 +7,7 @@ from thenewboston.models.created_modified import CreatedModified
 
 
 class Account(CreatedModified):
-    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)
+    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)  # noqa: A003
     account_number = models.CharField(max_length=VERIFY_KEY_LENGTH, unique=True)
     trust = models.DecimalField(
         decimal_places=2,

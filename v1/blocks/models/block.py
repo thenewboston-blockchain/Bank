@@ -11,7 +11,7 @@ modified_date - Not stored on the network, stored by bank for reference only
 
 
 class Block(CreatedModified):
-    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)
+    id = models.UUIDField(default=uuid4, editable=False, primary_key=True)  # noqa: A003
     balance_key = models.CharField(max_length=BALANCE_LOCK_LENGTH, unique=True)
     sender = models.CharField(max_length=VERIFY_KEY_LENGTH)
     signature = models.CharField(max_length=SIGNATURE_LENGTH, unique=True)

@@ -19,7 +19,7 @@ Running this script will:
 
 
 class Command(InitializeNode):
-    help = 'Initialize bank'
+    help = 'Initialize bank'  # noqa: A003
 
     def __init__(self, *args, **kwargs):
         """Initialize bank"""

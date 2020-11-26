@@ -17,7 +17,7 @@ Running this script will:
 
 
 class Command(FetchPrimaryValidatorConfig):
-    help = 'Set primary validator'
+    help = 'Set primary validator'  # noqa: A003
 
     def handle_primary_validator_config(self, primary_validator_config):
         """Set primary validator"""

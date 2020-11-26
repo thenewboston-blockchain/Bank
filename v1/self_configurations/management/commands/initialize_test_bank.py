@@ -29,7 +29,7 @@ User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = 'Delete existing data, load in fixture data, and rebuild cache'
+    help = 'Delete existing data, load in fixture data, and rebuild cache'  # noqa: A003
 
     def add_arguments(self, parser):
         """
