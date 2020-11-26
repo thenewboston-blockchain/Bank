@@ -1,0 +1,21 @@
+v1.status\_updates.consumers package
+====================================
+
+Submodules
+----------
+
+v1.status\_updates.consumers.primary\_validator\_updated module
+---------------------------------------------------------------
+
+.. automodule:: v1.status_updates.consumers.primary_validator_updated
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.status_updates.consumers
+   :members:
+   :undoc-members:
+   :show-inheritance:

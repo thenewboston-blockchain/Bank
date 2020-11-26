@@ -1,0 +1,21 @@
+v1.clean.serializers package
+============================
+
+Submodules
+----------
+
+v1.clean.serializers.clean module
+---------------------------------
+
+.. automodule:: v1.clean.serializers.clean
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.clean.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.blocks.views package
+=======================
+
+Submodules
+----------
+
+v1.blocks.views.block module
+----------------------------
+
+.. automodule:: v1.blocks.views.block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.blocks.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

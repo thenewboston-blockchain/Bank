@@ -1,0 +1,21 @@
+v1.connection\_requests.views package
+=====================================
+
+Submodules
+----------
+
+v1.connection\_requests.views.connection\_request module
+--------------------------------------------------------
+
+.. automodule:: v1.connection_requests.views.connection_request
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.connection_requests.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

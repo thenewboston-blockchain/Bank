@@ -1,0 +1,49 @@
+v1.connection\_requests package
+===============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.connection_requests.factories
+   v1.connection_requests.helpers
+   v1.connection_requests.serializers
+   v1.connection_requests.tests
+   v1.connection_requests.views
+
+Submodules
+----------
+
+v1.connection\_requests.admin module
+------------------------------------
+
+.. automodule:: v1.connection_requests.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.connection\_requests.apps module
+-----------------------------------
+
+.. automodule:: v1.connection_requests.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.connection\_requests.urls module
+-----------------------------------
+
+.. automodule:: v1.connection_requests.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.connection_requests
+   :members:
+   :undoc-members:
+   :show-inheritance:

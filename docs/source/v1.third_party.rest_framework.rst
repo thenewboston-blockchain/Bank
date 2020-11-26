@@ -1,0 +1,21 @@
+v1.third\_party.rest\_framework package
+=======================================
+
+Submodules
+----------
+
+v1.third\_party.rest\_framework.pagination module
+-------------------------------------------------
+
+.. automodule:: v1.third_party.rest_framework.pagination
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.third_party.rest_framework
+   :members:
+   :undoc-members:
+   :show-inheritance:

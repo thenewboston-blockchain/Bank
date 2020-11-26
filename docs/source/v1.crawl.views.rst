@@ -1,0 +1,21 @@
+v1.crawl.views package
+======================
+
+Submodules
+----------
+
+v1.crawl.views.crawl module
+---------------------------
+
+.. automodule:: v1.crawl.views.crawl
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.crawl.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

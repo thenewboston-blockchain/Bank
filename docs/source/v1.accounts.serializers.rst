@@ -1,0 +1,21 @@
+v1.accounts.serializers package
+===============================
+
+Submodules
+----------
+
+v1.accounts.serializers.account module
+--------------------------------------
+
+.. automodule:: v1.accounts.serializers.account
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.accounts.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.blocks.factories package
+===========================
+
+Submodules
+----------
+
+v1.blocks.factories.block module
+--------------------------------
+
+.. automodule:: v1.blocks.factories.block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.blocks.factories
+   :members:
+   :undoc-members:
+   :show-inheritance:

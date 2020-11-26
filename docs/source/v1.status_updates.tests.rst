@@ -1,0 +1,29 @@
+v1.status\_updates.tests package
+================================
+
+Submodules
+----------
+
+v1.status\_updates.tests.primary\_validator\_updated\_async module
+------------------------------------------------------------------
+
+.. automodule:: v1.status_updates.tests.primary_validator_updated_async
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.status\_updates.tests.upgrade\_notice module
+-----------------------------------------------
+
+.. automodule:: v1.status_updates.tests.upgrade_notice
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.status_updates.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.self\_configurations.views package
+=====================================
+
+Submodules
+----------
+
+v1.self\_configurations.views.self\_configuration module
+--------------------------------------------------------
+
+.. automodule:: v1.self_configurations.views.self_configuration
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.self_configurations.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

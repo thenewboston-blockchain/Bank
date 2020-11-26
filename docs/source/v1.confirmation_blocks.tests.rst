@@ -1,0 +1,37 @@
+v1.confirmation\_blocks.tests package
+=====================================
+
+Submodules
+----------
+
+v1.confirmation\_blocks.tests.confirmation\_block module
+--------------------------------------------------------
+
+.. automodule:: v1.confirmation_blocks.tests.confirmation_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.confirmation\_blocks.tests.confirmation\_block\_async module
+---------------------------------------------------------------
+
+.. automodule:: v1.confirmation_blocks.tests.confirmation_block_async
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.confirmation\_blocks.tests.conftest module
+---------------------------------------------
+
+.. automodule:: v1.confirmation_blocks.tests.conftest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.confirmation_blocks.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
