@@ -9,6 +9,7 @@ from ..serializers.upgrade_notice import UpgradeNoticeSerializer
 class UpgradeNoticeViewSet(ViewSet):
     """
     Upgrade notice
+
     ---
     create:
       description: Notice from a previous confirmation validator that they are now a primary validator

@@ -22,10 +22,7 @@ class CleanSerializer(serializers.Serializer):
     }
 
     def create(self, validated_data):
-        """
-        Start a network clean
-        """
-
+        """Start a network clean"""
         clean = validated_data['clean']
 
         if clean == CLEAN_COMMAND_START:
@@ -47,10 +44,10 @@ class CleanSerializer(serializers.Serializer):
     def validate_clean(self, clean):
         """
         Validate the correct clean command is given
+
         - can not start new clean when already cleaning
         - can not stop clean if not cleaning
         """
-
         clean_status = cache.get(CLEAN_STATUS)
 
         if clean == CLEAN_COMMAND_START and clean_status in (CLEAN_STATUS_CLEANING, CLEAN_STATUS_STOP_REQUESTED):

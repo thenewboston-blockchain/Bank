@@ -14,6 +14,7 @@ class BlockViewSet(
 ):
     """
     Blocks
+
     ---
     list:
       description: List blocks

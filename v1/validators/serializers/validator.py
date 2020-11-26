@@ -27,10 +27,7 @@ class ValidatorSerializerUpdate(serializers.ModelSerializer):
         model = Validator
 
     def update(self, instance, validated_data):
-        """
-        Check to see if new primary validator needs set due to updated trust levels
-        """
-
+        """Check to see if new primary validator needs set due to updated trust levels"""
         instance = super().update(instance, validated_data)
         sync.set_primary_validator.delay()
         return instance

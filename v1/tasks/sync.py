@@ -15,10 +15,7 @@ logger = logging.getLogger('thenewboston')
 
 
 def get_primary_validator_candidates(*, current_primary_validator):
-    """
-    Return queryset of validators more trusted than the current primary validator
-    """
-
+    """Return queryset of validators more trusted than the current primary validator"""
     return Validator.objects.filter(
         trust__gt=current_primary_validator.trust
     ).exclude(
@@ -30,10 +27,10 @@ def get_primary_validator_candidates(*, current_primary_validator):
 def send_primary_validator_updated_notices():
     """
     Send a notice to all validators that the banks primary validator has been updated
+
     - 200 response > validator is syncing to new primary validator
     - 400 response > validator is not syncing to new primary validator (can be deleted)
     """
-
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
     confirmation_validators = Validator.objects.all().exclude(node_identifier=primary_validator.node_identifier)
@@ -67,11 +64,11 @@ def send_primary_validator_updated_notices():
 def set_primary_validator():
     """
     Set the primary validator to the validator that is the:
+
     - most trusted
     - online
     - configured as a primary validator
     """
-
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
     primary_validator_candidates = get_primary_validator_candidates(current_primary_validator=primary_validator)

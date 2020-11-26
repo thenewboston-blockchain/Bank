@@ -7,10 +7,10 @@ from v1.self_configurations.helpers.self_configuration import get_self_configura
 def get_crawl_info():
     """
     Return standardized crawl data for use in:
+
     - HTTP responses
     - WS messages
     """
-
     self_configuration = get_self_configuration(exception_class=RuntimeError)
 
     return {

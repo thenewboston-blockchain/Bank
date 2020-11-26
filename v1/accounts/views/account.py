@@ -14,6 +14,7 @@ class AccountViewSet(
 ):
     """
     Accounts
+
     ---
     list:
       description: List accounts

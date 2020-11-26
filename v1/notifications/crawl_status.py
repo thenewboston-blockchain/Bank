@@ -8,10 +8,7 @@ from .helpers import standardize_notification
 
 
 def send_crawl_status_notification():
-    """
-    Send crawl status notification to all recipients
-    """
-
+    """Send crawl status notification to all recipients"""
     channel_layer = channels.layers.get_channel_layer()
 
     async_to_sync(channel_layer.group_send)(

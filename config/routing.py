@@ -8,10 +8,10 @@ from v1.validator_confirmation_services import routing as validator_confirmation
 
 application = ProtocolTypeRouter({
     'websocket': URLRouter(
-        clean_routing.websocket_urlpatterns +
-        confirmation_blocks_routing.websocket_urlpatterns +
-        crawl_routing.websocket_urlpatterns +
-        status_updates_routing.websocket_urlpatterns +
-        validator_confirmation_services_routing.websocket_urlpatterns
+        clean_routing.websocket_urlpatterns
+        + confirmation_blocks_routing.websocket_urlpatterns
+        + crawl_routing.websocket_urlpatterns
+        + status_updates_routing.websocket_urlpatterns
+        + validator_confirmation_services_routing.websocket_urlpatterns
     )
 })

@@ -14,12 +14,13 @@ class UpgradeNoticeSerializer(serializers.Serializer):
     def create(self, validated_data):
         """
         If validator is more trusted than the current primary validator:
+
         - switch to the new primary validator
 
         If validator is less trusted than the current primary validator:
+
         - delete the requesting validator (which is now on different network)
         """
-
         validator = validated_data['node_identifier']
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         current_primary_validator = self_configuration.primary_validator
@@ -43,9 +44,9 @@ class UpgradeNoticeSerializer(serializers.Serializer):
     def validate(self, data):
         """
         Check that self node_identifier matches bank_node_identifier
+
         - this ensures that the request was intended for self
         """
-
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         self_node_identifier = self_configuration.node_identifier
         bank_node_identifier = data['bank_node_identifier']
@@ -60,10 +61,7 @@ class UpgradeNoticeSerializer(serializers.Serializer):
 
     @staticmethod
     def validate_node_identifier(node_identifier):
-        """
-        Validate node_identifier is from validator
-        """
-
+        """Validate node_identifier is from validator"""
         validator = Validator.objects.filter(node_identifier=node_identifier).first()
 
         if not validator:
