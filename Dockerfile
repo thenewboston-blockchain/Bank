@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements/local.txt /requirements.txt
-COPY ./thenewboston.tar.* .
+COPY ./dist/ ./
 
 RUN set -xe \
     && apk update \
