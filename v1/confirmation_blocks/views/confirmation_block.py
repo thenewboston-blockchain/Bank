@@ -15,11 +15,10 @@ class ConfirmationBlockViewSet(
 ):
     """
     Confirmation blocks
+
     ---
-    list:
-      description: List confirmation blocks
-    create:
-      description: Create confirmation block
+    list: description: List confirmation blocks
+    create: description: Create confirmation block
     """
 
     ordering_fields = '__all__'

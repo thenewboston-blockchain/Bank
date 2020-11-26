@@ -9,10 +9,7 @@ from .helpers import standardize_notification
 
 
 def send_primary_validator_updated_notification():
-    """
-    Send primary validator updated notification to all recipients
-    """
-
+    """Send primary validator updated notification to all recipients"""
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
     primary_validator_data = ValidatorSerializer(primary_validator).data

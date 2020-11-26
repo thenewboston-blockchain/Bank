@@ -7,10 +7,7 @@ from channels.generic.websocket import JsonWebsocketConsumer
 class ConfirmationBlockConsumer(JsonWebsocketConsumer):
 
     def connect(self):
-        """
-        Accepts an incoming socket
-        """
-
+        """Accepts an incoming socket"""
         url_route = self.scope.get('url_route')
 
         if url_route:
@@ -30,15 +27,9 @@ class ConfirmationBlockConsumer(JsonWebsocketConsumer):
 
     @staticmethod
     def group_name(account_number):
-        """
-        Name of group where messages will be broadcast
-        """
-
+        """Name of group where messages will be broadcast"""
         return 'confirmation_blocks_%s' % account_number
 
     def send_confirmation_block(self, event):
-        """
-        Send confirmation block notification to group
-        """
-
+        """Send confirmation block notification to group"""
         self.send_json(event['message'])

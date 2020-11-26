@@ -10,7 +10,7 @@ Running this script will:
 
 
 def main():
-    for root, dirs, files in os.walk('v1'):
+    for root, _dirs, files in os.walk('v1'):
         if root[-10:] == 'migrations':
             for f in [file for file in files if file[:2] == '00']:
                 os.remove(os.path.normpath(os.path.join(root, f)))

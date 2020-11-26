@@ -17,11 +17,8 @@ class BankTransactionFilter(FilterSet):
 
     @staticmethod
     def filter_account_number(queryset, _, value):
-        """
-        Filter queryset by account number
-        """
-
+        """Filter queryset by account number"""
         return queryset.filter(
-            Q(block__sender=value) |
-            Q(recipient=value)
+            Q(block__sender=value)
+            | Q(recipient=value)
         )

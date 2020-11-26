@@ -50,4 +50,4 @@ def test_blocks_post_400_unique_recipients(client, block_data_unique_recipients)
         block_data_unique_recipients,
         expected=HTTP_400_BAD_REQUEST,
     )
-    assert response['non_field_errors'] == ["Tx recipients must be unique"]
+    assert response['non_field_errors'] == ['Tx recipients must be unique']

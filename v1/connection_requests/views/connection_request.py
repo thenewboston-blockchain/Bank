@@ -9,6 +9,7 @@ from ..serializers.connection_request import ConnectionRequestSerializerCreate
 class ConnectionRequestViewSet(ViewSet):
     """
     Connection requests
+
     ---
     create:
       description: Create connection request

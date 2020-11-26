@@ -8,9 +8,6 @@ class LimitOffsetPagination(DRFLimitOffsetPagination):
     max_limit = PAGINATION_MAX_LIMIT
 
     def get_limit(self, request):
-        """
-        Disable pagination by 'listening' for a zero value for limit_query_param
-        """
-
+        """Disable pagination by 'listening' for a zero value for limit_query_param"""
         if request.query_params.get(self.limit_query_param) != '0':
             return super().get_limit(request)

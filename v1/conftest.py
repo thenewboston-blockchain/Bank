@@ -1,7 +1,7 @@
-from faker import Faker
 import pytest
 from django.conf import settings
 from django.core.management import call_command
+from faker import Faker
 from pytest_django.migrations import DisableMigrations
 from thenewboston.accounts.manage import create_account
 from thenewboston.blocks.block import generate_block
@@ -110,10 +110,7 @@ def self_configuration(monkeypatch):
 
 @pytest.fixture(autouse=True)
 def use_fake_redis(settings):
-    """
-    Using fake Redis for running tests in parallel.
-    """
-
+    """Using fake Redis for running tests in parallel."""
     settings.DJANGO_REDIS_CONNECTION_FACTORY = 'thenewboston.third_party.django_redis.pool.FakeConnectionFactory'
     settings.CACHES['default']['OPTIONS']['REDIS_CLIENT_CLASS'] = 'fakeredis.FakeStrictRedis'
 

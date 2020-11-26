@@ -2,10 +2,7 @@ from ..models.self_configuration import SelfConfiguration
 
 
 def get_self_configuration(*, exception_class):
-    """
-    Return self configuration
-    """
-
+    """Return self configuration"""
     self_configuration = SelfConfiguration.objects.first()
 
     if not self_configuration:

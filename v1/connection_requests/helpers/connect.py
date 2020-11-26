@@ -11,10 +11,7 @@ logger = logging.getLogger('thenewboston')
 
 
 def is_self_known_to_node(*, node, self_configuration):
-    """
-    Return boolean to indicate if self is known to node
-    """
-
+    """Return boolean to indicate if self is known to node"""
     node_address = format_address(
         ip_address=node.ip_address,
         port=node.port,
@@ -32,10 +29,7 @@ def is_self_known_to_node(*, node, self_configuration):
 
 
 def send_connection_request(*, node, self_configuration):
-    """
-    Send connection request to node
-    """
-
+    """Send connection request to node"""
     node_address = format_address(
         ip_address=node.ip_address,
         port=node.port,
@@ -60,10 +54,7 @@ def send_connection_request(*, node, self_configuration):
 
 
 def set_primary_validator(*, validator):
-    """
-    Set validator as primary validator
-    """
-
+    """Set validator as primary validator"""
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     self_configuration.primary_validator = validator
     self_configuration.save()

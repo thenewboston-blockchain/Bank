@@ -28,10 +28,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
     signature = serializers.CharField(max_length=SIGNATURE_LENGTH)
 
     def create(self, validated_data):
-        """
-        Create confirmation block
-        """
-
+        """Create confirmation block"""
         message = validated_data['message']
         block_identifier = message['block_identifier']
         validator = validated_data['node_identifier']
@@ -59,9 +56,9 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
     def create_confirmation_block(*, block_identifier, inner_block_signature, validator):
         """
         Create confirmation block if necessary
+
         - confirmation blocks are only created for blocks originating from this bank
         """
-
         block = Block.objects.filter(signature=inner_block_signature).first()
         confirmation_block = ConfirmationBlock(
             block=block,
@@ -85,10 +82,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
 
     @staticmethod
     def validate_node_identifier(node_identifier):
-        """
-        Validate that node_identifier belongs to validator
-        """
-
+        """Validate that node_identifier belongs to validator"""
         validator = Validator.objects.filter(node_identifier=node_identifier).first()
 
         if not validator:

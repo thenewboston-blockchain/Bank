@@ -34,16 +34,13 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         """
         Required arguments:
+
         -ip_address - Public IP address
         """
-
         parser.add_argument('-ip', help='Public IP address', required=True)
 
     def handle(self, *args, **options):
-        """
-        Run script
-        """
-
+        """Run script"""
         valid_environments = ['local', 'postgres_local']
 
         if ENVIRONMENT not in valid_environments:
@@ -63,9 +60,9 @@ class Command(BaseCommand):
     def install_fixture_data(self):
         """
         Delete all Accounts, Banks, SelfConfigurations, Users, and Validators
+
         Load in fixture data (same models as above)
         """
-
         self.stdout.write(self.style.SUCCESS('Installing fixture data...'))
 
         Account.objects.all().delete()

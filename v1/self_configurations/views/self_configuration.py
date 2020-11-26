@@ -13,6 +13,7 @@ class SelfConfigurationViewSet(
 ):
     """
     Self configuration
+
     ---
     get:
       description: Get self configuration details

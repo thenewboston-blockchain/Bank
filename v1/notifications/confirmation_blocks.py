@@ -7,10 +7,7 @@ from .helpers import standardize_notification
 
 
 def send_confirmation_block_notifications(*, payload, sender_account_number, recipient_account_numbers):
-    """
-    Send confirmation block notifications to all recipients
-    """
-
+    """Send confirmation block notifications to all recipients"""
     channel_layer = channels.layers.get_channel_layer()
 
     for account_number in (*recipient_account_numbers, sender_account_number):

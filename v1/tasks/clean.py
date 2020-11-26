@@ -25,10 +25,7 @@ logger = logging.getLogger('thenewboston')
 
 
 def clean_nodes(*, nodes_type):
-    """
-    Clean nodes: delete or update nodes of type BANK or CONFIRMATION_VALIDATOR
-    """
-
+    """Clean nodes: delete or update nodes of type BANK or CONFIRMATION_VALIDATOR"""
     self_configuration = get_self_configuration(exception_class=RuntimeError)
     primary_validator = self_configuration.primary_validator
 
@@ -94,10 +91,7 @@ def clean_nodes(*, nodes_type):
 
 @shared_task
 def start_clean():
-    """
-    Start a network clean
-    """
-
+    """Start a network clean"""
     clean_nodes(nodes_type=BANK)
     clean_nodes(nodes_type=CONFIRMATION_VALIDATOR)
 

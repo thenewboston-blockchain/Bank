@@ -6,10 +6,7 @@ from v1.confirmation_blocks.models.confirmation_block import ConfirmationBlock
 
 
 def create_bank_transactions(*, block, message):
-    """
-    Crete bank transactions from given block data
-    """
-
+    """Crete bank transactions from given block data"""
     bank_transactions = []
 
     for tx in message['txs']:
@@ -26,9 +23,9 @@ def create_bank_transactions(*, block, message):
 def create_block_and_bank_transactions(block_data):
     """
     Create block and bank transactions
+
     Returns block, created
     """
-
     account_number = block_data['account_number']
     message = block_data['message']
     signature = block_data['signature']

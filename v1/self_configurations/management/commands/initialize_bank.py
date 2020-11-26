@@ -22,6 +22,7 @@ class Command(InitializeNode):
     help = 'Initialize bank'
 
     def __init__(self, *args, **kwargs):
+        """Initialize bank"""
         super().__init__(*args, **kwargs)
 
         self.required_input = {
@@ -35,10 +36,7 @@ class Command(InitializeNode):
         }
 
     def handle(self, *args, **options):
-        """
-        Run script
-        """
-
+        """Run script"""
         # Input values
         self.get_verify_key(
             attribute_name='node_identifier',
@@ -65,10 +63,10 @@ class Command(InitializeNode):
     def initialize_bank(self):
         """
         Process to initialize bank:
+
         - delete existing SelfConfiguration and related Bank objects
         - create SelfConfiguration and related Bank objects
         """
-
         # Delete existing SelfConfiguration and related Bank objects
         SelfConfiguration.objects.all().delete()
         Bank.objects.filter(ip_address=self.required_input['ip_address']).delete()

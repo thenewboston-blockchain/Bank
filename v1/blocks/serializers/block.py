@@ -29,9 +29,9 @@ class BlockSerializerCreate(NetworkBlockSerializer):
     def create(self, validated_data):
         """
         Create block and bank transactions
+
         Forward block to validator
         """
-
         validated_block = validated_data
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = self_configuration.primary_validator
@@ -66,10 +66,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         raise RuntimeError('Method unavailable')
 
     def validate(self, data):
-        """
-        Verify that correct payment exist for both Bank and Validator
-        """
-
+        """Verify that correct payment exist for both Bank and Validator"""
         data = super(BlockSerializerCreate, self).validate(data)
 
         account_number = data['account_number']

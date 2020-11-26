@@ -20,16 +20,13 @@ class Command(FetchPrimaryValidatorConfig):
     help = 'Set primary validator'
 
     def handle_primary_validator_config(self, primary_validator_config):
-        """
-        Set primary validator
-        """
-
+        """Set primary validator"""
         validator_field_names = standard_field_names(Validator)
         validator_data = {k: v for k, v in primary_validator_config.items() if k in validator_field_names}
 
         Validator.objects.filter(
-            Q(ip_address=validator_data.get('ip_address')) |
-            Q(node_identifier=validator_data.get('node_identifier'))
+            Q(ip_address=validator_data.get('ip_address'))
+            | Q(node_identifier=validator_data.get('node_identifier'))
         ).delete()
 
         validator = Validator.objects.create(

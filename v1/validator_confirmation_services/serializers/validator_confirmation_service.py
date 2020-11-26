@@ -20,10 +20,7 @@ class ValidatorConfirmationServiceSerializerCreate(serializers.Serializer):
     start = serializers.DateTimeField()
 
     def create(self, validated_data):
-        """
-        Create validator confirmation service
-        """
-
+        """Create validator confirmation service"""
         validator_confirmation_service = ValidatorConfirmationService.objects.create(
             end=validated_data['end'],
             start=validated_data['start'],
@@ -37,10 +34,7 @@ class ValidatorConfirmationServiceSerializerCreate(serializers.Serializer):
 
     @staticmethod
     def validate_node_identifier(node_identifier):
-        """
-        Validate that node_identifier belongs to validator
-        """
-
+        """Validate that node_identifier belongs to validator"""
         validator = Validator.objects.filter(node_identifier=node_identifier).first()
 
         if not validator:
