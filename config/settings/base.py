@@ -109,13 +109,13 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_WORKER_CONCURRENCY = 1
-CELERY_BROKER_URL = f'redis://{os.getenv("REDIS_HOST", "localhost")}'
-CELERY_RESULT_BACKEND = f'redis://{os.getenv("REDIS_HOST", "localhost")}'
+CELERY_BROKER_URL = f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/{os.getenv("REDIS_DB", "")}'
+CELERY_RESULT_BACKEND = f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/{os.getenv("REDIS_DB", "")}'
 
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/',
+        'LOCATION': f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/{os.getenv("REDIS_DB", "")}',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -174,7 +174,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [(os.getenv('REDIS_HOST', '127.0.0.1'), 6379)],
+            'hosts': [f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/{os.getenv("REDIS_DB", "")}'],
         },
     },
 }
