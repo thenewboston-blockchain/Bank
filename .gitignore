@@ -4,7 +4,6 @@
 dump.rdb
 
 # Log files
-!logs/.gitkeep
 *.log
 logs/*
 
@@ -35,6 +34,7 @@ MANIFEST
 build/
 develop-eggs/
 dist/
+static/
 downloads/
 eggs/
 lib/
@@ -80,3 +80,5 @@ env/
 venv
 venv.bak/
 venv/
+
+!.gitkeep

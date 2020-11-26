@@ -1,0 +1,21 @@
+v1.banks.serializers package
+============================
+
+Submodules
+----------
+
+v1.banks.serializers.bank module
+--------------------------------
+
+.. automodule:: v1.banks.serializers.bank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.banks.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

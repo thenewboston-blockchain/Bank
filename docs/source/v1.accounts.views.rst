@@ -1,0 +1,21 @@
+v1.accounts.views package
+=========================
+
+Submodules
+----------
+
+v1.accounts.views.account module
+--------------------------------
+
+.. automodule:: v1.accounts.views.account
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.accounts.views
+   :members:
+   :undoc-members:
+   :show-inheritance:

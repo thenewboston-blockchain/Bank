@@ -1,0 +1,50 @@
+v1.accounts package
+===================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.accounts.factories
+   v1.accounts.migrations
+   v1.accounts.models
+   v1.accounts.serializers
+   v1.accounts.tests
+   v1.accounts.views
+
+Submodules
+----------
+
+v1.accounts.admin module
+------------------------
+
+.. automodule:: v1.accounts.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.accounts.apps module
+-----------------------
+
+.. automodule:: v1.accounts.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.accounts.urls module
+-----------------------
+
+.. automodule:: v1.accounts.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.accounts
+   :members:
+   :undoc-members:
+   :show-inheritance:

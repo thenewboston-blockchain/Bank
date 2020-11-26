@@ -1,0 +1,59 @@
+v1.confirmation\_blocks package
+===============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.confirmation_blocks.consumers
+   v1.confirmation_blocks.factories
+   v1.confirmation_blocks.migrations
+   v1.confirmation_blocks.models
+   v1.confirmation_blocks.serializers
+   v1.confirmation_blocks.tests
+   v1.confirmation_blocks.views
+
+Submodules
+----------
+
+v1.confirmation\_blocks.admin module
+------------------------------------
+
+.. automodule:: v1.confirmation_blocks.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.confirmation\_blocks.apps module
+-----------------------------------
+
+.. automodule:: v1.confirmation_blocks.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.confirmation\_blocks.routing module
+--------------------------------------
+
+.. automodule:: v1.confirmation_blocks.routing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.confirmation\_blocks.urls module
+-----------------------------------
+
+.. automodule:: v1.confirmation_blocks.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.confirmation_blocks
+   :members:
+   :undoc-members:
+   :show-inheritance:

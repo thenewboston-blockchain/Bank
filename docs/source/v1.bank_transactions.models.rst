@@ -1,0 +1,21 @@
+v1.bank\_transactions.models package
+====================================
+
+Submodules
+----------
+
+v1.bank\_transactions.models.bank\_transaction module
+-----------------------------------------------------
+
+.. automodule:: v1.bank_transactions.models.bank_transaction
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.bank_transactions.models
+   :members:
+   :undoc-members:
+   :show-inheritance:

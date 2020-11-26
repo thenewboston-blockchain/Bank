@@ -1,0 +1,50 @@
+v1.banks package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.banks.factories
+   v1.banks.migrations
+   v1.banks.models
+   v1.banks.serializers
+   v1.banks.tests
+   v1.banks.views
+
+Submodules
+----------
+
+v1.banks.admin module
+---------------------
+
+.. automodule:: v1.banks.admin
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.banks.apps module
+--------------------
+
+.. automodule:: v1.banks.apps
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.banks.urls module
+--------------------
+
+.. automodule:: v1.banks.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.banks
+   :members:
+   :undoc-members:
+   :show-inheritance:

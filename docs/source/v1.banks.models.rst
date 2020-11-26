@@ -1,0 +1,21 @@
+v1.banks.models package
+=======================
+
+Submodules
+----------
+
+v1.banks.models.bank module
+---------------------------
+
+.. automodule:: v1.banks.models.bank
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.banks.models
+   :members:
+   :undoc-members:
+   :show-inheritance:

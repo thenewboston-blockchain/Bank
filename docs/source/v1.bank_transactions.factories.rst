@@ -1,0 +1,21 @@
+v1.bank\_transactions.factories package
+=======================================
+
+Submodules
+----------
+
+v1.bank\_transactions.factories.bank\_transaction module
+--------------------------------------------------------
+
+.. automodule:: v1.bank_transactions.factories.bank_transaction
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.bank_transactions.factories
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.invalid\_blocks.serializers package
+======================================
+
+Submodules
+----------
+
+v1.invalid\_blocks.serializers.invalid\_block module
+----------------------------------------------------
+
+.. automodule:: v1.invalid_blocks.serializers.invalid_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.invalid_blocks.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,21 @@
+v1.blocks.serializers package
+=============================
+
+Submodules
+----------
+
+v1.blocks.serializers.block module
+----------------------------------
+
+.. automodule:: v1.blocks.serializers.block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.blocks.serializers
+   :members:
+   :undoc-members:
+   :show-inheritance:

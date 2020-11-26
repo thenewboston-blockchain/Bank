@@ -1,0 +1,48 @@
+v1.clean package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   v1.clean.consumers
+   v1.clean.serializers
+   v1.clean.tests
+   v1.clean.views
+
+Submodules
+----------
+
+v1.clean.helpers module
+-----------------------
+
+.. automodule:: v1.clean.helpers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.clean.routing module
+-----------------------
+
+.. automodule:: v1.clean.routing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.clean.urls module
+--------------------
+
+.. automodule:: v1.clean.urls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.clean
+   :members:
+   :undoc-members:
+   :show-inheritance:

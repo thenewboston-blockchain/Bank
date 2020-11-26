@@ -1,0 +1,29 @@
+v1.invalid\_blocks.tests package
+================================
+
+Submodules
+----------
+
+v1.invalid\_blocks.tests.conftest module
+----------------------------------------
+
+.. automodule:: v1.invalid_blocks.tests.conftest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+v1.invalid\_blocks.tests.invalid\_block module
+----------------------------------------------
+
+.. automodule:: v1.invalid_blocks.tests.invalid_block
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: v1.invalid_blocks.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
