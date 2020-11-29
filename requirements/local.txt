@@ -61,7 +61,7 @@ lupa==1.9                 # via fakeredis
 markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via flake8
 msgpack==0.6.2            # via channels-redis
-packaging==20.4           # via pytest, sphinx
+packaging==20.7           # via pytest, sphinx
 pluggy==0.13.1            # via pytest
 prometheus-client==0.8.0  # via flower
 psycopg2==2.8.6           # via thenewboston
@@ -76,7 +76,7 @@ pyflakes==2.2.0           # via flake8
 pygments==2.7.2           # via sphinx
 pyhamcrest==2.0.2         # via twisted
 pynacl==1.4.0             # via thenewboston
-pyopenssl==19.1.0         # via twisted
+pyopenssl==20.0.0         # via twisted
 pyparsing==2.4.7          # via packaging
 pytest-asyncio==0.14.0    # via thenewboston
 pytest-cov==2.10.1        # via thenewboston
@@ -91,7 +91,7 @@ requests-mock==1.8.0      # via thenewboston
 requests==2.25.0          # via requests-mock, sphinx, thenewboston
 sentry-sdk==0.19.3        # via thenewboston
 service-identity==18.1.0  # via twisted
-six==1.15.0               # via automat, cryptography, fakeredis, packaging, pynacl, pyopenssl, python-dateutil, requests-mock
+six==1.15.0               # via automat, cryptography, fakeredis, pynacl, pyopenssl, python-dateutil, requests-mock
 snowballstemmer==2.0.0    # via pydocstyle, sphinx
 sortedcontainers==2.3.0   # via fakeredis
 sphinx==3.3.1             # via -r requirements/local.in
@@ -104,7 +104,7 @@ sphinxcontrib-serializinghtml==1.1.4  # via sphinx
 sqlparse==0.4.1           # via django, django-debug-toolbar
 tblib==1.7.0              # via -r requirements/base.in
 text-unidecode==1.3       # via faker
-thenewboston==0.0.28      # via -r requirements/base.in
+thenewboston==0.0.29      # via -r requirements/base.in
 toml==0.10.2              # via pytest
 tornado==6.1              # via flower
 twisted[tls]==20.3.0      # via daphne
