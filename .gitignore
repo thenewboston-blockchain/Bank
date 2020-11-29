@@ -15,7 +15,7 @@ __pycache__/*
 db.sqlite3
 db.sqlite3-journal
 local_settings.py
-# media
+media
 
 # Byte-compiled / optimized / DLL files
 *$py.class
