@@ -18,6 +18,22 @@ def confirmation_block_data(block_data, signing_key, confirmation_block_fake_dat
 
 
 @pytest.fixture
+def confirmation_block_data_unique_recipients(
+    block_data_unique_recipients,
+    signing_key,
+    confirmation_block_fake_data,
+):
+    yield generate_signed_request(
+        data={
+            'block': block_data_unique_recipients,
+            'block_identifier': confirmation_block_fake_data['block_identifier'],
+            'updated_balances': [],
+        },
+        nid_signing_key=signing_key
+    )
+
+
+@pytest.fixture
 def confirmation_block_fake_data():
     yield build_json(ConfirmationBlockFactory)
 
