@@ -54,7 +54,7 @@ def block_data(account_data, account, encoded_account_number, random_encoded_acc
                 'recipient': primary_validator.account_number
             },
             {
-                'amount': Faker().pyint(),
+                'amount': Faker().pyint(min_value=1),
                 'recipient': random_encoded_account_number
             }
         ]

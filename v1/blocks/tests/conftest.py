@@ -26,7 +26,7 @@ def block_data_unique_recipients(
                 'recipient': primary_validator.account_number
             },
             {
-                'amount': Faker().pyint(),
+                'amount': Faker().pyint(min_value=1),
                 'recipient': self_configuration.account_number
             }
         ]
