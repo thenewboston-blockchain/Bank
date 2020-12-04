@@ -14,6 +14,12 @@ Open .env and edit settings
 - `PUBLIC_IP_ADDRESS` is an IP address of your docker host, usually it's 127.0.0.1
 - `ACCOUNT_NUMBER` use `TNB Account Manager` app to generate a new account for test purposes
 
+Login to Github's registry 
+```shell
+docker login docker.pkg.github.com
+```
+Use your github's credentials or personal key if you have 2FA configured.
+
 Run:
 ```shell
 docker-compose up # add -d to detach from console
