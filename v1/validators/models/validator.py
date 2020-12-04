@@ -14,12 +14,13 @@ class Validator(NetworkValidator):
         ]
     )
 
-    class Meta:
+    class Meta(NetworkValidator.Meta):
         default_related_name = 'validators'
 
     def __str__(self):
         return (
             f'ID: {self.id} | '
             f'IP address: {self.ip_address} | '
+            f'Port: {self.port} | '
             f'Trust: {self.trust}'
         )

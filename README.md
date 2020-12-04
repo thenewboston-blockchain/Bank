@@ -3,11 +3,79 @@
 Follow the steps below to set up the project on your environment. If you run into any problems, feel free to leave a 
 GitHub Issue or reach out to any of our communities above.
 
-Clone this repository and cd into it:
+## Local Development (Docker edition)
+
+You need to have [Docker](https://docs.docker.com/engine/install/) and [docker-compose](https://docs.docker.com/compose/install/) installed
+
+Copy `dotenv` to `.env` 
+
+Open .env and edit settings
+
+- `PUBLIC_IP_ADDRESS` is an IP address of your docker host, usually it's 127.0.0.1
+- `ACCOUNT_NUMBER` use `TNB Account Manager` app to generate a new account for test purposes
+
+Run:
+```shell
+docker-compose up # add -d to detach from donsole
 ```
-git clone https://github.com/thenewboston-developers/Bank.git
-cd Bank
+
+This will start a dev network to work with, network consists of PV, 2x CVs, Bank and all the needed services (celery, db, redis).
+
+On a first run it will take some time to provision and configure test network settings.
+
+If something failed, deleting `postgresql-data` and `redis-data` volumes might solve the issue (refer to `docker volume` cli), and try previous command again.
+
+As a result
 ```
+http://$PUBLIC_IP_ADDRESS:8001 - PV
+http://$PUBLIC_IP_ADDRESS:8002 - CV 1
+http://$PUBLIC_IP_ADDRESS:8003 - CV 2
+http://$PUBLIC_IP_ADDRESS:8004 - BANK
+```
+
+You can add those to your TNB Account Manager app
+
+### For Python developers (Docker edition)
+To run all tests in parallel:
+```shell
+docker-compose run pv pytest -n auto
+# or
+docker-compose exec pv pytest # if docker-compose run is running
+```
+
+To monitor Celery tasks:
+```shell
+# For PV
+docker-compose exec celery_pv celery flower -A config.settings --address=127.0.0.1 --port=5555
+# For CV n. 1
+docker-compose exec celery_cv1 celery flower -A config.settings --address=127.0.0.1 --port=5555
+# For CV n. 2
+docker-compose exec celery_cv2 celery flower -A config.settings --address=127.0.0.1 --port=5555
+# For BANK
+docker-compose exec celery_bank celery flower -A config.settings --address=127.0.0.1 --port=5555
+```
+
+## Windows (without docker)
+
+This guide targets a unix environment however it is possible to perform this setup on Windows by installing Cygwin 
+[here](https://cygwin.com/install.html).
+
+When installing Cygwin ensure you add the following packages in the setup wizard choosing the most up-to-date version for each:
+
+* python3
+* python3-devel
+* pip3
+* gcc-core
+* libffi-devel
+* make
+* python38-wheel
+* libintl-devel
+  
+Once installed use Cygwin for all your command-line operations.
+
+*This is because one of the dependencies, uWSGI, does not provide Windows support directly.*
+
+## Steps (without docker)
 
 Set required environment variables:
 ```
@@ -15,7 +83,7 @@ Set required environment variables:
 export DJANGO_APPLICATION_ENVIRONMENT='local'
 
 # 64 character signing key used to authenticate network requests
-export NETWORK_SIGNING_KEY='e5e5fec0dcbbd8b0a76c67204823678d3f243de7a0a1042bb3ecf66285cd9fd4'
+export NETWORK_SIGNING_KEY='6f812a35643b55a77f71c3b722504fbc5918e83ec72965f7fd33865ed0be8f81'
 
 # A string with random chars
 export SECRET_KEY='some random string'
@@ -33,21 +101,24 @@ Install required packages:
 pip3 install -r requirements/local.txt
 ```
 
-## Local Development
+To initialize the project:
+```
+python3 manage.py migrate
+python3 manage.py initialize_test_primary_validator -ip [IP ADDRESS]
+```
+
+## Local Development (without docker)
 
 Run Redis:
 ```
 redis-server
 ```
 
-Run Celery:
+Run Celery (run each as a separate process):
 ```
 celery -A config.settings worker -l debug
-```
-
-To run all tests in parallel:
-```
-pytest -n auto
+celery -A config.settings worker -l debug --queue block_queue --pool solo
+celery -A config.settings worker -l debug --queue confirmation_block_queue --pool solo
 ```
 
 To monitor Celery tasks:
@@ -55,46 +126,25 @@ To monitor Celery tasks:
 celery flower -A config.settings --address=127.0.0.1 --port=5555
 ```
 
-## Local Development (Docker edition)
-
-Run:
-```
-docker-compose up # add -d to detach from console
-```
-
-To run all tests in parallel:
-```
-docker-compose run app pytest -n auto
-# or
-docker-compose exec app pytest # if docker-compose run is running
-```
-
-To run tests with coverage report:
-```
-docker-compose run app pytest --cov=v1
-# or
-docker-compose exec app pytest --cov=v1 # if docker-compose run is running
-```
-
-To monitor Celery tasks:
-```
-docker-compose exec celery celery flower -A config.settings --address=127.0.0.1 --port=5555
-```
-
 ## Developers
 
 To watch log files:
-```commandline
+```shell
 tail -f logs/warning.log -n 10
 ```
 
-When adding a package, add to `requirements/base.in` and then :
+To run all tests in parallel:
+```shell
+pytest -n auto
 ```
+
+When adding a package, add to `requirements/base.in` and then :
+```shell
 bash scripts/compile_requirements.sh
 ```
 
-To generate documentation
-```
+To generate documentation:
+```shell
 cd docs
 make html
 ```
