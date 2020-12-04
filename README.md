@@ -16,10 +16,10 @@ Open .env and edit settings
 
 Run:
 ```shell
-docker-compose up # add -d to detach from donsole
+docker-compose up # add -d to detach from console
 ```
 
-This will start a dev network to work with, network consists of PV, 2x CVs, Bank and all the needed services (celery, db, redis).
+This will start a dev network to work with, network consists of Bank, PV, 2x CVs and all the needed services (celery, db, redis).
 
 On a first run it will take some time to provision and configure test network settings.
 
@@ -27,10 +27,10 @@ If something failed, deleting `postgresql-data` and `redis-data` volumes might s
 
 As a result
 ```
+http://$PUBLIC_IP_ADDRESS:8004 - BANK
 http://$PUBLIC_IP_ADDRESS:8001 - PV
 http://$PUBLIC_IP_ADDRESS:8002 - CV 1
 http://$PUBLIC_IP_ADDRESS:8003 - CV 2
-http://$PUBLIC_IP_ADDRESS:8004 - BANK
 ```
 
 You can add those to your TNB Account Manager app
@@ -38,21 +38,21 @@ You can add those to your TNB Account Manager app
 ### For Python developers (Docker edition)
 To run all tests in parallel:
 ```shell
-docker-compose run pv pytest -n auto
+docker-compose run bank pytest -n auto
 # or
-docker-compose exec pv pytest # if docker-compose run is running
+docker-compose exec bank pytest # if docker-compose run is running
 ```
 
 To monitor Celery tasks:
 ```shell
+# For BANK
+docker-compose exec celery_bank celery flower -A config.settings --address=127.0.0.1 --port=5555
 # For PV
 docker-compose exec celery_pv celery flower -A config.settings --address=127.0.0.1 --port=5555
 # For CV n. 1
 docker-compose exec celery_cv1 celery flower -A config.settings --address=127.0.0.1 --port=5555
 # For CV n. 2
 docker-compose exec celery_cv2 celery flower -A config.settings --address=127.0.0.1 --port=5555
-# For BANK
-docker-compose exec celery_bank celery flower -A config.settings --address=127.0.0.1 --port=5555
 ```
 
 ## Windows (without docker)
@@ -104,7 +104,7 @@ pip3 install -r requirements/local.txt
 To initialize the project:
 ```
 python3 manage.py migrate
-python3 manage.py initialize_test_primary_validator -ip [IP ADDRESS]
+python3 manage.py initialize_test_bank -ip [IP ADDRESS]
 ```
 
 ## Local Development (without docker)

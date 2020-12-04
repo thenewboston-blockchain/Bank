@@ -18,7 +18,9 @@ services:
       - ./scripts/docker_entrypoints/initdb.d:/docker-entrypoint-initdb.d
 
   bank:
-    image: docker.pkg.github.com/thenewboston-developers/bank/bank:latest
+    build:
+      dockerfile: Dockerfile
+      context: .
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=d2621d30bc323ea35fe1c4fb11b4babb7fd4c1c0593805f011caedf7b7ce0031
@@ -34,6 +36,9 @@ services:
     env_file:
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint.sh
+    volumes:
+      - .:/opt/project
+      - ./media/bank:/opt/project/media
     ports:
       - 8004:8000
     links:
@@ -46,9 +51,7 @@ services:
       - redis
 
   pv:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=731f928711f30257d20bde471200c11975009415b4c6f596e7ee81bfed1a033b
@@ -65,7 +68,6 @@ services:
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint_pv.sh
     volumes:
-      - .:/opt/project
       - ./media/pv:/opt/project/media
     ports:
       - 8001:8000
@@ -77,9 +79,7 @@ services:
       - redis
 
   cv1:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=46a23fd52b2690f5acf56654489fd67b3734a52f35a2b7827f5caeaa06c0c0a5
@@ -96,7 +96,6 @@ services:
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint_cv.sh
     volumes:
-      - .:/opt/project
       - ./media/cv1:/opt/project/media
     ports:
       - 8002:8000
@@ -110,9 +109,7 @@ services:
       - redis
 
   cv2:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=1c7822c93d914ac40fc11d7bd71959d5aadb1ecd07fbffc7d9c481ccd043d4a9
@@ -129,7 +126,6 @@ services:
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint_cv.sh
     volumes:
-      - .:/opt/project
       - ./media/cv2:/opt/project/media
     ports:
       - 8003:8000
@@ -143,7 +139,9 @@ services:
       - redis
 
   celery_bank:
-    image: docker.pkg.github.com/thenewboston-developers/bank/bank:latest
+    build:
+      dockerfile: Dockerfile
+      context: .
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=d2621d30bc323ea35fe1c4fb11b4babb7fd4c1c0593805f011caedf7b7ce0031
@@ -155,6 +153,8 @@ services:
       - POSTGRES_PASSWORD=thenewboston
       - SECRET_KEY=somesecret
     command: celery -A config.settings worker -l debug
+    volumes:
+      - .:/opt/project
     links:
       - bank
       - db
@@ -162,81 +162,69 @@ services:
     depends_on:
       - db
       - redis
-
-  celery_pv:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
-      - NETWORK_SIGNING_KEY=731f928711f30257d20bde471200c11975009415b4c6f596e7ee81bfed1a033b
-      - REDIS_DB=0
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=thenewboston_pv
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
-    command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
-    volumes:
-      - .:/opt/project
-    links:
-      - pv
-      - db
-      - redis
-    depends_on:
-      - db
-      - redis
-
-  celery_cv1:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
-      - NETWORK_SIGNING_KEY=46a23fd52b2690f5acf56654489fd67b3734a52f35a2b7827f5caeaa06c0c0a5
-      - REDIS_DB=1
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=thenewboston_cv1
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
-    command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
-    volumes:
-      - .:/opt/project
-    links:
-      - cv1
-      - db
-      - redis
-    depends_on:
-      - db
-      - redis
-
-  celery_cv2:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
-      - NETWORK_SIGNING_KEY=1c7822c93d914ac40fc11d7bd71959d5aadb1ecd07fbffc7d9c481ccd043d4a9
-      - REDIS_DB=2
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=thenewboston_cv2
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
-    command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
-    volumes:
-      - .:/opt/project
-    links:
-      - cv2
-      - db
-      - redis
-    depends_on:
-      - db
-      - redis
+#
+#  celery_pv:
+#    image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
+#    environment:
+#      - DJANGO_APPLICATION_ENVIRONMENT=local
+#      - NETWORK_SIGNING_KEY=731f928711f30257d20bde471200c11975009415b4c6f596e7ee81bfed1a033b
+#      - REDIS_DB=0
+#      - REDIS_HOST=redis
+#      - POSTGRES_HOST=db
+#      - POSTGRES_DB=thenewboston_pv
+#      - POSTGRES_USER=thenewboston
+#      - POSTGRES_PASSWORD=thenewboston
+#      - SECRET_KEY=somesecret
+#    command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
+#    links:
+#      - pv
+#      - db
+#      - redis
+#    depends_on:
+#      - db
+#      - redis
+#
+#  celery_cv1:
+#    image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
+#    environment:
+#      - DJANGO_APPLICATION_ENVIRONMENT=local
+#      - NETWORK_SIGNING_KEY=46a23fd52b2690f5acf56654489fd67b3734a52f35a2b7827f5caeaa06c0c0a5
+#      - REDIS_DB=1
+#      - REDIS_HOST=redis
+#      - POSTGRES_HOST=db
+#      - POSTGRES_DB=thenewboston_cv1
+#      - POSTGRES_USER=thenewboston
+#      - POSTGRES_PASSWORD=thenewboston
+#      - SECRET_KEY=somesecret
+#    command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
+#    links:
+#      - cv1
+#      - db
+#      - redis
+#    depends_on:
+#      - db
+#      - redis
+#
+#  celery_cv2:
+#    image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
+#    environment:
+#      - DJANGO_APPLICATION_ENVIRONMENT=local
+#      - NETWORK_SIGNING_KEY=1c7822c93d914ac40fc11d7bd71959d5aadb1ecd07fbffc7d9c481ccd043d4a9
+#      - REDIS_DB=2
+#      - REDIS_HOST=redis
+#      - POSTGRES_HOST=db
+#      - POSTGRES_DB=thenewboston_cv2
+#      - POSTGRES_USER=thenewboston
+#      - POSTGRES_PASSWORD=thenewboston
+#      - SECRET_KEY=somesecret
+#    command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
+#    links:
+#      - cv2
+#      - db
+#      - redis
+#    depends_on:
+#      - db
+#      - redis
 
 volumes:
   postgresql-data:
