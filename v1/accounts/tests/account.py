@@ -1,6 +1,6 @@
 import pytest
 from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_404_NOT_FOUND
 from thenewboston.third_party.pytest.asserts import assert_objects_vs_dicts
 from thenewboston.utils.signed_requests import generate_signed_request
 
@@ -55,3 +55,17 @@ def test_bank_account_number_trust(
         expected=HTTP_400_BAD_REQUEST,
     )
     assert response['trust'] == [response_msg]
+
+
+def test_invalid_account_number(client, account, self_configuration):
+    client.patch_json(
+        reverse(
+            'account-detail',
+            args=[account.account_number + 'abcdef']
+        ),
+        generate_signed_request(
+            data={'trust': 100},
+            nid_signing_key=get_signing_key()
+        ),
+        expected=HTTP_404_NOT_FOUND,
+    )
