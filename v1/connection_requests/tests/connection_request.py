@@ -32,6 +32,7 @@ def validator_connection_request_data():
 def test_banks_post_400_connect_to_self(client, bank_connection_request_data, signing_key, self_configuration):
     bank_connection_request_data['ip_address'] = self_configuration.ip_address
     bank_connection_request_data['protocol'] = self_configuration.protocol
+    bank_connection_request_data['port'] = self_configuration.port
 
     response = client.post_json(
         reverse('connection_requests-list'),
@@ -49,6 +50,7 @@ def test_banks_post_400_connect_to_existing_bank(client, bank_connection_request
 
     bank_connection_request_data['ip_address'] = bank.ip_address
     bank_connection_request_data['protocol'] = bank.protocol
+    bank_connection_request_data['port'] = bank.port
 
     response = client.post_json(
         reverse('connection_requests-list'),
@@ -68,6 +70,7 @@ def test_banks_post_400_connect_to_existing_validator(
 
     validator_connection_request_data['ip_address'] = validator.ip_address
     validator_connection_request_data['protocol'] = validator.protocol
+    validator_connection_request_data['port'] = validator.port
 
     response = client.post_json(
         reverse('connection_requests-list'),

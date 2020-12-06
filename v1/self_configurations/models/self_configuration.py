@@ -13,7 +13,7 @@ class SelfConfiguration(NetworkNode):
     primary_validator = models.ForeignKey(Validator, on_delete=models.SET_NULL, blank=True, null=True)
     node_type = models.CharField(choices=NODE_TYPE_CHOICES, default=BANK, max_length=4)
 
-    class Meta:
+    class Meta(NetworkNode.Meta):
         default_related_name = 'self_configurations'
 
     def __str__(self):
@@ -24,7 +24,7 @@ class SelfConfiguration(NetworkNode):
 
     def _update_related_bank(self):
         """Update related row in the bank table"""
-        bank = Bank.objects.filter(ip_address=self.ip_address)
+        bank = Bank.objects.filter(ip_address=self.ip_address, protocol=self.protocol, port=self.port)
         field_names = common_field_names(self, Bank)
         data = {f: getattr(self, f) for f in field_names}
 

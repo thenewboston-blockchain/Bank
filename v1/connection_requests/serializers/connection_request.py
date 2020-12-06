@@ -84,14 +84,15 @@ class ConnectionRequestSerializerCreate(serializers.Serializer):
         """Attempt to connect to node"""
         ip_address = data['ip_address']
         protocol = data['protocol']
+        port = data.get('port', '')
 
-        if Bank.objects.filter(ip_address=ip_address, protocol=protocol).exists():
+        if Bank.objects.filter(ip_address=ip_address, protocol=protocol, port=port).exists():
             raise serializers.ValidationError('Already connected to bank')
 
-        if SelfConfiguration.objects.filter(ip_address=ip_address, protocol=protocol).exists():
+        if SelfConfiguration.objects.filter(ip_address=ip_address, protocol=protocol, port=port).exists():
             raise serializers.ValidationError('Unable to connect to self')
 
-        if Validator.objects.filter(ip_address=ip_address, protocol=protocol).exists():
+        if Validator.objects.filter(ip_address=ip_address, protocol=protocol, port=port).exists():
             raise serializers.ValidationError('Already connected to validator')
 
         return self.get_node_config(data)
