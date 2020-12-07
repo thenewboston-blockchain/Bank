@@ -4,8 +4,8 @@ set -e
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
     CREATE DATABASE thenewboston_cv1;
     CREATE DATABASE thenewboston_cv2;
-    CREATE DATABASE thenewboston_pk;
+    CREATE DATABASE thenewboston_pv;
     GRANT ALL PRIVILEGES ON DATABASE thenewboston_cv1 TO $POSTGRES_USER;
     GRANT ALL PRIVILEGES ON DATABASE thenewboston_cv2 TO $POSTGRES_USER;
-    GRANT ALL PRIVILEGES ON DATABASE thenewboston_pk TO $POSTGRES_USER;
+    GRANT ALL PRIVILEGES ON DATABASE thenewboston_pv TO $POSTGRES_USER;
 EOSQL

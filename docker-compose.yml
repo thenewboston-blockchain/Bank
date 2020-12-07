@@ -9,7 +9,7 @@ services:
   db:
     image: postgres:12-alpine
     environment:
-      - POSTGRES_DB=thenewboston_pv
+      - POSTGRES_DB=thenewboston_bank
       - POSTGRES_USER=thenewboston
       - POSTGRES_PASSWORD=thenewboston
       - C_FORCE_ROOT=true
