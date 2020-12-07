@@ -90,3 +90,27 @@ def test_update_bank_with_invalid_trust_value(
     )
 
     assert response['trust'] == [response_msg]
+
+
+def test_banks_detail(client, bank, django_assert_max_num_queries):
+    with django_assert_max_num_queries(1):
+        response = client.get_json(
+            reverse(
+                'bank-detail',
+                args=[bank.node_identifier],
+            ),
+            expected=status.HTTP_200_OK,
+        )
+    assert bank.node_identifier == response['node_identifier']
+    assert response
+
+
+def test_banks_detail_not_found(client, django_assert_max_num_queries):
+    with django_assert_max_num_queries(1):
+        client.get_json(
+            reverse(
+                'bank-detail',
+                args=['thisisafakebanknodeidentifier'],
+            ),
+            expected=status.HTTP_404_NOT_FOUND,
+        )
