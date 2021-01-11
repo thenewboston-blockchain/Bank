@@ -152,6 +152,8 @@ pluggy==0.13.1
     # via pytest
 prometheus-client==0.8.0
     # via flower
+psycopg2==2.8.6
+    # via thenewboston
 ptable==0.9.2
     # via thenewboston
 py==1.10.0
