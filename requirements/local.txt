@@ -73,6 +73,10 @@ daphne==2.5.0
     # via channels
 django-cors-headers==3.4.0
     # via thenewboston
+django-debug-toolbar==3.1.1
+    # via thenewboston
+django-filter==2.4.0
+    # via thenewboston
 django-redis==4.11.0
     # via thenewboston
 django==3.1.1
