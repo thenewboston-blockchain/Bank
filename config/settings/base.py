@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'rest_framework',
+    'drf_yasg',
 
     # API (v1) network nodes
     'v1.banks.apps.BanksConfig',
