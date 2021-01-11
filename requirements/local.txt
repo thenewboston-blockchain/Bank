@@ -150,7 +150,7 @@ inflection==0.5.1
 iniconfig==1.1.1
     # via pytest
 iptools==0.7.0
-    # via -r requirements/local.in
+    # via thenewboston
 itypes==1.2.0
     # via coreapi
 jinja2==2.11.2
@@ -161,6 +161,8 @@ kombu==4.6.11
     # via celery
 lupa==1.9
     # via fakeredis
+mccabe==0.6.1
+    # via flake8
 markupsafe==1.1.1
     # via jinja2
 more-itertools==8.6.0
@@ -192,11 +194,13 @@ pycodestyle==2.6.0
     # via thenewboston
 pycparser==2.20
     # via cffi
-pygments==2.7.3
-    # via sphinx
+pydocstyle==5.1.1
+    # via flake8-docstrings
+pyflakes==2.2.0
+    # via flake
 pyhamcrest==2.0.2
     # via twisted
-pynacl==1.3.0
+pynacl==1.4.0
     # via thenewboston
 pyopenssl==20.0.1
     # via twisted
@@ -212,7 +216,7 @@ pytest-forked==1.3.0
     # via pytest-xdist
 pytest-xdist==2.1.0
     # via thenewboston
-pytest==6.0.2
+pytest==6.1.2
     # via
     #   pytest-asyncio
     #   pytest-cov
@@ -233,7 +237,9 @@ redis==3.5.3
     #   -r requirements/base.in
     #   django-redis
     #   fakeredis
-requests==2.24.0
+requests-mock==1.8.0
+    # via thenewboston
+requests==2.25.0
     # via
     #   coreapi
     #   sphinx
@@ -242,7 +248,7 @@ ruamel.yaml.clib==0.2.2
     # via ruamel.yaml
 ruamel.yaml==0.16.12
     # via drf-yasg
-sentry-sdk==0.18.0
+sentry-sdk==0.19.3
     # via thenewboston
 service-identity==18.1.0
     # via twisted
@@ -255,7 +261,7 @@ six==1.15.0
     #   pyopenssl
     #   python-dateutil
 snowballstemmer==2.0.0
-    # via sphinx
+    # via pydocstyle
 sortedcontainers==2.3.0
     # via fakeredis
 sphinx==3.3.1
@@ -278,7 +284,7 @@ tblib==1.7.0
     # via -r requirements/base.in
 text-unidecode==1.3
     # via faker
-thenewboston==0.0.24
+thenewboston==0.0.30
     # via -r requirements/base.in
 toml==0.10.2
     # via pytest
@@ -294,7 +300,7 @@ uritemplate==3.0.1
     # via
     #   coreapi
     #   drf-yasg
-urllib3==1.25.11
+urllib3==1.26.2
     # via
     #   requests
     #   sentry-sdk
@@ -302,6 +308,8 @@ vine==1.3.0
     # via
     #   amqp
     #   celery
+wheel==0.35.1
+    # via thenewboston
 zipp==3.4.0
     # via importlib-metadata
 zope.interface==5.2.0

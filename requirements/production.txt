@@ -6,6 +6,8 @@
 #
 aioredis==1.3.1
     # via channels-redis
+alabaster==0.7.12
+    # via sphinx
 amqp==2.6.1
     # via kombu
 apipkg==1.5
@@ -28,6 +30,8 @@ autobahn==20.12.3
     # via daphne
 automat==20.2.0
     # via twisted
+babel==2.9.0
+    # via sphinx
 billiard==3.6.3.0
     # via celery
 celery==4.4.2
@@ -69,6 +73,10 @@ daphne==2.5.0
     # via channels
 django-cors-headers==3.5.0
     # via thenewboston
+django-debug-toolbar==3.1.1
+    # via thenewboston
+django-filter==2.4.0
+    # via thenewboston
 django-redis==4.12.1
     # via thenewboston
 django==3.1.3
@@ -83,6 +91,8 @@ djangorestframework==3.12.2
     # via
     #   drf-yasg
     #   thenewboston
+docutils==0.16
+    # via sphinx
 drf_yasg==1.20.0
     # via -r requirements/base.in
 execnet==1.7.1
@@ -111,6 +121,8 @@ flake8==3.8.4
     # via flake8-bugbear, flake8-builtins, flake8-coding, flake8-docstrings, flake8-polyfill, flake8-quotes, thenewboston
 flower==0.9.5
     # via -r requirements/base.in
+freezegun==1.0.0
+    # via thenewboston
 hiredis==1.1.0
     # via aioredis
 humanize==3.2.0
@@ -124,6 +136,8 @@ idna==2.10
     #   hyperlink
     #   requests
     #   twisted
+imagesize==1.2.0
+    # via sphinx
 importlib-metadata==3.4.0
     # via
     #   kombu
@@ -140,7 +154,9 @@ iptools==0.7.0
 itypes==1.2.0
     # via coreapi
 jinja2==2.11.2
-    # via coreschema
+    # via
+    #   coreschema
+    #   sphinx
 kombu==4.6.11
     # via celery
 lupa==1.9
@@ -157,6 +173,7 @@ packaging==20.8
     # via
     #   drf-yasg
     #   pytest
+    #   sphinx
 pluggy==0.13.1
     # via pytest
 prometheus-client==0.8.0
@@ -177,9 +194,13 @@ pycodestyle==2.6.0
     # via thenewboston
 pycparser==2.20
     # via cffi
+pydocstyle==5.1.1
+    # via flake8-docstrings
+pyflakes==2.2.0
+    # via flake
 pyhamcrest==2.0.2
     # via twisted
-pynacl==1.3.0
+pynacl==1.4.0
     # via thenewboston
 pyopenssl==20.0.1
     # via twisted
@@ -207,6 +228,7 @@ python-dateutil==2.8.1
     # via faker
 pytz==2020.5
     # via
+    #   babel
     #   celery
     #   django
     #   flower
@@ -220,6 +242,7 @@ requests-mock==1.8.0
 requests==2.25.0
     # via
     #   coreapi
+    #   sphinx
     #   thenewboston
 ruamel.yaml.clib==0.2.2
     # via ruamel.yaml
@@ -237,8 +260,24 @@ six==1.15.0
     #   pynacl
     #   pyopenssl
     #   python-dateutil
+snowballstemmer==2.0.0
+    # via pydocstyle
 sortedcontainers==2.3.0
     # via fakeredis
+sphinx==3.3.1
+    # via -r requirements/local.in
+sphinxcontrib-applehelp==1.0.2
+    # via sphinx
+sphinxcontrib-devhelp==1.0.2
+    # via sphinx
+sphinxcontrib-htmlhelp==1.0.3
+    # via sphinx
+sphinxcontrib-jsmath==1.0.1
+    # via sphinx
+sphinxcontrib-qthelp==1.0.3
+    # via sphinx
+sphinxcontrib-serializinghtml==1.1.4
+    # via sphinx
 sqlparse==0.4.1
     # via django
 tblib==1.7.0
