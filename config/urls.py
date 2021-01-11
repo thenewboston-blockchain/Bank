@@ -2,11 +2,10 @@ from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
-
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
 
 from v1.accounts.urls import router as accounts_router
 from v1.bank_transactions.urls import router as bank_transactions_router
@@ -28,12 +27,12 @@ admin.site.site_title = 'Bank'
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Bank API",
-      default_version='v1',
-      description="Test description",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@thenewboston.com"),
-      license=openapi.License(name="MIT License"),
+       title='Bank API',
+       default_version='v1',
+       description='Test description',
+       terms_of_service='https://www.google.com/policies/terms/',
+       contact=openapi.Contact(email='contact@thenewboston.com'),
+       license=openapi.License(name='MIT License'),
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
