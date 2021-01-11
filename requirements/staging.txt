@@ -122,6 +122,8 @@ inflection==0.5.1
     # via drf-yasg
 iniconfig==1.1.1
     # via pytest
+iptools==0.7.0
+    # via thenewboston
 itypes==1.2.0
     # via coreapi
 jinja2==2.11.2
