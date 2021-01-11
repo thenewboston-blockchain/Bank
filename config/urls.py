@@ -26,16 +26,16 @@ admin.site.site_header = 'Bank'
 admin.site.site_title = 'Bank'
 
 schema_view = get_schema_view(
-   openapi.Info(
-       title='Bank API',
-       default_version='v1',
-       description='Test description',
-       terms_of_service='https://www.google.com/policies/terms/',
-       contact=openapi.Contact(email='contact@thenewboston.com'),
-       license=openapi.License(name='MIT License'),
-   ),
-   public=True,
-   permission_classes=(permissions.AllowAny,),
+    openapi.Info(
+        title='Bank API',
+        default_version='v1',
+        description='Test description',
+        terms_of_service='https://www.google.com/policies/terms/',
+        contact=openapi.Contact(email='contact@thenewboston.com'),
+        license=openapi.License(name='MIT License'),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
