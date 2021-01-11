@@ -1,6 +1,5 @@
 celery==4.4.2
-flake8==3.8.4
 flower==0.9.5
 redis==3.5.3
 tblib==1.7.0
-thenewboston==0.0.24
+thenewboston==0.0.30
