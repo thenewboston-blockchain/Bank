@@ -10,7 +10,7 @@ from thenewboston.verify_keys.verify_key import encode_verify_key
 
 from v1.accounts.factories.account import AccountFactory
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
-from v1.utils.blocks import create_block_and_bank_transactions
+from v1.utils.blocks import create_block_and_related_objects
 from v1.validators.factories.validator import ValidatorFactory
 
 
@@ -32,7 +32,7 @@ def account_number(account_data):
 
 @pytest.fixture
 def block(block_data):
-    yield create_block_and_bank_transactions(block_data)
+    yield create_block_and_related_objects(block_data)
 
 
 @pytest.fixture
