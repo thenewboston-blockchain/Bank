@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from v1.accounts.models.account import Account
 from v1.bank_transactions.models.bank_transaction import BankTransaction
 from v1.blocks.models.block import Block
 from v1.confirmation_blocks.models.confirmation_block import ConfirmationBlock
@@ -54,5 +55,10 @@ def create_block_and_bank_transactions(block_data):
         signature=signature
     )
     create_bank_transactions(block=block, message=message)
+
+    Account.objects.get_or_create(
+        account_number=account_number,
+        defaults={'trust': 0},
+    )
 
     return block, True
