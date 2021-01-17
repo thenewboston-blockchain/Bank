@@ -8,7 +8,7 @@ from thenewboston.utils.fields import all_field_names
 
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import send_signed_block
-from v1.utils.blocks import create_block_and_bank_transactions
+from v1.utils.blocks import create_block_and_related_objects
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.block import Block
 
@@ -37,7 +37,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
 
         try:
             with transaction.atomic():
-                block, created = create_block_and_bank_transactions(validated_block)
+                block, created = create_block_and_related_objects(validated_block)
                 send_signed_block.delay(
                     block=validated_block,
                     ip_address=primary_validator.ip_address,

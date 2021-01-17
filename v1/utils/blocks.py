@@ -21,11 +21,11 @@ def create_bank_transactions(*, block, message):
     BankTransaction.objects.bulk_create(bank_transactions)
 
 
-def create_block_and_bank_transactions(block_data):
+def create_block_and_related_objects(block_data):
     """
-    Create block and bank transactions
+    Create block, bank transactions, and account if necessary
 
-    Returns block, created
+    Returns block, block_created
     """
     account_number = block_data['account_number']
     message = block_data['message']
@@ -55,7 +55,6 @@ def create_block_and_bank_transactions(block_data):
         signature=signature
     )
     create_bank_transactions(block=block, message=message)
-
     Account.objects.get_or_create(
         account_number=account_number,
         defaults={'trust': 0},

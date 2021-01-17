@@ -8,7 +8,7 @@ from thenewboston.utils.fields import all_field_names
 
 from v1.blocks.models.block import Block
 from v1.notifications.confirmation_blocks import send_confirmation_block_notifications
-from v1.utils.blocks import create_block_and_bank_transactions
+from v1.utils.blocks import create_block_and_related_objects
 from v1.validators.models.validator import Validator
 from ..models.confirmation_block import ConfirmationBlock
 
@@ -72,7 +72,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         )
 
         if not block:
-            create_block_and_bank_transactions(inner_block)
+            create_block_and_related_objects(inner_block)
             return confirmation_block
 
         try:
