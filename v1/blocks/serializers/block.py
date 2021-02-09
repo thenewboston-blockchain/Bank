@@ -35,6 +35,11 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = self_configuration.primary_validator
 
+        message = validated_data['message']
+        txs = message['txs']
+        """Remove BANK fee if senders account_number matches nodes account_number"""
+        validated_block['message']['txs'] = list(filter(lambda tx: tx['recipient'] != self_configuration.account_number, txs))
+
         try:
             with transaction.atomic():
                 block, created = create_block_and_related_objects(validated_block)
