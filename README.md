@@ -113,7 +113,7 @@ python3 manage.py migrate
 python3 manage.py initialize_test_bank -ip [IP ADDRESS]
 ```
 
-## Local Development (without docker)
+## Local Development (without Docker)
 
 Run Redis:
 ```
