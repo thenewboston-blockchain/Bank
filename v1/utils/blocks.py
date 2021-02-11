@@ -1,6 +1,6 @@
 from rest_framework import serializers
-
 from thenewboston.constants.network import BANK
+
 from v1.accounts.models.account import Account
 from v1.bank_transactions.models.bank_transaction import BankTransaction
 from v1.blocks.models.block import Block

@@ -3,7 +3,6 @@ import logging
 from django.db import transaction
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
 from thenewboston.constants.network import PRIMARY_VALIDATOR
 from thenewboston.serializers.network_block import NetworkBlockSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
