@@ -2,6 +2,9 @@ import logging
 
 from django.db import transaction
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+
+from thenewboston.constants.network import PRIMARY_VALIDATOR
 from thenewboston.serializers.network_block import NetworkBlockSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
@@ -16,7 +19,6 @@ logger = logging.getLogger('thenewboston')
 
 
 class BlockSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Block
         fields = '__all__'
@@ -34,11 +36,6 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         validated_block = validated_data
         self_configuration = get_self_configuration(exception_class=RuntimeError)
         primary_validator = self_configuration.primary_validator
-
-        message = validated_data['message']
-        txs = message['txs']
-        """Remove BANK fee if senders account_number matches nodes account_number"""
-        validated_block['message']['txs'] = list(filter(lambda tx: tx['recipient'] != self_configuration.account_number, txs))
 
         try:
             with transaction.atomic():
@@ -88,5 +85,11 @@ class BlockSerializerCreate(NetworkBlockSerializer):
                 recipient=primary_validator.account_number,
                 txs=txs
             )
+
+        pv_tx = next(tx for tx in txs if tx['fee'] == PRIMARY_VALIDATOR)
+        if pv_tx['recipient'] != primary_validator.account_number:
+            raise ValidationError({
+                'error_message': 'PV account_number does not match Bank PV account_number'
+            })
 
         return data
