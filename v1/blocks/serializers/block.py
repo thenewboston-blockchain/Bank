@@ -2,6 +2,7 @@ import logging
 
 from django.db import transaction
 from rest_framework import serializers
+from thenewboston.constants.network import BANK, PRIMARY_VALIDATOR
 from thenewboston.serializers.network_block import NetworkBlockSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
@@ -71,6 +72,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         if account_number != self_configuration.account_number:
             validate_transaction_exists(
                 amount=self_configuration.default_transaction_fee,
+                fee=BANK,
                 error=serializers.ValidationError,
                 recipient=self_configuration.account_number,
                 txs=txs
@@ -79,6 +81,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         if account_number != primary_validator.account_number:
             validate_transaction_exists(
                 amount=primary_validator.default_transaction_fee,
+                fee=PRIMARY_VALIDATOR,
                 error=serializers.ValidationError,
                 recipient=primary_validator.account_number,
                 txs=txs

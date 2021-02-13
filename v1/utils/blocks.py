@@ -14,6 +14,7 @@ def create_bank_transactions(*, block, message):
         bank_transaction = BankTransaction(
             amount=tx['amount'],
             block=block,
+            fee=tx.get('fee', ''),
             recipient=tx['recipient']
         )
         bank_transactions.append(bank_transaction)
@@ -47,6 +48,7 @@ def create_block_and_related_objects(block_data):
         # User is using that balance key to send a new block (different Txs)
         BankTransaction.objects.filter(block=block).delete()
         create_bank_transactions(block=block, message=message)
+
         return block, False
 
     block = Block.objects.create(

@@ -33,7 +33,6 @@ def test_blocks_list_filter(client, blocks, django_assert_max_num_queries):
 
 
 def test_blocks_post(client, block_data):
-
     response = client.post_json(
         reverse('block-list'),
         block_data,
@@ -44,7 +43,6 @@ def test_blocks_post(client, block_data):
 
 
 def test_blocks_post_400_unique_recipients(client, block_data_unique_recipients):
-
     response = client.post_json(
         reverse('block-list'),
         block_data_unique_recipients,
