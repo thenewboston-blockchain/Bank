@@ -29,6 +29,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
     def create(self, validated_data):
         """
         Create block and bank transactions
+
         Forward block to validator
         """
         validated_block = validated_data

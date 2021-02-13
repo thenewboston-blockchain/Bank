@@ -48,6 +48,7 @@ def create_block_and_related_objects(block_data):
         # User is using that balance key to send a new block (different Txs)
         BankTransaction.objects.filter(block=block).delete()
         create_bank_transactions(block=block, message=message)
+
         return block, False
 
     block = Block.objects.create(
@@ -55,7 +56,7 @@ def create_block_and_related_objects(block_data):
         sender=account_number,
         signature=signature
     )
-
+    create_bank_transactions(block=block, message=message)
     Account.objects.get_or_create(
         account_number=account_number,
         defaults={'trust': 0},
