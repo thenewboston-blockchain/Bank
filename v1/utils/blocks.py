@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from v1.accounts.models.account import Account
 from v1.bank_transactions.models.bank_transaction import BankTransaction
 from v1.blocks.models.block import Block
 from v1.confirmation_blocks.models.confirmation_block import ConfirmationBlock
@@ -13,6 +14,7 @@ def create_bank_transactions(*, block, message):
         bank_transaction = BankTransaction(
             amount=tx['amount'],
             block=block,
+            fee=tx.get('fee', ''),
             recipient=tx['recipient']
         )
         bank_transactions.append(bank_transaction)
@@ -20,11 +22,11 @@ def create_bank_transactions(*, block, message):
     BankTransaction.objects.bulk_create(bank_transactions)
 
 
-def create_block_and_bank_transactions(block_data):
+def create_block_and_related_objects(block_data):
     """
-    Create block and bank transactions
+    Create block, bank transactions, and account if necessary
 
-    Returns block, created
+    Returns block, block_created
     """
     account_number = block_data['account_number']
     message = block_data['message']
@@ -46,6 +48,7 @@ def create_block_and_bank_transactions(block_data):
         # User is using that balance key to send a new block (different Txs)
         BankTransaction.objects.filter(block=block).delete()
         create_bank_transactions(block=block, message=message)
+
         return block, False
 
     block = Block.objects.create(
@@ -54,5 +57,9 @@ def create_block_and_bank_transactions(block_data):
         signature=signature
     )
     create_bank_transactions(block=block, message=message)
+    Account.objects.get_or_create(
+        account_number=account_number,
+        defaults={'trust': 0},
+    )
 
     return block, True

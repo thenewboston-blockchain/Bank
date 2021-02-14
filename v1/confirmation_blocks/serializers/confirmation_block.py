@@ -8,6 +8,7 @@ from thenewboston.utils.fields import all_field_names
 
 from v1.blocks.models.block import Block
 from v1.notifications.confirmation_blocks import send_confirmation_block_notifications
+from v1.utils.blocks import create_block_and_related_objects
 from v1.validators.models.validator import Validator
 from ..models.confirmation_block import ConfirmationBlock
 
@@ -34,13 +35,12 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         validator = validated_data['node_identifier']
 
         inner_block = message['block']
-        inner_block_signature = inner_block['signature']
         inner_block_account_number = inner_block['account_number']
         inner_block_recipients = {tx['recipient'] for tx in inner_block['message']['txs']}
 
         confirmation_block = self.create_confirmation_block(
             block_identifier=block_identifier,
-            inner_block_signature=inner_block_signature,
+            inner_block=inner_block,
             validator=validator
         )
 
@@ -53,12 +53,17 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         return confirmation_block
 
     @staticmethod
-    def create_confirmation_block(*, block_identifier, inner_block_signature, validator):
+    def create_confirmation_block(*, block_identifier, inner_block, validator):
         """
-        Create confirmation block if necessary
+        Create block, confirmation block, bank transactions, and account if necessary
 
-        - confirmation blocks are only created for blocks originating from this bank
+        - when a block is sent through a bank it will create and store the related block, bank transactions, and account
+        - when a block is sent through another bank, the bank that receives the confirmation block may not have that
+        information
+        - this related information is helpful when users set this bank as their new active bank (since it will already
+        have their entire transaction history)
         """
+        inner_block_signature = inner_block['signature']
         block = Block.objects.filter(signature=inner_block_signature).first()
         confirmation_block = ConfirmationBlock(
             block=block,
@@ -67,6 +72,7 @@ class ConfirmationBlockSerializerCreate(serializers.Serializer):
         )
 
         if not block:
+            create_block_and_related_objects(inner_block)
             return confirmation_block
 
         try:

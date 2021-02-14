@@ -16,7 +16,6 @@ def test_confirmation_block_list(client, confirmation_blocks, django_assert_max_
 
 
 def test_confirmation_block_post(client, validator, block, confirmation_block_data):
-
     response = client.post_json(
         reverse('confirmationblock-list'),
         confirmation_block_data,

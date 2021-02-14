@@ -2,14 +2,14 @@ import logging
 
 from django.db import transaction
 from rest_framework import serializers
+from thenewboston.constants.network import BANK, PRIMARY_VALIDATOR
 from thenewboston.serializers.network_block import NetworkBlockSerializer
 from thenewboston.transactions.validation import validate_transaction_exists
 from thenewboston.utils.fields import all_field_names
 
-from v1.accounts.models.account import Account
 from v1.self_configurations.helpers.self_configuration import get_self_configuration
 from v1.tasks.blocks import send_signed_block
-from v1.utils.blocks import create_block_and_bank_transactions
+from v1.utils.blocks import create_block_and_related_objects
 from v1.validators.helpers.validator_configuration import get_primary_validator
 from ..models.block import Block
 
@@ -38,14 +38,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
 
         try:
             with transaction.atomic():
-                block, created = create_block_and_bank_transactions(validated_block)
-
-                if created:
-                    Account.objects.get_or_create(
-                        account_number=validated_block['account_number'],
-                        defaults={'trust': 0},
-                    )
-
+                block, created = create_block_and_related_objects(validated_block)
                 send_signed_block.delay(
                     block=validated_block,
                     ip_address=primary_validator.ip_address,
@@ -79,6 +72,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         if account_number != self_configuration.account_number:
             validate_transaction_exists(
                 amount=self_configuration.default_transaction_fee,
+                fee=BANK,
                 error=serializers.ValidationError,
                 recipient=self_configuration.account_number,
                 txs=txs
@@ -87,6 +81,7 @@ class BlockSerializerCreate(NetworkBlockSerializer):
         if account_number != primary_validator.account_number:
             validate_transaction_exists(
                 amount=primary_validator.default_transaction_fee,
+                fee=PRIMARY_VALIDATOR,
                 error=serializers.ValidationError,
                 recipient=primary_validator.account_number,
                 txs=txs

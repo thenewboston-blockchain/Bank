@@ -19,7 +19,7 @@ services:
 
   bank:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_dev
       context: .
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
@@ -140,7 +140,7 @@ services:
 
   celery_bank:
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_dev
       context: .
     environment:
       - DJANGO_APPLICATION_ENVIRONMENT=local
