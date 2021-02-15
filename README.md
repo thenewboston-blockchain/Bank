@@ -160,10 +160,10 @@ completely unrelated topics.
 
 - [thenewboston.com](https://thenewboston.com/)
 - [Discord](https://discord.gg/thenewboston)
-- [reddit](https://www.reddit.com/r/thenewboston/)
-- [LinkedIn](https://www.linkedin.com/company/thenewboston-developers/)
 - [Facebook](https://www.facebook.com/TheNewBoston-464114846956315/)
-- [Twitter](https://twitter.com/bucky_roberts)
+- [LinkedIn](https://www.linkedin.com/company/thenewboston-developers/)
+- [Reddit](https://www.reddit.com/r/thenewboston/)
+- [Twitter](https://twitter.com/thenewboston_og)
 - [YouTube](https://www.youtube.com/user/thenewboston)
 
 ## Donate
