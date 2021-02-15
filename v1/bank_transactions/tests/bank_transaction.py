@@ -49,6 +49,7 @@ def test_bank_transactions_non_fee_filter(client, bank_transactions, value, djan
     expected_response_len = sum(
         transaction.fee == value for transaction in bank_transactions
     )
+
     with django_assert_max_num_queries(2):
         response = client.get_json(
             reverse('banktransaction-list'),
@@ -59,5 +60,6 @@ def test_bank_transactions_non_fee_filter(client, bank_transactions, value, djan
             expected=HTTP_200_OK,
         )
     assert len(response) == expected_response_len
+
     for transaction in response:
         assert transaction['fee'] == value

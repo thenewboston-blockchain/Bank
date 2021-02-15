@@ -13,8 +13,8 @@ class BankTransactionFilter(FilterSet):
         fields = [
             'account_number',
             'block__sender',
-            'recipient',
             'fee',
+            'recipient',
         ]
 
     @staticmethod
@@ -26,7 +26,7 @@ class BankTransactionFilter(FilterSet):
         )
 
     @staticmethod
-    def filter_fee(queryset, name, value):
+    def filter_fee(queryset, _, value):
         """Filter queryset by fee"""
         if value == 'NONE':
             return queryset.filter(
