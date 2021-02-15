@@ -42,3 +42,24 @@ def test_bank_transactions_filter(client, bank_transactions, field, attribute, d
             expected=HTTP_200_OK,
         )
     assert response[0]['id'] == str(target_transaction.id)
+
+
+@pytest.mark.parametrize('value', ['PRIMARY_VALIDATOR', 'BANK', '', 'FOO'])
+def test_bank_transactions_non_fee_filter(client, bank_transactions, value, django_assert_max_num_queries):
+    expected_response_len = sum(
+        transaction.fee == value for transaction in bank_transactions
+    )
+
+    with django_assert_max_num_queries(2):
+        response = client.get_json(
+            reverse('banktransaction-list'),
+            {
+                'limit': 0,
+                'fee': value or 'NONE',
+            },
+            expected=HTTP_200_OK,
+        )
+    assert len(response) == expected_response_len
+
+    for transaction in response:
+        assert transaction['fee'] == value

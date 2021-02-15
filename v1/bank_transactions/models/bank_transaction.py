@@ -14,5 +14,6 @@ class BankTransaction(NetworkTransaction):
         return (
             f'ID: {self.id} | '
             f'Amount: {self.amount} | '
-            f'Recipient: {self.recipient}'
+            f'Recipient: {self.recipient} | '
+            f'Fee: {self.fee or "-"}'
         )
