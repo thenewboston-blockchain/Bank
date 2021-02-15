@@ -28,7 +28,7 @@ class BankTransactionFilter(FilterSet):
     @staticmethod
     def filter_fee(queryset, name, value):
         """Filter queryset by fee"""
-        if value == "NONE":
+        if value == 'NONE':
             return queryset.filter(
                 fee__exact='',
             )

@@ -54,7 +54,7 @@ def test_bank_transactions_non_fee_filter(client, bank_transactions, value, djan
             reverse('banktransaction-list'),
             {
                 'limit': 0,
-                'fee': value or "NONE",
+                'fee': value or 'NONE',
             },
             expected=HTTP_200_OK,
         )
