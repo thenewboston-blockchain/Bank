@@ -6,7 +6,7 @@ omit = */tests/*
 branch = True
 
 include =
-    v1/*
+    thenewboston_bank/*
 ; parallel = true
 ; concurrency = multiprocessing
 

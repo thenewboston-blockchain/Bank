@@ -1,21 +1,21 @@
-v1.invalid\_blocks.tests package
+thenewboston_bank.invalid\_blocks.tests package
 ================================
 
 Submodules
 ----------
 
-v1.invalid\_blocks.tests.conftest module
+thenewboston_bank.invalid\_blocks.tests.conftest module
 ----------------------------------------
 
-.. automodule:: v1.invalid_blocks.tests.conftest
+.. automodule:: thenewboston_bank.invalid_blocks.tests.conftest
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.invalid\_blocks.tests.invalid\_block module
+thenewboston_bank.invalid\_blocks.tests.invalid\_block module
 ----------------------------------------------
 
-.. automodule:: v1.invalid_blocks.tests.invalid_block
+.. automodule:: thenewboston_bank.invalid_blocks.tests.invalid_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ v1.invalid\_blocks.tests.invalid\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.invalid_blocks.tests
+.. automodule:: thenewboston_bank.invalid_blocks.tests
    :members:
    :undoc-members:
    :show-inheritance:

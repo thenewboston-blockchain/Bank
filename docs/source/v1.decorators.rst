@@ -1,13 +1,13 @@
-v1.decorators package
+thenewboston_bank.decorators package
 =====================
 
 Submodules
 ----------
 
-v1.decorators.nodes module
+thenewboston_bank.decorators.nodes module
 --------------------------
 
-.. automodule:: v1.decorators.nodes
+.. automodule:: thenewboston_bank.decorators.nodes
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.decorators.nodes module
 Module contents
 ---------------
 
-.. automodule:: v1.decorators
+.. automodule:: thenewboston_bank.decorators
    :members:
    :undoc-members:
    :show-inheritance:

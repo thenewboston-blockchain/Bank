@@ -1,13 +1,13 @@
-v1.self\_configurations.views package
+thenewboston_bank.self\_configurations.views package
 =====================================
 
 Submodules
 ----------
 
-v1.self\_configurations.views.self\_configuration module
+thenewboston_bank.self\_configurations.views.self\_configuration module
 --------------------------------------------------------
 
-.. automodule:: v1.self_configurations.views.self_configuration
+.. automodule:: thenewboston_bank.self_configurations.views.self_configuration
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.self\_configurations.views.self\_configuration module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.views
+.. automodule:: thenewboston_bank.self_configurations.views
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,4 +1,4 @@
-v1.third\_party package
+thenewboston_bank.third\_party package
 =======================
 
 Subpackages
@@ -7,12 +7,12 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.third_party.rest_framework
+   thenewboston_bank.third_party.rest_framework
 
 Module contents
 ---------------
 
-.. automodule:: v1.third_party
+.. automodule:: thenewboston_bank.third_party
    :members:
    :undoc-members:
    :show-inheritance:

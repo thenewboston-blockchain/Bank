@@ -1,37 +1,37 @@
-v1.tasks package
+thenewboston_bank.tasks package
 ================
 
 Submodules
 ----------
 
-v1.tasks.blocks module
+thenewboston_bank.tasks.blocks module
 ----------------------
 
-.. automodule:: v1.tasks.blocks
+.. automodule:: thenewboston_bank.tasks.blocks
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.tasks.clean module
+thenewboston_bank.tasks.clean module
 ---------------------
 
-.. automodule:: v1.tasks.clean
+.. automodule:: thenewboston_bank.tasks.clean
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.tasks.crawl module
+thenewboston_bank.tasks.crawl module
 ---------------------
 
-.. automodule:: v1.tasks.crawl
+.. automodule:: thenewboston_bank.tasks.crawl
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.tasks.sync module
+thenewboston_bank.tasks.sync module
 --------------------
 
-.. automodule:: v1.tasks.sync
+.. automodule:: thenewboston_bank.tasks.sync
    :members:
    :undoc-members:
    :show-inheritance:
@@ -39,7 +39,7 @@ v1.tasks.sync module
 Module contents
 ---------------
 
-.. automodule:: v1.tasks
+.. automodule:: thenewboston_bank.tasks
    :members:
    :undoc-members:
    :show-inheritance:

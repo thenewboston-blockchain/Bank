@@ -1,4 +1,4 @@
-v1.banks package
+thenewboston_bank.banks package
 ================
 
 Subpackages
@@ -7,36 +7,36 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.banks.factories
-   v1.banks.migrations
-   v1.banks.models
-   v1.banks.serializers
-   v1.banks.tests
-   v1.banks.views
+   thenewboston_bank.banks.factories
+   thenewboston_bank.banks.migrations
+   thenewboston_bank.banks.models
+   thenewboston_bank.banks.serializers
+   thenewboston_bank.banks.tests
+   thenewboston_bank.banks.views
 
 Submodules
 ----------
 
-v1.banks.admin module
+thenewboston_bank.banks.admin module
 ---------------------
 
-.. automodule:: v1.banks.admin
+.. automodule:: thenewboston_bank.banks.admin
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.banks.apps module
+thenewboston_bank.banks.apps module
 --------------------
 
-.. automodule:: v1.banks.apps
+.. automodule:: thenewboston_bank.banks.apps
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.banks.urls module
+thenewboston_bank.banks.urls module
 --------------------
 
-.. automodule:: v1.banks.urls
+.. automodule:: thenewboston_bank.banks.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -44,7 +44,7 @@ v1.banks.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.banks
+.. automodule:: thenewboston_bank.banks
    :members:
    :undoc-members:
    :show-inheritance:

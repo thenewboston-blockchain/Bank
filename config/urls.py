@@ -7,19 +7,19 @@ from drf_yasg.views import get_schema_view
 from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 
-from v1.accounts.urls import router as accounts_router
-from v1.bank_transactions.urls import router as bank_transactions_router
-from v1.banks.urls import router as banks_router
-from v1.blocks.urls import router as blocks_router
-from v1.clean.urls import router as clean_router
-from v1.confirmation_blocks.urls import router as confirmation_blocks_router
-from v1.connection_requests.urls import router as connection_requests_router
-from v1.crawl.urls import router as crawl_router
-from v1.invalid_blocks.urls import router as invalid_blocks_router
-from v1.self_configurations.urls import router as self_configurations_router
-from v1.status_updates.urls import router as status_updates_router
-from v1.validator_confirmation_services.urls import router as validator_confirmation_services_router
-from v1.validators.urls import router as validators_router
+from thenewboston_bank.accounts.urls import router as accounts_router
+from thenewboston_bank.bank_transactions.urls import router as bank_transactions_router
+from thenewboston_bank.banks.urls import router as banks_router
+from thenewboston_bank.blocks.urls import router as blocks_router
+from thenewboston_bank.clean.urls import router as clean_router
+from thenewboston_bank.confirmation_blocks.urls import router as confirmation_blocks_router
+from thenewboston_bank.connection_requests.urls import router as connection_requests_router
+from thenewboston_bank.crawl.urls import router as crawl_router
+from thenewboston_bank.invalid_blocks.urls import router as invalid_blocks_router
+from thenewboston_bank.self_configurations.urls import router as self_configurations_router
+from thenewboston_bank.status_updates.urls import router as status_updates_router
+from thenewboston_bank.validator_confirmation_services.urls import router as validator_confirmation_services_router
+from thenewboston_bank.validators.urls import router as validators_router
 
 admin.site.index_title = 'Admin'
 admin.site.site_header = 'Bank'

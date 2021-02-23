@@ -1,4 +1,4 @@
-v1.clean package
+thenewboston_bank.clean package
 ================
 
 Subpackages
@@ -7,34 +7,34 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.clean.consumers
-   v1.clean.serializers
-   v1.clean.tests
-   v1.clean.views
+   thenewboston_bank.clean.consumers
+   thenewboston_bank.clean.serializers
+   thenewboston_bank.clean.tests
+   thenewboston_bank.clean.views
 
 Submodules
 ----------
 
-v1.clean.helpers module
+thenewboston_bank.clean.helpers module
 -----------------------
 
-.. automodule:: v1.clean.helpers
+.. automodule:: thenewboston_bank.clean.helpers
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.clean.routing module
+thenewboston_bank.clean.routing module
 -----------------------
 
-.. automodule:: v1.clean.routing
+.. automodule:: thenewboston_bank.clean.routing
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.clean.urls module
+thenewboston_bank.clean.urls module
 --------------------
 
-.. automodule:: v1.clean.urls
+.. automodule:: thenewboston_bank.clean.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -42,7 +42,7 @@ v1.clean.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.clean
+.. automodule:: thenewboston_bank.clean
    :members:
    :undoc-members:
    :show-inheritance:

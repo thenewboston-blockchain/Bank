@@ -24,18 +24,18 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # API (v1) network nodes
-    'v1.banks.apps.BanksConfig',
-    'v1.validators.apps.ValidatorsConfig',
+    'thenewboston_bank.banks.apps.BanksConfig',
+    'thenewboston_bank.validators.apps.ValidatorsConfig',
 
     # API (v1)
-    'v1.accounts.apps.AccountsConfig',
-    'v1.bank_transactions.apps.BankTransactionsConfig',
-    'v1.blocks.apps.BlocksConfig',
-    'v1.confirmation_blocks.apps.ConfirmationBlocksConfig',
-    'v1.connection_requests.apps.ConnectionRequestsConfig',
-    'v1.invalid_blocks.apps.InvalidBlocksConfig',
-    'v1.self_configurations.apps.SelfConfigurationsConfig',
-    'v1.validator_confirmation_services.apps.ValidatorConfirmationServicesConfig',
+    'thenewboston_bank.accounts.apps.AccountsConfig',
+    'thenewboston_bank.bank_transactions.apps.BankTransactionsConfig',
+    'thenewboston_bank.blocks.apps.BlocksConfig',
+    'thenewboston_bank.confirmation_blocks.apps.ConfirmationBlocksConfig',
+    'thenewboston_bank.connection_requests.apps.ConnectionRequestsConfig',
+    'thenewboston_bank.invalid_blocks.apps.InvalidBlocksConfig',
+    'thenewboston_bank.self_configurations.apps.SelfConfigurationsConfig',
+    'thenewboston_bank.validator_confirmation_services.apps.ValidatorConfirmationServicesConfig',
 
 ]
 
@@ -168,7 +168,7 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'v1.third_party.rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PAGINATION_CLASS': 'thenewboston_bank.third_party.rest_framework.pagination.LimitOffsetPagination',
 }
 
 PAGINATION_DEFAULT_LIMIT = 50

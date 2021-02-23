@@ -1,13 +1,13 @@
-v1.clean.views package
+thenewboston_bank.clean.views package
 ======================
 
 Submodules
 ----------
 
-v1.clean.views.clean module
+thenewboston_bank.clean.views.clean module
 ---------------------------
 
-.. automodule:: v1.clean.views.clean
+.. automodule:: thenewboston_bank.clean.views.clean
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.clean.views.clean module
 Module contents
 ---------------
 
-.. automodule:: v1.clean.views
+.. automodule:: thenewboston_bank.clean.views
    :members:
    :undoc-members:
    :show-inheritance:

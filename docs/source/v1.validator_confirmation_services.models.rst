@@ -1,13 +1,13 @@
-v1.validator\_confirmation\_services.models package
+thenewboston_bank.validator\_confirmation\_services.models package
 ===================================================
 
 Submodules
 ----------
 
-v1.validator\_confirmation\_services.models.validator\_confirmation\_service module
+thenewboston_bank.validator\_confirmation\_services.models.validator\_confirmation\_service module
 -----------------------------------------------------------------------------------
 
-.. automodule:: v1.validator_confirmation_services.models.validator_confirmation_service
+.. automodule:: thenewboston_bank.validator_confirmation_services.models.validator_confirmation_service
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.validator\_confirmation\_services.models.validator\_confirmation\_service mod
 Module contents
 ---------------
 
-.. automodule:: v1.validator_confirmation_services.models
+.. automodule:: thenewboston_bank.validator_confirmation_services.models
    :members:
    :undoc-members:
    :show-inheritance:

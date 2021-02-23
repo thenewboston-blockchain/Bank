@@ -1,13 +1,13 @@
-v1.crawl.consumers package
+thenewboston_bank.crawl.consumers package
 ==========================
 
 Submodules
 ----------
 
-v1.crawl.consumers.crawl\_status module
+thenewboston_bank.crawl.consumers.crawl\_status module
 ---------------------------------------
 
-.. automodule:: v1.crawl.consumers.crawl_status
+.. automodule:: thenewboston_bank.crawl.consumers.crawl_status
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.crawl.consumers.crawl\_status module
 Module contents
 ---------------
 
-.. automodule:: v1.crawl.consumers
+.. automodule:: thenewboston_bank.crawl.consumers
    :members:
    :undoc-members:
    :show-inheritance:

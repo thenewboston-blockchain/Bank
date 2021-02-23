@@ -1,13 +1,13 @@
-v1.validators.factories package
+thenewboston_bank.validators.factories package
 ===============================
 
 Submodules
 ----------
 
-v1.validators.factories.validator module
+thenewboston_bank.validators.factories.validator module
 ----------------------------------------
 
-.. automodule:: v1.validators.factories.validator
+.. automodule:: thenewboston_bank.validators.factories.validator
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.validators.factories.validator module
 Module contents
 ---------------
 
-.. automodule:: v1.validators.factories
+.. automodule:: thenewboston_bank.validators.factories
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-v1.banks.serializers package
+thenewboston_bank.banks.serializers package
 ============================
 
 Submodules
 ----------
 
-v1.banks.serializers.bank module
+thenewboston_bank.banks.serializers.bank module
 --------------------------------
 
-.. automodule:: v1.banks.serializers.bank
+.. automodule:: thenewboston_bank.banks.serializers.bank
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.banks.serializers.bank module
 Module contents
 ---------------
 
-.. automodule:: v1.banks.serializers
+.. automodule:: thenewboston_bank.banks.serializers
    :members:
    :undoc-members:
    :show-inheritance:

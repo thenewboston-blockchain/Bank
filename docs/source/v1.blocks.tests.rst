@@ -1,21 +1,21 @@
-v1.blocks.tests package
+thenewboston_bank.blocks.tests package
 =======================
 
 Submodules
 ----------
 
-v1.blocks.tests.block module
+thenewboston_bank.blocks.tests.block module
 ----------------------------
 
-.. automodule:: v1.blocks.tests.block
+.. automodule:: thenewboston_bank.blocks.tests.block
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.blocks.tests.conftest module
+thenewboston_bank.blocks.tests.conftest module
 -------------------------------
 
-.. automodule:: v1.blocks.tests.conftest
+.. automodule:: thenewboston_bank.blocks.tests.conftest
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ v1.blocks.tests.conftest module
 Module contents
 ---------------
 
-.. automodule:: v1.blocks.tests
+.. automodule:: thenewboston_bank.blocks.tests
    :members:
    :undoc-members:
    :show-inheritance:

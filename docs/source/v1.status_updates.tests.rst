@@ -1,21 +1,21 @@
-v1.status\_updates.tests package
+thenewboston_bank.status\_updates.tests package
 ================================
 
 Submodules
 ----------
 
-v1.status\_updates.tests.primary\_validator\_updated\_async module
+thenewboston_bank.status\_updates.tests.primary\_validator\_updated\_async module
 ------------------------------------------------------------------
 
-.. automodule:: v1.status_updates.tests.primary_validator_updated_async
+.. automodule:: thenewboston_bank.status_updates.tests.primary_validator_updated_async
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.status\_updates.tests.upgrade\_notice module
+thenewboston_bank.status\_updates.tests.upgrade\_notice module
 -----------------------------------------------
 
-.. automodule:: v1.status_updates.tests.upgrade_notice
+.. automodule:: thenewboston_bank.status_updates.tests.upgrade_notice
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ v1.status\_updates.tests.upgrade\_notice module
 Module contents
 ---------------
 
-.. automodule:: v1.status_updates.tests
+.. automodule:: thenewboston_bank.status_updates.tests
    :members:
    :undoc-members:
    :show-inheritance:

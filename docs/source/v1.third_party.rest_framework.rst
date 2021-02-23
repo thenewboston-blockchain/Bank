@@ -1,13 +1,13 @@
-v1.third\_party.rest\_framework package
+thenewboston_bank.third\_party.rest\_framework package
 =======================================
 
 Submodules
 ----------
 
-v1.third\_party.rest\_framework.pagination module
+thenewboston_bank.third\_party.rest\_framework.pagination module
 -------------------------------------------------
 
-.. automodule:: v1.third_party.rest_framework.pagination
+.. automodule:: thenewboston_bank.third_party.rest_framework.pagination
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.third\_party.rest\_framework.pagination module
 Module contents
 ---------------
 
-.. automodule:: v1.third_party.rest_framework
+.. automodule:: thenewboston_bank.third_party.rest_framework
    :members:
    :undoc-members:
    :show-inheritance:

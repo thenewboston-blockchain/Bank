@@ -1,21 +1,21 @@
-v1.bank\_transactions.tests package
+thenewboston_bank.bank\_transactions.tests package
 ===================================
 
 Submodules
 ----------
 
-v1.bank\_transactions.tests.bank\_transaction module
+thenewboston_bank.bank\_transactions.tests.bank\_transaction module
 ----------------------------------------------------
 
-.. automodule:: v1.bank_transactions.tests.bank_transaction
+.. automodule:: thenewboston_bank.bank_transactions.tests.bank_transaction
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.bank\_transactions.tests.conftest module
+thenewboston_bank.bank\_transactions.tests.conftest module
 -------------------------------------------
 
-.. automodule:: v1.bank_transactions.tests.conftest
+.. automodule:: thenewboston_bank.bank_transactions.tests.conftest
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ v1.bank\_transactions.tests.conftest module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions.tests
+.. automodule:: thenewboston_bank.bank_transactions.tests
    :members:
    :undoc-members:
    :show-inheritance:

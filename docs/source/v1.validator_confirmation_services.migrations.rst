@@ -1,13 +1,13 @@
-v1.validator\_confirmation\_services.migrations package
+thenewboston_bank.validator\_confirmation\_services.migrations package
 =======================================================
 
 Submodules
 ----------
 
-v1.validator\_confirmation\_services.migrations.0001\_initial module
+thenewboston_bank.validator\_confirmation\_services.migrations.0001\_initial module
 --------------------------------------------------------------------
 
-.. automodule:: v1.validator_confirmation_services.migrations.0001_initial
+.. automodule:: thenewboston_bank.validator_confirmation_services.migrations.0001_initial
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.validator\_confirmation\_services.migrations.0001\_initial module
 Module contents
 ---------------
 
-.. automodule:: v1.validator_confirmation_services.migrations
+.. automodule:: thenewboston_bank.validator_confirmation_services.migrations
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-v1.validators.serializers package
+thenewboston_bank.validators.serializers package
 =================================
 
 Submodules
 ----------
 
-v1.validators.serializers.validator module
+thenewboston_bank.validators.serializers.validator module
 ------------------------------------------
 
-.. automodule:: v1.validators.serializers.validator
+.. automodule:: thenewboston_bank.validators.serializers.validator
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.validators.serializers.validator module
 Module contents
 ---------------
 
-.. automodule:: v1.validators.serializers
+.. automodule:: thenewboston_bank.validators.serializers
    :members:
    :undoc-members:
    :show-inheritance:

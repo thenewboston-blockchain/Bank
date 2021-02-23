@@ -1,13 +1,13 @@
-v1.bank\_transactions.migrations package
+thenewboston_bank.bank\_transactions.migrations package
 ========================================
 
 Submodules
 ----------
 
-v1.bank\_transactions.migrations.0001\_initial module
+thenewboston_bank.bank\_transactions.migrations.0001\_initial module
 -----------------------------------------------------
 
-.. automodule:: v1.bank_transactions.migrations.0001_initial
+.. automodule:: thenewboston_bank.bank_transactions.migrations.0001_initial
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.bank\_transactions.migrations.0001\_initial module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions.migrations
+.. automodule:: thenewboston_bank.bank_transactions.migrations
    :members:
    :undoc-members:
    :show-inheritance:

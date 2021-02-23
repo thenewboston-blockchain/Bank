@@ -1,13 +1,13 @@
-v1.accounts.views package
+thenewboston_bank.accounts.views package
 =========================
 
 Submodules
 ----------
 
-v1.accounts.views.account module
+thenewboston_bank.accounts.views.account module
 --------------------------------
 
-.. automodule:: v1.accounts.views.account
+.. automodule:: thenewboston_bank.accounts.views.account
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.accounts.views.account module
 Module contents
 ---------------
 
-.. automodule:: v1.accounts.views
+.. automodule:: thenewboston_bank.accounts.views
    :members:
    :undoc-members:
    :show-inheritance:

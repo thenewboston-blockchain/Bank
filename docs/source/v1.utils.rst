@@ -1,29 +1,29 @@
-v1.utils package
+thenewboston_bank.utils package
 ================
 
 Submodules
 ----------
 
-v1.utils.blocks module
+thenewboston_bank.utils.blocks module
 ----------------------
 
-.. automodule:: v1.utils.blocks
+.. automodule:: thenewboston_bank.utils.blocks
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.utils.functools module
+thenewboston_bank.utils.functools module
 -------------------------
 
-.. automodule:: v1.utils.functools
+.. automodule:: thenewboston_bank.utils.functools
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.utils.trust module
+thenewboston_bank.utils.trust module
 ---------------------
 
-.. automodule:: v1.utils.trust
+.. automodule:: thenewboston_bank.utils.trust
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ v1.utils.trust module
 Module contents
 ---------------
 
-.. automodule:: v1.utils
+.. automodule:: thenewboston_bank.utils
    :members:
    :undoc-members:
    :show-inheritance:

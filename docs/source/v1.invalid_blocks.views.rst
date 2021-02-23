@@ -1,13 +1,13 @@
-v1.invalid\_blocks.views package
+thenewboston_bank.invalid\_blocks.views package
 ================================
 
 Submodules
 ----------
 
-v1.invalid\_blocks.views.invalid\_block module
+thenewboston_bank.invalid\_blocks.views.invalid\_block module
 ----------------------------------------------
 
-.. automodule:: v1.invalid_blocks.views.invalid_block
+.. automodule:: thenewboston_bank.invalid_blocks.views.invalid_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.invalid\_blocks.views.invalid\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.invalid_blocks.views
+.. automodule:: thenewboston_bank.invalid_blocks.views
    :members:
    :undoc-members:
    :show-inheritance:

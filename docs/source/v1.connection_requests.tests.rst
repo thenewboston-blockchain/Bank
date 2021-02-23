@@ -1,13 +1,13 @@
-v1.connection\_requests.tests package
+thenewboston_bank.connection\_requests.tests package
 =====================================
 
 Submodules
 ----------
 
-v1.connection\_requests.tests.connection\_request module
+thenewboston_bank.connection\_requests.tests.connection\_request module
 --------------------------------------------------------
 
-.. automodule:: v1.connection_requests.tests.connection_request
+.. automodule:: thenewboston_bank.connection_requests.tests.connection_request
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.connection\_requests.tests.connection\_request module
 Module contents
 ---------------
 
-.. automodule:: v1.connection_requests.tests
+.. automodule:: thenewboston_bank.connection_requests.tests
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,4 +1,0 @@
--r base.in
-
-iptools==0.7.0
-sphinx==3.3.1

@@ -1,13 +1,13 @@
-v1.constants package
+thenewboston_bank.constants package
 ====================
 
 Submodules
 ----------
 
-v1.constants.models module
+thenewboston_bank.constants.models module
 --------------------------
 
-.. automodule:: v1.constants.models
+.. automodule:: thenewboston_bank.constants.models
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.constants.models module
 Module contents
 ---------------
 
-.. automodule:: v1.constants
+.. automodule:: thenewboston_bank.constants
    :members:
    :undoc-members:
    :show-inheritance:

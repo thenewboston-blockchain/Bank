@@ -1,10 +1,10 @@
 from channels.routing import ProtocolTypeRouter, URLRouter
 
-from v1.clean import routing as clean_routing
-from v1.confirmation_blocks import routing as confirmation_blocks_routing
-from v1.crawl import routing as crawl_routing
-from v1.status_updates import routing as status_updates_routing
-from v1.validator_confirmation_services import routing as validator_confirmation_services_routing
+from thenewboston_bank.clean import routing as clean_routing
+from thenewboston_bank.confirmation_blocks import routing as confirmation_blocks_routing
+from thenewboston_bank.crawl import routing as crawl_routing
+from thenewboston_bank.status_updates import routing as status_updates_routing
+from thenewboston_bank.validator_confirmation_services import routing as validator_confirmation_services_routing
 
 application = ProtocolTypeRouter({
     'websocket': URLRouter(

@@ -1,13 +1,13 @@
-v1.confirmation\_blocks.consumers package
+thenewboston_bank.confirmation\_blocks.consumers package
 =========================================
 
 Submodules
 ----------
 
-v1.confirmation\_blocks.consumers.confirmation\_block module
+thenewboston_bank.confirmation\_blocks.consumers.confirmation\_block module
 ------------------------------------------------------------
 
-.. automodule:: v1.confirmation_blocks.consumers.confirmation_block
+.. automodule:: thenewboston_bank.confirmation_blocks.consumers.confirmation_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.confirmation\_blocks.consumers.confirmation\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.confirmation_blocks.consumers
+.. automodule:: thenewboston_bank.confirmation_blocks.consumers
    :members:
    :undoc-members:
    :show-inheritance:

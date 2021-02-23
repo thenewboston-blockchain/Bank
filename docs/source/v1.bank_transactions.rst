@@ -1,4 +1,4 @@
-v1.bank\_transactions package
+thenewboston_bank.bank\_transactions package
 =============================
 
 Subpackages
@@ -7,38 +7,38 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.bank_transactions.factories
-   v1.bank_transactions.filters
-   v1.bank_transactions.helpers
-   v1.bank_transactions.migrations
-   v1.bank_transactions.models
-   v1.bank_transactions.serializers
-   v1.bank_transactions.tests
-   v1.bank_transactions.views
+   thenewboston_bank.bank_transactions.factories
+   thenewboston_bank.bank_transactions.filters
+   thenewboston_bank.bank_transactions.helpers
+   thenewboston_bank.bank_transactions.migrations
+   thenewboston_bank.bank_transactions.models
+   thenewboston_bank.bank_transactions.serializers
+   thenewboston_bank.bank_transactions.tests
+   thenewboston_bank.bank_transactions.views
 
 Submodules
 ----------
 
-v1.bank\_transactions.admin module
+thenewboston_bank.bank\_transactions.admin module
 ----------------------------------
 
-.. automodule:: v1.bank_transactions.admin
+.. automodule:: thenewboston_bank.bank_transactions.admin
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.bank\_transactions.apps module
+thenewboston_bank.bank\_transactions.apps module
 ---------------------------------
 
-.. automodule:: v1.bank_transactions.apps
+.. automodule:: thenewboston_bank.bank_transactions.apps
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.bank\_transactions.urls module
+thenewboston_bank.bank\_transactions.urls module
 ---------------------------------
 
-.. automodule:: v1.bank_transactions.urls
+.. automodule:: thenewboston_bank.bank_transactions.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -46,7 +46,7 @@ v1.bank\_transactions.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions
+.. automodule:: thenewboston_bank.bank_transactions
    :members:
    :undoc-members:
    :show-inheritance:

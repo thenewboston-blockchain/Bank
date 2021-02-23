@@ -1,13 +1,13 @@
-v1.confirmation\_blocks.factories package
+thenewboston_bank.confirmation\_blocks.factories package
 =========================================
 
 Submodules
 ----------
 
-v1.confirmation\_blocks.factories.confirmation\_block module
+thenewboston_bank.confirmation\_blocks.factories.confirmation\_block module
 ------------------------------------------------------------
 
-.. automodule:: v1.confirmation_blocks.factories.confirmation_block
+.. automodule:: thenewboston_bank.confirmation_blocks.factories.confirmation_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.confirmation\_blocks.factories.confirmation\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.confirmation_blocks.factories
+.. automodule:: thenewboston_bank.confirmation_blocks.factories
    :members:
    :undoc-members:
    :show-inheritance:

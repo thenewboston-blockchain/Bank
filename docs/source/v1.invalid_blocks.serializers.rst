@@ -1,13 +1,13 @@
-v1.invalid\_blocks.serializers package
+thenewboston_bank.invalid\_blocks.serializers package
 ======================================
 
 Submodules
 ----------
 
-v1.invalid\_blocks.serializers.invalid\_block module
+thenewboston_bank.invalid\_blocks.serializers.invalid\_block module
 ----------------------------------------------------
 
-.. automodule:: v1.invalid_blocks.serializers.invalid_block
+.. automodule:: thenewboston_bank.invalid_blocks.serializers.invalid_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.invalid\_blocks.serializers.invalid\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.invalid_blocks.serializers
+.. automodule:: thenewboston_bank.invalid_blocks.serializers
    :members:
    :undoc-members:
    :show-inheritance:

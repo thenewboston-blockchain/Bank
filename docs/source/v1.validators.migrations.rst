@@ -1,13 +1,13 @@
-v1.validators.migrations package
+thenewboston_bank.validators.migrations package
 ================================
 
 Submodules
 ----------
 
-v1.validators.migrations.0001\_initial module
+thenewboston_bank.validators.migrations.0001\_initial module
 ---------------------------------------------
 
-.. automodule:: v1.validators.migrations.0001_initial
+.. automodule:: thenewboston_bank.validators.migrations.0001_initial
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.validators.migrations.0001\_initial module
 Module contents
 ---------------
 
-.. automodule:: v1.validators.migrations
+.. automodule:: thenewboston_bank.validators.migrations
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-v1.confirmation\_blocks.serializers package
+thenewboston_bank.confirmation\_blocks.serializers package
 ===========================================
 
 Submodules
 ----------
 
-v1.confirmation\_blocks.serializers.confirmation\_block module
+thenewboston_bank.confirmation\_blocks.serializers.confirmation\_block module
 --------------------------------------------------------------
 
-.. automodule:: v1.confirmation_blocks.serializers.confirmation_block
+.. automodule:: thenewboston_bank.confirmation_blocks.serializers.confirmation_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.confirmation\_blocks.serializers.confirmation\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.confirmation_blocks.serializers
+.. automodule:: thenewboston_bank.confirmation_blocks.serializers
    :members:
    :undoc-members:
    :show-inheritance:

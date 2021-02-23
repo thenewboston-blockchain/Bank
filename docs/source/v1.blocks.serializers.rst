@@ -1,13 +1,13 @@
-v1.blocks.serializers package
+thenewboston_bank.blocks.serializers package
 =============================
 
 Submodules
 ----------
 
-v1.blocks.serializers.block module
+thenewboston_bank.blocks.serializers.block module
 ----------------------------------
 
-.. automodule:: v1.blocks.serializers.block
+.. automodule:: thenewboston_bank.blocks.serializers.block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.blocks.serializers.block module
 Module contents
 ---------------
 
-.. automodule:: v1.blocks.serializers
+.. automodule:: thenewboston_bank.blocks.serializers
    :members:
    :undoc-members:
    :show-inheritance:

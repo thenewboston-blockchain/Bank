@@ -1,13 +1,13 @@
-v1.blocks.views package
+thenewboston_bank.blocks.views package
 =======================
 
 Submodules
 ----------
 
-v1.blocks.views.block module
+thenewboston_bank.blocks.views.block module
 ----------------------------
 
-.. automodule:: v1.blocks.views.block
+.. automodule:: thenewboston_bank.blocks.views.block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.blocks.views.block module
 Module contents
 ---------------
 
-.. automodule:: v1.blocks.views
+.. automodule:: thenewboston_bank.blocks.views
    :members:
    :undoc-members:
    :show-inheritance:

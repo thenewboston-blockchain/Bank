@@ -1,13 +1,13 @@
-v1.connection\_requests.factories package
+thenewboston_bank.connection\_requests.factories package
 =========================================
 
 Submodules
 ----------
 
-v1.connection\_requests.factories.connection\_request module
+thenewboston_bank.connection\_requests.factories.connection\_request module
 ------------------------------------------------------------
 
-.. automodule:: v1.connection_requests.factories.connection_request
+.. automodule:: thenewboston_bank.connection_requests.factories.connection_request
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.connection\_requests.factories.connection\_request module
 Module contents
 ---------------
 
-.. automodule:: v1.connection_requests.factories
+.. automodule:: thenewboston_bank.connection_requests.factories
    :members:
    :undoc-members:
    :show-inheritance:

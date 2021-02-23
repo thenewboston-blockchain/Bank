@@ -1,13 +1,13 @@
-v1.self\_configurations.migrations package
+thenewboston_bank.self\_configurations.migrations package
 ==========================================
 
 Submodules
 ----------
 
-v1.self\_configurations.migrations.0001\_initial module
+thenewboston_bank.self\_configurations.migrations.0001\_initial module
 -------------------------------------------------------
 
-.. automodule:: v1.self_configurations.migrations.0001_initial
+.. automodule:: thenewboston_bank.self_configurations.migrations.0001_initial
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.self\_configurations.migrations.0001\_initial module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.migrations
+.. automodule:: thenewboston_bank.self_configurations.migrations
    :members:
    :undoc-members:
    :show-inheritance:

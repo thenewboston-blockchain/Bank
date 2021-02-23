@@ -1,13 +1,13 @@
-v1.banks.models package
+thenewboston_bank.banks.models package
 =======================
 
 Submodules
 ----------
 
-v1.banks.models.bank module
+thenewboston_bank.banks.models.bank module
 ---------------------------
 
-.. automodule:: v1.banks.models.bank
+.. automodule:: thenewboston_bank.banks.models.bank
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.banks.models.bank module
 Module contents
 ---------------
 
-.. automodule:: v1.banks.models
+.. automodule:: thenewboston_bank.banks.models
    :members:
    :undoc-members:
    :show-inheritance:

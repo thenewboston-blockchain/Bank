@@ -1,13 +1,13 @@
-v1.crawl.serializers package
+thenewboston_bank.crawl.serializers package
 ============================
 
 Submodules
 ----------
 
-v1.crawl.serializers.crawl module
+thenewboston_bank.crawl.serializers.crawl module
 ---------------------------------
 
-.. automodule:: v1.crawl.serializers.crawl
+.. automodule:: thenewboston_bank.crawl.serializers.crawl
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.crawl.serializers.crawl module
 Module contents
 ---------------
 
-.. automodule:: v1.crawl.serializers
+.. automodule:: thenewboston_bank.crawl.serializers
    :members:
    :undoc-members:
    :show-inheritance:

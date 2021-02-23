@@ -1,13 +1,13 @@
-v1.blocks.models package
+thenewboston_bank.blocks.models package
 ========================
 
 Submodules
 ----------
 
-v1.blocks.models.block module
+thenewboston_bank.blocks.models.block module
 -----------------------------
 
-.. automodule:: v1.blocks.models.block
+.. automodule:: thenewboston_bank.blocks.models.block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.blocks.models.block module
 Module contents
 ---------------
 
-.. automodule:: v1.blocks.models
+.. automodule:: thenewboston_bank.blocks.models
    :members:
    :undoc-members:
    :show-inheritance:

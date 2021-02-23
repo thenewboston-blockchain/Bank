@@ -1,4 +1,4 @@
-v1.confirmation\_blocks package
+thenewboston_bank.confirmation\_blocks package
 ===============================
 
 Subpackages
@@ -7,45 +7,45 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.confirmation_blocks.consumers
-   v1.confirmation_blocks.factories
-   v1.confirmation_blocks.migrations
-   v1.confirmation_blocks.models
-   v1.confirmation_blocks.serializers
-   v1.confirmation_blocks.tests
-   v1.confirmation_blocks.views
+   thenewboston_bank.confirmation_blocks.consumers
+   thenewboston_bank.confirmation_blocks.factories
+   thenewboston_bank.confirmation_blocks.migrations
+   thenewboston_bank.confirmation_blocks.models
+   thenewboston_bank.confirmation_blocks.serializers
+   thenewboston_bank.confirmation_blocks.tests
+   thenewboston_bank.confirmation_blocks.views
 
 Submodules
 ----------
 
-v1.confirmation\_blocks.admin module
+thenewboston_bank.confirmation\_blocks.admin module
 ------------------------------------
 
-.. automodule:: v1.confirmation_blocks.admin
+.. automodule:: thenewboston_bank.confirmation_blocks.admin
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.confirmation\_blocks.apps module
+thenewboston_bank.confirmation\_blocks.apps module
 -----------------------------------
 
-.. automodule:: v1.confirmation_blocks.apps
+.. automodule:: thenewboston_bank.confirmation_blocks.apps
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.confirmation\_blocks.routing module
+thenewboston_bank.confirmation\_blocks.routing module
 --------------------------------------
 
-.. automodule:: v1.confirmation_blocks.routing
+.. automodule:: thenewboston_bank.confirmation_blocks.routing
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.confirmation\_blocks.urls module
+thenewboston_bank.confirmation\_blocks.urls module
 -----------------------------------
 
-.. automodule:: v1.confirmation_blocks.urls
+.. automodule:: thenewboston_bank.confirmation_blocks.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -53,7 +53,7 @@ v1.confirmation\_blocks.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.confirmation_blocks
+.. automodule:: thenewboston_bank.confirmation_blocks
    :members:
    :undoc-members:
    :show-inheritance:

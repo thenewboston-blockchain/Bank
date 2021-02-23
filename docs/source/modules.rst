@@ -7,4 +7,4 @@ Bank
    config
    manage
    tests
-   v1
+   thenewboston_bank

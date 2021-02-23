@@ -1,4 +1,4 @@
-v1.self\_configurations.management package
+thenewboston_bank.self\_configurations.management package
 ==========================================
 
 Subpackages
@@ -7,12 +7,12 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.self_configurations.management.commands
+   thenewboston_bank.self_configurations.management.commands
 
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.management
+.. automodule:: thenewboston_bank.self_configurations.management
    :members:
    :undoc-members:
    :show-inheritance:

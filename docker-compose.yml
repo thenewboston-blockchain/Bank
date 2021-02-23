@@ -3,37 +3,30 @@ version: '3.2'
 services:
   redis:
     image: redis:alpine
+    ports:
+      - 127.0.0.1:6379:6379
     volumes:
       - redis-data:/data
 
   db:
     image: postgres:12-alpine
     environment:
+      # TODO(dmu) MEDIUM: Why do we need `POSTGRES_DB`, `POSTGRES_USER` and `POSTGRES_PASSWORD` here?
       - POSTGRES_DB=thenewboston_bank
       - POSTGRES_USER=thenewboston
       - POSTGRES_PASSWORD=thenewboston
       - C_FORCE_ROOT=true
+    ports:
+      - 127.0.0.1:5432:5432
     volumes:
       - postgresql-data:/var/lib/postgresql/data
       - ./scripts/docker_entrypoints/initdb.d:/docker-entrypoint-initdb.d
 
   bank:
-    build:
-      dockerfile: Dockerfile_dev
-      context: .
-    environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
-      - NETWORK_SIGNING_KEY=d2621d30bc323ea35fe1c4fb11b4babb7fd4c1c0593805f011caedf7b7ce0031
-      - NODE_IDENTIFIER=ce236a006a0aec488ad8e5161dd018b2ce84d9e4d9adc897eca7fb112864198f
-      - NODE_PORT=8004
-      - REDIS_DB=3
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=thenewboston_bank
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
+    build: .
     env_file:
+      - .env-common
+      - .env-bank
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint.sh
     volumes:
@@ -41,124 +34,92 @@ services:
       - ./media/bank:/opt/project/media
     ports:
       - 8004:8000
-    links:
-      - pv
-      - db
-      - redis
     depends_on:
-      - pv
       - db
       - redis
+      # TODO(dmu) HIGH: Why Bank depends on Primary Validator? Is it consistent with how production
+      #                 supposed to run?
+      - pv
 
   pv:
     image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=731f928711f30257d20bde471200c11975009415b4c6f596e7ee81bfed1a033b
       - NODE_IDENTIFIER=ed3b6d8e7ba1819ccedb17f9a7427b8e76b22dccf2bc130fc2386daf86ec80d3
       - NODE_PORT=8001
       - REDIS_DB=0
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
       - POSTGRES_DB=thenewboston_pv
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
     env_file:
+      - .env-common
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint_pv.sh
     volumes:
       - ./media/pv:/opt/project/media
     ports:
       - 8001:8000
-    links:
-      - db
-      - redis
     depends_on:
       - db
       - redis
+      - celery_pv
 
   cv1:
     image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=46a23fd52b2690f5acf56654489fd67b3734a52f35a2b7827f5caeaa06c0c0a5
       - NODE_IDENTIFIER=8ecf3ff5cc8b6b9db7077f9776043b21d22a59544056add03bdfa4c8b35a13bd
       - NODE_PORT=8002
       - REDIS_DB=1
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
       - POSTGRES_DB=thenewboston_cv1
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
     env_file:
+      - .env-common
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint_cv.sh
     volumes:
       - ./media/cv1:/opt/project/media
     ports:
       - 8002:8000
-    links:
-      - pv
-      - db
-      - redis
     depends_on:
-      - pv
       - db
       - redis
+      - celery_cv1
+      # TODO(dmu) HIGH: Why Confirmation Validator depends on Primary Validator? Is it consistent
+      #                 with how production supposed to run?
+      - pv
 
   cv2:
     image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=1c7822c93d914ac40fc11d7bd71959d5aadb1ecd07fbffc7d9c481ccd043d4a9
       - NODE_IDENTIFIER=73ca63ab2ab4ad8a2f48baa321bce17f8840f7355211b32a288b4e8c3e5a7a4d
       - NODE_PORT=8003
       - REDIS_DB=2
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
       - POSTGRES_DB=thenewboston_cv2
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
     env_file:
+      - .env-common
       - .env
     entrypoint: /opt/project/scripts/docker_entrypoints/entrypoint_cv.sh
     volumes:
       - ./media/cv2:/opt/project/media
     ports:
       - 8003:8000
-    links:
-      - pv
-      - db
-      - redis
     depends_on:
-      - pv
       - db
       - redis
+      - celery_cv2
+      # TODO(dmu) HIGH: Why Confirmation Validator depends on Primary Validator? Is it consistent
+      #                 with how production supposed to run?
+      - pv
 
   celery_bank:
-    build:
-      dockerfile: Dockerfile_dev
-      context: .
-    environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
-      - NETWORK_SIGNING_KEY=d2621d30bc323ea35fe1c4fb11b4babb7fd4c1c0593805f011caedf7b7ce0031
-      - REDIS_DB=3
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=thenewboston_bank
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
+    build: .
+    env_file:
+      - .env-common
+      - .env-bank
     command: celery -A config.settings worker -l debug
     volumes:
       - .:/opt/project
-    links:
-      - bank
-      - db
-      - redis
+    ports:
+      - 127.0.0.1:5559:5559
     depends_on:
       - db
       - redis
@@ -166,18 +127,16 @@ services:
   celery_pv:
     image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=731f928711f30257d20bde471200c11975009415b4c6f596e7ee81bfed1a033b
       - REDIS_DB=0
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
       - POSTGRES_DB=thenewboston_pv
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
+    env_file:
+      - .env-common
+      - .env
     command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
-    links:
-      - pv
+    ports:
+      - 127.0.0.1:5556:5556
+    links:  # TODO(dmu) LOW: Documentation says that there is no need to define links explicitly
       - db
       - redis
     depends_on:
@@ -187,20 +146,15 @@ services:
   celery_cv1:
     image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=46a23fd52b2690f5acf56654489fd67b3734a52f35a2b7827f5caeaa06c0c0a5
       - REDIS_DB=1
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
       - POSTGRES_DB=thenewboston_cv1
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
+    env_file:
+      - .env-common
+      - .env
     command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
-    links:
-      - cv1
-      - db
-      - redis
+    ports:
+      - 127.0.0.1:5557:5557
     depends_on:
       - db
       - redis
@@ -208,20 +162,15 @@ services:
   celery_cv2:
     image: docker.pkg.github.com/thenewboston-developers/validator/validator:latest
     environment:
-      - DJANGO_APPLICATION_ENVIRONMENT=local
       - NETWORK_SIGNING_KEY=1c7822c93d914ac40fc11d7bd71959d5aadb1ecd07fbffc7d9c481ccd043d4a9
       - REDIS_DB=2
-      - REDIS_HOST=redis
-      - POSTGRES_HOST=db
       - POSTGRES_DB=thenewboston_cv2
-      - POSTGRES_USER=thenewboston
-      - POSTGRES_PASSWORD=thenewboston
-      - SECRET_KEY=somesecret
+    env_file:
+      - .env-common
+      - .env
     command: celery -A config.settings worker -l debug -Q celery,block_queue,confirmation_block_queue
-    links:
-      - cv2
-      - db
-      - redis
+    ports:
+      - 127.0.0.1:5558:5558
     depends_on:
       - db
       - redis

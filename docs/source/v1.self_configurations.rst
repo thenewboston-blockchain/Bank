@@ -1,4 +1,4 @@
-v1.self\_configurations package
+thenewboston_bank.self\_configurations package
 ===============================
 
 Subpackages
@@ -7,37 +7,37 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.self_configurations.helpers
-   v1.self_configurations.management
-   v1.self_configurations.migrations
-   v1.self_configurations.models
-   v1.self_configurations.serializers
-   v1.self_configurations.tests
-   v1.self_configurations.views
+   thenewboston_bank.self_configurations.helpers
+   thenewboston_bank.self_configurations.management
+   thenewboston_bank.self_configurations.migrations
+   thenewboston_bank.self_configurations.models
+   thenewboston_bank.self_configurations.serializers
+   thenewboston_bank.self_configurations.tests
+   thenewboston_bank.self_configurations.views
 
 Submodules
 ----------
 
-v1.self\_configurations.admin module
+thenewboston_bank.self\_configurations.admin module
 ------------------------------------
 
-.. automodule:: v1.self_configurations.admin
+.. automodule:: thenewboston_bank.self_configurations.admin
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.self\_configurations.apps module
+thenewboston_bank.self\_configurations.apps module
 -----------------------------------
 
-.. automodule:: v1.self_configurations.apps
+.. automodule:: thenewboston_bank.self_configurations.apps
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.self\_configurations.urls module
+thenewboston_bank.self\_configurations.urls module
 -----------------------------------
 
-.. automodule:: v1.self_configurations.urls
+.. automodule:: thenewboston_bank.self_configurations.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -45,7 +45,7 @@ v1.self\_configurations.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations
+.. automodule:: thenewboston_bank.self_configurations
    :members:
    :undoc-members:
    :show-inheritance:

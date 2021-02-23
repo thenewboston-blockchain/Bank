@@ -1,29 +1,29 @@
-v1.validator\_confirmation\_services.tests package
+thenewboston_bank.validator\_confirmation\_services.tests package
 ==================================================
 
 Submodules
 ----------
 
-v1.validator\_confirmation\_services.tests.conftest module
+thenewboston_bank.validator\_confirmation\_services.tests.conftest module
 ----------------------------------------------------------
 
-.. automodule:: v1.validator_confirmation_services.tests.conftest
+.. automodule:: thenewboston_bank.validator_confirmation_services.tests.conftest
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.validator\_confirmation\_services.tests.validator\_confirmation\_service module
+thenewboston_bank.validator\_confirmation\_services.tests.validator\_confirmation\_service module
 ----------------------------------------------------------------------------------
 
-.. automodule:: v1.validator_confirmation_services.tests.validator_confirmation_service
+.. automodule:: thenewboston_bank.validator_confirmation_services.tests.validator_confirmation_service
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.validator\_confirmation\_services.tests.validator\_confirmation\_service\_async module
+thenewboston_bank.validator\_confirmation\_services.tests.validator\_confirmation\_service\_async module
 -----------------------------------------------------------------------------------------
 
-.. automodule:: v1.validator_confirmation_services.tests.validator_confirmation_service_async
+.. automodule:: thenewboston_bank.validator_confirmation_services.tests.validator_confirmation_service_async
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ v1.validator\_confirmation\_services.tests.validator\_confirmation\_service\_asy
 Module contents
 ---------------
 
-.. automodule:: v1.validator_confirmation_services.tests
+.. automodule:: thenewboston_bank.validator_confirmation_services.tests
    :members:
    :undoc-members:
    :show-inheritance:

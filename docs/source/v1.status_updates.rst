@@ -1,4 +1,4 @@
-v1.status\_updates package
+thenewboston_bank.status\_updates package
 ==========================
 
 Subpackages
@@ -7,26 +7,26 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.status_updates.consumers
-   v1.status_updates.serializers
-   v1.status_updates.tests
-   v1.status_updates.views
+   thenewboston_bank.status_updates.consumers
+   thenewboston_bank.status_updates.serializers
+   thenewboston_bank.status_updates.tests
+   thenewboston_bank.status_updates.views
 
 Submodules
 ----------
 
-v1.status\_updates.routing module
+thenewboston_bank.status\_updates.routing module
 ---------------------------------
 
-.. automodule:: v1.status_updates.routing
+.. automodule:: thenewboston_bank.status_updates.routing
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.status\_updates.urls module
+thenewboston_bank.status\_updates.urls module
 ------------------------------
 
-.. automodule:: v1.status_updates.urls
+.. automodule:: thenewboston_bank.status_updates.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -34,7 +34,7 @@ v1.status\_updates.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.status_updates
+.. automodule:: thenewboston_bank.status_updates
    :members:
    :undoc-members:
    :show-inheritance:

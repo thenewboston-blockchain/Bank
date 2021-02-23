@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "thenewboston-bank"
+version = "0.1.0"
+# TODO(dmu) LOW: Provide description, maintainers, homepage, repository
+description = ""
+authors = ["Bucky Roberts <buckyroberts@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "thenewboston_bank" },
+]
+include = ["LICENSE"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = ">=3.1.7"
+# TODO(dmu) MEDIUM: Upgrade to channels>=3.x once this issue is fixed:
+#                   https://github.com/django/channels/issues/1588#issuecomment-786145606
+channels = ">=2.4.0,<3.0"
+channels-redis = ">=3.2.0"
+django-cors-headers = ">=3.7.0"
+django-filter = ">=2.4.0"
+django-redis = ">=4.12.1"
+djangorestframework = ">=3.12.2"
+# TODO(dmu) LOW: Consider moving factory-boy to dev dependencies
+factory-boy = ">=3.2.0"
+iptools = ">=0.7.0"
+sentry-sdk = ">=0.20.3"
+# TODO(dmu) HIGH: Upgrade to celery>=5.0.5 once flower gains support for Celery 5.x
+celery = ">=4.4.7"
+drf-yasg = ">=1.20.0"
+fakeredis = {version = ">=1.4.5", extras = ["lua"]}
+flower = ">=0.9.7"
+psycopg2 = ">=2.8.6"
+redis = ">=3.5.3"
+# TODO(dmu) MEDIUM: Why do we need `tblib` dependency?
+tblib = ">=1.7.0"
+# TODO(dmu) MEDIUM: Unpin `cryptography` once this issue is resolved (do we still need it pinned?):
+#                   https://github.com/pyca/cryptography/issues/5765
+cryptography = "3.3.2"
+thenewboston = "0.2.1"
+
+[tool.poetry.dev-dependencies]
+django-debug-toolbar = ">=3.2"
+flake8 = "3.8.4"
+flake8-bugbear = ">=20.11.1"
+flake8-builtins = "1.5.3"
+flake8-coding = "1.3.2"
+flake8-docstrings = "1.5.0"
+flake8-import-order = "0.18.1"
+flake8-polyfill = "1.0.2"
+flake8-quotes = "3.2.0"
+pytest = ">=6.2.2"
+pytest-asyncio = ">=0.14.0"
+pytest-cov = ">=2.11.1"
+pytest-django = ">=4.1.0"
+pytest-xdist = ">=2.2.1"
+requests-mock = ">=1.8.0"
+Sphinx = ">=3.5.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

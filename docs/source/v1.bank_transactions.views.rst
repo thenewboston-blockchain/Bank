@@ -1,13 +1,13 @@
-v1.bank\_transactions.views package
+thenewboston_bank.bank\_transactions.views package
 ===================================
 
 Submodules
 ----------
 
-v1.bank\_transactions.views.bank\_transaction module
+thenewboston_bank.bank\_transactions.views.bank\_transaction module
 ----------------------------------------------------
 
-.. automodule:: v1.bank_transactions.views.bank_transaction
+.. automodule:: thenewboston_bank.bank_transactions.views.bank_transaction
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.bank\_transactions.views.bank\_transaction module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions.views
+.. automodule:: thenewboston_bank.bank_transactions.views
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,37 +1,37 @@
-v1.connection\_requests.serializers package
+thenewboston_bank.connection\_requests.serializers package
 ===========================================
 
 Submodules
 ----------
 
-v1.connection\_requests.serializers.bank\_configuration module
+thenewboston_bank.connection\_requests.serializers.bank\_configuration module
 --------------------------------------------------------------
 
-.. automodule:: v1.connection_requests.serializers.bank_configuration
+.. automodule:: thenewboston_bank.connection_requests.serializers.bank_configuration
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.connection\_requests.serializers.connection\_request module
+thenewboston_bank.connection\_requests.serializers.connection\_request module
 --------------------------------------------------------------
 
-.. automodule:: v1.connection_requests.serializers.connection_request
+.. automodule:: thenewboston_bank.connection_requests.serializers.connection_request
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.connection\_requests.serializers.primary\_validator\_configuration module
+thenewboston_bank.connection\_requests.serializers.primary\_validator\_configuration module
 ----------------------------------------------------------------------------
 
-.. automodule:: v1.connection_requests.serializers.primary_validator_configuration
+.. automodule:: thenewboston_bank.connection_requests.serializers.primary_validator_configuration
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.connection\_requests.serializers.validator\_configuration module
+thenewboston_bank.connection\_requests.serializers.validator\_configuration module
 -------------------------------------------------------------------
 
-.. automodule:: v1.connection_requests.serializers.validator_configuration
+.. automodule:: thenewboston_bank.connection_requests.serializers.validator_configuration
    :members:
    :undoc-members:
    :show-inheritance:
@@ -39,7 +39,7 @@ v1.connection\_requests.serializers.validator\_configuration module
 Module contents
 ---------------
 
-.. automodule:: v1.connection_requests.serializers
+.. automodule:: thenewboston_bank.connection_requests.serializers
    :members:
    :undoc-members:
    :show-inheritance:

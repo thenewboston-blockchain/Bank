@@ -1,13 +1,13 @@
-v1.self\_configurations.tests package
+thenewboston_bank.self\_configurations.tests package
 =====================================
 
 Submodules
 ----------
 
-v1.self\_configurations.tests.self\_configuration module
+thenewboston_bank.self\_configurations.tests.self\_configuration module
 --------------------------------------------------------
 
-.. automodule:: v1.self_configurations.tests.self_configuration
+.. automodule:: thenewboston_bank.self_configurations.tests.self_configuration
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.self\_configurations.tests.self\_configuration module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.tests
+.. automodule:: thenewboston_bank.self_configurations.tests
    :members:
    :undoc-members:
    :show-inheritance:

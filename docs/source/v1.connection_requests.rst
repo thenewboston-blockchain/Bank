@@ -1,4 +1,4 @@
-v1.connection\_requests package
+thenewboston_bank.connection\_requests package
 ===============================
 
 Subpackages
@@ -7,35 +7,35 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.connection_requests.factories
-   v1.connection_requests.helpers
-   v1.connection_requests.serializers
-   v1.connection_requests.tests
-   v1.connection_requests.views
+   thenewboston_bank.connection_requests.factories
+   thenewboston_bank.connection_requests.helpers
+   thenewboston_bank.connection_requests.serializers
+   thenewboston_bank.connection_requests.tests
+   thenewboston_bank.connection_requests.views
 
 Submodules
 ----------
 
-v1.connection\_requests.admin module
+thenewboston_bank.connection\_requests.admin module
 ------------------------------------
 
-.. automodule:: v1.connection_requests.admin
+.. automodule:: thenewboston_bank.connection_requests.admin
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.connection\_requests.apps module
+thenewboston_bank.connection\_requests.apps module
 -----------------------------------
 
-.. automodule:: v1.connection_requests.apps
+.. automodule:: thenewboston_bank.connection_requests.apps
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.connection\_requests.urls module
+thenewboston_bank.connection\_requests.urls module
 -----------------------------------
 
-.. automodule:: v1.connection_requests.urls
+.. automodule:: thenewboston_bank.connection_requests.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -43,7 +43,7 @@ v1.connection\_requests.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.connection_requests
+.. automodule:: thenewboston_bank.connection_requests
    :members:
    :undoc-members:
    :show-inheritance:

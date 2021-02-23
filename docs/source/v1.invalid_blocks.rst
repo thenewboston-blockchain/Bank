@@ -1,4 +1,4 @@
-v1.invalid\_blocks package
+thenewboston_bank.invalid\_blocks package
 ==========================
 
 Subpackages
@@ -7,36 +7,36 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   v1.invalid_blocks.factories
-   v1.invalid_blocks.migrations
-   v1.invalid_blocks.models
-   v1.invalid_blocks.serializers
-   v1.invalid_blocks.tests
-   v1.invalid_blocks.views
+   thenewboston_bank.invalid_blocks.factories
+   thenewboston_bank.invalid_blocks.migrations
+   thenewboston_bank.invalid_blocks.models
+   thenewboston_bank.invalid_blocks.serializers
+   thenewboston_bank.invalid_blocks.tests
+   thenewboston_bank.invalid_blocks.views
 
 Submodules
 ----------
 
-v1.invalid\_blocks.admin module
+thenewboston_bank.invalid\_blocks.admin module
 -------------------------------
 
-.. automodule:: v1.invalid_blocks.admin
+.. automodule:: thenewboston_bank.invalid_blocks.admin
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.invalid\_blocks.apps module
+thenewboston_bank.invalid\_blocks.apps module
 ------------------------------
 
-.. automodule:: v1.invalid_blocks.apps
+.. automodule:: thenewboston_bank.invalid_blocks.apps
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.invalid\_blocks.urls module
+thenewboston_bank.invalid\_blocks.urls module
 ------------------------------
 
-.. automodule:: v1.invalid_blocks.urls
+.. automodule:: thenewboston_bank.invalid_blocks.urls
    :members:
    :undoc-members:
    :show-inheritance:
@@ -44,7 +44,7 @@ v1.invalid\_blocks.urls module
 Module contents
 ---------------
 
-.. automodule:: v1.invalid_blocks
+.. automodule:: thenewboston_bank.invalid_blocks
    :members:
    :undoc-members:
    :show-inheritance:

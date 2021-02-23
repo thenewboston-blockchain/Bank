@@ -1,21 +1,21 @@
-v1.self\_configurations.helpers package
+thenewboston_bank.self\_configurations.helpers package
 =======================================
 
 Submodules
 ----------
 
-v1.self\_configurations.helpers.self\_configuration module
+thenewboston_bank.self\_configurations.helpers.self\_configuration module
 ----------------------------------------------------------
 
-.. automodule:: v1.self_configurations.helpers.self_configuration
+.. automodule:: thenewboston_bank.self_configurations.helpers.self_configuration
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.self\_configurations.helpers.signing\_key module
+thenewboston_bank.self\_configurations.helpers.signing\_key module
 ---------------------------------------------------
 
-.. automodule:: v1.self_configurations.helpers.signing_key
+.. automodule:: thenewboston_bank.self_configurations.helpers.signing_key
    :members:
    :undoc-members:
    :show-inheritance:
@@ -23,7 +23,7 @@ v1.self\_configurations.helpers.signing\_key module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.helpers
+.. automodule:: thenewboston_bank.self_configurations.helpers
    :members:
    :undoc-members:
    :show-inheritance:

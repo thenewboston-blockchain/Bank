@@ -1,13 +1,13 @@
-v1.validators.views package
+thenewboston_bank.validators.views package
 ===========================
 
 Submodules
 ----------
 
-v1.validators.views.validator module
+thenewboston_bank.validators.views.validator module
 ------------------------------------
 
-.. automodule:: v1.validators.views.validator
+.. automodule:: thenewboston_bank.validators.views.validator
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.validators.views.validator module
 Module contents
 ---------------
 
-.. automodule:: v1.validators.views
+.. automodule:: thenewboston_bank.validators.views
    :members:
    :undoc-members:
    :show-inheritance:

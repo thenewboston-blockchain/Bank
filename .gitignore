@@ -82,3 +82,5 @@ venv.bak/
 venv/
 
 !.gitkeep
+
+/local/

@@ -1,13 +1,13 @@
-v1.bank\_transactions.filters package
+thenewboston_bank.bank\_transactions.filters package
 =====================================
 
 Submodules
 ----------
 
-v1.bank\_transactions.filters.bank\_transaction module
+thenewboston_bank.bank\_transactions.filters.bank\_transaction module
 ------------------------------------------------------
 
-.. automodule:: v1.bank_transactions.filters.bank_transaction
+.. automodule:: thenewboston_bank.bank_transactions.filters.bank_transaction
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.bank\_transactions.filters.bank\_transaction module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions.filters
+.. automodule:: thenewboston_bank.bank_transactions.filters
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-v1.crawl.views package
+thenewboston_bank.crawl.views package
 ======================
 
 Submodules
 ----------
 
-v1.crawl.views.crawl module
+thenewboston_bank.crawl.views.crawl module
 ---------------------------
 
-.. automodule:: v1.crawl.views.crawl
+.. automodule:: thenewboston_bank.crawl.views.crawl
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.crawl.views.crawl module
 Module contents
 ---------------
 
-.. automodule:: v1.crawl.views
+.. automodule:: thenewboston_bank.crawl.views
    :members:
    :undoc-members:
    :show-inheritance:

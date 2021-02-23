@@ -5,15 +5,10 @@ on: [pull_request]
 
 jobs:
   tests:
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [3.7, 3.8, 3.9]
-
-    name: Testing Python ${{ matrix.python-version }}
+    name: Testing
 
     runs-on: ubuntu-latest
-    container: python:${{ matrix.python-version }}
+    container: python:3.9.2
 
     services:
       postgres:
@@ -39,14 +34,19 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install self
-        run: pip install -r requirements/production.txt
+      - name: Run Poetry image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: 1.1.4
 
-      - name: Lint with flake8
-        run: flake8 .
+      - name: Install
+        run: make install
 
-      - name: Test with pytest
-        run: pytest -n auto
+      - name: Lint
+        run: make lint
+
+      - name: Test
+        run: make test
         env:
           DJANGO_APPLICATION_ENVIRONMENT: test
           REDIS_HOST: redis

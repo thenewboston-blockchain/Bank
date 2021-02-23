@@ -2,6 +2,7 @@
 
 Follow the steps below to set up the project on your environment. If you run into any problems, feel free to leave a 
 GitHub Issue or reach out to any of our communities above.
+(RECOMMENDED: see `INSTALL.rst` for detailed step-by-step setup for Debian-based distributions)
 
 ## Local Development (Docker edition)
 
@@ -18,7 +19,7 @@ Login to Github's registry
 ```shell
 docker login docker.pkg.github.com
 ```
-Use your github's credentials or personal key if you have 2FA configured.
+Use your github's credentials or personal access token if you have 2FA configured.
 
 Run:
 ```shell
@@ -52,13 +53,13 @@ docker-compose exec bank pytest # if docker-compose run is running
 To monitor Celery tasks:
 ```shell
 # For BANK
-docker-compose exec celery_bank celery flower -A config.settings --address=127.0.0.1 --port=5555
+docker-compose exec celery_bank celery flower -A config.settings --port=5559
 # For PV
-docker-compose exec celery_pv celery flower -A config.settings --address=127.0.0.1 --port=5555
+docker-compose exec celery_pv celery flower -A config.settings --port=5556
 # For CV n. 1
-docker-compose exec celery_cv1 celery flower -A config.settings --address=127.0.0.1 --port=5555
+docker-compose exec celery_cv1 celery flower -A config.settings --port=5557
 # For CV n. 2
-docker-compose exec celery_cv2 celery flower -A config.settings --address=127.0.0.1 --port=5555
+docker-compose exec celery_cv2 celery flower -A config.settings --port=5558
 ```
 
 ## Windows (without docker)
@@ -100,11 +101,14 @@ Install Redis:
 brew install redis
 ```
 
-Create a virtual environment with Python 3.7 or higher.
+Install Python 3.9.2 or higher.
 
 Install required packages:
 ```
-pip3 install -r requirements/local.txt
+pip3 install virtualenvwrapper && \
+pip3 install poetry==1.1.4 && \
+poetry config virtualenvs.path ${HOME}/.virtualenvs && \
+poetry install
 ```
 
 To initialize the project:
@@ -140,11 +144,6 @@ tail -f logs/warning.log -n 10
 To run all tests in parallel:
 ```shell
 pytest -n auto
-```
-
-When adding a package, add to `requirements/base.in` and then :
-```shell
-bash scripts/compile_requirements.sh
 ```
 
 To generate documentation:

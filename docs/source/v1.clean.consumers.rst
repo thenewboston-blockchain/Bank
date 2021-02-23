@@ -1,13 +1,13 @@
-v1.clean.consumers package
+thenewboston_bank.clean.consumers package
 ==========================
 
 Submodules
 ----------
 
-v1.clean.consumers.clean\_status module
+thenewboston_bank.clean.consumers.clean\_status module
 ---------------------------------------
 
-.. automodule:: v1.clean.consumers.clean_status
+.. automodule:: thenewboston_bank.clean.consumers.clean_status
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.clean.consumers.clean\_status module
 Module contents
 ---------------
 
-.. automodule:: v1.clean.consumers
+.. automodule:: thenewboston_bank.clean.consumers
    :members:
    :undoc-members:
    :show-inheritance:

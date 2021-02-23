@@ -1,13 +1,13 @@
-v1.connection\_requests.helpers package
+thenewboston_bank.connection\_requests.helpers package
 =======================================
 
 Submodules
 ----------
 
-v1.connection\_requests.helpers.connect module
+thenewboston_bank.connection\_requests.helpers.connect module
 ----------------------------------------------
 
-.. automodule:: v1.connection_requests.helpers.connect
+.. automodule:: thenewboston_bank.connection_requests.helpers.connect
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.connection\_requests.helpers.connect module
 Module contents
 ---------------
 
-.. automodule:: v1.connection_requests.helpers
+.. automodule:: thenewboston_bank.connection_requests.helpers
    :members:
    :undoc-members:
    :show-inheritance:

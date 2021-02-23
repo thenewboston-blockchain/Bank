@@ -1,13 +1,13 @@
-v1.self\_configurations.serializers package
+thenewboston_bank.self\_configurations.serializers package
 ===========================================
 
 Submodules
 ----------
 
-v1.self\_configurations.serializers.self\_configuration module
+thenewboston_bank.self\_configurations.serializers.self\_configuration module
 --------------------------------------------------------------
 
-.. automodule:: v1.self_configurations.serializers.self_configuration
+.. automodule:: thenewboston_bank.self_configurations.serializers.self_configuration
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.self\_configurations.serializers.self\_configuration module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.serializers
+.. automodule:: thenewboston_bank.self_configurations.serializers
    :members:
    :undoc-members:
    :show-inheritance:

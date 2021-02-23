@@ -1,29 +1,29 @@
-v1.self\_configurations.management.commands package
+thenewboston_bank.self\_configurations.management.commands package
 ===================================================
 
 Submodules
 ----------
 
-v1.self\_configurations.management.commands.initialize\_bank module
+thenewboston_bank.self\_configurations.management.commands.initialize\_bank module
 -------------------------------------------------------------------
 
-.. automodule:: v1.self_configurations.management.commands.initialize_bank
+.. automodule:: thenewboston_bank.self_configurations.management.commands.initialize_bank
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.self\_configurations.management.commands.initialize\_test\_bank module
+thenewboston_bank.self\_configurations.management.commands.initialize\_test\_bank module
 -------------------------------------------------------------------------
 
-.. automodule:: v1.self_configurations.management.commands.initialize_test_bank
+.. automodule:: thenewboston_bank.self_configurations.management.commands.initialize_test_bank
    :members:
    :undoc-members:
    :show-inheritance:
 
-v1.self\_configurations.management.commands.set\_primary\_validator module
+thenewboston_bank.self\_configurations.management.commands.set\_primary\_validator module
 --------------------------------------------------------------------------
 
-.. automodule:: v1.self_configurations.management.commands.set_primary_validator
+.. automodule:: thenewboston_bank.self_configurations.management.commands.set_primary_validator
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ v1.self\_configurations.management.commands.set\_primary\_validator module
 Module contents
 ---------------
 
-.. automodule:: v1.self_configurations.management.commands
+.. automodule:: thenewboston_bank.self_configurations.management.commands
    :members:
    :undoc-members:
    :show-inheritance:

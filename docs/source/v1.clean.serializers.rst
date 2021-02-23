@@ -1,13 +1,13 @@
-v1.clean.serializers package
+thenewboston_bank.clean.serializers package
 ============================
 
 Submodules
 ----------
 
-v1.clean.serializers.clean module
+thenewboston_bank.clean.serializers.clean module
 ---------------------------------
 
-.. automodule:: v1.clean.serializers.clean
+.. automodule:: thenewboston_bank.clean.serializers.clean
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.clean.serializers.clean module
 Module contents
 ---------------
 
-.. automodule:: v1.clean.serializers
+.. automodule:: thenewboston_bank.clean.serializers
    :members:
    :undoc-members:
    :show-inheritance:

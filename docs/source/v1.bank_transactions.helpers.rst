@@ -1,13 +1,13 @@
-v1.bank\_transactions.helpers package
+thenewboston_bank.bank\_transactions.helpers package
 =====================================
 
 Submodules
 ----------
 
-v1.bank\_transactions.helpers.optimizations module
+thenewboston_bank.bank\_transactions.helpers.optimizations module
 --------------------------------------------------
 
-.. automodule:: v1.bank_transactions.helpers.optimizations
+.. automodule:: thenewboston_bank.bank_transactions.helpers.optimizations
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.bank\_transactions.helpers.optimizations module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions.helpers
+.. automodule:: thenewboston_bank.bank_transactions.helpers
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-v1.bank\_transactions.models package
+thenewboston_bank.bank\_transactions.models package
 ====================================
 
 Submodules
 ----------
 
-v1.bank\_transactions.models.bank\_transaction module
+thenewboston_bank.bank\_transactions.models.bank\_transaction module
 -----------------------------------------------------
 
-.. automodule:: v1.bank_transactions.models.bank_transaction
+.. automodule:: thenewboston_bank.bank_transactions.models.bank_transaction
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.bank\_transactions.models.bank\_transaction module
 Module contents
 ---------------
 
-.. automodule:: v1.bank_transactions.models
+.. automodule:: thenewboston_bank.bank_transactions.models
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,13 +1,13 @@
-v1.cache\_tools package
+thenewboston_bank.cache\_tools package
 =======================
 
 Submodules
 ----------
 
-v1.cache\_tools.cache\_keys module
+thenewboston_bank.cache\_tools.cache\_keys module
 ----------------------------------
 
-.. automodule:: v1.cache_tools.cache_keys
+.. automodule:: thenewboston_bank.cache_tools.cache_keys
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.cache\_tools.cache\_keys module
 Module contents
 ---------------
 
-.. automodule:: v1.cache_tools
+.. automodule:: thenewboston_bank.cache_tools
    :members:
    :undoc-members:
    :show-inheritance:

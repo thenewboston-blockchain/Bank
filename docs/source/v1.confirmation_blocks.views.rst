@@ -1,13 +1,13 @@
-v1.confirmation\_blocks.views package
+thenewboston_bank.confirmation\_blocks.views package
 =====================================
 
 Submodules
 ----------
 
-v1.confirmation\_blocks.views.confirmation\_block module
+thenewboston_bank.confirmation\_blocks.views.confirmation\_block module
 --------------------------------------------------------
 
-.. automodule:: v1.confirmation_blocks.views.confirmation_block
+.. automodule:: thenewboston_bank.confirmation_blocks.views.confirmation_block
    :members:
    :undoc-members:
    :show-inheritance:
@@ -15,7 +15,7 @@ v1.confirmation\_blocks.views.confirmation\_block module
 Module contents
 ---------------
 
-.. automodule:: v1.confirmation_blocks.views
+.. automodule:: thenewboston_bank.confirmation_blocks.views
    :members:
    :undoc-members:
    :show-inheritance:
