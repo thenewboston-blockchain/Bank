@@ -15,6 +15,7 @@ def create_bank_transactions(*, block, message):
             amount=tx['amount'],
             block=block,
             fee=tx.get('fee', ''),
+            memo=tx.get('memo', ''),
             recipient=tx['recipient']
         )
         bank_transactions.append(bank_transaction)
