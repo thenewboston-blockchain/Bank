@@ -4,6 +4,7 @@ from rest_framework.status import HTTP_201_CREATED
 from rest_framework.viewsets import GenericViewSet
 
 from v1.decorators.nodes import is_signed_message
+from ..filters.confirmation_block import ConfirmationBlockFilter
 from ..models.confirmation_block import ConfirmationBlock
 from ..serializers.confirmation_block import ConfirmationBlockSerializer, ConfirmationBlockSerializerCreate
 
@@ -21,6 +22,7 @@ class ConfirmationBlockViewSet(
     create: description: Create confirmation block
     """
 
+    filterset_class = ConfirmationBlockFilter
     ordering_fields = '__all__'
     queryset = ConfirmationBlock.objects.all()
     serializer_class = ConfirmationBlockSerializer
