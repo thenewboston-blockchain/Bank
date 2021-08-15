@@ -23,6 +23,7 @@ class ConfirmationBlockViewSet(
     """
 
     filterset_class = ConfirmationBlockFilter
+    ordering = ['-created_date']
     ordering_fields = '__all__'
     queryset = ConfirmationBlock.objects.all()
     serializer_class = ConfirmationBlockSerializer
