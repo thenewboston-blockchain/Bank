@@ -23,9 +23,11 @@ def test_bank_transactions_list(client, bank_transactions, django_assert_max_num
 @pytest.mark.parametrize(
     'field, attribute',
     [
+        ('id', 'id'),
         ('account_number', 'block.sender'),
         ('account_number', 'recipient'),
         ('block__sender', 'block.sender'),
+        ('block__balance_key', 'block.balance_key'),
         ('recipient', 'recipient'),
     ],
 )

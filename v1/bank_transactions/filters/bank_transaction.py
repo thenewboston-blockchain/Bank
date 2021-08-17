@@ -11,8 +11,10 @@ class BankTransactionFilter(FilterSet):
     class Meta:
         model = BankTransaction
         fields = [
+            'id',
             'account_number',
             'block__sender',
+            'block__balance_key',
             'fee',
             'recipient',
         ]
