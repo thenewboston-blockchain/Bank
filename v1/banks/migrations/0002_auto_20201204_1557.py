@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='bank',
             name='ip_address',
-            field=models.TextField(),
+            field=models.URLField((),
         ),
         migrations.AddIndex(
             model_name='bank',
