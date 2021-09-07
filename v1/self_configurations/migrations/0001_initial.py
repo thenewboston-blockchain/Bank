@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
                 ('account_number', models.CharField(max_length=64)),
-                ('ip_address', models.GenericIPAddressField(unique=True)),
+                ('ip_address', models.TextField(unique=True)),
                 ('node_identifier', models.CharField(max_length=64, unique=True)),
                 ('port', models.PositiveIntegerField(blank=True, null=True, validators=[django.core.validators.MaxValueValidator(65535)])),
                 ('protocol', models.CharField(choices=[('http', 'http'), ('https', 'https')], max_length=5)),

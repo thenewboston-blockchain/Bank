@@ -47,7 +47,6 @@ class Command(BaseCommand):
             raise RuntimeError(f'DJANGO_APPLICATION_ENVIRONMENT must be in {valid_environments}')
 
         ip = options['ip']
-        validate_ipv46_address(ip)
 
         self.install_fixture_data()
 
