@@ -8,5 +8,6 @@ class ConfirmationBlockFilter(FilterSet):
     class Meta:
         model = ConfirmationBlock
         fields = [
-            'block'
+            'block',
+            'block__signature'
         ]
